@@ -1,0 +1,22 @@
+{
+  "name": "camunda-commons-ui",
+  "version": "7.2.0-SNAPSHOT",
+  "homepage": "http://camunda.org/",
+  "authors": [
+    "Roman Smirnov <roman.smirnov@camunda.com>",
+    "Nico Rehwaldt <nico.rehwaldt@camunda.com>",
+    "Valentin Vago <valentin.vago@camunda.com>"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "angular-translate": "~2.2.0"
+  }
+}
