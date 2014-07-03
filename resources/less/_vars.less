@@ -1,6 +1,3 @@
-@import "../vendor/bootstrap/less/variables";
-@import "../vendor/bootstrap/less/mixins";
-
 /********************************************************************\
  * Web interface customization variables                            *
  *                                                                  *
@@ -8,25 +5,32 @@
  * http://lesscss.org/features/#features-overview-feature-variables *
 \********************************************************************/
 
+// Note: the import paths might need to be configured in your project
+// see: https://github.com/gruntjs/grunt-contrib-less#paths
+
+@import "bootstrap/less/variables";
+@import "bootstrap/less/mixins";
+
 // Colors ------------------------------------------------------------
 
 // this is the "main" color (like in the header)
-@main-color:    #b5152b;
-@brand-primary: @main-color;
+@main-color:                #b5152b;
+@brand-primary:             @main-color;
 
 // slightly darker variant
-// @main-darker: #9c3930;
-@main-darker:   darken(@main-color, 25%);
+// @main-darker:            #9c3930;
+@main-darker:               darken(@main-color, 25%);
 
-@link-color: #08c;
+@link-color:                #08c;
 
-@important-color: #b94a48;
-@important-darker: darken(@important-color, 45%);
+@important-color:           #b94a48;
+@important-darker:          darken(@important-color, 45%);
 
-@warning-color: #f89406;
-@warning-darker: #c67605;//darken(@warning-color, 45%);
+@warning-color:             #f89406;
+@warning-darker:            #c67605;//darken(@warning-color, 45%);
 
 // bootstrap overrides -----------------------------------------------
+
 // bootstrap pagination ----------------------------------------------
-@pagination-active-bg: @gray-light;
-@pagination-active-border: @gray-light;
+@pagination-active-bg:      @gray-light;
+@pagination-active-border:  @gray-light;
