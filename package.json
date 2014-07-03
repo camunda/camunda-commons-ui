@@ -1,0 +1,22 @@
+{
+  "name": "camunda-commons-ui",
+  "version": "7.2.0-SNAPSHOT",
+  "description": "Common files for camunda BPM platform UIs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/camunda/camunda-commons-ui.git"
+  },
+  "keywords": [
+    "camunda"
+  ],
+  "author": "Daniel Meyer <daniel.meyer@camunda.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/camunda/camunda-commons-ui/issues"
+  },
+  "homepage": "https://github.com/camunda/camunda-commons-ui"
+}
