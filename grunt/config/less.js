@@ -1,4 +1,4 @@
-module.exports = function() {
+module.exports = function(config) {
   return {
     options: {
       paths: [
@@ -7,12 +7,12 @@ module.exports = function() {
       ],
       compress: true,
       sourceMap: true,
-      sourceMapURL: 'styles.css.map',
+      sourceMapURL: 'styles/styles.css.map',
       sourceMapFilename: '<%= buildTarget %>/styles/styles.css.map'
     },
     styles: {
       files: {
-        '<%= buildTarget %>/styles/styles.css': 'client/styles/styles.less'
+        '<%= buildTarget %>/styles/styles.css': '<%= pkg.gruntConfig.clientDir %>/styles/styles.less'
       }
     }
   };

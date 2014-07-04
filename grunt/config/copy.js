@@ -57,7 +57,7 @@ module.exports = function(config) {
       files: [
         {
           expand: true,
-          cwd: config.clientDir +'',
+          cwd: '<%= pkg.gruntConfig.clientDir %>',
           src: [
             '*.{ico,txt}',
             'index.html'
@@ -66,19 +66,19 @@ module.exports = function(config) {
         },
         {
           expand: true,
-          cwd: config.clientDir +'/fonts',
+          cwd: '<%= pkg.gruntConfig.clientDir %>/fonts',
           src: ['*/*.{eot,svg,ttf,woff}'],
           dest: '<%= buildTarget %>/fonts/'
         },
         {
           expand: true,
-          cwd: config.clientDir +'/bower_components/bootstrap/fonts',
+          cwd: '<%= pkg.gruntConfig.clientDir %>/bower_components/bootstrap/fonts',
           src: ['**'],
           dest: '<%= buildTarget %>/fonts/bootstrap/'
         },
         {
           expand: true,
-          cwd: config.clientDir +'/images',
+          cwd: '<%= pkg.gruntConfig.clientDir %>/images',
           src: ['**'],
           dest: '<%= buildTarget %>/images/'
         }
@@ -88,11 +88,11 @@ module.exports = function(config) {
       files: [
         {
           src: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk.js',
-          dest: config.clientDir +'/bower_components/camunda-bpm-sdk-js/index.js'
+          dest: '<%= pkg.gruntConfig.clientDir %>/bower_components/camunda-bpm-sdk-js/index.js'
         },
         {
           src: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-mock.js',
-          dest: config.clientDir +'/bower_components/camunda-bpm-sdk-js-mock/index.js'
+          dest: '<%= pkg.gruntConfig.clientDir %>/bower_components/camunda-bpm-sdk-js-mock/index.js'
         }
       ]
     }
