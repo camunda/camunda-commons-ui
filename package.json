@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/camunda/camunda-commons-ui/issues"
   },
-  "homepage": "https://github.com/camunda/camunda-commons-ui"
+  "homepage": "https://github.com/camunda/camunda-commons-ui",
+  "dependencies": {
+    "underscore": "~1.6.0"
+  }
 }
