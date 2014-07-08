@@ -81,7 +81,7 @@ module.exports = function(config) {
     },
 
     served: {
-      files: ['<%= buildTarget %>/**/*.{js,css,jpg,png,webp,eot,svg,ttf,otf,woff}'],
+      files: ['<%= buildTarget %>/**/*.{html,js,css,jpg,png,webp,eot,svg,ttf,otf,woff}'],
       options: {
         livereload: config.livereloadPort || false
       }
