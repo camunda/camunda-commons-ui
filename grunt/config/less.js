@@ -7,7 +7,7 @@ module.exports = function(config) {
       ],
       compress: true,
       sourceMap: true,
-      sourceMapURL: 'styles/styles.css.map',
+      sourceMapURL: './styles.css.map',
       sourceMapFilename: '<%= buildTarget %>/styles/styles.css.map'
     },
     styles: {
