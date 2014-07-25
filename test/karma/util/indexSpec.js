@@ -1,4 +1,4 @@
-describe('camunda-commons-ui', function() {
+describe('camunda-commons-ui/util', function() {
   'use strict';
   // the karma-test-main.js file takes care of pre-requiring the chai lib, so you can use it
   // with require('chai') instead of require(['chai'], function(chai) { .. })
