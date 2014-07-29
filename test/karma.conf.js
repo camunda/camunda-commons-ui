@@ -17,9 +17,11 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       {pattern: 'node_modules/chai/chai.js', included: false},
+      {pattern: 'node_modules/chai-spies/chai-spies.js', included: false},
       {pattern: 'test/vendor/**/*.js', included: false},
       {pattern: 'test/karma/**/*Spec.js', included: false},
       {pattern: 'lib/**/*.js', included: false},
+      {pattern: 'lib/**/*.html', included: false},
       // at last!
       'test/karma-test-main.js'
     ],

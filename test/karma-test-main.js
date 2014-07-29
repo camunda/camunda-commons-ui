@@ -1,9 +1,13 @@
 (function() {
   'use strict';
-  var allTestFiles = [
+  var baseFiles = [
     'chai',
-    'angular'
+    'chai-spies',
+    'angular',
+    'angular-mocks'
   ];
+
+  var allTestFiles = [];
   var TEST_REGEXP = /(spec|test)\.js$/i;
 
   var pathToModule = function(path) {
@@ -20,12 +24,15 @@
   var config = {
     paths: {
       'chai':             'node_modules/chai/chai',
+      'chai-spies':       'node_modules/chai-spies/chai-spies',
       'jquery':           'test/vendor/jquery-2.1.1',
+
+      'text': 'test/vendor/text',
 
       'angular':          'test/vendor/angular',
       'angular-animate':  'test/vendor/angular-animate',
       'angular-cookies':  'test/vendor/angular-cookies',
-      'angular-mock':     'test/vendor/angular-mock',
+      'angular-mocks':    'test/vendor/angular-mocks',
       'angular-route':    'test/vendor/angular-route',
       'angular-sanitize': 'test/vendor/angular-sanitize'
     },
@@ -33,23 +40,33 @@
     // Karma serves files under /base, which is the basePath from your config file
     baseUrl: '/base',
 
-    // dynamically load all test files
-    deps: allTestFiles,
-
     shim: {
       'angular':          {exports: 'angular', deps: ['jquery']},
       'angular-animate':  ['angular'],
       'angular-cookies':  ['angular'],
-      'angular-mock':     ['angular'],
+      'angular-mocks':    ['angular'],
       'angular-route':    ['angular'],
       'angular-sanitize': ['angular']
-    },
-
-    // we have to kickoff jasmine, as it is asynchronous
-    callback: window.__karma__.start
+    }
   };
 
   // console.info('karma, requirejs configuration', config);
 
   require.config(config);
+
+  // load test infrastructure
+  require(baseFiles, function(chai, chaiSpies) {
+
+    // use spies
+    chai.use(chaiSpies);
+
+    // load test files
+    require(allTestFiles, function() {
+
+      // start karma
+      window.__karma__.start();
+    });
+
+  });
+
 }());
