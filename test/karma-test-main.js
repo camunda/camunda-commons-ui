@@ -34,7 +34,8 @@
       'angular-cookies':  'test/vendor/angular-cookies',
       'angular-mocks':    'test/vendor/angular-mocks',
       'angular-route':    'test/vendor/angular-route',
-      'angular-sanitize': 'test/vendor/angular-sanitize'
+      'angular-sanitize': 'test/vendor/angular-sanitize',
+      'angular-ui':       'test/vendor/ui-bootstrap'
     },
 
     // Karma serves files under /base, which is the basePath from your config file
@@ -46,7 +47,8 @@
       'angular-cookies':  ['angular'],
       'angular-mocks':    ['angular'],
       'angular-route':    ['angular'],
-      'angular-sanitize': ['angular']
+      'angular-sanitize': ['angular'],
+      'angular-ui':       ['angular']
     }
   };
 
