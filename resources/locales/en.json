@@ -1,0 +1,34 @@
+{
+  "SUBMIT":
+                        "Submit",
+  "ABORT":
+                        "Abort",
+  "CANCEL":
+                        "Cancel",
+  "TASK":
+                        "Task",
+  "FILTER":
+                        "Filter",
+  "TASKS":
+                        "Tasks",
+  "FILTERS":
+                        "Filters",
+  "PROCESS_DEFINITION":
+                        "Process Definition",
+  "PROCESS_INSTANCE":
+                        "Process Instance",
+  "LOGGED_IN":
+                        "You are now logged in.",
+  "CREDENTIALS_ERROR":
+                        "Can not log in with those credentials.",
+  "USERNAME":
+                        "User name",
+  "PASSWORD":
+                        "Password",
+  "LOGIN":
+                        "Login",
+  "MANAGE_ACOUNT":
+                        "Manage your account",
+  "START_PROCESS":
+                        "Start a process"
+}

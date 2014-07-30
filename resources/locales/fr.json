@@ -1,0 +1,30 @@
+{
+  "SUBMIT":
+                        "Soumettre",
+  "ABORT":
+                        "Abandonner",
+  "CANCEL":
+                        "Annuler",
+  "TASK":
+                        "Tâche",
+  "FILTER":
+                        "Filtre",
+  "TASKS":
+                        "Tâches",
+  "FILTERS":
+                        "Filtres",
+  "PROCESS_DEFINITION":
+                        "Définition de processus",
+  "PROCESS_INSTANCE":
+                        "Instance de processus",
+  "LOGGED_IN":
+                        "Vous êtes maintenant authentifié.",
+  "CREDENTIALS_ERROR":
+                        "Impossible de vous authentifier avec ces informations.",
+  "USERNAME":
+                        "Nom d'utilisateur",
+  "PASSWORD":
+                        "Mot de passe",
+  "LOGIN":
+                        "Authentifier"
+}
