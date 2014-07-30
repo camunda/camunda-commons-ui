@@ -164,7 +164,8 @@ The service emits events. An events default action may be suppressed by calling 
 *   `authentication.logout.success`: logout succeeded; default action: redirect to `/`
 *   `authentication.logout.failure`: logout failed
 
-## Directives
+
+### Directives
 
 Use the directives `cam-if-logged-in` and `cam-if-logged-out` to conditionally show elements based on whether the user is logged in.
 
@@ -179,6 +180,22 @@ Use the directives `cam-if-logged-in` and `cam-if-logged-out` to conditionally s
   <a>Login to access your dashboard</a>
 </div>
 ```
+
+
+## Features
+
+### Interception of 401 (unauthorized)
+
+The camunda-commons-ui module adds interception of 401 responses (unauthorized) to ensure that a server side session timeout is correctly handled.
+
+The behavior is defined in `lib/pages/index`. It defaults to emitting a `authentication.login.required` event and resetting the client side authentication.
+
+
+### Redirect after login
+
+The camunda-commons-ui/auth module adds adds automatic redirect after login functionality.
+
+The behavior is defined in `lib/auth/index`. It defaults to capturing the current request url on `authentication.login.required` and redirecting to that url on `authentication.login.success`. The behavior may be disabled by silencing the respective events.
 
 
 ## Examples

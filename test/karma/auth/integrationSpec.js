@@ -15,7 +15,7 @@ define([ 'chai', 'angular', 'angular-route', 'lib/auth/index' ], function(chai, 
   }
 
 
-  var testModule = angular.module('auth.secureRoute.test', [ angular.module('ngRoute').name, authModule.name ]);
+  var testModule = angular.module('cam.commons.auth.test', [ angular.module('ngRoute').name, authModule.name ]);
 
   testModule.config(function($routeProvider) {
 
@@ -426,7 +426,7 @@ define([ 'chai', 'angular', 'angular-route', 'lib/auth/index' ], function(chai, 
       });
 
 
-      describe('post-login redirect', function() {
+      describe('post-login', function() {
 
         beforeEach(inject(function($httpBackend) {
           $httpBackend
@@ -451,6 +451,43 @@ define([ 'chai', 'angular', 'angular-route', 'lib/auth/index' ], function(chai, 
 
           // then
           expect($location.url()).to.eql('/required-authentication');
+        }));
+
+      });
+
+
+      describe('post-logout', function() {
+
+        beforeEach(inject(function($httpBackend) {
+          $httpBackend
+            .when('POST', 'admin://auth/user/:engine/logout')
+            .respond(200);
+
+          $httpBackend
+            .when('POST', 'admin://auth/user/:engine/login/:appName')
+            .respond({ userId: 'testUser', authorizedApps: [ 'a', 'b' ] });
+        }));
+
+
+        it('should require re-authentication after logout', inject(function($route, $location, $rootScope, $httpBackend, AuthenticationService) {
+
+          // given
+          AuthenticationService.login('testUser', '');
+          $httpBackend.flush();
+
+          AuthenticationService.logout('testUser', '');
+          $httpBackend.flush();
+
+          // assume
+          expect($location.url()).to.eql('/');
+          expect($rootScope.authentication).to.eql(null);
+
+          // when
+          $location.path('/required-authentication');
+          $rootScope.$digest();
+
+          // then
+          expect($location.url()).to.eql('/login');
         }));
 
       });
