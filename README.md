@@ -10,29 +10,31 @@ Common frontend / UI resources and libraries for camunda web applications:
 ## Content
 
 - `lib`
+  - `auth` - for authentication mechanisms and tools, [read more](./lib/auth/README.md)
+  - `util` - commonly used utilities [read more](./lib/util/README.md)
   - `directives`
-  - `extensions`
   - `pages`
   - `plugin`
   - `resources`
   - `services`
 - `resources`
+  - `locales` - translation files 
   - `img`
-  - `less`
+  - `less` - base less files to generate CSS stylesheets
 
 
 ## Test
 
 To test the components install karma via
 
-```
+```sh
 npm install -g karma-cli
 npm install
 ```
 
 and execute the test suite via
 
-```
+```sh
 karma start test/karma.conf.js
 ```
 

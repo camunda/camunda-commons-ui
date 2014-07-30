@@ -3,13 +3,46 @@
 Authentication module for camunda webapps.
 
 
+## Implementation
+
+The authentication tools are relying on the camunda-commons-ui utilities, 
+
+```js
+require.config({
+  paths: {
+    angular:                    'url/path/to/angular',
+    'camunda-commons-ui-util':  'url/path/to/camunda-commons-ui/util/index',
+    'camunda-commons-ui-auth':  'url/path/to/camunda-commons-ui/auth/index'
+  },
+  shim: {
+    angular: {
+      exports: 'angular'
+    },
+    'camunda-commons-ui-util': ['angular'],
+    'camunda-commons-ui-auth': ['camunda-commons-ui-util']
+  }
+});
+
+require([ // or `define`
+  'angular',
+  'camunda-commons-ui-auth'
+], function(
+  angular,
+  camAuth
+) {
+  var ngModule = angular.module('my-ng-module-name', [
+    camAuth.name
+  ]);
+});
+```
+
+
 ## Secure Routes
 
 Secure your route by configuring the `authenticated` flag in a route definition.
 
-```
-module.config(function(routeProvider) {
-
+```js
+ngModule.config(function(routeProvider) {
   routeProvider.when('/restricted', {
     controller: 'some-controller',
     authentication: 'required'
@@ -45,7 +78,7 @@ The currently logged in user may always be accessed via `$rootScope.authenticati
 
 ### In templates
 
-```
+```xml
 <navigation>
   <ng-if="authentication">
     <a ng-click="logout()">logout</a>
@@ -58,7 +91,7 @@ The currently logged in user may always be accessed via `$rootScope.authenticati
 
 Configure a route with the `authentication` flag to access the currently authenticated user in a route controller.
 
-```
+```js
 function MyRouteController($scope, authentication) {
 
   if (authentication == null) {
@@ -68,7 +101,7 @@ function MyRouteController($scope, authentication) {
   }
 }
 
-module.config(function(routeProvider) {
+ngModule.config(function(routeProvider) {
 
   routeProvider.when('/my-route', {
     controller: MyRouteController,
@@ -81,8 +114,8 @@ module.config(function(routeProvider) {
 
 Use `$rootScope.authentication` to access the current authentication any time.
 
-```
-module.service('myService', function($rootScope) {
+```js
+ngModule.service('myService', function($rootScope) {
 
   if ($rootScope.authentication) {
     // authenticated
@@ -135,7 +168,7 @@ The service emits events. An events default action may be suppressed by calling 
 
 Use the directives `cam-if-logged-in` and `cam-if-logged-out` to conditionally show elements based on whether the user is logged in.
 
-```
+```xml
 <h1>Overview</h1>
 
 <div cam-if-logged-in>
@@ -152,16 +185,16 @@ Use the directives `cam-if-logged-in` and `cam-if-logged-out` to conditionally s
 
 A login controller:
 
-```
+```js
 function MyController($scope, AuthenticationService) {
 
   $scope.login = function() {
     AuthenticationService.login(username, password)
-        .then(function(credentials) {
-          // authenticated successfully
-        }, function(error) {
-          // authenticated successfully
-        });
+      .then(function(credentials) {
+        // authenticated successfully
+      }, function(error) {
+        // authentication failed
+      });
   };
 }
 ```
