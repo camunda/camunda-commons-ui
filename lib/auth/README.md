@@ -5,22 +5,36 @@ Authentication module for camunda webapps.
 
 ## Implementation
 
-The authentication tools are relying on the camunda-commons-ui utilities, 
+The authentication tools are relying on the camunda-commons-ui utilities, here's an example of how to load the modules with [requirejs](http://requirejs.org).
 
 ```js
 require.config({
+  // http://requirejs.org/docs/api.html#paths
   paths: {
-    angular:                    'url/path/to/angular',
-    'camunda-commons-ui-util':  'url/path/to/camunda-commons-ui/util/index',
-    'camunda-commons-ui-auth':  'url/path/to/camunda-commons-ui/auth/index'
+    angular:                    'path/to/angular',
+    'camunda-commons-ui':       'path/to/camunda-commons-ui/lib'
   },
+  
+  // http://requirejs.org/docs/api.html#shim
   shim: {
     angular: {
       exports: 'angular'
     },
-    'camunda-commons-ui-util': ['angular'],
-    'camunda-commons-ui-auth': ['camunda-commons-ui-util']
-  }
+    'camunda-commons-ui/util': ['angular'],
+    'camunda-commons-ui/auth': ['camunda-commons-ui-util']
+  },
+
+  // http://requirejs.org/docs/api.html#packages
+  packages: [
+    {
+      name: 'camunda-commons-ui/util'
+      main: 'index'
+    },
+    {
+      name: 'camunda-commons-ui/auth',
+      main: 'index'
+    }
+  ]
 });
 
 require([ // or `define`
@@ -30,6 +44,8 @@ require([ // or `define`
   angular,
   camAuth
 ) {
+  // camAuth is a angularjs module and therefor has a "name" property
+  // who can be used to solve dependencies
   var ngModule = angular.module('my-ng-module-name', [
     camAuth.name
   ]);
@@ -193,7 +209,7 @@ The behavior is defined in `lib/pages/index`. It defaults to emitting a `authent
 
 ### Redirect after login
 
-The camunda-commons-ui/auth module adds adds automatic redirect after login functionality.
+The camunda-commons-ui/auth module adds automatic redirect after login functionality.
 
 The behavior is defined in `lib/auth/index`. It defaults to capturing the current request url on `authentication.login.required` and redirecting to that url on `authentication.login.success`. The behavior may be disabled by silencing the respective events.
 
