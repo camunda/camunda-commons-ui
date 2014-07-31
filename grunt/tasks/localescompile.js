@@ -24,7 +24,7 @@ module.exports = function(grunt) {
     for (lang in languages) {
       filepath = path.join(dest, lang +'.json');
       grunt.file.write(filepath, JSON.stringify(languages[lang], null, 2));
-      grunt.verbose.writeln('Wrote "%s" translations in %s', lang, filepath);
+      grunt.log.writeln('Wrote "%s" translations in %s', lang, filepath);
     }
 
     done();

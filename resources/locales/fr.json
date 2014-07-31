@@ -5,6 +5,8 @@
                         "Abandonner",
   "CANCEL":
                         "Annuler",
+  "BACK":
+                        "Retour",
   "TASK":
                         "Tâche",
   "FILTER":
@@ -17,14 +19,6 @@
                         "Définition de processus",
   "PROCESS_INSTANCE":
                         "Instance de processus",
-  "LOGGED_IN":
-                        "Vous êtes maintenant authentifié.",
-  "CREDENTIALS_ERROR":
-                        "Impossible de vous authentifier avec ces informations.",
-  "USERNAME":
-                        "Nom d'utilisateur",
-  "PASSWORD":
-                        "Mot de passe",
-  "LOGIN":
-                        "Authentifier"
+  "MANAGE_ACCOUNT":
+                        "Gérer votre compte"
 }

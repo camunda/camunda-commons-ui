@@ -5,6 +5,8 @@
                         "Abort",
   "CANCEL":
                         "Cancel",
+  "BACK":
+                        "Back",
   "TASK":
                         "Task",
   "FILTER":
@@ -17,18 +19,6 @@
                         "Process Definition",
   "PROCESS_INSTANCE":
                         "Process Instance",
-  "LOGGED_IN":
-                        "You are now logged in.",
-  "CREDENTIALS_ERROR":
-                        "Can not log in with those credentials.",
-  "USERNAME":
-                        "User name",
-  "PASSWORD":
-                        "Password",
-  "LOGIN":
-                        "Login",
-  "MANAGE_ACOUNT":
-                        "Manage your account",
-  "START_PROCESS":
-                        "Start a process"
+  "MANAGE_ACCOUNT":
+                        "Manage your account"
 }
