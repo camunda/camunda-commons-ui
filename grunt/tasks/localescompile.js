@@ -15,7 +15,7 @@ module.exports = function(grunt) {
 
       languages[lang] = languages[lang] || {};
 
-      loaded = require(file);
+      loaded = grunt.file.readJSON(file);
       for (key in loaded) {
         languages[lang][key] = loaded[key];
       }
