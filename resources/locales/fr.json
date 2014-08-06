@@ -1,6 +1,8 @@
 {
   "SUBMIT":
                         "Soumettre",
+  "START":
+                        "Démarrer",
   "ABORT":
                         "Abandonner",
   "CANCEL":
@@ -15,6 +17,8 @@
                         "Tâches",
   "FILTERS":
                         "Filtres",
+  "LOADING":
+                        "Chargement…",
   "PROCESS_DEFINITION":
                         "Définition de processus",
   "PROCESS_INSTANCE":

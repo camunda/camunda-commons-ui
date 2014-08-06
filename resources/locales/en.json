@@ -1,6 +1,8 @@
 {
   "SUBMIT":
                         "Submit",
+  "START":
+                        "Start",
   "ABORT":
                         "Abort",
   "CANCEL":
@@ -15,6 +17,8 @@
                         "Tasks",
   "FILTERS":
                         "Filters",
+  "LOADING":
+                        "Loading…",
   "PROCESS_DEFINITION":
                         "Process Definition",
   "PROCESS_INSTANCE":
