@@ -5,6 +5,8 @@
                         "Start",
   "ABORT":
                         "Abort",
+  "CLOSE":
+                        "Close",
   "CANCEL":
                         "Cancel",
   "BACK":
