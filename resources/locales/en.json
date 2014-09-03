@@ -1,4 +1,14 @@
 {
+  "APP_VENDOR":
+                        "camunda",
+  "ADMIN_APP":
+                        "Admin",
+  "TASKLIST_APP":
+                        "Tasklist",
+  "COCKPIT_APP":
+                        "Cockpit",
+  "TOGGLE_NAVIGATION":
+                        "Toggle navigation",
   "SUBMIT":
                         "Submit",
   "START":
