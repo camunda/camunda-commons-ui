@@ -11,6 +11,8 @@
                         "Toggle navigation",
   "SUBMIT":
                         "Submit",
+  "SAVE":
+                        "Save",
   "START":
                         "Start",
   "ABORT":
@@ -21,6 +23,8 @@
                         "Cancel",
   "BACK":
                         "Back",
+  "DELETE":
+                        "Delete",
   "TASK":
                         "Task",
   "FILTER":
@@ -31,6 +35,8 @@
                         "Filters",
   "LOADING":
                         "Loading…",
+  "REQUIRED_FIELD":
+                        "Required field",
   "PROCESS_DEFINITION":
                         "Process Definition",
   "PROCESS_INSTANCE":
