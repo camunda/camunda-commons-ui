@@ -1,15 +1,14 @@
-<li class="dropdown"
-    tooltip="If you have multiple engines running you can select the process engine here. The data displayed in this application is based on the selected engine only."
-    tooltip-placement="bottom"
+<li class="dropdown engine-select"
     ng-show="engines.length > 1 && currentEngine">
-<!-- # CE - src/main/webapp/app/common/directives/engineSelect.html -->
-
+<!-- # CE - camunda-commons-ui lib/directives/engineSelect.html -->
   <a href
      class="dropdown-toggle"
      data-toggle="dropdown">
+    <span class="glyphicon glyphicon-info-sign icon-info-sign icon-white"
+          tooltip="If you have multiple engines running you can select the process engine here. The data displayed in this application is based on the selected engine only."
+          tooltip-placement="bottom"></span>
     {{ currentEngine.name }}
   </a>
-
   <ul class="dropdown-menu">
     <li ng-repeat="(id, engine) in engines">
       <a ng-href="{{ 'app://../' + engine.name + '/' | uri }}">
@@ -17,5 +16,5 @@
       </a>
     </li>
   </ul>
-<!-- / CE - src/main/webapp/app/common/directives/engineSelect.html -->
+<!-- / CE - camunda-commons-ui lib/directives/engineSelect.html -->
 </li>
