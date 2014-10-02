@@ -25,6 +25,8 @@
                         "Back",
   "DELETE":
                         "Delete",
+  "SET":
+                        "Set",
   "TASK":
                         "Task",
   "FILTER":
@@ -37,6 +39,10 @@
                         "Loading…",
   "REQUIRED_FIELD":
                         "Required field",
+  "REQUIRED_INTEGER_FIELD":
+                        "Value must be an integer",
+  "REQUIRED_HEX_COLOR_FIELD":
+                        "Value must be an hexadecimal color",
   "PROCESS_DEFINITION":
                         "Process Definition",
   "PROCESS_INSTANCE":
