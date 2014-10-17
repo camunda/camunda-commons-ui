@@ -16,6 +16,7 @@ Common frontend / UI resources and libraries for camunda web applications:
   - `pages`
   - `plugin`
   - `resources`
+  - `search`
   - `services`
 - `resources`
   - `locales` - translation files 
