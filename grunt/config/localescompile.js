@@ -12,7 +12,7 @@ module.exports = function() {
       src: [
         'node_modules/camunda-commons-ui/resources/locales/*.json',
         'node_modules/camunda-commons-ui/lib/*/locales/*.json',
-        'client/scripts/*/locales/*.json'
+        'client/scripts/**/locales/*.json'
       ]
     }
   };

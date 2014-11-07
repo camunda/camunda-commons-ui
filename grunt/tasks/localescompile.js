@@ -13,11 +13,22 @@ module.exports = function(grunt) {
       file = this.filesSrc[f];
       lang = path.basename(file, '.json');
 
-      languages[lang] = languages[lang] || {};
+      languages[lang] = languages[lang] || {labels:{}};
 
       loaded = grunt.file.readJSON(file);
       for (key in loaded) {
-        languages[lang][key] = loaded[key];
+        if(typeof loaded[key] === "string") {
+          if(languages[lang].labels[key]) {
+            throw grunt.util.error("Duplicate entry " + key + " for translation file " + lang + ".");
+          }
+          languages[lang].labels[key] = loaded[key];
+        } else {
+          if(languages[lang][key]) {
+            throw grunt.util.error("Duplicate entry " + key + " for translation file " + lang + ".");
+          }
+          languages[lang][key] = loaded[key];
+        }
+
       }
     }
 
