@@ -5,8 +5,11 @@ module.exports = function(config) {
         'styles',
         'scripts'
       ],
-      compress: true,
-      sourceMap: true,
+
+      dumpLineNumbers: '<%= buildTarget === "dist" ? "" : "comments" %>',
+      compress: '<%= buildTarget === "dist" ? "true" : "" %>',
+      sourceMap: '<%= buildTarget === "dist" ? "true" : "" %>',
+
       sourceMapURL: './styles.css.map',
       sourceMapFilename: '<%= buildTarget %>/styles/styles.css.map'
     },
