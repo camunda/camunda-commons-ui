@@ -1,0 +1,23 @@
+<li class="app-switch dropdown">
+  <a href
+     sem-show-applications
+     class="dropdown-toggle"
+     data-toggle="dropdown">
+    <i class="glyphicon glyphicon-home"></i>
+    <b class="caret"></b>
+  </a>
+
+  <ul class="dropdown-menu">
+    <li ng-if="!username || authentication.canAccess('admin')">
+      <a sem-jump-to-admin
+         ng-href="{{ '../../admin/:engine/' | uri }}"
+         translate="ADMIN_APP">Admin</a>
+    </li>
+
+    <li ng-if="!username || authentication.canAccess('cockpit')">
+      <a sem-jump-to-cockpit
+         ng-href="{{ '../../cockpit/:engine/' | uri }}"
+         translate="COCKPIT_APP">Cockpit</a>
+    </li>
+  </ul>
+</li>

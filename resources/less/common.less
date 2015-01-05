@@ -1,3 +1,16 @@
+@import "_bootstrap-imports";
+
+.navbar {
+  .navbar-brand {
+    text-indent: -999em;
+    background: no-repeat url(@brand-logo);
+    width: 220px;
+  }
+}
+
+
+
+
 /**
  * loaded to remove angular template flicker on site load
  * @see http://docs.angularjs.org/api/ng.directive:ngCloak
@@ -138,15 +151,6 @@ textarea.in-place-edit {
 html, body {
   height: 100%;
   min-height: 100%;
-}
-
-/** navbar brand */
-.navbar .brand {
-   display: block;
-   float: left;
-   background: no-repeat;
-   height: 39px;
-   padding: 0;
 }
 
 /**

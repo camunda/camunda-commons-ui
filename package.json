@@ -24,6 +24,7 @@
     "underscore": "~1.6.0"
   },
   "devDependencies": {
+    "bootstrap": "^3.3.1",
     "chai": "~1.9.1",
     "mocha": "~1.20.1",
     "karma-phantomjs-launcher": "~0.1.4",
