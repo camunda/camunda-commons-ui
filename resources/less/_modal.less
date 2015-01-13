@@ -1,0 +1,21 @@
+.modal {
+  background-color: fade(@gray-darker, 50%);
+}
+
+.modal-content {
+  background-color: @gray-lighter;
+}
+
+.modal-body {
+  background-color: @body-bg;
+  border: 1px solid darken(@gray-lighter, 15%);
+  border-width: 1px 0;
+
+  > form {
+    overflow: hidden;
+    padding: (@grid-gutter-width / 2);
+    > fieldset {
+      max-width: 100%;
+    }
+  }
+}
