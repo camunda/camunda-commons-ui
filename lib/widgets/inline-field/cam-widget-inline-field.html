@@ -11,7 +11,12 @@
 
 <span ng-if="editing && (varType === 'option')"
       class="option-value">
-  {{ varValue | translate }}
+  <span ng-if="varValue.value">
+    {{ varValue.value }}
+  </span>
+  <span ng-if="!varValue.value">
+    {{ varValue }}
+  </span>
 </span>
 
 <span ng-if="editing"
@@ -52,7 +57,12 @@
     <ul class="dropdown-menu">
       <li ng-repeat="option in options">
         <a ng-click="applyChange(option)">
-          {{option | translate }}
+          <span ng-if="option.value">
+            {{ option.value }}
+          </span>
+          <span ng-if="!option.value">
+            {{ option }}
+          </span>
         </a>
       </li>
     </ul>

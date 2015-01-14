@@ -1,0 +1,57 @@
+<span class="search-label"
+      ng-class="{'invalid': !valid}">
+  <a href
+     ng-click="onDelete()"
+     class="remove-search glyphicon glyphicon-remove">
+  </a>
+
+  <span class="glyphicon glyphicon-exclamation-sign valid-hide"></span>
+
+  <span cam-widget-inline-field
+        class="set-value"
+        type="option"
+        options="type.values"
+        change="changeSearch('type', varValue)"
+        value="type.value">
+    <span ng-if="type.tooltip"
+          tooltip-placement="top"
+          tooltip="{{type.tooltip}}">
+      {{ type.value.value | camQueryComponent }}
+    </span>
+    <span ng-if="!type.tooltip">
+      {{ type.value.value | camQueryComponent }}
+    </span>
+  </span>
+  <span ng-if="extended">
+    :
+    <span cam-widget-inline-field
+          class="set-value"
+          type="text"
+          change="changeSearch('name', varValue)"
+          value="name.value">
+      <span>
+        {{ name.value | camQueryComponent }}
+      </span>
+    </span>
+  </span>
+
+  <span cam-widget-inline-field
+        class="set-value"
+        type="option"
+        options="operator.values"
+        change="changeSearch('operator', varValue)"
+        value="operator.value">
+    <span>
+      {{ operator.value.value | camQueryComponent }}
+    </span>
+  </span>
+
+  <span cam-widget-inline-field
+        class="set-value"
+        type="{{ valueType }}"
+        change="changeSearch('value', varValue)"
+        value="value.value"
+        flexible="{{ allowDates }}">
+    <span class="visible-whitespace">{{ value.value | camQueryComponent }}</span>
+  </span>
+</span>
