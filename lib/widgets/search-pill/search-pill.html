@@ -5,7 +5,12 @@
      class="remove-search glyphicon glyphicon-remove">
   </a>
 
-  <span class="glyphicon glyphicon-exclamation-sign valid-hide"></span>
+  <span class="glyphicon glyphicon-exclamation-sign valid-hide"
+        ng-if="invalidText"
+        tooltip-placement="top"
+        tooltip="{{ invalidText }}"></span>
+  <span class="glyphicon glyphicon-exclamation-sign valid-hide"
+        ng-if="!invalidText"></span>
 
   <span cam-widget-inline-field
         class="set-value"
@@ -29,7 +34,12 @@
           type="text"
           change="changeSearch('name', varValue)"
           value="name.value">
-      <span>
+      <span ng-if="name.tooltip"
+            tooltip-placement="top"
+            tooltip="{{name.tooltip}}">
+        {{ name.value | camQueryComponent }}
+      </span>
+      <span ng-if="!name.tooltip">
         {{ name.value | camQueryComponent }}
       </span>
     </span>
@@ -41,7 +51,12 @@
         options="operator.values"
         change="changeSearch('operator', varValue)"
         value="operator.value">
-    <span>
+    <span ng-if="operator.tooltip"
+          tooltip-placement="top"
+          tooltip="{{operator.tooltip}}">
+      {{ operator.value.value | camQueryComponent }}
+    </span>
+    <span ng-if="!operator.tooltip">
       {{ operator.value.value | camQueryComponent }}
     </span>
   </span>
@@ -52,6 +67,11 @@
         change="changeSearch('value', varValue)"
         value="value.value"
         flexible="{{ allowDates }}">
-    <span class="visible-whitespace">{{ value.value | camQueryComponent }}</span>
+    <span class="visible-whitespace"
+          ng-if="value.tooltip"
+          tooltip-placement="top"
+          tooltip="{{value.tooltip}}">{{ value.value | camQueryComponent }}</span>
+    <span class="visible-whitespace"
+          ng-if="!value.tooltip">{{ value.value | camQueryComponent }}</span>
   </span>
 </span>

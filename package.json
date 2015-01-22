@@ -4,6 +4,9 @@
   "version": "7.3.0-SNAPSHOT",
   "description": "Common files for camunda BPM platform UIs",
   "main": "index.js",
+  "gruntConfig": {
+    "connectPort": 8070
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +40,11 @@
   "devDependencies": {
     "chai": "1.9.1",
     "chai-spies": "0.5.1",
+    "grunt": "0.4.5",
+    "load-grunt-tasks": "2.0.0",
+    "grunt-contrib-connect": "0.9.0",
+    "grunt-contrib-less": "0.9.0",
+    "grunt-protractor-runner": "1.2.1",
     "karma": "0.12.17",
     "karma-chrome-launcher": "0.1.4",
     "karma-firefox-launcher": "0.1.3",
