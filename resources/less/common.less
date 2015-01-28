@@ -76,6 +76,10 @@ body > footer {
   display: none;
 }
 
+[ng-click] {
+  cursor: pointer;
+}
+
 .ctn-wrapper > [notifications-panel] {
   position: absolute;
   bottom: 40px;
@@ -83,6 +87,12 @@ body > footer {
   max-width: 80%;
 }
 
+a {
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
 
 @import "_modal";
 
