@@ -31,7 +31,8 @@ module.exports = function(grunt) {
 
     connect: {
       options: {
-        port: pkg.gruntConfig.connectPort
+        port: pkg.gruntConfig.connectPort,
+        livereload: pkg.gruntConfig.livereloadPort
       },
       widgetTests: {
         options: {
@@ -53,10 +54,42 @@ module.exports = function(grunt) {
     },
 
     less: {
-      widgets: {
+      options: {
+        dumpLineNumbers: 'comments',
+        compress: false,
+        sourceMap: false
+      },
+
+      styles: {
         files: {
-          'styles.css': 'resources/less/styles.less'
+          'styles.css': 'resources/less/styles.less',
+          'test-styles.css': 'resources/less/test-styles.less'
         }
+      }
+    },
+
+    watch: {
+      options: {
+        livereload: false,
+      },
+
+      styles: {
+        files: [
+          'lib/**/*.less',
+          'resources/less/**/*.less'
+        ],
+        tasks: ['less']
+      },
+
+      served: {
+        options: {
+          livereload: pkg.gruntConfig.livereloadPort
+        },
+        files: [
+          '*.css',
+          '**/*.spec.*'
+        ],
+        tasks: []
       }
     }
   });
