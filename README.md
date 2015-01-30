@@ -19,7 +19,7 @@ Common frontend / UI resources and libraries for camunda web applications:
   - `search`
   - `services`
 - `resources`
-  - `locales` - translation files 
+  - `locales` - translation files
   - `img`
   - `less` - base less files to generate CSS stylesheets
 
@@ -39,6 +39,13 @@ and execute the test suite via
 karma start test/karma.conf.js
 ```
 
+
+### Widget tests
+
+```sh
+npm install
+./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager --chrome update
+```
 
 ## License
 
