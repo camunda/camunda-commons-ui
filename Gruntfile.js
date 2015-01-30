@@ -60,9 +60,8 @@ module.exports = function(grunt) {
         sourceMap: false
       },
 
-      styles: {
+      widgets: {
         files: {
-          'styles.css': 'resources/less/styles.less',
           'test-styles.css': 'resources/less/test-styles.less'
         }
       }

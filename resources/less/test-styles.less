@@ -1,0 +1,61 @@
+@brand-logo:  '../img/camunda-logo.png';
+
+@import "common-variables.less";
+@icon-font-path: "/node_modules/bootstrap/fonts/";
+
+@import "common.less";
+
+@import "../../lib/widgets/inline-field/cam-widget-inline-field.less";
+@import "../../lib/widgets/search-pill/search-pill.less";
+
+
+
+
+// custom styles for the testing suite -----------------------------------------
+
+body {
+  // @see node_modules/bootstrap/less/grid.less
+  > header > div,
+  > footer > nav,
+  > section {
+    .container-fixed();
+
+    @media (min-width: @screen-sm-min) {
+      width: @container-sm;
+    }
+    @media (min-width: @screen-md-min) {
+      width: @container-md;
+    }
+    @media (min-width: @screen-lg-min) {
+      width: @container-lg;
+    }
+  }
+
+  > footer,
+  > footer > nav {
+    text-align: right;
+    overflow: hidden;
+  }
+}
+
+dd {
+  padding-left: @grid-gutter-width;
+  max-width: 550px;
+}
+dt + dd {
+  margin-bottom: (@grid-gutter-width / 2);
+}
+
+.widget-reference {
+  dt {
+    font-family: monospace;
+  }
+}
+
+.widget-example {
+  margin: (@grid-gutter-width / 2) 0;
+  padding: (@grid-gutter-width / 2) 0;
+  [ng-non-bindable] {
+    margin-bottom: @grid-gutter-width;
+  }
+}

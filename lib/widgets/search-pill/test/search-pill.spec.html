@@ -1,43 +1,65 @@
 <html>
   <head>
     <link href="/styles.css" rel="stylesheet" />
+    <link href="/test-styles.css" rel="stylesheet" />
   </head>
   <body>
-    <h1>Search Pill</h1>
-    <h2>Description</h2>
-    <p>The search pill is used in the tasklist app and the cockpit EE search plugin. It represents a single component of a possibly complex search query.
-      A search can contain multiple search pills. Search pills have a type, an operator and a value and can optionally have a variable name.</p>
+    <header>
+      <div>
+        <h1>Search Pill</h1>
+      </div>
+    </header>
 
-    <h2>Usage</h2>
-    <h3>Options</h3>
-    <dl>
-      <dt>valid</dt>
-      <dd>Boolean flag which indicates whether the search pill is valid or not. Invalid pills are rendered differently</dd>
-      <dt>extended</dt>
-      <dd>If set to true, the pill will contain an additional name field</dd>
-      <dt>allow-dates</dt>
-      <dd>Allows the user to enter date values via a datepicker in addition to standard text input</dd>
-      <dt>enforce-dates</dt>
-      <dd>Enforces the date picker as input method.</dd>
-      <dt>invalid-text</dt>
-      <dd>Text which will be rendered as tooltip when the valid flag is set to false</dd>
-      <dt>type</dt>
-      <dd>An object specifying possible types for the search pill. Keys of this object must be values, which contains an array of key/value-pairs of possible type values, and value, which will contain the selected type. Can also specify an optional tooltip field.</dd>
-      <dt>name</dt>
-      <dd>An object containing a value and an optional tooltip field. Only used in combination with the extended flag.</dd>
-      <dt>operator</dt>
-      <dd>An object specifying possible operators for the search pill. Keys of this object must be values, which contains an array of key/value-pairs of possible oeprator values, and value, which will contain the selected operator. Can also specify an optional tooltip field.</dd>
-      <dt>value</dt>
-      <dd>An object containing a value and an optional tooltip field.</dd>
-      <dt>on-change</dt>
-      <dd>Function which is called whenever a component of the search pill is changed. Gets the arguments field, before and value.</dd>
-      <dt>on-delete</dt>
-      <dd>Function which is called when the delete button is clicked.</dd>
-    </dl>
-    <h2>Examples</h2>
-    <h3>Basic Search Pill</h3>
-    <div ng-controller="testController">
-    <pre ng-non-bindable>
+    <section class="widget-description">
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>The search pill is used in the tasklist app and the cockpit EE search plugin. It represents a single component of a possibly complex search query.<br/>
+        A search can contain multiple search pills. Search pills have a type, an operator and a value and can optionally have a variable name.</p>
+    </section>
+
+    <section class="widget-reference">
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt>valid</dt>
+        <dd>Boolean flag which indicates whether the search pill is valid or not. Invalid pills are rendered differently</dd>
+        <dt>extended</dt>
+        <dd>If set to true, the pill will contain an additional name field</dd>
+        <dt>allow-dates</dt>
+        <dd>Allows the user to enter date values via a datepicker in addition to standard text input</dd>
+        <dt>enforce-dates</dt>
+        <dd>Enforces the date picker as input method.</dd>
+        <dt>invalid-text</dt>
+        <dd>Text which will be rendered as tooltip when the valid flag is set to false</dd>
+        <dt>type</dt>
+        <dd>An object specifying possible types for the search pill. Keys of this object must be values, which contains an array of key/value-pairs of possible type values, and value, which will contain the selected type. Can also specify an optional tooltip field.</dd>
+        <dt>name</dt>
+        <dd>An object containing a value and an optional tooltip field. Only used in combination with the extended flag.</dd>
+        <dt>operator</dt>
+        <dd>An object specifying possible operators for the search pill. Keys of this object must be values, which contains an array of key/value-pairs of possible oeprator values, and value, which will contain the selected operator. Can also specify an optional tooltip field.</dd>
+        <dt>value</dt>
+        <dd>An object containing a value and an optional tooltip field.</dd>
+        <dt>on-change</dt>
+        <dd>Function which is called whenever a component of the search pill is changed. Gets the arguments field, before and value.</dd>
+        <dt>on-delete</dt>
+        <dd>Function which is called when the delete button is clicked.</dd>
+      </dl>
+    </section>
+
+    <section class="widget-examples">
+      <header>
+        <h2>Examples</h2>
+      </header>
+
+      <div class="widget-example"
+           id="basic">
+        <h3>Basic Search Pill</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
 $scope.search1 = {
   type: {
     values: [{key: 'foo', value: 'Foo'}, {key: 'bar', value: 'Bar'}],
@@ -65,18 +87,21 @@ $scope.search1 = {
             operator="search1.operator"
             value="search1.value"
             on-change="search1.update()" /&gt;</pre>
-      <span cam-widget-search-pill
-            id="pill1"
-            valid="search1.valid"
-            type="search1.type"
-            operator="search1.operator"
-            value="search1.value"
-            on-change="search1.update()" />
-    </div>
+          <span cam-widget-search-pill
+                id="pill1"
+                valid="search1.valid"
+                type="search1.type"
+                operator="search1.operator"
+                value="search1.value"
+                on-change="search1.update()" />
+        </div>
+      </div><!-- /.widget-example -->
 
-    <h3>Enforcing Dates</h3>
-    <div ng-controller="testController">
-    <pre ng-non-bindable>
+      <div class="widget-example"
+           id="enforcing-dates">
+        <h3>Enforcing Dates</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
 $scope.search2 = angular.copy($scope.search1);
 $scope.search2.enforceDates = true;
 
@@ -86,18 +111,21 @@ $scope.search2.enforceDates = true;
             operator="search2.operator"
             value="search2.value"
             enforce-dates="search2.enforceDates" /&gt;</pre>
-      <span cam-widget-search-pill
-            id="pill2"
-            valid="search2.valid"
-            type="search2.type"
-            operator="search2.operator"
-            value="search2.value"
-            enforce-dates="search2.enforceDates" />
-    </div>
+          <span cam-widget-search-pill
+                id="pill2"
+                valid="search2.valid"
+                type="search2.type"
+                operator="search2.operator"
+                value="search2.value"
+                enforce-dates="search2.enforceDates" />
+        </div>
+      </div><!-- /.widget-example -->
 
-    <h3>Allowing Dates</h3>
-    <div ng-controller="testController">
-    <pre ng-non-bindable>
+      <div class="widget-example"
+           id="allowing-dates">
+        <h3>Allowing Dates</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
 $scope.search3 = angular.copy($scope.search1);
 $scope.search3.allowDates = true;
 
@@ -107,18 +135,21 @@ $scope.search3.allowDates = true;
             operator="search3.operator"
             value="search3.value"
             allow-dates="search3.allowDates" /&gt;</pre>
-      <span cam-widget-search-pill
-            id="pill3"
-            valid="search3.valid"
-            type="search3.type"
-            operator="search3.operator"
-            value="search3.value"
-            allow-dates="search3.allowDates" />
-    </div>
+          <span cam-widget-search-pill
+                id="pill3"
+                valid="search3.valid"
+                type="search3.type"
+                operator="search3.operator"
+                value="search3.value"
+                allow-dates="search3.allowDates" />
+        </div>
+      </div><!-- /.widget-example -->
 
-    <h3>Extended</h3>
-    <div ng-controller="testController">
-    <pre ng-non-bindable>
+      <div class="widget-example"
+           id="extended">
+        <h3>Extended</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
 $scope.search4 = angular.copy($scope.search1);
 $scope.search4.name = {
   value: ''
@@ -135,16 +166,32 @@ $scope.search4.update = function() {
             value="search4.value"
             extended="search4.extended"
             on-change="search4.update()" /&gt;</pre>
-      <span cam-widget-search-pill
-            id="pill4"
-            valid="search4.valid"
-            name="search4.name"
-            type="search4.type"
-            operator="search4.operator"
-            value="search4.value"
-            extended="search4.extended"
-            on-change="search4.update()" />
-    </div>
+          <span cam-widget-search-pill
+                id="pill4"
+                valid="search4.valid"
+                name="search4.name"
+                type="search4.type"
+                operator="search4.operator"
+                value="search4.value"
+                extended="search4.extended"
+                on-change="search4.update()" />
+        </div>
+      </div><!-- /.widget-example -->
+    </section>
+
+
+    <footer>
+      <nav>
+        <ul class="list-inline">
+          <li>
+            <a href="http://camunda.org">camunda.org</a>
+          </li>
+          <li>
+            <a href="http://github.com/camunda-commons-ui">commons UI lib</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
 
     <script src="/node_modules/requirejs/require.js"></script>
     <script>
