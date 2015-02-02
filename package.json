@@ -55,6 +55,6 @@
     "mocha": "1.20.1"
   },
   "optionalDependencies": {
-    "grunt-contrib-watch": "^0.6.1"
+    "grunt-contrib-watch": "0.6.1"
   }
 }
