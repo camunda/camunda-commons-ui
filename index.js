@@ -58,7 +58,6 @@ function requirejsConf(options) {
       'angular-sanitize':           'vendor/angular-sanitize',
       'angular-scenario':           'vendor/angular-scenario',
       'angular-touch':              'vendor/angular-touch',
-      'angular-ui':                 'vendor/angular-ui',
       'angular-bootstrap':          'vendor/ui-bootstrap-tpls-0.11.0',
       'jquery-ui-core':             'vendor/jquery.ui.core',
       'jquery-ui-mouse':            'vendor/jquery.ui.mouse',
