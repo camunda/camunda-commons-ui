@@ -35,7 +35,7 @@
       'angular-mocks':    'test/vendor/angular-mocks',
       'angular-route':    'test/vendor/angular-route',
       'angular-sanitize': 'test/vendor/angular-sanitize',
-      'angular-ui':       'test/vendor/ui-bootstrap'
+      'angular-bootstrap':'test/vendor/ui-bootstrap'
     },
 
     // Karma serves files under /base, which is the basePath from your config file

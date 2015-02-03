@@ -20,10 +20,18 @@ module.exports = function(grunt) {
   config.pkg = pkg;
 
   grunt.initConfig({
+
+    karma: {
+      unit: {
+        configFile: './test/karma.conf.js',
+        singleRun: true
+      }
+    },
+
     protractor: {
       widgets: {   // Grunt requires at least one target to run so you can simply put 'all: {}' here too.
         options: {
-          configFile: 'conf.js',
+          configFile: 'test/protractor.conf.js',
           seleniumAddress: 'http://localhost:4444/wd/hub',
         },
       },
@@ -93,5 +101,5 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('default', ['less:widgets', 'connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('default', ['less:widgets', 'karma', 'connect:widgetTests', 'protractor:widgets']);
 };

@@ -4,6 +4,6 @@ exports.config = {
   capabilities: {
     'browserName': 'chrome'
   },
-  specs: ['lib/widgets/inline-field/test/cam-widget-inline-field.spec.js',
-          'lib/widgets/search-pill/test/search-pill.spec.js']
+  specs: ['../lib/widgets/inline-field/test/cam-widget-inline-field.spec.js',
+          '../lib/widgets/search-pill/test/search-pill.spec.js']
 };
