@@ -4,7 +4,7 @@
     {{ context[property] }}
     <span class="edit-toggle"
           ng-click="enter()">
-      <i class="glyphicon glyphicon-pencil"></i>
+      <span class="glyphicon glyphicon-pencil"></span>
     </span>
   </div>
 
@@ -36,12 +36,12 @@
         <button type="submit"
                 class="btn btn-primary"
                 ng-disabled="inPlaceTextFieldForm.$invalid">
-          <i class="glyphicon glyphicon-ok "></i>
+          <span class="glyphicon glyphicon-ok "></span>
         </button>
         <button type="button"
-                class="btn"
+                class="btn btn-default"
                 ng-click="leave()">
-          <i class="glyphicon glyphicon-ban-circle"></i>
+          <span class="glyphicon glyphicon-ban-circle"></span>
         </button>
       </div>
     </div>
