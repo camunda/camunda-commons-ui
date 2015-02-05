@@ -6,3 +6,4 @@ doc
 /.project
 styles.css
 test-styles.css
+test/*results.xml
