@@ -9,16 +9,6 @@
   {{ dateValue | camDate }}
 </span>
 
-<span ng-if="editing && (varType === 'option')"
-      class="option-value">
-  <span ng-if="varValue.value">
-    {{ varValue.value }}
-  </span>
-  <span ng-if="!varValue.value">
-    {{ varValue }}
-  </span>
-</span>
-
 <span ng-if="editing"
       class="edit">
 
@@ -42,31 +32,30 @@
                 ng-model="dateValue"
                 ng-change="changeDate(this)" />
 
-
     <timepicker class="timepicker"
                 ng-if="varType === 'datetime' || varType === 'time'"
                 show-meridian="false"
 
                 ng-model="dateValue"
                 ng-change="changeDate(this)" />
-
   </span>
 
-  <div ng-show="varType === 'option'"
-       class="cam-widget-inline-field field-control">
-    <ul class="dropdown-menu">
-      <li ng-repeat="option in options">
-        <a ng-click="applyChange(option)">
-          <span ng-if="option.value">
-            {{ option.value }}
-          </span>
-          <span ng-if="!option.value">
-            {{ option }}
-          </span>
-        </a>
-      </li>
-    </ul>
-  </div>
+  <input ng-if="varType === 'option' && options[0].value"
+         class="form-control"
+         type="text"
+         ng-model="editValue"
+         ng-keydown="handleKeydown($event)"
+         typeahead="option as option.value for option in options | filter:$viewValue:instantTypeahead"
+         typeahead-on-select="saveSelection($item)"
+         instant-typeahead />
+  <input ng-if="varType === 'option' && !options[0].value"
+         class="form-control"
+         type="text"
+         ng-model="editValue"
+         ng-keydown="handleKeydown($event)"
+         typeahead="option for option in options | filter:$viewValue:instantTypeahead"
+         typeahead-on-select="saveSelection($item)"
+         instant-typeahead />
 
   <span ng-show="varType !== 'option'"
         class="cam-widget-inline-field btn-group">
