@@ -93,9 +93,18 @@
 .cam-widget-inline-field {
   &.btn-group,
   &.field-control {
-    position: absolute;
-    background-color: @body-bg;
     display: none;
+  }
+}
+
+
+body > .cam-widget-inline-field {
+  &.btn-group,
+  &.field-control {
+    position: absolute;
+    z-index: 99999;
+    display: block;
+    background-color: @body-bg;
   }
 
   &.btn-group {
@@ -105,6 +114,7 @@
     border-radius: 3px 3px 0 0;
 
     > button.btn {
+      padding-bottom: 3px;
       &:first-child {
         border-radius: 3px 0 0 0;
       }
@@ -138,15 +148,5 @@
       min-width: initial;
       text-align: left;
     }
-  }
-}
-
-
-body>.cam-widget-inline-field {
-  &.btn-group,
-  &.field-control {
-    position: absolute;
-    z-index: 99999;
-    display: block;
   }
 }
