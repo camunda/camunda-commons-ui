@@ -14,7 +14,6 @@ html {
 
 body {
   padding-top: @navbar-height;
-  padding-bottom: @footer-height;
 }
 
 
@@ -33,23 +32,17 @@ h3 {
   line-height: 40px;
 }
 
-body > footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: @footer-height;
 
-  padding: 5px 10px;
-  border-top: 1px solid @custom-gray-light;
-  background-color: @custom-gray-lighter;
-  z-index: 100;
+
+
+.monospaced {
+  font-family: 'Courier New', Courier, monospace;
 }
-
 
 .navbar {
   .navbar-brand {
     text-indent: -999em;
-    background: no-repeat url(@brand-logo);
+    // background: no-repeat url(@brand-logo);
     width: 220px;
   }
 }
@@ -97,3 +90,7 @@ a {
 
 @import "_modal";
 @import "_cam-table";
+
+@import "../../lib/auth/page/login";
+
+@import "../../lib/widgets/footer/cam-widget-footer";
