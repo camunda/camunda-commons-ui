@@ -3,6 +3,8 @@
       ng-class="{'invalid': !valid}">
   <a href
      ng-click="onDelete()"
+     tooltip-placement="top"
+     tooltip="{{ deleteText }}"
      class="remove-search glyphicon glyphicon-remove">
   </a>
 
@@ -17,7 +19,8 @@
         class="set-value"
         type="option"
         options="type.values"
-        change="changeSearch('type', varValue)"
+        change="changeSearch('type', varValue, $event)"
+        on-start-editing="clearEditTrigger('type')"
         value="type.value">
     <span ng-if="type.tooltip"
           tooltip-placement="top"
@@ -33,7 +36,8 @@
     <span cam-widget-inline-field
           class="set-value"
           type="text"
-          change="changeSearch('name', varValue)"
+          change="changeSearch('name', varValue, $event)"
+          on-start-editing="clearEditTrigger('name')"
           value="name.value">
       <span ng-if="name.tooltip"
             tooltip-placement="top"
@@ -50,7 +54,8 @@
         class="set-value"
         type="option"
         options="operator.values"
-        change="changeSearch('operator', varValue)"
+        change="changeSearch('operator', varValue, $event)"
+        on-start-editing="clearEditTrigger('operator')"
         value="operator.value">
     <span ng-if="operator.tooltip"
           tooltip-placement="top"
@@ -65,7 +70,8 @@
   <span cam-widget-inline-field
         class="set-value"
         type="{{ valueType }}"
-        change="changeSearch('value', varValue)"
+        change="changeSearch('value', varValue, $event)"
+        on-start-editing="clearEditTrigger('value')"
         value="value.value"
         flexible="{{ allowDates }}">
     <span class="visible-whitespace"

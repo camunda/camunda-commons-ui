@@ -1,0 +1,31 @@
+<form class="search-field"
+      ng-submit="createSearch()">
+  <div class="form-container search-container">
+    <span cam-widget-search-pill
+          ng-repeat="search in searches"
+          extended="search.extended"
+          allow-dates="search.allowDates"
+          enforce-dates="search.enforceDates"
+          valid="search.valid"
+          name="search.name"
+          type="search.type"
+          operator="search.operator"
+          value="search.value"
+          invalid-text="{{ translations.invalid }}"
+          delete-text="{{ translations.deleteSearch }}"
+          on-change="handleChange($index, field, before, value, $event)"
+          on-delete="deleteSearch($index)"
+    />
+
+    <input class="form-control"
+           type="text"
+           placeholder="{{ translations.inputPlaceholder }}"
+           ng-model="inputQuery"
+           ng-keydown="onKeydown($event)"
+           typeahead="type as type.id.value for type in types | filter:$viewValue:instantTypeahead"
+           typeahead-on-select="createSearch($item)"
+           instant-typeahead
+    />
+
+  </div>
+</form>
