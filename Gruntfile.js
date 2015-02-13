@@ -10,6 +10,13 @@ var specHtmlExp = /\.spec\.html$/;
 module.exports = function(grunt) {
   'use strict';
   require('load-grunt-tasks')(grunt);
+  try {
+    grunt.task.loadNpmTasks('grunt-contrib-watch');
+  }
+  catch (err) {
+    grunt.log.errorlns(err.stack);
+  }
+
   var commons = require('./index');
 
   var pkg = require('./package.json');
