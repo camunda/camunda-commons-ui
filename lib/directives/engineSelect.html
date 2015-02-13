@@ -9,7 +9,7 @@
           tooltip-placement="bottom"></span>
     {{ currentEngine.name }}
   </a>
-  <ul class="dropdown-menu">
+  <ul class="dropdown-menu dropdown-menu-right">
     <li ng-repeat="(id, engine) in engines">
       <a ng-href="{{ 'app://../' + engine.name + '/' | uri }}">
         {{ engine.name }}
