@@ -200,12 +200,6 @@ $scope.search4.update = function() {
       });
       require(['text!/test-conf.json'], function(rConf) {
         rConf = JSON.parse(rConf);
-        rConf.packages.push({
-          name: 'camunda-commons-ui/widgets',
-          location: 'lib/widgets',
-          main: 'index'
-        });
-        rConf.baseUrl = '/';
         require.config(rConf);
         require([
           'angular',

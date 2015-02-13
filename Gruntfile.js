@@ -55,7 +55,14 @@ module.exports = function(grunt) {
             middlewares.unshift(function (req, res, next) {
               if (req.url === '/test-conf.json') {
                 res.setHeader('Content-Type', 'application/json');
-                return res.end(JSON.stringify(commons.requirejs({pathPrefix: ''})));
+                var conf = commons.requirejs({ pathPrefix: '' });
+                conf.baseUrl = '/';
+                conf.packages.push({
+                  name: 'camunda-commons-ui/widgets',
+                  location: 'lib/widgets',
+                  main: 'index'
+                });
+                return res.end(JSON.stringify(conf));
               }
               next();
             });
@@ -101,7 +108,7 @@ module.exports = function(grunt) {
         },
         files: [
           '*.css',
-          '**/*.spec.*'
+          'lib/**/*.{html,js}'
         ],
         tasks: []
       }
