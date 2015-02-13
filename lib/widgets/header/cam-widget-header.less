@@ -19,9 +19,6 @@ body {
 
   > [ng-transclude] {
     float: left;
-    padding-left: (@grid-gutter-width / 2);
-    padding-right: (@grid-gutter-width / 2);
-
     > ul {
       margin: 0;
       padding: 0;
@@ -51,5 +48,14 @@ body {
 
   > .cam-nav {
     float: right;
+  }
+
+  @media screen and (max-width: @grid-float-breakpoint) {
+    > [ng-transclude],
+    > .cam-nav {
+      float: left;
+      margin-left: 0;
+      width: 100%;
+    }
   }
 }
