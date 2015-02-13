@@ -1,0 +1,71 @@
+<div class="navbar-header">
+  <button type="button"
+          class="navbar-toggle collapsed">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+
+  <a class="navbar-brand"
+     href="#/"
+     title="{{ brandName }}">
+    {{ brandName }}
+  </a>
+</div>
+
+<div ng-transclude></div>
+
+<ul class="cam-nav nav navbar-nav">
+
+  <li engine-select></li>
+
+  <li class="account dropdown"
+    ng-if="authentication.name"
+    ng-cloak>
+    <a href
+       class="dropdown-toggle">
+      <span class="glyphicon glyphicon-user "></span>
+      {{ authentication.name }}
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li class="profile">
+        <a ng-href="{{ '../../admin/:engine/#/users/' + authentication.name + '?tab=profile' | uri }}">
+          My Profile
+        </a>
+      </li>
+
+      <li class="divider"></li>
+
+      <li class="logout">
+        <a href
+           ng-click="authentication.logout()">
+          Sign out
+        </a>
+      </li>
+    </ul>
+  </li>
+
+  <li class="divider-vertical"
+      ng-if="authentication.name"
+      ng-cloak></li>
+
+  <li class="app-switch dropdown">
+    <a href
+       class="dropdown-toggle">
+      <span class="glyphicon glyphicon-home"></span>
+      <span class="caret"></span>
+    </a>
+
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li ng-repeat="(appName, app) in apps"
+          ng-if="appName !== currentApp && (!authentication || authentication.canAccess(appName))"
+          ng-class="appName">
+        <a ng-href="{{ '../../' + appName + '/:engine/' | uri }}">
+          {{ app.label }}
+        </a>
+      </li>
+    </ul>
+  </li>
+</ul>

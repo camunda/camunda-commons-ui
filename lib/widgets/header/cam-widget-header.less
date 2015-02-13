@@ -1,0 +1,55 @@
+body {
+  padding-top: @header-height;
+}
+
+[cam-widget-header] {
+  .navbar;
+  .navbar-inverse;
+  .navbar-fixed-top;
+
+  color: @navbar-inverse-brand-color;
+
+  .navbar-brand {
+    background: no-repeat url(@brand-logo);
+  }
+
+  a {
+    color: @navbar-inverse-link-color;
+  }
+
+  > [ng-transclude] {
+    float: left;
+    padding-left: (@grid-gutter-width / 2);
+    padding-right: (@grid-gutter-width / 2);
+
+    > ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      > li > a {
+        position: relative;
+        display: block;
+        padding: 10px 15px;
+      }
+    }
+  }
+
+
+  > ul,
+  > [ng-transclude] > ul {
+
+    > li {
+      > a {
+        line-height: (@navbar-height / 2);
+        height: @navbar-height;
+        > .glyphicon {
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+
+  > .cam-nav {
+    float: right;
+  }
+}

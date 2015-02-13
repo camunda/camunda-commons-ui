@@ -7,6 +7,8 @@
 
 @import "../../lib/widgets/inline-field/cam-widget-inline-field.less";
 @import "../../lib/widgets/search-pill/search-pill.less";
+@import "../../lib/widgets/header/cam-widget-header.less";
+@import "../../lib/widgets/footer/cam-widget-footer.less";
 
 
 
@@ -58,4 +60,29 @@ dt + dd {
   [ng-non-bindable] {
     margin-bottom: @grid-gutter-width;
   }
+}
+
+.test-container {
+  .container;
+  width: 100% !important;
+  position: relative;
+  background-color: @gray-lighter;
+  padding: @grid-gutter-width;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+
+// overrides for tests
+
+// header
+.cam-widget-header-test-page .test-container {
+  padding-top: @header-height;
+}
+
+.test-container > [cam-widget-header] {
+  position: absolute;
+  // top: @grid-gutter-width;
+  // left: @grid-gutter-width;
+  // right: @grid-gutter-width;
 }

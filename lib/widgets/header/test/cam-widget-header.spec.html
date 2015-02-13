@@ -1,0 +1,195 @@
+<html>
+  <head>
+    <link href="/styles.css" rel="stylesheet" />
+    <link href="/test-styles.css" rel="stylesheet" />
+  </head>
+  <body class="cam-widget-header-test-page">
+    <header>
+      <div>
+        <h1>Header</h1>
+      </div>
+    </header>
+
+    <section class="widget-description">
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>A header navigation bar with a branding on the left and the common menus on the right.
+      You can customize what comes in the center with <a href="//docs.angularjs.org/api/ng/directive/ngTransclude">ng-transclude</a>.</p>
+    </section>
+
+    <section class="widget-reference">
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt>brandName</dt>
+        <dd>brand</dd>
+      </dl>
+    </section>
+
+    <section class="widget-examples">
+      <header>
+        <h2>Examples</h2>
+      </header>
+
+      <div class="widget-example"
+           id="empty">
+        <h3>Without content</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable></pre>
+          <div class="test-container">
+            <div cam-widget-header
+                 brand-name="Cammunda Commons UI"></div>
+          </div><!-- /.test-container -->
+        </div>
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="with-content">
+        <h3>With content</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable></pre>
+          <div class="test-container">
+            <div cam-widget-header
+                 brand-name="Cammunda Commons UI">
+              <ul>
+                <li>
+                  <a href>Awesome</a>
+                </li>
+              </ul>
+            </div>
+          </div><!-- /.test-container -->
+        </div>
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="anonymous">
+        <h3>Anonymous</h3>
+        <div ng-controller="testAnonymousController">
+          <pre ng-non-bindable></pre>
+          <div class="test-container">
+            <div cam-widget-header
+                 brand-name="Cammunda Commons UI"
+                 current-app="ctrlCurrentApp"
+                 authentication="authentication">
+            </div>
+          </div><!-- /.test-container -->
+        </div>
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="authenticated">
+        <h3>Authenticated</h3>
+        <div ng-controller="testAuthenticatedController">
+          <pre ng-non-bindable></pre>
+          <div class="test-container">
+            <div cam-widget-header
+                 brand-name="Cammunda Commons UI"
+                 current-app="ctrlCurrentApp"
+                 authentication="authentication">
+            </div>
+            <div class="row">
+              <div class="col-xs-12">
+                testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+              </div>
+            </div>
+          </div><!-- /.test-container -->
+        </div>
+      </div><!-- /.widget-example -->
+    </section>
+
+    <footer>
+      <nav>
+        <ul class="list-inline">
+          <li>
+            <a href="http://camunda.org">camunda.org</a>
+          </li>
+          <li>
+            <a href="http://github.com/camunda-commons-ui">commons UI lib</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="/node_modules/requirejs/require.js"></script>
+    <script>
+      require.config({
+        paths: {text: '/node_modules/requirejs-text/text'}
+      });
+      require(['text!/test-conf.json'], function(rConf) {
+        'use strict';
+        rConf = JSON.parse(rConf);
+        rConf.baseUrl = '/';
+        require.config(rConf);
+        require([
+          'angular',
+          'lib/widgets/header/cam-widget-header',
+          'angular-bootstrap'
+        ], function (
+          angular,
+          headerDefinition
+        ) {
+          var $ = angular.element;
+          $('.test-container').each(function () {
+            var $el = $(this);
+            var html = $el.html().replace(/\n            /g, '\n').trim();
+            $('pre[ng-non-bindable]', $el.parent()).first().text(html);
+          });
+
+          // naive authentication object for test purposes
+          function Authentication(username, accesses) {
+            this.name = username || '';
+            this._accesses = accesses || [];
+          }
+          Authentication.prototype.logout = function () {
+            this.name = '';
+          };
+          Authentication.prototype.canAccess = function (appName) {
+            return !this._accesses.length || this._accesses.indexOf(appName) > -1;
+          };
+
+
+          var mockedDependenciesModule = angular.module('mockedDependencies', []);
+          // mockedDependenciesModule.controller('AuthenticationController', function () {});
+          mockedDependenciesModule.provider('uriFilter', [function () {
+            return { $get: function () {} };
+          }]);
+          mockedDependenciesModule.filter('uri', [function () {
+            return function () { return '#uri-filter-replaced'; };
+          }]);
+
+
+
+          var headerModule = angular.module('headerModule', [
+            'ui.bootstrap',
+            mockedDependenciesModule.name
+          ]);
+          headerModule.directive('camWidgetHeader', headerDefinition);
+
+
+
+          var testModule = angular.module('testModule', [headerModule.name]);
+          testModule.controller('testController', [function() {}]);
+
+          testModule.controller('testAnonymousController', ['$scope', function($scope) {
+            $scope.ctrlCurrentApp = 'admin';
+            $scope.authentication = new Authentication();
+          }]);
+
+          testModule.controller('testAuthenticatedController', ['$scope', function($scope) {
+            $scope.ctrlCurrentApp = 'tasklist';
+            $scope.authentication = new Authentication('mustermann', ['tasklist', 'admin']);
+          }]);
+
+          angular.bootstrap(document.body, [testModule.name]);
+        });
+      });
+    </script>
+  </body>
+</html>
