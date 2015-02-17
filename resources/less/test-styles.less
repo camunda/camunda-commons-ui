@@ -5,6 +5,9 @@
 
 @import "common.less";
 
+@import "../../lib/widgets/inline-field/cam-widget-inline-field.less";
+@import "../../lib/widgets/search-pill/search-pill.less";
+@import "../../lib/widgets/loader/cam-widget-loader.less";
 
 
 // custom styles for the testing suite -----------------------------------------
@@ -62,8 +65,6 @@ dt + dd {
   position: relative;
   background-color: @gray-lighter;
   padding: @grid-gutter-width;
-  overflow: hidden;
-  min-height: 200px;
 }
 
 
@@ -72,6 +73,10 @@ dt + dd {
 // header
 .cam-widget-header-test-page .test-container {
   padding-top: @header-height;
+  .test-container {
+    overflow: hidden;
+    min-height: 200px;
+  }
 }
 
 .test-container > [cam-widget-header] {

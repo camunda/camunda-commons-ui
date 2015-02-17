@@ -21,12 +21,17 @@
     <section class="widget-reference">
       <header>
         <h2>Usage</h2>
+        This widget depends an authentication service (provided in camunda-commons-ui - lib/auth).
       </header>
 
       <h3>Options</h3>
       <dl>
-        <dt>brandName</dt>
-        <dd>brand</dd>
+        <dt><span class="badge">@</span> brand-name</dt>
+        <dd>The brand name for the application</dd>
+        <dt><span class="badge">@</span> current-app</dt>
+        <dd>Indicate on which app the user currently is (used to limit the choices in the app switch dropdown).</dd>
+        <dt><span class="badge">=</span> authentication</dt>
+        <dd>can be passed to customize the dropdown menus (showing or not the account and limit the choices of apps the user can switch to according to its authorizations).</dd>
       </dl>
     </section>
 
@@ -38,69 +43,86 @@
       <div class="widget-example"
            id="empty">
         <h3>Without content</h3>
-        <div ng-controller="testController">
-          <pre ng-non-bindable></pre>
-          <div class="test-container">
-            <div cam-widget-header
-                 brand-name="Cammunda Commons UI"></div>
-          </div><!-- /.test-container -->
-        </div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     brand-name="Cammunda Commons UI"&gt;&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               brand-name="Cammunda Commons UI"></div>
+        </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
 
 
       <div class="widget-example"
            id="with-content">
         <h3>With content</h3>
-        <div ng-controller="testController">
-          <pre ng-non-bindable></pre>
-          <div class="test-container">
-            <div cam-widget-header
-                 brand-name="Cammunda Commons UI">
-              <ul>
-                <li>
-                  <a href>Awesome</a>
-                </li>
-              </ul>
-            </div>
-          </div><!-- /.test-container -->
-        </div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     brand-name="Cammunda Commons UI"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href&gt;Awesome&lt;/a&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               brand-name="Cammunda Commons UI">
+            <ul>
+              <li>
+                <a href>Awesome</a>
+              </li>
+            </ul>
+          </div>
+        </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
 
 
       <div class="widget-example"
-           id="anonymous">
+           id="anonymous"
+           ng-controller="testAnonymousController">
         <h3>Anonymous</h3>
-        <div ng-controller="testAnonymousController">
-          <pre ng-non-bindable></pre>
-          <div class="test-container">
-            <div cam-widget-header
-                 brand-name="Cammunda Commons UI"
-                 current-app="ctrlCurrentApp"
-                 authentication="authentication">
-            </div>
-          </div><!-- /.test-container -->
-        </div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     brand-name="Cammunda Commons UI"
+     current-app="{{ ctrlCurrentApp }}"&gt;
+  You are on `{{ ctrlCurrentApp }}` app.
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               brand-name="Cammunda Commons UI"
+               current-app="{{ ctrlCurrentApp }}">
+            You are on `{{ ctrlCurrentApp }}` app.
+          </div>
+        </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
 
 
       <div class="widget-example"
-           id="authenticated">
+           id="authenticated"
+           ng-controller="testAuthenticatedController">
         <h3>Authenticated</h3>
-        <div ng-controller="testAuthenticatedController">
-          <pre ng-non-bindable></pre>
-          <div class="test-container">
-            <div cam-widget-header
-                 brand-name="Cammunda Commons UI"
-                 current-app="ctrlCurrentApp"
-                 authentication="authentication">
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     brand-name="Cammunda Commons UI"
+     current-app="{{ ctrlCurrentApp }}"&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+  &lt;div class="col-xs-12"&gt;
+    testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               brand-name="Cammunda Commons UI"
+               current-app="{{ ctrlCurrentApp }}">
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
             </div>
-            <div class="row">
-              <div class="col-xs-12">
-                testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
-              </div>
-            </div>
-          </div><!-- /.test-container -->
-        </div>
+          </div>
+        </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
     </section>
 
@@ -135,28 +157,24 @@
           angular,
           headerDefinition
         ) {
-          var $ = angular.element;
-          $('.test-container').each(function () {
-            var $el = $(this);
-            var html = $el.html().replace(/\n            /g, '\n').trim();
-            $('pre[ng-non-bindable]', $el.parent()).first().text(html);
-          });
-
-          // naive authentication object for test purposes
+          // naive auth object for test purposes
           function Authentication(username, accesses) {
             this.name = username || '';
             this._accesses = accesses || [];
           }
-          Authentication.prototype.logout = function () {
-            this.name = '';
-          };
           Authentication.prototype.canAccess = function (appName) {
             return !this._accesses.length || this._accesses.indexOf(appName) > -1;
           };
 
 
           var mockedDependenciesModule = angular.module('mockedDependencies', []);
-          // mockedDependenciesModule.controller('AuthenticationController', function () {});
+
+          mockedDependenciesModule.service('AuthenticationService', [function () {
+            this.logout = function () {
+              console.info('loging out');
+            };
+          }]);
+
           mockedDependenciesModule.provider('uriFilter', [function () {
             return { $get: function () {} };
           }]);
@@ -175,16 +193,15 @@
 
 
           var testModule = angular.module('testModule', [headerModule.name]);
-          testModule.controller('testController', [function() {}]);
 
           testModule.controller('testAnonymousController', ['$scope', function($scope) {
             $scope.ctrlCurrentApp = 'admin';
-            $scope.authentication = new Authentication();
+            $scope.auth = new Authentication();
           }]);
 
           testModule.controller('testAuthenticatedController', ['$scope', function($scope) {
             $scope.ctrlCurrentApp = 'tasklist';
-            $scope.authentication = new Authentication('mustermann', ['tasklist', 'admin']);
+            $scope.auth = new Authentication('mustermann', ['tasklist', 'admin']);
           }]);
 
           angular.bootstrap(document.body, [testModule.name]);

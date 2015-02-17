@@ -66,8 +66,11 @@ h3 {
  */
 [ng\:cloak],
 [ng-cloak],
-.ng-cloak {
-  display: none;
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
 }
 
 [ng-click] {
@@ -88,6 +91,7 @@ a {
   }
 }
 
+@import "_animate-spin";
 @import "_modal";
 @import "_cam-table";
 
