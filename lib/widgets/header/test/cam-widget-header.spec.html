@@ -147,7 +147,6 @@
       require(['text!/test-conf.json'], function(rConf) {
         'use strict';
         rConf = JSON.parse(rConf);
-        rConf.baseUrl = '/';
         require.config(rConf);
         require([
           'angular',
