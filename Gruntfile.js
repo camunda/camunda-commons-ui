@@ -118,4 +118,5 @@ module.exports = function(grunt) {
   grunt.registerTask('auto-build', ['less', 'connect:widgetTests', 'watch']);
 
   grunt.registerTask('default', ['less:widgets', 'karma', 'connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('protractorTests', ['connect:widgetTests', 'protractor:widgets']);
 };
