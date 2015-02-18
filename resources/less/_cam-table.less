@@ -8,4 +8,27 @@ table.cam-table {
     max-width: 120px;
     .text-overflow();
   }
+
+  td,
+  th {
+    margin: 0;
+    &.select {
+      text-align: center;
+      width: 40px;
+      input[type="checkbox"] {
+        margin-top: 5px;
+      }
+    }
+  }
+
+  td.checkbox {
+    input[type="checkbox"] {
+      position: static;
+      margin-left: 0;
+    }
+  }
+
+  tbody tr:first-child td {
+    border-top: none;
+  }
 }
