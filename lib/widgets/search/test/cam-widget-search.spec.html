@@ -3,7 +3,7 @@
     <link href='/styles.css' rel='stylesheet' />
     <link href='/test-styles.css' rel='stylesheet' />
   </head>
-  <body>
+  <body ng-app="myModule">
     <header>
       <div>
         <h1>Search</h1>
@@ -256,7 +256,7 @@ $scope.operators =  {
             };
           }]);
 
-          angular.bootstrap(document.body, [ngModule.name]);
+          //angular.bootstrap(document.body, [ngModule.name]);
         });
       })
     </script>
