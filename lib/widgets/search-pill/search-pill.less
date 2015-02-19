@@ -4,7 +4,7 @@
   }
 
   .invalid .valid-hide {
-    display: initial;
+    display: inline-block;
   }
 
   .search-label {
@@ -21,6 +21,11 @@
       .alert-danger();
       border-width: 1px;
       border-style: solid;
+    }
+
+    > .glyphicon {
+      vertical-align: middle;
+      margin-top: -2px;
     }
 
     [cam-widget-inline-field] {
