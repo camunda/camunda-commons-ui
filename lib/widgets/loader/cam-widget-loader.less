@@ -1,15 +1,22 @@
 [cam-widget-loader] {
-  .loader-state {
+  > .loader-state {
     &.loading,
     &.empty,
     &.alert-danger {
       text-align: center;
+      margin-top: @padding-base-vertical;
+      margin-bottom: @padding-base-vertical;
     }
+  }
+
+  > .loading,
+  > .empty {
+    font-style: italic;
+    color: @gray-light;
   }
 
   > .loading {
     cursor: wait;
     cursor: progress;
-    padding: 5px;
   }
 }
