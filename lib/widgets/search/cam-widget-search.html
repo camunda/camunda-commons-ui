@@ -1,5 +1,6 @@
 <form class="search-field"
-      ng-submit="createSearch()">
+      ng-submit="createSearch()"
+      ng-class="{'has-search': searches.length}">
   <div class="form-container search-container">
     <span cam-widget-search-pill
           ng-repeat="search in searches"
@@ -17,7 +18,7 @@
           on-delete="deleteSearch($index)"
     />
 
-    <input class="form-control"
+    <input class="form-control main-field"
            type="text"
            placeholder="{{ translations.inputPlaceholder }}"
            ng-model="inputQuery"
