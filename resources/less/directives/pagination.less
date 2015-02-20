@@ -4,47 +4,16 @@
 
   > li {
     display: inline-block;
-    cursor: pointer;
 
-    > a {
+    a {
       border: none;
-      border-bottom: 1px solid @body-bg;
-      padding: 0 3px;
-      margin: 0 5px;
+    }
 
-      &:focus,
-      &:hover {
-        margin-bottom: 0;
-        background: transparent;
-        border-bottom: 1px solid @pagination-border;
+    &.active {
+      a {
+        background-color: @gray-lighter;
+        color: @gray;
       }
-    }
-  }
-
-  .active,
-  .disabled {
-    cursor: auto;
-  }
-
-  > .active > a {
-    margin-bottom: 0;
-    color: #005580;
-    border-bottom: 1px solid #005580;
-    background: transparent;
-
-    &:hover,
-    &:focus {
-      color: #005580;
-      background: transparent;
-    }
-  }
-
-  > .disabled > a {
-    border-bottom: 1px solid @body-bg;
-
-    &:hover,
-    &:focus {
-      border-bottom: 1px solid @body-bg;
     }
   }
 }

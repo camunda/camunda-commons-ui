@@ -14,34 +14,41 @@
 // Colors ------------------------------------------------------------
 
 // this is the "main" color (like in the header)
-@main-color:    #b5152b;
-@brand-primary: @main-color;
+@main-color:                      #b5152b;
+@brand-primary:                   @main-color;
 
 // slightly darker variant
-// @main-darker: #9c3930;
-@main-darker:   darken(@main-color, 25%);
+// @main-darker:                     #9c3930;
+@main-darker:                     darken(@main-color, 25%);
 
-@important-color: #b94a48;
-@important-darker: darken(@important-color, 45%);
+@important-color:                 #b94a48;
+@important-darker:                darken(@important-color, 45%);
 
-@warning-color: #f89406;
-// @warning-darker: #c67605;
-@warning-darker: darken(@warning-color, 45%);
+@warning-color:                   #f89406;
+// @warning-darker:                  #c67605;
+@warning-darker:                  darken(@warning-color, 45%);
 
 // process state colors
-@running-color: desaturate(lighten(@link-color, 25%), 40%);
-@running-darker: darken(@running-color, 45%);
+@running-color:                   desaturate(lighten(@link-color, 25%), 40%);
+@running-darker:                  darken(@running-color, 45%);
 
-@completed-color: #bbb;
-@completed-darker: darken(@completed-color, 45%);
+@completed-color:                 #bbb;
+@completed-darker:                darken(@completed-color, 45%);
 
-@canceled-color: desaturate(lighten(@warning-color, 20%), 25%);
-@canceled-darker: darken(@canceled-color, 45%);
+@canceled-color:                  desaturate(lighten(@warning-color, 20%), 25%);
+@canceled-darker:                 darken(@canceled-color, 45%);
 
-@line-style:                dotted;
-@line-color:                @gray-light;
+@line-style:                      dotted;
+@line-color:                      @gray-light;
 
 @link-color:                      #08c;
+
+@border-radius-base:              0;
+@border-radius-large:             0;
+@border-radius-small:             0;
+
+@dropdown-link-active-color:      @gray-dark;
+@dropdown-link-active-bg:         @gray-lighter;
 
 // custom colors
 @custom-gray-light:               #e5e5e5;
