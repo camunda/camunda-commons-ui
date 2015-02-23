@@ -42,10 +42,20 @@ License: [MIT](https://raw.githubusercontent.com/jquery/jquery-ui/master/LICENSE
 
 ## AngularJS Bootstrap
 
-Version: 0.11.0
-Source: http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js
+Version: 0.11.2
+Source: Custom build from [forked ui-bootstrap](//github.com/camunda-third-party/bootstrap). To rebuild:
+```sh
+git clone https://github.com/camunda-third-party/bootstrap.git angular-ui-bootstrap
+cd angular-ui-bootstrap
+npm install
+grunt build 
+# copy 
+# '<angular-ui-bootstrap directory>/dist/ui-bootstrap-tpls.0.11.2.js'
+# to
+# '<camunda-commons-ui directory>/vendor/ui-bootstrap-tpls.0.11.2-camunda.js'
+```
 
-- ui-bootstrap-tpls.0.11.0.js
+- ui-bootstrap-tpls.0.11.2-camunda.js
 
 License: [MIT](https://github.com/angular-ui/bootstrap/blob/master/LICENSE)
 
