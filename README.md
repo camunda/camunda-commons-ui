@@ -2,10 +2,9 @@
 
 Common frontend / UI resources and libraries for camunda web applications:
 
-- [cockpit](https://github.com/camunda/camunda-cockpit-ui)
-- [tasklist](https://github.com/camunda/camunda-tasklist-ui)
-- admin
-
+- [admin][admin]
+- [cockpit][cockpit]
+- [tasklist][tasklist]
 
 ## Content
 
@@ -22,6 +21,7 @@ Common frontend / UI resources and libraries for camunda web applications:
   - `locales` - translation files
   - `img`
   - `less` - base less files to generate CSS stylesheets
+- (`widgets`)[#widgets]
 
 
 ## Test
@@ -40,12 +40,34 @@ karma start test/karma.conf.js
 ```
 
 
-### Widget tests
+### Widgets
+
+Widgets are reusable components which should be easy to integrate in the Camunda webapps ([admin][admin], [cockpit][cockpit] and [tasklist][tasklist]) and your own projects.
+
+#### Available widgets
+
+- `cam-widget-footer`
+- `cam-widget-header`
+- `cam-widget-inline-field`
+- `cam-widget-loader`
+- `cam-widget-search`
+- `cam-widget-search-pill`
+
+#### Developing the widgets
+
+```sh
+grunt auto-build
+```
+
+#### Testing the widgets
 
 ```sh
 npm install
 ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager --chrome update
+grunt
 ```
+
+
 
 ## License
 
@@ -57,3 +79,8 @@ Unless otherwise specified this project is licensed under [Apache License Versio
  - [Daniel _meyerdan_ Meyer](https://github.com/meyerdan) - [@meyerdan](http://twitter.com/meyerdan)
  - [Valentin _zeropaper_ Vago](https://github.com/zeropaper) - [@zeropaper](http://twitter.com/zeropaper)
  - [Nico _Nikku_ Rehwaldt](https://github.com/nikku) - [@nrehwaldt](http://twitter.com/nrehwaldt)
+
+
+[admin][//github.com/camunda/camunda-admin-ui]
+[cockpit][//github.com/camunda/camunda-cockpit-ui]
+[tasklist][//github.com/camunda/camunda-tasklist-ui]
