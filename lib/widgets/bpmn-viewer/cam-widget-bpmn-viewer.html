@@ -1,0 +1,11 @@
+<div class="alert alert-danger"
+     ng-if="error">
+  <span>
+    <strong>Could not render diagram:</strong>
+  </span>
+  <span>
+   {{ error.message }}
+  </span>
+</div>
+
+<div ng-show="!error" class="diagram-holder"></div>
