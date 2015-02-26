@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='/styles.css' rel='stylesheet' />
+    <link href='/test-styles.css' rel='stylesheet' />
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>Bpmn-Viewer</h1>
+      </div>
+    </header>
+
+    <section class='widget-description'>
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>TODO</p>
+    </section>
+
+    <section class='widget-reference'>
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt><span class="badge">=</span> TODO</dt>
+        <dd>TODO</dd>
+      </dl>
+    </section>
+
+    <section class='widget-examples'>
+      <header>
+        <h2>Example</h2>
+      </header>
+
+      <div class='widget-example'
+           id='example'>
+        <div ng-controller='testController'>
+          <div style="height: 200px;">
+            <div cam-widget-bpmn-viewer
+              process-diagram='diagramXML'
+              control='control'
+              on-click='handleClick(element)'
+              style="width:100%; height: 100%;"
+            />
+          </div>
+          <pre ng-non-bindable>
+TODO
+          </pre>
+        </div>
+      </div><!-- /.widget-example -->
+    </section>
+
+
+    <footer>
+      <nav>
+        <ul class='list-inline'>
+          <li>
+            <a href='http://camunda.org'>camunda.org</a>
+          </li>
+          <li>
+            <a href='http://github.com/camunda-commons-ui'>commons UI lib</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src='/node_modules/requirejs/require.js'></script>
+    <script>
+      require.config({
+        paths: {text: '/node_modules/requirejs-text/text'}
+      });
+      require(['text!/test-conf.json'], function(rConf) {
+        'use strict';
+        rConf = JSON.parse(rConf);
+        require.config(rConf);
+        require([
+          'angular',
+          'camunda-commons-ui/widgets',
+          'text!lib/widgets/bpmn-viewer/test/test.xml'
+        ], function (angular, camCommonsUi, testXML) {
+
+          var ngModule = angular.module('myModule', [camCommonsUi.name]);
+
+          ngModule.controller('testController', ['$scope', function($scope) {
+            $scope.diagramXML = testXML;
+
+            $scope.control = {};
+
+            $scope.handleClick = function(element) {
+              if($scope.control.isHighlighted(element.id)) {
+                $scope.control.clearHighlight(element.id);
+              } else {
+                $scope.control.highlight(element.id);
+              }
+            };
+
+
+          }]);
+
+          angular.bootstrap(document.body, [ngModule.name]);
+        });
+      });
+    </script>
+  </body>
+</html>

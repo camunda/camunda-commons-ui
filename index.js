@@ -67,7 +67,7 @@ function requirejsConf(options) {
       'jquery-overscroll':          'vendor/jquery.overscroll',
       domReady:                     'vendor/domReady',
       'placeholders-js':            'vendor/placeholders.main',
-      'bpmn-js':                    'vendor/bpmn-viewer',
+      'bpmn-js':                    'vendor/bpmn-navigated-viewer',
       'snap-svg':                   'vendor/snap.svg'
     },
 
