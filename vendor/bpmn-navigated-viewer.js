@@ -134,7 +134,7 @@ function Viewer(options) {
   assign(container.style, {
     width: ensureUnit(options.width),
     height: ensureUnit(options.height),
-    position: options.position
+    position: options.position,
   });
 
   /**
@@ -9319,6 +9319,39 @@ Canvas.prototype.removeMarker = function(element, marker) {
   this._updateMarker(element, marker, false);
 };
 
+/**
+ * Check the existence of a marker on element.
+ *
+ * @param  {String|djs.model.Base} element
+ * @param  {String} marker
+ */
+Canvas.prototype.hasMarker = function(element, marker) {
+  if (!element.id) {
+    element = this._elementRegistry.get(element);
+  }
+
+  var gfx = this.getGraphics(element);
+
+  return gfx && gfx.hasClass(marker);
+};
+
+/**
+ * Toggles a marker on an element.
+ *
+ * Fires the element.marker.update event, making it possible to
+ * integrate extension into the marker life-cycle, too.
+ *
+ * @param  {String|djs.model.Base} element
+ * @param  {String} marker
+ */
+Canvas.prototype.toggleMarker = function(element, marker) {
+  if(this.hasMarker(element, marker)) {
+    this.removeMarker(element, marker);
+  } else {
+    this.addMarker(element, marker);
+  }
+};
+
 Canvas.prototype.getRootElement = function() {
   if (!this._rootElement) {
     this.setRootElement({ id: '__implicitroot' });
@@ -11306,6 +11339,7 @@ Overlays.prototype._updateRoot = function(viewbox) {
   var matrix = 'matrix(' + a + ',0,0,' + d + ',' + (-1 * viewbox.x * a) + ',' + (-1 * viewbox.y * d) + ')';
 
   this._overlayRoot.style.transform = matrix;
+  this._overlayRoot.style['-ms-transform'] = matrix;
 };
 
 

@@ -38,7 +38,7 @@
       <div class='widget-example'
            id='example'>
         <div ng-controller='testController'>
-          <div style="height: 200px;">
+          <div style="height: 400px;">
             <div cam-widget-bpmn-viewer
               process-diagram='diagramXML'
               control='control'
@@ -46,9 +46,9 @@
               style="width:100%; height: 100%;"
             />
           </div>
-          <pre ng-non-bindable>
-TODO
-          </pre>
+          <div>
+            Selected elements: <span>{{selectedNodes}}</span>
+          </div>
         </div>
       </div><!-- /.widget-example -->
     </section>
@@ -89,14 +89,20 @@ TODO
 
             $scope.control = {};
 
+            $scope.selectedNodes = [];
             $scope.handleClick = function(element) {
               if($scope.control.isHighlighted(element.id)) {
                 $scope.control.clearHighlight(element.id);
+                $scope.control.removeBadges(element.id);
+                $scope.selectedNodes.splice($scope.selectedNodes.indexOf(element.id),1);
+                $scope.$apply();
               } else {
                 $scope.control.highlight(element.id);
+                $scope.control.createBadge(element.id, {text: 'Test', tooltip: 'This is a tooltip'});
+                $scope.selectedNodes.push(element.id);
+                $scope.$apply();
               }
             };
-
 
           }]);
 
