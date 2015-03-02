@@ -15,7 +15,7 @@
       <header>
         <h2>Description</h2>
       </header>
-      <p>TODO</p>
+      <p>This widget displays a BPMN diagram and lets the user interact with it using the mouse (zoom and move). It also provides an API to highlight elements and create badge annotations.</p>
     </section>
 
     <section class='widget-reference'>
@@ -25,8 +25,38 @@
 
       <h3>Options</h3>
       <dl>
-        <dt><span class="badge">=</span> TODO</dt>
-        <dd>TODO</dd>
+        <dt><span class="badge">=</span> process-diagram</dt>
+        <dd>A string containing the XML content of the rendered BPM model.</dd>
+        <dt><span class="badge">=</span> control</dt>
+        <dd>An object containing the control API of the widget. After initialization of the widget, the object provided in by this variable contains the following methods:
+          <ul>
+            <li>
+              <b>highlight(id)</b>: Highlights an element by ID.
+            </li>
+            <li>
+              <b>clearHighlight(id)</b>: Removes the highlight from the element by ID.
+            </li>
+            <li>
+              <b>isHighlighted(id)</b>: Returns whether an element is highlighted (boolean).
+            </li>
+            <li>
+              <b>createBadge(id, config)</b>: Creates a badge annotation for an element. Config is an object containing the following properties:
+              <ul>
+                <li><b>color</b>: background color of the badge (HTML color string: #FFFFFF)</li>
+                <li><b>tooltip</b>: Tooltip text</li>
+                <li><b>text</b>: Text content of the badge</li>
+                <li><b>position</b>: Object describing the position of the badge (see <a href="https://github.com/bpmn-io/diagram-js/blob/01f9f5d7bc9930b5bd0715bbdf9468547e0e18d6/lib/features/overlays/Overlays.js#L185">diagram.js documentation</a>)</li>
+              </ul>
+            </li>
+            <li>
+              <b>removeBadges(id)</b>: Removes all badges from an element by ID.
+            </li>
+          </ul>
+        </dd>
+        <dt><span class="badge">&amp;</span> on-load</dt>
+        <dd>Method that is called after the diagram is loaded correctly. Diagram will already be correctly zoomed and event listeners are setup. Will also be called whenever the process-diagram value changes and the diagram successfully reloads.</dd>
+        <dt><span class="badge">&amp;</span> on-click</dt>
+        <dd>Method that is called when the user clicks on an element in the diagram. Via the named parameter element, the target of the click can be accessed. <i>Hint: Using element.businessObject.$instanceOf('bpmn:FlowNode') you can retrieve the type of the clicked element.</i></dd>
       </dl>
     </section>
 
@@ -38,18 +68,41 @@
       <div class='widget-example'
            id='example'>
         <div ng-controller='testController'>
-          <div style="height: 400px;">
-            <div cam-widget-bpmn-viewer
-              process-diagram='diagramXML'
-              control='control'
-              on-click='handleClick(element)'
-              style="width:100%; height: 100%;"
-            />
-          </div>
-          <div>
-            Selected elements: <span>{{selectedNodes}}</span>
-          </div>
+          <div cam-widget-bpmn-viewer
+            process-diagram='diagramXML'
+            control='control'
+            on-click='handleClick(element)'
+            style="height: 400px;"></div>
+            Selected elements: {{selectedNodes}}
         </div>
+
+          <pre ng-non-bindable>
+$scope.diagramXML = /* bpmn xml string */;
+$scope.control = {};
+$scope.selectedNodes = [];
+
+$scope.handleClick = function(element) {
+  if(element.businessObject.$instanceOf('bpmn:FlowNode')) {
+    if($scope.control.isHighlighted(element.id)) {
+      $scope.control.clearHighlight(element.id);
+      $scope.control.removeBadges(element.id);
+      $scope.selectedNodes.splice($scope.selectedNodes.indexOf(element.id),1);
+      $scope.$apply();
+    } else {
+      $scope.control.highlight(element.id);
+      $scope.control.createBadge(element.id, {text: 'Test', tooltip: 'This is a tooltip'});
+      $scope.selectedNodes.push(element.id);
+      $scope.$apply();
+    }
+  }
+};
+
+&lt;div cam-widget-bpmn-viewer
+            process-diagram='diagramXML'
+            control='control'
+            on-click='handleClick(element)'
+            style="height: 400px;"&gt;&lt;/div&gt;
+Selected elements: {{selectedNodes}}</pre>
       </div><!-- /.widget-example -->
     </section>
 
@@ -91,16 +144,18 @@
 
             $scope.selectedNodes = [];
             $scope.handleClick = function(element) {
-              if($scope.control.isHighlighted(element.id)) {
-                $scope.control.clearHighlight(element.id);
-                $scope.control.removeBadges(element.id);
-                $scope.selectedNodes.splice($scope.selectedNodes.indexOf(element.id),1);
-                $scope.$apply();
-              } else {
-                $scope.control.highlight(element.id);
-                $scope.control.createBadge(element.id, {text: 'Test', tooltip: 'This is a tooltip'});
-                $scope.selectedNodes.push(element.id);
-                $scope.$apply();
+              if(element.businessObject.$instanceOf('bpmn:FlowNode')) {
+                if($scope.control.isHighlighted(element.id)) {
+                  $scope.control.clearHighlight(element.id);
+                  $scope.control.removeBadges(element.id);
+                  $scope.selectedNodes.splice($scope.selectedNodes.indexOf(element.id),1);
+                  $scope.$apply();
+                } else {
+                  $scope.control.highlight(element.id);
+                  $scope.control.createBadge(element.id, {text: 'Test', tooltip: 'This is a tooltip'});
+                  $scope.selectedNodes.push(element.id);
+                  $scope.$apply();
+                }
               }
             };
 

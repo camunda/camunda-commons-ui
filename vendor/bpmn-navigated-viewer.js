@@ -12050,7 +12050,8 @@ function ZoomScroll(events, canvas) {
   function zoom(direction, position) {
 
     var currentZoom = canvas.zoom();
-    var factor = 1 + (direction / ZOOM_OFFSET);
+
+    var factor = Math.pow(1 + Math.abs(direction / ZOOM_OFFSET) , direction > 0 ? 1 : -1);
 
     canvas.zoom(cap(currentZoom * factor), position);
   }
