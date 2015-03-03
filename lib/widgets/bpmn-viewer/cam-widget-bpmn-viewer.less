@@ -30,7 +30,49 @@
     background-color: #338CD2;
   }
 
-  border: 1px solid red;
+  .navigation {
+    position: absolute;
+    right: 15px;
+
+    &.zoom {
+      bottom: 10px;
+    }
+    &.reset {
+      bottom: 100px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 5px;
+      margin: 0;
+      background: #FFF;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      border-radius: 2px;
+    }
+
+    button {
+      padding: 0;
+      outline: none;
+      cursor: pointer;
+      font-size: 22px;
+      line-height: 26px;
+      background: none;
+      border: none;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #CCC;
+      margin-top: 6px;
+      margin-bottom: 6px;
+    }
+  }
+
+  border: 1px solid #bebebe;
   position: relative;
 
+}
+
+.djs-cursor-move {
+  cursor: move;
 }
