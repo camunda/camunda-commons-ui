@@ -48,5 +48,20 @@
   "PROCESS_INSTANCE":
                         "Process Instance",
   "MANAGE_ACCOUNT":
-                        "Manage your account"
+                        "Manage your account",
+
+  "BOOLEAN":
+                        "Boolean",
+  "SHORT":
+                        "Short",
+  "INTEGER":
+                        "Integer",
+  "LONG":
+                        "Long",
+  "DOUBLE":
+                        "Double",
+  "DATE":
+                        "Date",
+  "STRING":
+                        "String"
 }
