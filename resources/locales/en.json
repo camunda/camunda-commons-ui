@@ -50,6 +50,11 @@
   "MANAGE_ACCOUNT":
                         "Manage your account",
 
+  "ASC":
+                        "Ascending",
+  "DESC":
+                        "Descending",
+
   "BOOLEAN":
                         "Boolean",
   "SHORT":
