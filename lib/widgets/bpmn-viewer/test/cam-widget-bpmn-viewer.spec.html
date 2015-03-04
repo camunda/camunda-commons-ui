@@ -57,6 +57,8 @@
         <dd>Method that is called after the diagram is loaded correctly. Diagram will already be correctly zoomed and event listeners are setup. Will also be called whenever the process-diagram value changes and the diagram successfully reloads.</dd>
         <dt><span class="badge">&amp;</span> on-click</dt>
         <dd>Method that is called when the user clicks on an element in the diagram. Via the named parameter element, the target of the click can be accessed. <i>Hint: Using element.businessObject.$instanceOf('bpmn:FlowNode') you can retrieve the type of the clicked element.</i></dd>
+        <dt><span class="badge">&amp;</span> disable-navigation</dt>
+        <dd>Boolean indicating whether the diagram should be navigatable. If set to false, move and zoom functionality is disabled. This does not affect the callbacks, you can still have onclick listeners on an diagram with disabled navigation. This setting can not be changed at runtime.</dd>
       </dl>
     </section>
 
@@ -67,9 +69,11 @@
 
       <div class='widget-example'
            id='example'>
+        <h3>Navigated Viewer</h3>
         <div ng-controller='testController'>
           <div cam-widget-bpmn-viewer
             process-diagram='diagramXML'
+            id='viewer1'
             control='control'
             on-click='handleClick(element)'
             style="height: 400px;"></div>
@@ -104,7 +108,28 @@ $scope.handleClick = function(element) {
             style="height: 400px;"&gt;&lt;/div&gt;
 Selected elements: {{selectedNodes}}</pre>
       </div><!-- /.widget-example -->
+
+      <div class='widget-example'
+           id='example'>
+        <h3>Navigation Disabled</h3>
+        <div ng-controller='testController'>
+          <div cam-widget-bpmn-viewer
+            id='viewer2'
+            process-diagram='diagramXML'
+            disable-navigation='true'
+            style="height: 400px;"></div>
+        </div>
+
+          <pre ng-non-bindable>
+$scope.diagramXML = /* bpmn xml string */;
+
+&lt;div cam-widget-bpmn-viewer
+            process-diagram='diagramXML'
+            disable-navigation='true'
+            style="height: 400px;"&gt;&lt;/div&gt;</pre>
+      </div><!-- /.widget-example -->
     </section>
+
 
 
     <footer>
