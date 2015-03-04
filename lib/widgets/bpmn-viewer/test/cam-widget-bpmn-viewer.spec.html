@@ -25,7 +25,7 @@
 
       <h3>Options</h3>
       <dl>
-        <dt><span class="badge">=</span> process-diagram</dt>
+        <dt><span class="badge">=</span> diagram-data</dt>
         <dd>A string containing the XML content of the rendered BPM model.</dd>
         <dt><span class="badge">=</span> control</dt>
         <dd>An object containing the control API of the widget. After initialization of the widget, the object provided in by this variable contains the following methods:
@@ -54,7 +54,7 @@
           </ul>
         </dd>
         <dt><span class="badge">&amp;</span> on-load</dt>
-        <dd>Method that is called after the diagram is loaded correctly. Diagram will already be correctly zoomed and event listeners are setup. Will also be called whenever the process-diagram value changes and the diagram successfully reloads.</dd>
+        <dd>Method that is called after the diagram is loaded correctly. Diagram will already be correctly zoomed and event listeners are setup. Will also be called whenever the diagram-data value changes and the diagram successfully reloads.</dd>
         <dt><span class="badge">&amp;</span> on-click</dt>
         <dd>Method that is called when the user clicks on an element in the diagram. Via the named parameter element, the target of the click can be accessed. <i>Hint: Using element.businessObject.$instanceOf('bpmn:FlowNode') you can retrieve the type of the clicked element.</i></dd>
         <dt><span class="badge">&amp;</span> disable-navigation</dt>
@@ -72,7 +72,7 @@
         <h3>Navigated Viewer</h3>
         <div ng-controller='testController'>
           <div cam-widget-bpmn-viewer
-            process-diagram='diagramXML'
+            diagram-data='diagramXML'
             id='viewer1'
             control='control'
             on-click='handleClick(element)'
@@ -102,7 +102,7 @@ $scope.handleClick = function(element) {
 };
 
 &lt;div cam-widget-bpmn-viewer
-            process-diagram='diagramXML'
+            diagram-data='diagramXML'
             control='control'
             on-click='handleClick(element)'
             style="height: 400px;"&gt;&lt;/div&gt;
@@ -115,7 +115,7 @@ Selected elements: {{selectedNodes}}</pre>
         <div ng-controller='testController'>
           <div cam-widget-bpmn-viewer
             id='viewer2'
-            process-diagram='diagramXML'
+            diagram-data='diagramXML'
             disable-navigation='true'
             style="height: 400px;"></div>
         </div>
@@ -124,7 +124,7 @@ Selected elements: {{selectedNodes}}</pre>
 $scope.diagramXML = /* bpmn xml string */;
 
 &lt;div cam-widget-bpmn-viewer
-            process-diagram='diagramXML'
+            diagram-data='diagramXML'
             disable-navigation='true'
             style="height: 400px;"&gt;&lt;/div&gt;</pre>
       </div><!-- /.widget-example -->
