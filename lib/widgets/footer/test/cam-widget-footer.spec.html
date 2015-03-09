@@ -1,0 +1,87 @@
+<html>
+  <head>
+    <link href="/styles.css" rel="stylesheet" />
+    <link href="/test-styles.css" rel="stylesheet" />
+  </head>
+  <body class="cam-widget-footer-test-page">
+    <header>
+      <div>
+        <h1>Footer</h1>
+      </div>
+    </header>
+
+    <section class="widget-description">
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>A simple footer element.</p>
+    </section>
+
+    <section class="widget-reference">
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt><span class="badge">@</span> version</dt>
+        <dd>Aimed to receive the version number of the application.</dd>
+      </dl>
+    </section>
+
+    <section class="widget-examples">
+      <header>
+        <h2>Examples</h2>
+      </header>
+
+      <div class="widget-example"
+           id="empty">
+        <h3>With version</h3>
+        <pre ng-non-bindable>&lt;div cam-widget-footer
+     version="version number"&gt;&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-footer
+               version="version number"></div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+    </section>
+
+    <footer>
+      <nav>
+        <ul class="list-inline">
+          <li>
+            <a href="http://camunda.org">camunda.org</a>
+          </li>
+          <li>
+            <a href="http://github.com/camunda-commons-ui">commons UI lib</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="/node_modules/requirejs/require.js"></script>
+    <script>
+      require.config({
+        paths: {text: '/node_modules/requirejs-text/text'}
+      });
+      require(['text!/test-conf.json'], function(rConf) {
+        'use strict';
+        rConf = JSON.parse(rConf);
+        require.config(rConf);
+        require([
+          'angular',
+          'lib/widgets/footer/cam-widget-footer'
+        ], function (
+          angular,
+          footerDefinition
+        ) {
+          var footerModule = angular.module('footerModule', []);
+
+          footerModule.directive('camWidgetFooter', footerDefinition);
+
+          angular.bootstrap(document.body, [footerModule.name]);
+        });
+      });
+    </script>
+  </body>
+</html>
