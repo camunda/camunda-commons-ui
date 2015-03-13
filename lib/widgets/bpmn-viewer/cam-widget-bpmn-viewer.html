@@ -9,7 +9,7 @@
 </div>
 
 <div ng-show="!error">
-  <div class="diagram-holder"></div>
+  <div class="diagram-holder" ng-class='{"diagram-holder": true, "move-cursor": !disableNavigation && !grabbing, "grab-cursor": !disableNavigation && grabbing}'></div>
 
   <div ng-if="!disableNavigation"
        class="navigation zoom">
