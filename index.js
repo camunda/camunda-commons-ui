@@ -67,7 +67,7 @@ function requirejsConf(options) {
       'jquery-overscroll':          'vendor/jquery.overscroll',
       domReady:                     'vendor/domReady',
       'placeholders-js':            'vendor/placeholders.main',
-      'bpmn-js':                    'vendor/bpmn-viewer',
+      'bpmn-io':                    'vendor/bpmn-viewer',
       'snap-svg':                   'vendor/snap.svg'
     },
 
@@ -77,7 +77,7 @@ function requirejsConf(options) {
         exports: 'angular'
       },
 
-      'bpmn-js':              [
+      'bpmn-io':              [
                                 'snap-svg',
                                 'sax',
                                 'lodash'
