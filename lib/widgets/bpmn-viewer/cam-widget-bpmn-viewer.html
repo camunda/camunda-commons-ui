@@ -9,6 +9,14 @@
 </div>
 
 <div ng-show="!error">
+
+  <div ng-if="!loaded" class="placeholder-container">
+    <div class="placeholder-content">
+      Loading diagram<br />
+      <span class="glyphicon glyphicon-refresh animate-spin"></span>
+    </div>
+  </div>
+
   <div class="diagram-holder" ng-class='{"diagram-holder": true, "grab-cursor": !disableNavigation && !grabbing, "djs-cursor-move": !disableNavigation && grabbing}'></div>
 
   <div ng-if="!disableNavigation"
