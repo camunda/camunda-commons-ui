@@ -1,0 +1,111 @@
+<html>
+  <head>
+    <link href="/styles.css" rel="stylesheet" />
+    <link href="/test-styles.css" rel="stylesheet" />
+  </head>
+  <body class="cam-widget-debug-test-page">
+    <header>
+      <div>
+        <h1>debug</h1>
+      </div>
+    </header>
+
+    <section class="widget-description">
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>Simple utility for development puproses that prints a variable.
+      Can become useful when you get lost in the scopes madness.</p>
+    </section>
+
+    <section class="widget-reference">
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt><span class="badge">@</span> open</dt>
+        <dd>can be used to determine the initial state (open or not) of the debug widget</dd>
+
+        <dt><span class="badge">=</span> debugged</dt>
+        <dd>can be used to pass the variable to debug</dd>
+      </dl>
+    </section>
+
+    <section class="widget-examples">
+      <header>
+        <h2>Examples</h2>
+      </header>
+
+      <div class="widget-example"
+           id="default"
+           ng-controller="testController">
+        <h3>Default usage</h3>
+        <pre ng-non-bindable>&lt;div cam-widget-debug
+     debugged=&quot;varToDebug&quot;&gt;&lt;/div&gt;</pre>
+        <div class="test-container"
+             id="test-container">
+          <div cam-widget-debug
+               debugged="varToDebug"></div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+    </section>
+
+    <footer>
+      <nav>
+        <ul class="list-inline">
+          <li>
+            <a href="http://camunda.org">camunda.org</a>
+          </li>
+          <li>
+            <a href="http://github.com/camunda-commons-ui">commons UI lib</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+
+    <script src="/node_modules/requirejs/require.js"></script>
+    <script>
+      require.config({
+        paths: {text: '/node_modules/requirejs-text/text'}
+      });
+      require(['text!/test-conf.json'], function(rConf) {
+        'use strict';
+        rConf = JSON.parse(rConf);
+        require.config(rConf);
+        require([
+          'angular',
+          'lib/widgets/debug/cam-widget-debug'
+        ], function (
+          angular,
+          debugDefinition
+        ) {
+          var debugModule = angular.module('debugModule', []);
+          debugModule.directive('camWidgetDebug', debugDefinition);
+
+
+
+          var testModule = angular.module('testModule', [debugModule.name]);
+          testModule.controller('testController', [
+            '$scope',
+          function(
+            $scope
+          ) {
+            $scope.varToDebug = {
+              something: {
+                to: {
+                  debug: new Date()
+                }
+              },
+              array: 'abcdef'.split('')
+            };
+          }]);
+
+
+          angular.bootstrap(document.body, [testModule.name]);
+        });
+      });
+    </script>
+  </body>
+</html>

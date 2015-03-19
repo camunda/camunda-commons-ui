@@ -1,0 +1,14 @@
+<div class="debug">
+  <div class="col-xs-2">
+    <button class="btn btn-default btn-round"
+            ng-click="open = !open">
+      <span class="glyphicon"
+            ng-class="{'glyphicon-eye-open': !open, 'glyphicon-eye-close': open}"></span>
+    </button>
+  </div>
+  <div class="col-xs-10"
+       ng-show="open">
+    <code>{{ varName }}</code>
+    <pre>{{ debugged | json }}</pre>
+  </div>
+</div>
