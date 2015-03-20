@@ -27,6 +27,8 @@
                         "Delete",
   "SET":
                         "Set",
+  "CHANGE":
+                        "Change",
   "TASK":
                         "Task",
   "FILTER":
