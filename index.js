@@ -45,7 +45,6 @@ function requirejsConf(options) {
       ngDefine:                     'node_modules/requirejs-angular-define/dist/ngDefine',
       text:                         'node_modules/requirejs-text/text',
       lodash:                       'node_modules/lodash/lodash',
-      sax:                          'node_modules/sax/lib/sax',
 
       // #### vendor dependencies
       angular:                      'vendor/angular',
@@ -67,8 +66,7 @@ function requirejsConf(options) {
       'jquery-overscroll':          'vendor/jquery.overscroll',
       domReady:                     'vendor/domReady',
       'placeholders-js':            'vendor/placeholders.main',
-      'bpmn-io':                    'vendor/bpmn-viewer',
-      'snap-svg':                   'vendor/snap.svg'
+      'bpmn-io':                    'vendor/bpmn-viewer'
     },
 
     shim: {
@@ -76,15 +74,6 @@ function requirejsConf(options) {
         deps: ['jquery'],
         exports: 'angular'
       },
-
-      'bpmn-io':              [
-                                'snap-svg',
-                                'sax',
-                                'lodash'
-                              ],
-      'snap-svg':             {
-                                exports: 'Snap'
-                              },
 
       'placeholders-js':      [
                                 'vendor/placeholders.utils.js',

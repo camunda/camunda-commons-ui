@@ -1,5 +1,5 @@
 /*!
- * bpmn-js - bpmn-navigated-viewer v0.8.0
+ * bpmn-js - bpmn-navigated-viewer v0.9.2
 
  * Copyright 2014, 2015 camunda Services GmbH and other contributors
  *
@@ -8,7 +8,7 @@
  *
  * Source Code: https://github.com/bpmn-io/bpmn-js
  *
- * Date: 2015-02-26
+ * Date: 2015-03-19
  */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var f;"undefined"!=typeof window?f=window:"undefined"!=typeof global?f=global:"undefined"!=typeof self&&(f=self),f.BpmnJS=e()}}(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 'use strict';
@@ -30,26 +30,26 @@ NavigatedViewer.prototype = Object.create(Viewer.prototype);
 module.exports = NavigatedViewer;
 
 NavigatedViewer.prototype._navigationModules = [
-  _dereq_(59),
-  _dereq_(57)
+  _dereq_(60),
+  _dereq_(58)
 ];
 
 NavigatedViewer.prototype._modules = [].concat(
   NavigatedViewer.prototype._modules,
   NavigatedViewer.prototype._navigationModules);
-},{"2":2,"57":57,"59":59}],2:[function(_dereq_,module,exports){
+},{"2":2,"58":58,"60":60}],2:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157),
-    omit = _dereq_(161),
-    isString = _dereq_(154),
-    isNumber = _dereq_(151);
+var assign = _dereq_(159),
+    omit = _dereq_(163),
+    isString = _dereq_(156),
+    isNumber = _dereq_(153);
 
-var domify = _dereq_(171),
-    domQuery = _dereq_(173),
-    domRemove = _dereq_(174);
+var domify = _dereq_(173),
+    domQuery = _dereq_(175),
+    domRemove = _dereq_(176);
 
-var Diagram = _dereq_(34),
+var Diagram = _dereq_(35),
     BpmnModdle = _dereq_(14);
 
 var Importer = _dereq_(9);
@@ -134,7 +134,7 @@ function Viewer(options) {
   assign(container.style, {
     width: ensureUnit(options.width),
     height: ensureUnit(options.height),
-    position: options.position,
+    position: options.position
   });
 
   /**
@@ -354,13 +354,13 @@ Viewer.prototype.on = function(event, handler) {
 // modules the viewer is composed of
 Viewer.prototype._modules = [
   _dereq_(3),
-  _dereq_(54),
-  _dereq_(50)
+  _dereq_(55),
+  _dereq_(51)
 ];
 
 module.exports = Viewer;
 
-},{"14":14,"151":151,"154":154,"157":157,"161":161,"171":171,"173":173,"174":174,"3":3,"34":34,"50":50,"54":54,"9":9}],3:[function(_dereq_,module,exports){
+},{"14":14,"153":153,"156":156,"159":159,"163":163,"173":173,"175":175,"176":176,"3":3,"35":35,"51":51,"55":55,"9":9}],3:[function(_dereq_,module,exports){
 module.exports = {
   __depends__: [
     _dereq_(6),
@@ -370,16 +370,16 @@ module.exports = {
 },{"11":11,"6":6}],4:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(148),
-    isObject = _dereq_(152),
-    assign = _dereq_(157),
-    forEach = _dereq_(78),
-    every = _dereq_(75),
-    includes = _dereq_(80),
-    some = _dereq_(83);
+var isArray = _dereq_(150),
+    isObject = _dereq_(154),
+    assign = _dereq_(159),
+    forEach = _dereq_(80),
+    every = _dereq_(77),
+    includes = _dereq_(82),
+    some = _dereq_(85);
 
-var DefaultRenderer = _dereq_(42),
-    TextUtil = _dereq_(66),
+var DefaultRenderer = _dereq_(43),
+    TextUtil = _dereq_(68),
     DiUtil = _dereq_(12);
 
 var createLine = DefaultRenderer.createLine;
@@ -818,7 +818,7 @@ function BpmnRenderer(events, styles, pathMap) {
         strokeWidth: 1
       });
     },
-    'bpmn:LinkEventDefinition': function(p, event) {
+    'bpmn:LinkEventDefinition': function(p, event, isThrowing) {
       var pathData = pathMap.getScaledPath('EVENT_LINK', {
         xScaleFactor: 1,
         yScaleFactor: 1,
@@ -830,8 +830,11 @@ function BpmnRenderer(events, styles, pathMap) {
         }
       });
 
+      var fill = isThrowing ? 'black' : 'none';
+
       return drawPath(p, pathData, {
-        strokeWidth: 1
+        strokeWidth: 1,
+        fill: fill
       });
     },
     'bpmn:ErrorEventDefinition': function(p, event, isThrowing) {
@@ -1275,7 +1278,8 @@ function BpmnRenderer(events, styles, pathMap) {
     'bpmn:InclusiveGateway': function(p, element) {
       var diamond = drawDiamond(p, element.width, element.height);
 
-      /* circle path */ drawCircle(p, element.width, element.height, element.height * 0.24, {
+        /* circle path */
+        drawCircle(p, element.width, element.height, element.height * 0.24, {
         strokeWidth: 2.5,
         fill: 'none'
       });
@@ -1882,10 +1886,11 @@ BpmnRenderer.prototype = Object.create(DefaultRenderer.prototype);
 BpmnRenderer.$inject = [ 'eventBus', 'styles', 'pathMap' ];
 
 module.exports = BpmnRenderer;
-},{"12":12,"148":148,"152":152,"157":157,"42":42,"66":66,"75":75,"78":78,"80":80,"83":83}],5:[function(_dereq_,module,exports){
+
+},{"12":12,"150":150,"154":154,"159":159,"43":43,"68":68,"77":77,"80":80,"82":82,"85":85}],5:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(69);
+var Snap = _dereq_(71);
 
 /**
  * Map containing SVG paths needed by BpmnRenderer.
@@ -2337,7 +2342,7 @@ function PathMap() {
 
 module.exports = PathMap;
 
-},{"69":69}],6:[function(_dereq_,module,exports){
+},{"71":71}],6:[function(_dereq_,module,exports){
 module.exports = {
   renderer: [ 'type', _dereq_(4) ],
   pathMap: [ 'type', _dereq_(5) ]
@@ -2345,8 +2350,8 @@ module.exports = {
 },{"4":4,"5":5}],7:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157),
-    map = _dereq_(81);
+var assign = _dereq_(159),
+    map = _dereq_(83);
 
 var LabelUtil = _dereq_(13);
 
@@ -2534,14 +2539,14 @@ BpmnImporter.prototype._getElement = function(semantic) {
   return this._elementRegistry.get(semantic.id);
 };
 
-},{"10":10,"12":12,"13":13,"157":157,"81":81}],8:[function(_dereq_,module,exports){
+},{"10":10,"12":12,"13":13,"159":159,"83":83}],8:[function(_dereq_,module,exports){
 'use strict';
 
-var filter = _dereq_(76),
-    find = _dereq_(77),
-    forEach = _dereq_(78);
+var filter = _dereq_(78),
+    find = _dereq_(79),
+    forEach = _dereq_(80);
 
-var Refs = _dereq_(183);
+var Refs = _dereq_(185);
 
 var elementToString = _dereq_(10).elementToString;
 
@@ -2942,7 +2947,7 @@ function BpmnTreeWalker(handler) {
 }
 
 module.exports = BpmnTreeWalker;
-},{"10":10,"183":183,"76":76,"77":77,"78":78}],9:[function(_dereq_,module,exports){
+},{"10":10,"185":185,"78":78,"79":79,"80":80}],9:[function(_dereq_,module,exports){
 'use strict';
 
 var BpmnTreeWalker = _dereq_(8);
@@ -3036,7 +3041,7 @@ module.exports.isExpanded = function(semantic) {
 },{}],13:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157);
+var assign = _dereq_(159);
 
 
 var DEFAULT_LABEL_SIZE = module.exports.DEFAULT_LABEL_SIZE = {
@@ -3133,16 +3138,16 @@ module.exports.getExternalLabelBounds = function(semantic, element) {
     y: mid.y - size.height / 2
   }, size);
 };
-},{"157":157}],14:[function(_dereq_,module,exports){
+},{"159":159}],14:[function(_dereq_,module,exports){
 module.exports = _dereq_(16);
 },{"16":16}],15:[function(_dereq_,module,exports){
 'use strict';
 
-var isString = _dereq_(154),
-    isFunction = _dereq_(149),
-    assign = _dereq_(157);
+var isString = _dereq_(156),
+    isFunction = _dereq_(151),
+    assign = _dereq_(159);
 
-var Moddle = _dereq_(21),
+var Moddle = _dereq_(22),
     XmlReader = _dereq_(18),
     XmlWriter = _dereq_(19);
 
@@ -3216,24 +3221,24 @@ BpmnModdle.prototype.toXML = function(element, options, done) {
   }
 };
 
-},{"149":149,"154":154,"157":157,"18":18,"19":19,"21":21}],16:[function(_dereq_,module,exports){
+},{"151":151,"156":156,"159":159,"18":18,"19":19,"22":22}],16:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157);
+var assign = _dereq_(159);
 
 var BpmnModdle = _dereq_(15);
 
 var packages = {
-  bpmn: _dereq_(30),
-  bpmndi: _dereq_(31),
-  dc: _dereq_(32),
-  di: _dereq_(33)
+  bpmn: _dereq_(31),
+  bpmndi: _dereq_(32),
+  dc: _dereq_(33),
+  di: _dereq_(34)
 };
 
 module.exports = function(additionalPackages, options) {
   return new BpmnModdle(assign({}, packages, additionalPackages), options);
 };
-},{"15":15,"157":157,"30":30,"31":31,"32":32,"33":33}],17:[function(_dereq_,module,exports){
+},{"15":15,"159":159,"31":31,"32":32,"33":33,"34":34}],17:[function(_dereq_,module,exports){
 'use strict';
 
 function capitalize(string) {
@@ -3273,17 +3278,17 @@ module.exports.XSI_TYPE = 'xsi:type';
 },{}],18:[function(_dereq_,module,exports){
 'use strict';
 
-var reduce = _dereq_(82),
-    forEach = _dereq_(78),
-    find = _dereq_(77),
-    assign = _dereq_(157),
-    defer = _dereq_(86);
+var reduce = _dereq_(84),
+    forEach = _dereq_(80),
+    find = _dereq_(79),
+    assign = _dereq_(159),
+    defer = _dereq_(88);
 
-var Stack = _dereq_(20),
-    SaxParser = _dereq_(186).parser,
-    Moddle = _dereq_(21),
-    parseNameNs = _dereq_(26).parseName,
-    Types = _dereq_(29),
+var Stack = _dereq_(21),
+    SaxParser = _dereq_(20).parser,
+    Moddle = _dereq_(22),
+    parseNameNs = _dereq_(27).parseName,
+    Types = _dereq_(30),
     coerceType = Types.coerceType,
     isSimpleType = Types.isSimple,
     common = _dereq_(17),
@@ -3909,17 +3914,17 @@ XMLReader.prototype.handler = function(name) {
 
 module.exports = XMLReader;
 module.exports.ElementHandler = ElementHandler;
-},{"157":157,"17":17,"186":186,"20":20,"21":21,"26":26,"29":29,"77":77,"78":78,"82":82,"86":86}],19:[function(_dereq_,module,exports){
+},{"159":159,"17":17,"20":20,"21":21,"22":22,"27":27,"30":30,"79":79,"80":80,"84":84,"88":88}],19:[function(_dereq_,module,exports){
 'use strict';
 
-var map = _dereq_(81),
-    forEach = _dereq_(78),
-    isString = _dereq_(154),
-    filter = _dereq_(76),
-    assign = _dereq_(157);
+var map = _dereq_(83),
+    forEach = _dereq_(80),
+    isString = _dereq_(156),
+    filter = _dereq_(78),
+    assign = _dereq_(159);
 
-var Types = _dereq_(29),
-    parseNameNs = _dereq_(26).parseName,
+var Types = _dereq_(30),
+    parseNameNs = _dereq_(27).parseName,
     common = _dereq_(17),
     nameToAlias = common.nameToAlias;
 
@@ -4513,7 +4518,1422 @@ function XMLWriter(options) {
 }
 
 module.exports = XMLWriter;
-},{"154":154,"157":157,"17":17,"26":26,"29":29,"76":76,"78":78,"81":81}],20:[function(_dereq_,module,exports){
+},{"156":156,"159":159,"17":17,"27":27,"30":30,"78":78,"80":80,"83":83}],20:[function(_dereq_,module,exports){
+(function (Buffer){
+// wrapper for non-node envs
+;(function (sax) {
+
+sax.parser = function (strict, opt) { return new SAXParser(strict, opt) }
+sax.SAXParser = SAXParser
+sax.SAXStream = SAXStream
+sax.createStream = createStream
+
+// When we pass the MAX_BUFFER_LENGTH position, start checking for buffer overruns.
+// When we check, schedule the next check for MAX_BUFFER_LENGTH - (max(buffer lengths)),
+// since that's the earliest that a buffer overrun could occur.  This way, checks are
+// as rare as required, but as often as necessary to ensure never crossing this bound.
+// Furthermore, buffers are only tested at most once per write(), so passing a very
+// large string into write() might have undesirable effects, but this is manageable by
+// the caller, so it is assumed to be safe.  Thus, a call to write() may, in the extreme
+// edge case, result in creating at most one complete copy of the string passed in.
+// Set to Infinity to have unlimited buffers.
+sax.MAX_BUFFER_LENGTH = 64 * 1024
+
+var buffers = [
+  "comment", "sgmlDecl", "textNode", "tagName", "doctype",
+  "procInstName", "procInstBody", "entity", "attribName",
+  "attribValue", "cdata", "script"
+]
+
+sax.EVENTS = // for discoverability.
+  [ "text"
+  , "processinginstruction"
+  , "sgmldeclaration"
+  , "doctype"
+  , "comment"
+  , "attribute"
+  , "opentag"
+  , "closetag"
+  , "opencdata"
+  , "cdata"
+  , "closecdata"
+  , "error"
+  , "end"
+  , "ready"
+  , "script"
+  , "opennamespace"
+  , "closenamespace"
+  ]
+
+function SAXParser (strict, opt) {
+  if (!(this instanceof SAXParser)) return new SAXParser(strict, opt)
+
+  var parser = this
+  clearBuffers(parser)
+  parser.q = parser.c = ""
+  parser.bufferCheckPosition = sax.MAX_BUFFER_LENGTH
+  parser.opt = opt || {}
+  parser.opt.lowercase = parser.opt.lowercase || parser.opt.lowercasetags
+  parser.looseCase = parser.opt.lowercase ? "toLowerCase" : "toUpperCase"
+  parser.tags = []
+  parser.closed = parser.closedRoot = parser.sawRoot = false
+  parser.tag = parser.error = null
+  parser.strict = !!strict
+  parser.noscript = !!(strict || parser.opt.noscript)
+  parser.state = S.BEGIN
+  parser.ENTITIES = Object.create(sax.ENTITIES)
+  parser.attribList = []
+
+  // namespaces form a prototype chain.
+  // it always points at the current tag,
+  // which protos to its parent tag.
+  if (parser.opt.xmlns) parser.ns = Object.create(rootNS)
+
+  // mostly just for error reporting
+  parser.trackPosition = parser.opt.position !== false
+  if (parser.trackPosition) {
+    parser.position = parser.line = parser.column = 0
+  }
+  emit(parser, "onready")
+}
+
+if (!Object.create) Object.create = function (o) {
+  function f () { this.__proto__ = o }
+  f.prototype = o
+  return new f
+}
+
+if (!Object.getPrototypeOf) Object.getPrototypeOf = function (o) {
+  return o.__proto__
+}
+
+if (!Object.keys) Object.keys = function (o) {
+  var a = []
+  for (var i in o) if (o.hasOwnProperty(i)) a.push(i)
+  return a
+}
+
+function checkBufferLength (parser) {
+  var maxAllowed = Math.max(sax.MAX_BUFFER_LENGTH, 10)
+    , maxActual = 0
+  for (var i = 0, l = buffers.length; i < l; i ++) {
+    var len = parser[buffers[i]].length
+    if (len > maxAllowed) {
+      // Text/cdata nodes can get big, and since they're buffered,
+      // we can get here under normal conditions.
+      // Avoid issues by emitting the text node now,
+      // so at least it won't get any bigger.
+      switch (buffers[i]) {
+        case "textNode":
+          closeText(parser)
+        break
+
+        case "cdata":
+          emitNode(parser, "oncdata", parser.cdata)
+          parser.cdata = ""
+        break
+
+        case "script":
+          emitNode(parser, "onscript", parser.script)
+          parser.script = ""
+        break
+
+        default:
+          error(parser, "Max buffer length exceeded: "+buffers[i])
+      }
+    }
+    maxActual = Math.max(maxActual, len)
+  }
+  // schedule the next check for the earliest possible buffer overrun.
+  parser.bufferCheckPosition = (sax.MAX_BUFFER_LENGTH - maxActual)
+                             + parser.position
+}
+
+function clearBuffers (parser) {
+  for (var i = 0, l = buffers.length; i < l; i ++) {
+    parser[buffers[i]] = ""
+  }
+}
+
+function flushBuffers (parser) {
+  closeText(parser)
+  if (parser.cdata !== "") {
+    emitNode(parser, "oncdata", parser.cdata)
+    parser.cdata = ""
+  }
+  if (parser.script !== "") {
+    emitNode(parser, "onscript", parser.script)
+    parser.script = ""
+  }
+}
+
+SAXParser.prototype =
+  { end: function () { end(this) }
+  , write: write
+  , resume: function () { this.error = null; return this }
+  , close: function () { return this.write(null) }
+  , flush: function () { flushBuffers(this) }
+  }
+
+try {
+  var Stream = _dereq_("stream").Stream
+} catch (ex) {
+  var Stream = function () {}
+}
+
+
+var streamWraps = sax.EVENTS.filter(function (ev) {
+  return ev !== "error" && ev !== "end"
+})
+
+function createStream (strict, opt) {
+  return new SAXStream(strict, opt)
+}
+
+function SAXStream (strict, opt) {
+  if (!(this instanceof SAXStream)) return new SAXStream(strict, opt)
+
+  Stream.apply(this)
+
+  this._parser = new SAXParser(strict, opt)
+  this.writable = true
+  this.readable = true
+
+
+  var me = this
+
+  this._parser.onend = function () {
+    me.emit("end")
+  }
+
+  this._parser.onerror = function (er) {
+    me.emit("error", er)
+
+    // if didn't throw, then means error was handled.
+    // go ahead and clear error, so we can write again.
+    me._parser.error = null
+  }
+
+  this._decoder = null;
+
+  streamWraps.forEach(function (ev) {
+    Object.defineProperty(me, "on" + ev, {
+      get: function () { return me._parser["on" + ev] },
+      set: function (h) {
+        if (!h) {
+          me.removeAllListeners(ev)
+          return me._parser["on"+ev] = h
+        }
+        me.on(ev, h)
+      },
+      enumerable: true,
+      configurable: false
+    })
+  })
+}
+
+SAXStream.prototype = Object.create(Stream.prototype,
+  { constructor: { value: SAXStream } })
+
+SAXStream.prototype.write = function (data) {
+  if (typeof Buffer === 'function' &&
+      typeof Buffer.isBuffer === 'function' &&
+      Buffer.isBuffer(data)) {
+    if (!this._decoder) {
+      var SD = _dereq_('string_decoder').StringDecoder
+      this._decoder = new SD('utf8')
+    }
+    data = this._decoder.write(data);
+  }
+
+  this._parser.write(data.toString())
+  this.emit("data", data)
+  return true
+}
+
+SAXStream.prototype.end = function (chunk) {
+  if (chunk && chunk.length) this.write(chunk)
+  this._parser.end()
+  return true
+}
+
+SAXStream.prototype.on = function (ev, handler) {
+  var me = this
+  if (!me._parser["on"+ev] && streamWraps.indexOf(ev) !== -1) {
+    me._parser["on"+ev] = function () {
+      var args = arguments.length === 1 ? [arguments[0]]
+               : Array.apply(null, arguments)
+      args.splice(0, 0, ev)
+      me.emit.apply(me, args)
+    }
+  }
+
+  return Stream.prototype.on.call(me, ev, handler)
+}
+
+
+
+// character classes and tokens
+var whitespace = "\r\n\t "
+  // this really needs to be replaced with character classes.
+  // XML allows all manner of ridiculous numbers and digits.
+  , number = "0124356789"
+  , letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  // (Letter | "_" | ":")
+  , quote = "'\""
+  , entity = number+letter+"#"
+  , attribEnd = whitespace + ">"
+  , CDATA = "[CDATA["
+  , DOCTYPE = "DOCTYPE"
+  , XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"
+  , XMLNS_NAMESPACE = "http://www.w3.org/2000/xmlns/"
+  , rootNS = { xml: XML_NAMESPACE, xmlns: XMLNS_NAMESPACE }
+
+// turn all the string character sets into character class objects.
+whitespace = charClass(whitespace)
+number = charClass(number)
+letter = charClass(letter)
+
+// http://www.w3.org/TR/REC-xml/#NT-NameStartChar
+// This implementation works on strings, a single character at a time
+// as such, it cannot ever support astral-plane characters (10000-EFFFF)
+// without a significant breaking change to either this  parser, or the
+// JavaScript language.  Implementation of an emoji-capable xml parser
+// is left as an exercise for the reader.
+var nameStart = /[:_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/
+
+var nameBody = /[:_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\u00B7\u0300-\u036F\u203F-\u2040\.\d-]/
+
+quote = charClass(quote)
+entity = charClass(entity)
+attribEnd = charClass(attribEnd)
+
+function charClass (str) {
+  return str.split("").reduce(function (s, c) {
+    s[c] = true
+    return s
+  }, {})
+}
+
+function isRegExp (c) {
+  return Object.prototype.toString.call(c) === '[object RegExp]'
+}
+
+function is (charclass, c) {
+  return isRegExp(charclass) ? !!c.match(charclass) : charclass[c]
+}
+
+function not (charclass, c) {
+  return !is(charclass, c)
+}
+
+var S = 0
+sax.STATE =
+{ BEGIN                     : S++
+, TEXT                      : S++ // general stuff
+, TEXT_ENTITY               : S++ // &amp and such.
+, OPEN_WAKA                 : S++ // <
+, SGML_DECL                 : S++ // <!BLARG
+, SGML_DECL_QUOTED          : S++ // <!BLARG foo "bar
+, DOCTYPE                   : S++ // <!DOCTYPE
+, DOCTYPE_QUOTED            : S++ // <!DOCTYPE "//blah
+, DOCTYPE_DTD               : S++ // <!DOCTYPE "//blah" [ ...
+, DOCTYPE_DTD_QUOTED        : S++ // <!DOCTYPE "//blah" [ "foo
+, COMMENT_STARTING          : S++ // <!-
+, COMMENT                   : S++ // <!--
+, COMMENT_ENDING            : S++ // <!-- blah -
+, COMMENT_ENDED             : S++ // <!-- blah --
+, CDATA                     : S++ // <![CDATA[ something
+, CDATA_ENDING              : S++ // ]
+, CDATA_ENDING_2            : S++ // ]]
+, PROC_INST                 : S++ // <?hi
+, PROC_INST_BODY            : S++ // <?hi there
+, PROC_INST_ENDING          : S++ // <?hi "there" ?
+, OPEN_TAG                  : S++ // <strong
+, OPEN_TAG_SLASH            : S++ // <strong /
+, ATTRIB                    : S++ // <a
+, ATTRIB_NAME               : S++ // <a foo
+, ATTRIB_NAME_SAW_WHITE     : S++ // <a foo _
+, ATTRIB_VALUE              : S++ // <a foo=
+, ATTRIB_VALUE_QUOTED       : S++ // <a foo="bar
+, ATTRIB_VALUE_CLOSED       : S++ // <a foo="bar"
+, ATTRIB_VALUE_UNQUOTED     : S++ // <a foo=bar
+, ATTRIB_VALUE_ENTITY_Q     : S++ // <foo bar="&quot;"
+, ATTRIB_VALUE_ENTITY_U     : S++ // <foo bar=&quot;
+, CLOSE_TAG                 : S++ // </a
+, CLOSE_TAG_SAW_WHITE       : S++ // </a   >
+, SCRIPT                    : S++ // <script> ...
+, SCRIPT_ENDING             : S++ // <script> ... <
+}
+
+sax.ENTITIES =
+{ "amp" : "&"
+, "gt" : ">"
+, "lt" : "<"
+, "quot" : "\""
+, "apos" : "'"
+, "AElig" : 198
+, "Aacute" : 193
+, "Acirc" : 194
+, "Agrave" : 192
+, "Aring" : 197
+, "Atilde" : 195
+, "Auml" : 196
+, "Ccedil" : 199
+, "ETH" : 208
+, "Eacute" : 201
+, "Ecirc" : 202
+, "Egrave" : 200
+, "Euml" : 203
+, "Iacute" : 205
+, "Icirc" : 206
+, "Igrave" : 204
+, "Iuml" : 207
+, "Ntilde" : 209
+, "Oacute" : 211
+, "Ocirc" : 212
+, "Ograve" : 210
+, "Oslash" : 216
+, "Otilde" : 213
+, "Ouml" : 214
+, "THORN" : 222
+, "Uacute" : 218
+, "Ucirc" : 219
+, "Ugrave" : 217
+, "Uuml" : 220
+, "Yacute" : 221
+, "aacute" : 225
+, "acirc" : 226
+, "aelig" : 230
+, "agrave" : 224
+, "aring" : 229
+, "atilde" : 227
+, "auml" : 228
+, "ccedil" : 231
+, "eacute" : 233
+, "ecirc" : 234
+, "egrave" : 232
+, "eth" : 240
+, "euml" : 235
+, "iacute" : 237
+, "icirc" : 238
+, "igrave" : 236
+, "iuml" : 239
+, "ntilde" : 241
+, "oacute" : 243
+, "ocirc" : 244
+, "ograve" : 242
+, "oslash" : 248
+, "otilde" : 245
+, "ouml" : 246
+, "szlig" : 223
+, "thorn" : 254
+, "uacute" : 250
+, "ucirc" : 251
+, "ugrave" : 249
+, "uuml" : 252
+, "yacute" : 253
+, "yuml" : 255
+, "copy" : 169
+, "reg" : 174
+, "nbsp" : 160
+, "iexcl" : 161
+, "cent" : 162
+, "pound" : 163
+, "curren" : 164
+, "yen" : 165
+, "brvbar" : 166
+, "sect" : 167
+, "uml" : 168
+, "ordf" : 170
+, "laquo" : 171
+, "not" : 172
+, "shy" : 173
+, "macr" : 175
+, "deg" : 176
+, "plusmn" : 177
+, "sup1" : 185
+, "sup2" : 178
+, "sup3" : 179
+, "acute" : 180
+, "micro" : 181
+, "para" : 182
+, "middot" : 183
+, "cedil" : 184
+, "ordm" : 186
+, "raquo" : 187
+, "frac14" : 188
+, "frac12" : 189
+, "frac34" : 190
+, "iquest" : 191
+, "times" : 215
+, "divide" : 247
+, "OElig" : 338
+, "oelig" : 339
+, "Scaron" : 352
+, "scaron" : 353
+, "Yuml" : 376
+, "fnof" : 402
+, "circ" : 710
+, "tilde" : 732
+, "Alpha" : 913
+, "Beta" : 914
+, "Gamma" : 915
+, "Delta" : 916
+, "Epsilon" : 917
+, "Zeta" : 918
+, "Eta" : 919
+, "Theta" : 920
+, "Iota" : 921
+, "Kappa" : 922
+, "Lambda" : 923
+, "Mu" : 924
+, "Nu" : 925
+, "Xi" : 926
+, "Omicron" : 927
+, "Pi" : 928
+, "Rho" : 929
+, "Sigma" : 931
+, "Tau" : 932
+, "Upsilon" : 933
+, "Phi" : 934
+, "Chi" : 935
+, "Psi" : 936
+, "Omega" : 937
+, "alpha" : 945
+, "beta" : 946
+, "gamma" : 947
+, "delta" : 948
+, "epsilon" : 949
+, "zeta" : 950
+, "eta" : 951
+, "theta" : 952
+, "iota" : 953
+, "kappa" : 954
+, "lambda" : 955
+, "mu" : 956
+, "nu" : 957
+, "xi" : 958
+, "omicron" : 959
+, "pi" : 960
+, "rho" : 961
+, "sigmaf" : 962
+, "sigma" : 963
+, "tau" : 964
+, "upsilon" : 965
+, "phi" : 966
+, "chi" : 967
+, "psi" : 968
+, "omega" : 969
+, "thetasym" : 977
+, "upsih" : 978
+, "piv" : 982
+, "ensp" : 8194
+, "emsp" : 8195
+, "thinsp" : 8201
+, "zwnj" : 8204
+, "zwj" : 8205
+, "lrm" : 8206
+, "rlm" : 8207
+, "ndash" : 8211
+, "mdash" : 8212
+, "lsquo" : 8216
+, "rsquo" : 8217
+, "sbquo" : 8218
+, "ldquo" : 8220
+, "rdquo" : 8221
+, "bdquo" : 8222
+, "dagger" : 8224
+, "Dagger" : 8225
+, "bull" : 8226
+, "hellip" : 8230
+, "permil" : 8240
+, "prime" : 8242
+, "Prime" : 8243
+, "lsaquo" : 8249
+, "rsaquo" : 8250
+, "oline" : 8254
+, "frasl" : 8260
+, "euro" : 8364
+, "image" : 8465
+, "weierp" : 8472
+, "real" : 8476
+, "trade" : 8482
+, "alefsym" : 8501
+, "larr" : 8592
+, "uarr" : 8593
+, "rarr" : 8594
+, "darr" : 8595
+, "harr" : 8596
+, "crarr" : 8629
+, "lArr" : 8656
+, "uArr" : 8657
+, "rArr" : 8658
+, "dArr" : 8659
+, "hArr" : 8660
+, "forall" : 8704
+, "part" : 8706
+, "exist" : 8707
+, "empty" : 8709
+, "nabla" : 8711
+, "isin" : 8712
+, "notin" : 8713
+, "ni" : 8715
+, "prod" : 8719
+, "sum" : 8721
+, "minus" : 8722
+, "lowast" : 8727
+, "radic" : 8730
+, "prop" : 8733
+, "infin" : 8734
+, "ang" : 8736
+, "and" : 8743
+, "or" : 8744
+, "cap" : 8745
+, "cup" : 8746
+, "int" : 8747
+, "there4" : 8756
+, "sim" : 8764
+, "cong" : 8773
+, "asymp" : 8776
+, "ne" : 8800
+, "equiv" : 8801
+, "le" : 8804
+, "ge" : 8805
+, "sub" : 8834
+, "sup" : 8835
+, "nsub" : 8836
+, "sube" : 8838
+, "supe" : 8839
+, "oplus" : 8853
+, "otimes" : 8855
+, "perp" : 8869
+, "sdot" : 8901
+, "lceil" : 8968
+, "rceil" : 8969
+, "lfloor" : 8970
+, "rfloor" : 8971
+, "lang" : 9001
+, "rang" : 9002
+, "loz" : 9674
+, "spades" : 9824
+, "clubs" : 9827
+, "hearts" : 9829
+, "diams" : 9830
+}
+
+Object.keys(sax.ENTITIES).forEach(function (key) {
+    var e = sax.ENTITIES[key]
+    var s = typeof e === 'number' ? String.fromCharCode(e) : e
+    sax.ENTITIES[key] = s
+})
+
+for (var S in sax.STATE) sax.STATE[sax.STATE[S]] = S
+
+// shorthand
+S = sax.STATE
+
+function emit (parser, event, data) {
+  parser[event] && parser[event](data)
+}
+
+function emitNode (parser, nodeType, data) {
+  if (parser.textNode) closeText(parser)
+  emit(parser, nodeType, data)
+}
+
+function closeText (parser) {
+  parser.textNode = textopts(parser.opt, parser.textNode)
+  if (parser.textNode) emit(parser, "ontext", parser.textNode)
+  parser.textNode = ""
+}
+
+function textopts (opt, text) {
+  if (opt.trim) text = text.trim()
+  if (opt.normalize) text = text.replace(/\s+/g, " ")
+  return text
+}
+
+function error (parser, er) {
+  closeText(parser)
+  if (parser.trackPosition) {
+    er += "\nLine: "+parser.line+
+          "\nColumn: "+parser.column+
+          "\nChar: "+parser.c
+  }
+  er = new Error(er)
+  parser.error = er
+  emit(parser, "onerror", er)
+  return parser
+}
+
+function end (parser) {
+  if (!parser.closedRoot) strictFail(parser, "Unclosed root tag")
+  if ((parser.state !== S.BEGIN) && (parser.state !== S.TEXT)) error(parser, "Unexpected end")
+  closeText(parser)
+  parser.c = ""
+  parser.closed = true
+  emit(parser, "onend")
+  SAXParser.call(parser, parser.strict, parser.opt)
+  return parser
+}
+
+function strictFail (parser, message) {
+  if (typeof parser !== 'object' || !(parser instanceof SAXParser))
+    throw new Error('bad call to strictFail');
+  if (parser.strict) error(parser, message)
+}
+
+function newTag (parser) {
+  if (!parser.strict) parser.tagName = parser.tagName[parser.looseCase]()
+  var parent = parser.tags[parser.tags.length - 1] || parser
+    , tag = parser.tag = { name : parser.tagName, attributes : {} }
+
+  // will be overridden if tag contails an xmlns="foo" or xmlns:foo="bar"
+  if (parser.opt.xmlns) tag.ns = parent.ns
+  parser.attribList.length = 0
+}
+
+function qname (name, attribute) {
+  var i = name.indexOf(":")
+    , qualName = i < 0 ? [ "", name ] : name.split(":")
+    , prefix = qualName[0]
+    , local = qualName[1]
+
+  // <x "xmlns"="http://foo">
+  if (attribute && name === "xmlns") {
+    prefix = "xmlns"
+    local = ""
+  }
+
+  return { prefix: prefix, local: local }
+}
+
+function attrib (parser) {
+  if (!parser.strict) parser.attribName = parser.attribName[parser.looseCase]()
+
+  if (parser.attribList.indexOf(parser.attribName) !== -1 ||
+      parser.tag.attributes.hasOwnProperty(parser.attribName)) {
+    return parser.attribName = parser.attribValue = ""
+  }
+
+  if (parser.opt.xmlns) {
+    var qn = qname(parser.attribName, true)
+      , prefix = qn.prefix
+      , local = qn.local
+
+    if (prefix === "xmlns") {
+      // namespace binding attribute; push the binding into scope
+      if (local === "xml" && parser.attribValue !== XML_NAMESPACE) {
+        strictFail( parser
+                  , "xml: prefix must be bound to " + XML_NAMESPACE + "\n"
+                  + "Actual: " + parser.attribValue )
+      } else if (local === "xmlns" && parser.attribValue !== XMLNS_NAMESPACE) {
+        strictFail( parser
+                  , "xmlns: prefix must be bound to " + XMLNS_NAMESPACE + "\n"
+                  + "Actual: " + parser.attribValue )
+      } else {
+        var tag = parser.tag
+          , parent = parser.tags[parser.tags.length - 1] || parser
+        if (tag.ns === parent.ns) {
+          tag.ns = Object.create(parent.ns)
+        }
+        tag.ns[local] = parser.attribValue
+      }
+    }
+
+    // defer onattribute events until all attributes have been seen
+    // so any new bindings can take effect; preserve attribute order
+    // so deferred events can be emitted in document order
+    parser.attribList.push([parser.attribName, parser.attribValue])
+  } else {
+    // in non-xmlns mode, we can emit the event right away
+    parser.tag.attributes[parser.attribName] = parser.attribValue
+    emitNode( parser
+            , "onattribute"
+            , { name: parser.attribName
+              , value: parser.attribValue } )
+  }
+
+  parser.attribName = parser.attribValue = ""
+}
+
+function openTag (parser, selfClosing) {
+  if (parser.opt.xmlns) {
+    // emit namespace binding events
+    var tag = parser.tag
+
+    // add namespace info to tag
+    var qn = qname(parser.tagName)
+    tag.prefix = qn.prefix
+    tag.local = qn.local
+    tag.uri = tag.ns[qn.prefix] || ""
+
+    if (tag.prefix && !tag.uri) {
+      strictFail(parser, "Unbound namespace prefix: "
+                       + JSON.stringify(parser.tagName))
+      tag.uri = qn.prefix
+    }
+
+    var parent = parser.tags[parser.tags.length - 1] || parser
+    if (tag.ns && parent.ns !== tag.ns) {
+      Object.keys(tag.ns).forEach(function (p) {
+        emitNode( parser
+                , "onopennamespace"
+                , { prefix: p , uri: tag.ns[p] } )
+      })
+    }
+
+    // handle deferred onattribute events
+    // Note: do not apply default ns to attributes:
+    //   http://www.w3.org/TR/REC-xml-names/#defaulting
+    for (var i = 0, l = parser.attribList.length; i < l; i ++) {
+      var nv = parser.attribList[i]
+      var name = nv[0]
+        , value = nv[1]
+        , qualName = qname(name, true)
+        , prefix = qualName.prefix
+        , local = qualName.local
+        , uri = prefix == "" ? "" : (tag.ns[prefix] || "")
+        , a = { name: name
+              , value: value
+              , prefix: prefix
+              , local: local
+              , uri: uri
+              }
+
+      // if there's any attributes with an undefined namespace,
+      // then fail on them now.
+      if (prefix && prefix != "xmlns" && !uri) {
+        strictFail(parser, "Unbound namespace prefix: "
+                         + JSON.stringify(prefix))
+        a.uri = prefix
+      }
+      parser.tag.attributes[name] = a
+      emitNode(parser, "onattribute", a)
+    }
+    parser.attribList.length = 0
+  }
+
+  parser.tag.isSelfClosing = !!selfClosing
+
+  // process the tag
+  parser.sawRoot = true
+  parser.tags.push(parser.tag)
+  emitNode(parser, "onopentag", parser.tag)
+  if (!selfClosing) {
+    // special case for <script> in non-strict mode.
+    if (!parser.noscript && parser.tagName.toLowerCase() === "script") {
+      parser.state = S.SCRIPT
+    } else {
+      parser.state = S.TEXT
+    }
+    parser.tag = null
+    parser.tagName = ""
+  }
+  parser.attribName = parser.attribValue = ""
+  parser.attribList.length = 0
+}
+
+function closeTag (parser) {
+  if (!parser.tagName) {
+    strictFail(parser, "Weird empty close tag.")
+    parser.textNode += "</>"
+    parser.state = S.TEXT
+    return
+  }
+
+  if (parser.script) {
+    if (parser.tagName !== "script") {
+      parser.script += "</" + parser.tagName + ">"
+      parser.tagName = ""
+      parser.state = S.SCRIPT
+      return
+    }
+    emitNode(parser, "onscript", parser.script)
+    parser.script = ""
+  }
+
+  // first make sure that the closing tag actually exists.
+  // <a><b></c></b></a> will close everything, otherwise.
+  var t = parser.tags.length
+  var tagName = parser.tagName
+  if (!parser.strict) tagName = tagName[parser.looseCase]()
+  var closeTo = tagName
+  while (t --) {
+    var close = parser.tags[t]
+    if (close.name !== closeTo) {
+      // fail the first time in strict mode
+      strictFail(parser, "Unexpected close tag")
+    } else break
+  }
+
+  // didn't find it.  we already failed for strict, so just abort.
+  if (t < 0) {
+    strictFail(parser, "Unmatched closing tag: "+parser.tagName)
+    parser.textNode += "</" + parser.tagName + ">"
+    parser.state = S.TEXT
+    return
+  }
+  parser.tagName = tagName
+  var s = parser.tags.length
+  while (s --> t) {
+    var tag = parser.tag = parser.tags.pop()
+    parser.tagName = parser.tag.name
+    emitNode(parser, "onclosetag", parser.tagName)
+
+    var x = {}
+    for (var i in tag.ns) x[i] = tag.ns[i]
+
+    var parent = parser.tags[parser.tags.length - 1] || parser
+    if (parser.opt.xmlns && tag.ns !== parent.ns) {
+      // remove namespace bindings introduced by tag
+      Object.keys(tag.ns).forEach(function (p) {
+        var n = tag.ns[p]
+        emitNode(parser, "onclosenamespace", { prefix: p, uri: n })
+      })
+    }
+  }
+  if (t === 0) parser.closedRoot = true
+  parser.tagName = parser.attribValue = parser.attribName = ""
+  parser.attribList.length = 0
+  parser.state = S.TEXT
+}
+
+function parseEntity (parser) {
+  var entity = parser.entity
+    , entityLC = entity.toLowerCase()
+    , num
+    , numStr = ""
+  if (parser.ENTITIES[entity])
+    return parser.ENTITIES[entity]
+  if (parser.ENTITIES[entityLC])
+    return parser.ENTITIES[entityLC]
+  entity = entityLC
+  if (entity.charAt(0) === "#") {
+    if (entity.charAt(1) === "x") {
+      entity = entity.slice(2)
+      num = parseInt(entity, 16)
+      numStr = num.toString(16)
+    } else {
+      entity = entity.slice(1)
+      num = parseInt(entity, 10)
+      numStr = num.toString(10)
+    }
+  }
+  entity = entity.replace(/^0+/, "")
+  if (numStr.toLowerCase() !== entity) {
+    strictFail(parser, "Invalid character entity")
+    return "&"+parser.entity + ";"
+  }
+
+  return String.fromCodePoint(num)
+}
+
+function write (chunk) {
+  var parser = this
+  if (this.error) throw this.error
+  if (parser.closed) return error(parser,
+    "Cannot write after close. Assign an onready handler.")
+  if (chunk === null) return end(parser)
+  var i = 0, c = ""
+  while (parser.c = c = chunk.charAt(i++)) {
+    if (parser.trackPosition) {
+      parser.position ++
+      if (c === "\n") {
+        parser.line ++
+        parser.column = 0
+      } else parser.column ++
+    }
+    switch (parser.state) {
+
+      case S.BEGIN:
+        if (c === "<") {
+          parser.state = S.OPEN_WAKA
+          parser.startTagPosition = parser.position
+        } else if (not(whitespace,c)) {
+          // have to process this as a text node.
+          // weird, but happens.
+          strictFail(parser, "Non-whitespace before first tag.")
+          parser.textNode = c
+          parser.state = S.TEXT
+        }
+      continue
+
+      case S.TEXT:
+        if (parser.sawRoot && !parser.closedRoot) {
+          var starti = i-1
+          while (c && c!=="<" && c!=="&") {
+            c = chunk.charAt(i++)
+            if (c && parser.trackPosition) {
+              parser.position ++
+              if (c === "\n") {
+                parser.line ++
+                parser.column = 0
+              } else parser.column ++
+            }
+          }
+          parser.textNode += chunk.substring(starti, i-1)
+        }
+        if (c === "<") {
+          parser.state = S.OPEN_WAKA
+          parser.startTagPosition = parser.position
+        } else {
+          if (not(whitespace, c) && (!parser.sawRoot || parser.closedRoot))
+            strictFail(parser, "Text data outside of root node.")
+          if (c === "&") parser.state = S.TEXT_ENTITY
+          else parser.textNode += c
+        }
+      continue
+
+      case S.SCRIPT:
+        // only non-strict
+        if (c === "<") {
+          parser.state = S.SCRIPT_ENDING
+        } else parser.script += c
+      continue
+
+      case S.SCRIPT_ENDING:
+        if (c === "/") {
+          parser.state = S.CLOSE_TAG
+        } else {
+          parser.script += "<" + c
+          parser.state = S.SCRIPT
+        }
+      continue
+
+      case S.OPEN_WAKA:
+        // either a /, ?, !, or text is coming next.
+        if (c === "!") {
+          parser.state = S.SGML_DECL
+          parser.sgmlDecl = ""
+        } else if (is(whitespace, c)) {
+          // wait for it...
+        } else if (is(nameStart,c)) {
+          parser.state = S.OPEN_TAG
+          parser.tagName = c
+        } else if (c === "/") {
+          parser.state = S.CLOSE_TAG
+          parser.tagName = ""
+        } else if (c === "?") {
+          parser.state = S.PROC_INST
+          parser.procInstName = parser.procInstBody = ""
+        } else {
+          strictFail(parser, "Unencoded <")
+          // if there was some whitespace, then add that in.
+          if (parser.startTagPosition + 1 < parser.position) {
+            var pad = parser.position - parser.startTagPosition
+            c = new Array(pad).join(" ") + c
+          }
+          parser.textNode += "<" + c
+          parser.state = S.TEXT
+        }
+      continue
+
+      case S.SGML_DECL:
+        if ((parser.sgmlDecl+c).toUpperCase() === CDATA) {
+          emitNode(parser, "onopencdata")
+          parser.state = S.CDATA
+          parser.sgmlDecl = ""
+          parser.cdata = ""
+        } else if (parser.sgmlDecl+c === "--") {
+          parser.state = S.COMMENT
+          parser.comment = ""
+          parser.sgmlDecl = ""
+        } else if ((parser.sgmlDecl+c).toUpperCase() === DOCTYPE) {
+          parser.state = S.DOCTYPE
+          if (parser.doctype || parser.sawRoot) strictFail(parser,
+            "Inappropriately located doctype declaration")
+          parser.doctype = ""
+          parser.sgmlDecl = ""
+        } else if (c === ">") {
+          emitNode(parser, "onsgmldeclaration", parser.sgmlDecl)
+          parser.sgmlDecl = ""
+          parser.state = S.TEXT
+        } else if (is(quote, c)) {
+          parser.state = S.SGML_DECL_QUOTED
+          parser.sgmlDecl += c
+        } else parser.sgmlDecl += c
+      continue
+
+      case S.SGML_DECL_QUOTED:
+        if (c === parser.q) {
+          parser.state = S.SGML_DECL
+          parser.q = ""
+        }
+        parser.sgmlDecl += c
+      continue
+
+      case S.DOCTYPE:
+        if (c === ">") {
+          parser.state = S.TEXT
+          emitNode(parser, "ondoctype", parser.doctype)
+          parser.doctype = true // just remember that we saw it.
+        } else {
+          parser.doctype += c
+          if (c === "[") parser.state = S.DOCTYPE_DTD
+          else if (is(quote, c)) {
+            parser.state = S.DOCTYPE_QUOTED
+            parser.q = c
+          }
+        }
+      continue
+
+      case S.DOCTYPE_QUOTED:
+        parser.doctype += c
+        if (c === parser.q) {
+          parser.q = ""
+          parser.state = S.DOCTYPE
+        }
+      continue
+
+      case S.DOCTYPE_DTD:
+        parser.doctype += c
+        if (c === "]") parser.state = S.DOCTYPE
+        else if (is(quote,c)) {
+          parser.state = S.DOCTYPE_DTD_QUOTED
+          parser.q = c
+        }
+      continue
+
+      case S.DOCTYPE_DTD_QUOTED:
+        parser.doctype += c
+        if (c === parser.q) {
+          parser.state = S.DOCTYPE_DTD
+          parser.q = ""
+        }
+      continue
+
+      case S.COMMENT:
+        if (c === "-") parser.state = S.COMMENT_ENDING
+        else parser.comment += c
+      continue
+
+      case S.COMMENT_ENDING:
+        if (c === "-") {
+          parser.state = S.COMMENT_ENDED
+          parser.comment = textopts(parser.opt, parser.comment)
+          if (parser.comment) emitNode(parser, "oncomment", parser.comment)
+          parser.comment = ""
+        } else {
+          parser.comment += "-" + c
+          parser.state = S.COMMENT
+        }
+      continue
+
+      case S.COMMENT_ENDED:
+        if (c !== ">") {
+          strictFail(parser, "Malformed comment")
+          // allow <!-- blah -- bloo --> in non-strict mode,
+          // which is a comment of " blah -- bloo "
+          parser.comment += "--" + c
+          parser.state = S.COMMENT
+        } else parser.state = S.TEXT
+      continue
+
+      case S.CDATA:
+        if (c === "]") parser.state = S.CDATA_ENDING
+        else parser.cdata += c
+      continue
+
+      case S.CDATA_ENDING:
+        if (c === "]") parser.state = S.CDATA_ENDING_2
+        else {
+          parser.cdata += "]" + c
+          parser.state = S.CDATA
+        }
+      continue
+
+      case S.CDATA_ENDING_2:
+        if (c === ">") {
+          if (parser.cdata) emitNode(parser, "oncdata", parser.cdata)
+          emitNode(parser, "onclosecdata")
+          parser.cdata = ""
+          parser.state = S.TEXT
+        } else if (c === "]") {
+          parser.cdata += "]"
+        } else {
+          parser.cdata += "]]" + c
+          parser.state = S.CDATA
+        }
+      continue
+
+      case S.PROC_INST:
+        if (c === "?") parser.state = S.PROC_INST_ENDING
+        else if (is(whitespace, c)) parser.state = S.PROC_INST_BODY
+        else parser.procInstName += c
+      continue
+
+      case S.PROC_INST_BODY:
+        if (!parser.procInstBody && is(whitespace, c)) continue
+        else if (c === "?") parser.state = S.PROC_INST_ENDING
+        else parser.procInstBody += c
+      continue
+
+      case S.PROC_INST_ENDING:
+        if (c === ">") {
+          emitNode(parser, "onprocessinginstruction", {
+            name : parser.procInstName,
+            body : parser.procInstBody
+          })
+          parser.procInstName = parser.procInstBody = ""
+          parser.state = S.TEXT
+        } else {
+          parser.procInstBody += "?" + c
+          parser.state = S.PROC_INST_BODY
+        }
+      continue
+
+      case S.OPEN_TAG:
+        if (is(nameBody, c)) parser.tagName += c
+        else {
+          newTag(parser)
+          if (c === ">") openTag(parser)
+          else if (c === "/") parser.state = S.OPEN_TAG_SLASH
+          else {
+            if (not(whitespace, c)) strictFail(
+              parser, "Invalid character in tag name")
+            parser.state = S.ATTRIB
+          }
+        }
+      continue
+
+      case S.OPEN_TAG_SLASH:
+        if (c === ">") {
+          openTag(parser, true)
+          closeTag(parser)
+        } else {
+          strictFail(parser, "Forward-slash in opening tag not followed by >")
+          parser.state = S.ATTRIB
+        }
+      continue
+
+      case S.ATTRIB:
+        // haven't read the attribute name yet.
+        if (is(whitespace, c)) continue
+        else if (c === ">") openTag(parser)
+        else if (c === "/") parser.state = S.OPEN_TAG_SLASH
+        else if (is(nameStart, c)) {
+          parser.attribName = c
+          parser.attribValue = ""
+          parser.state = S.ATTRIB_NAME
+        } else strictFail(parser, "Invalid attribute name")
+      continue
+
+      case S.ATTRIB_NAME:
+        if (c === "=") parser.state = S.ATTRIB_VALUE
+        else if (c === ">") {
+          strictFail(parser, "Attribute without value")
+          parser.attribValue = parser.attribName
+          attrib(parser)
+          openTag(parser)
+        }
+        else if (is(whitespace, c)) parser.state = S.ATTRIB_NAME_SAW_WHITE
+        else if (is(nameBody, c)) parser.attribName += c
+        else strictFail(parser, "Invalid attribute name")
+      continue
+
+      case S.ATTRIB_NAME_SAW_WHITE:
+        if (c === "=") parser.state = S.ATTRIB_VALUE
+        else if (is(whitespace, c)) continue
+        else {
+          strictFail(parser, "Attribute without value")
+          parser.tag.attributes[parser.attribName] = ""
+          parser.attribValue = ""
+          emitNode(parser, "onattribute",
+                   { name : parser.attribName, value : "" })
+          parser.attribName = ""
+          if (c === ">") openTag(parser)
+          else if (is(nameStart, c)) {
+            parser.attribName = c
+            parser.state = S.ATTRIB_NAME
+          } else {
+            strictFail(parser, "Invalid attribute name")
+            parser.state = S.ATTRIB
+          }
+        }
+      continue
+
+      case S.ATTRIB_VALUE:
+        if (is(whitespace, c)) continue
+        else if (is(quote, c)) {
+          parser.q = c
+          parser.state = S.ATTRIB_VALUE_QUOTED
+        } else {
+          strictFail(parser, "Unquoted attribute value")
+          parser.state = S.ATTRIB_VALUE_UNQUOTED
+          parser.attribValue = c
+        }
+      continue
+
+      case S.ATTRIB_VALUE_QUOTED:
+        if (c !== parser.q) {
+          if (c === "&") parser.state = S.ATTRIB_VALUE_ENTITY_Q
+          else parser.attribValue += c
+          continue
+        }
+        attrib(parser)
+        parser.q = ""
+        parser.state = S.ATTRIB_VALUE_CLOSED
+      continue
+
+      case S.ATTRIB_VALUE_CLOSED:
+        if (is(whitespace, c)) {
+          parser.state = S.ATTRIB
+        } else if (c === ">") openTag(parser)
+        else if (c === "/") parser.state = S.OPEN_TAG_SLASH
+        else if (is(nameStart, c)) {
+          strictFail(parser, "No whitespace between attributes")
+          parser.attribName = c
+          parser.attribValue = ""
+          parser.state = S.ATTRIB_NAME
+        } else strictFail(parser, "Invalid attribute name")
+      continue
+
+      case S.ATTRIB_VALUE_UNQUOTED:
+        if (not(attribEnd,c)) {
+          if (c === "&") parser.state = S.ATTRIB_VALUE_ENTITY_U
+          else parser.attribValue += c
+          continue
+        }
+        attrib(parser)
+        if (c === ">") openTag(parser)
+        else parser.state = S.ATTRIB
+      continue
+
+      case S.CLOSE_TAG:
+        if (!parser.tagName) {
+          if (is(whitespace, c)) continue
+          else if (not(nameStart, c)) {
+            if (parser.script) {
+              parser.script += "</" + c
+              parser.state = S.SCRIPT
+            } else {
+              strictFail(parser, "Invalid tagname in closing tag.")
+            }
+          } else parser.tagName = c
+        }
+        else if (c === ">") closeTag(parser)
+        else if (is(nameBody, c)) parser.tagName += c
+        else if (parser.script) {
+          parser.script += "</" + parser.tagName
+          parser.tagName = ""
+          parser.state = S.SCRIPT
+        } else {
+          if (not(whitespace, c)) strictFail(parser,
+            "Invalid tagname in closing tag")
+          parser.state = S.CLOSE_TAG_SAW_WHITE
+        }
+      continue
+
+      case S.CLOSE_TAG_SAW_WHITE:
+        if (is(whitespace, c)) continue
+        if (c === ">") closeTag(parser)
+        else strictFail(parser, "Invalid characters in closing tag")
+      continue
+
+      case S.TEXT_ENTITY:
+      case S.ATTRIB_VALUE_ENTITY_Q:
+      case S.ATTRIB_VALUE_ENTITY_U:
+        switch(parser.state) {
+          case S.TEXT_ENTITY:
+            var returnState = S.TEXT, buffer = "textNode"
+          break
+
+          case S.ATTRIB_VALUE_ENTITY_Q:
+            var returnState = S.ATTRIB_VALUE_QUOTED, buffer = "attribValue"
+          break
+
+          case S.ATTRIB_VALUE_ENTITY_U:
+            var returnState = S.ATTRIB_VALUE_UNQUOTED, buffer = "attribValue"
+          break
+        }
+        if (c === ";") {
+          parser[buffer] += parseEntity(parser)
+          parser.entity = ""
+          parser.state = returnState
+        }
+        else if (is(entity, c)) parser.entity += c
+        else {
+          strictFail(parser, "Invalid character entity")
+          parser[buffer] += "&" + parser.entity + c
+          parser.entity = ""
+          parser.state = returnState
+        }
+      continue
+
+      default:
+        throw new Error(parser, "Unknown state: " + parser.state)
+    }
+  } // while
+  // cdata blocks can get very big under normal conditions. emit and move on.
+  // if (parser.state === S.CDATA && parser.cdata) {
+  //   emitNode(parser, "oncdata", parser.cdata)
+  //   parser.cdata = ""
+  // }
+  if (parser.position >= parser.bufferCheckPosition) checkBufferLength(parser)
+  return parser
+}
+
+/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
+if (!String.fromCodePoint) {
+        (function() {
+                var stringFromCharCode = String.fromCharCode;
+                var floor = Math.floor;
+                var fromCodePoint = function() {
+                        var MAX_SIZE = 0x4000;
+                        var codeUnits = [];
+                        var highSurrogate;
+                        var lowSurrogate;
+                        var index = -1;
+                        var length = arguments.length;
+                        if (!length) {
+                                return '';
+                        }
+                        var result = '';
+                        while (++index < length) {
+                                var codePoint = Number(arguments[index]);
+                                if (
+                                        !isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
+                                        codePoint < 0 || // not a valid Unicode code point
+                                        codePoint > 0x10FFFF || // not a valid Unicode code point
+                                        floor(codePoint) != codePoint // not an integer
+                                ) {
+                                        throw RangeError('Invalid code point: ' + codePoint);
+                                }
+                                if (codePoint <= 0xFFFF) { // BMP code point
+                                        codeUnits.push(codePoint);
+                                } else { // Astral code point; split in surrogate halves
+                                        // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
+                                        codePoint -= 0x10000;
+                                        highSurrogate = (codePoint >> 10) + 0xD800;
+                                        lowSurrogate = (codePoint % 0x400) + 0xDC00;
+                                        codeUnits.push(highSurrogate, lowSurrogate);
+                                }
+                                if (index + 1 == length || codeUnits.length > MAX_SIZE) {
+                                        result += stringFromCharCode.apply(null, codeUnits);
+                                        codeUnits.length = 0;
+                                }
+                        }
+                        return result;
+                };
+                if (Object.defineProperty) {
+                        Object.defineProperty(String, 'fromCodePoint', {
+                                'value': fromCodePoint,
+                                'configurable': true,
+                                'writable': true
+                        });
+                } else {
+                        String.fromCodePoint = fromCodePoint;
+                }
+        }());
+}
+
+})(typeof exports === "undefined" ? sax = {} : exports);
+
+}).call(this,undefined)
+
+},{"undefined":undefined}],21:[function(_dereq_,module,exports){
 /**
  * Tiny stack for browser or server
  *
@@ -4630,9 +6050,9 @@ else {
 }
 } )( this );
 
-},{}],21:[function(_dereq_,module,exports){
-module.exports = _dereq_(25);
-},{"25":25}],22:[function(_dereq_,module,exports){
+},{}],22:[function(_dereq_,module,exports){
+module.exports = _dereq_(26);
+},{"26":26}],23:[function(_dereq_,module,exports){
 'use strict';
 
 function Base() { }
@@ -4647,14 +6067,14 @@ Base.prototype.set = function(name, value) {
 
 
 module.exports = Base;
-},{}],23:[function(_dereq_,module,exports){
+},{}],24:[function(_dereq_,module,exports){
 'use strict';
 
-var pick = _dereq_(162),
-    assign = _dereq_(157),
-    forEach = _dereq_(78);
+var pick = _dereq_(164),
+    assign = _dereq_(159),
+    forEach = _dereq_(80);
 
-var parseNameNs = _dereq_(26).parseName;
+var parseNameNs = _dereq_(27).parseName;
 
 
 function DescriptorBuilder(nameNs) {
@@ -4833,12 +6253,12 @@ DescriptorBuilder.prototype.addTrait = function(t) {
   allTypes.push(t);
 };
 
-},{"157":157,"162":162,"26":26,"78":78}],24:[function(_dereq_,module,exports){
+},{"159":159,"164":164,"27":27,"80":80}],25:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(78);
+var forEach = _dereq_(80);
 
-var Base = _dereq_(22);
+var Base = _dereq_(23);
 
 
 function Factory(model, properties) {
@@ -4891,20 +6311,20 @@ Factory.prototype.createType = function(descriptor) {
 
   return ModdleElement;
 };
-},{"22":22,"78":78}],25:[function(_dereq_,module,exports){
+},{"23":23,"80":80}],26:[function(_dereq_,module,exports){
 'use strict';
 
-var isString = _dereq_(154),
-    isObject = _dereq_(152),
-    forEach = _dereq_(78),
-    find = _dereq_(77);
+var isString = _dereq_(156),
+    isObject = _dereq_(154),
+    forEach = _dereq_(80),
+    find = _dereq_(79);
 
 
-var Factory = _dereq_(24),
-    Registry = _dereq_(28),
-    Properties = _dereq_(27);
+var Factory = _dereq_(25),
+    Registry = _dereq_(29),
+    Properties = _dereq_(28);
 
-var parseNameNs = _dereq_(26).parseName;
+var parseNameNs = _dereq_(27).parseName;
 
 
 //// Moddle implementation /////////////////////////////////////////////////
@@ -5113,7 +6533,7 @@ Moddle.prototype.getPropertyDescriptor = function(element, property) {
   return this.getElementDescriptor(element).propertiesByName[property];
 };
 
-},{"152":152,"154":154,"24":24,"26":26,"27":27,"28":28,"77":77,"78":78}],26:[function(_dereq_,module,exports){
+},{"154":154,"156":156,"25":25,"27":27,"28":28,"29":29,"79":79,"80":80}],27:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -5150,7 +6570,7 @@ module.exports.parseName = function(name, defaultPrefix) {
     localName: localName
   };
 };
-},{}],27:[function(_dereq_,module,exports){
+},{}],28:[function(_dereq_,module,exports){
 'use strict';
 
 
@@ -5244,16 +6664,16 @@ Properties.prototype.defineDescriptor = function(target, descriptor) {
 Properties.prototype.defineModel = function(target, model) {
   this.define(target, '$model', { value: model });
 };
-},{}],28:[function(_dereq_,module,exports){
+},{}],29:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157),
-    forEach = _dereq_(78);
+var assign = _dereq_(159),
+    forEach = _dereq_(80);
 
-var Types = _dereq_(29),
-    DescriptorBuilder = _dereq_(23);
+var Types = _dereq_(30),
+    DescriptorBuilder = _dereq_(24);
 
-var parseNameNs = _dereq_(26).parseName,
+var parseNameNs = _dereq_(27).parseName,
     isBuiltInType = Types.isBuiltIn;
 
 
@@ -5420,7 +6840,7 @@ Registry.prototype.getEffectiveDescriptor = function(name) {
 Registry.prototype.definePackage = function(target, pkg) {
   this.properties.define(target, '$pkg', { value: pkg });
 };
-},{"157":157,"23":23,"26":26,"29":29,"78":78}],29:[function(_dereq_,module,exports){
+},{"159":159,"24":24,"27":27,"30":30,"80":80}],30:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -5431,7 +6851,7 @@ var BUILTINS = {
   Boolean: true,
   Integer: true,
   Real: true,
-  Element: true,
+  Element: true
 };
 
 /**
@@ -5471,7 +6891,7 @@ module.exports.isBuiltIn = function(type) {
 module.exports.isSimple = function(type) {
   return !!TYPE_CONVERTERS[type];
 };
-},{}],30:[function(_dereq_,module,exports){
+},{}],31:[function(_dereq_,module,exports){
 module.exports={
   "name": "BPMN20",
   "uri": "http://www.omg.org/spec/BPMN/20100524/MODEL",
@@ -8359,7 +9779,7 @@ module.exports={
     "typePrefix": "t"
   }
 }
-},{}],31:[function(_dereq_,module,exports){
+},{}],32:[function(_dereq_,module,exports){
 module.exports={
   "name": "BPMNDI",
   "uri": "http://www.omg.org/spec/BPMN/20100524/DI",
@@ -8553,7 +9973,7 @@ module.exports={
   "associations": [],
   "prefix": "bpmndi"
 }
-},{}],32:[function(_dereq_,module,exports){
+},{}],33:[function(_dereq_,module,exports){
 module.exports={
   "name": "DC",
   "uri": "http://www.omg.org/spec/DD/20100524/DC",
@@ -8653,7 +10073,7 @@ module.exports={
   "prefix": "dc",
   "associations": []
 }
-},{}],33:[function(_dereq_,module,exports){
+},{}],34:[function(_dereq_,module,exports){
 module.exports={
   "name": "DI",
   "uri": "http://www.omg.org/spec/DD/20100524/DI",
@@ -8870,12 +10290,12 @@ module.exports={
     "tagAlias": "lowerCase"
   }
 }
-},{}],34:[function(_dereq_,module,exports){
-module.exports = _dereq_(35);
-},{"35":35}],35:[function(_dereq_,module,exports){
+},{}],35:[function(_dereq_,module,exports){
+module.exports = _dereq_(36);
+},{"36":36}],36:[function(_dereq_,module,exports){
 'use strict';
 
-var di = _dereq_(71);
+var di = _dereq_(73);
 
 
 /**
@@ -8952,7 +10372,7 @@ function createInjector(options) {
     'config': ['value', options]
   };
 
-  var coreModule = _dereq_(41);
+  var coreModule = _dereq_(42);
 
   var modules = [ configModule, coreModule ].concat(options.modules || []);
 
@@ -9066,16 +10486,16 @@ module.exports = Diagram;
 Diagram.prototype.destroy = function() {
   this.get('eventBus').fire('diagram.destroy');
 };
-},{"41":41,"71":71}],36:[function(_dereq_,module,exports){
+},{"42":42,"73":73}],37:[function(_dereq_,module,exports){
 'use strict';
 
-var isNumber = _dereq_(151),
-    assign = _dereq_(157),
-    forEach = _dereq_(78);
+var isNumber = _dereq_(153),
+    assign = _dereq_(159),
+    forEach = _dereq_(80);
 
-var Collections = _dereq_(60);
+var Collections = _dereq_(62);
 
-var Snap = _dereq_(69);
+var Snap = _dereq_(71);
 
 function round(number, resolution) {
   return Math.round(number * resolution) / resolution;
@@ -9913,10 +11333,11 @@ Canvas.prototype.getAbsoluteBBox = function(element) {
     height: height
   };
 };
-},{"151":151,"157":157,"60":60,"69":69,"78":78}],37:[function(_dereq_,module,exports){
+
+},{"153":153,"159":159,"62":62,"71":71,"80":80}],38:[function(_dereq_,module,exports){
 'use strict';
 
-var Model = _dereq_(55);
+var Model = _dereq_(56);
 
 
 /**
@@ -9963,7 +11384,7 @@ ElementFactory.prototype.create = function(type, attrs) {
 
   return Model.create(type, attrs);
 };
-},{"55":55}],38:[function(_dereq_,module,exports){
+},{"56":56}],39:[function(_dereq_,module,exports){
 'use strict';
 
 var ELEMENT_ID = 'data-element-id';
@@ -10105,13 +11526,13 @@ ElementRegistry.prototype.getGraphics = function(filter) {
   return container && container.gfx;
 };
 
-},{}],39:[function(_dereq_,module,exports){
+},{}],40:[function(_dereq_,module,exports){
 'use strict';
 
-var isFunction = _dereq_(149),
-    isArray = _dereq_(148),
-    isNumber = _dereq_(151),
-    assign = _dereq_(157);
+var isFunction = _dereq_(151),
+    isArray = _dereq_(150),
+    isNumber = _dereq_(153),
+    assign = _dereq_(159);
 
 var DEFAULT_PRIORITY = 1000;
 
@@ -10383,14 +11804,14 @@ EventBus.prototype._getListeners = function(name) {
   return listeners;
 };
 
-},{"148":148,"149":149,"151":151,"157":157}],40:[function(_dereq_,module,exports){
+},{"150":150,"151":151,"153":153,"159":159}],41:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(78),
-    reduce = _dereq_(82);
+var forEach = _dereq_(80),
+    reduce = _dereq_(84);
 
-var GraphicsUtil = _dereq_(64),
-    domClear = _dereq_(169);
+var GraphicsUtil = _dereq_(66),
+    domClear = _dereq_(171);
 
 /**
  * A factory that creates graphical elements
@@ -10539,20 +11960,20 @@ GraphicsFactory.prototype.remove = function(element) {
   // remove
   gfx.parent().remove();
 };
-},{"169":169,"64":64,"78":78,"82":82}],41:[function(_dereq_,module,exports){
+},{"171":171,"66":66,"80":80,"84":84}],42:[function(_dereq_,module,exports){
 module.exports = {
-  __depends__: [ _dereq_(44) ],
+  __depends__: [ _dereq_(45) ],
   __init__: [ 'canvas' ],
-  canvas: [ 'type', _dereq_(36) ],
-  elementRegistry: [ 'type', _dereq_(38) ],
-  elementFactory: [ 'type', _dereq_(37) ],
-  eventBus: [ 'type', _dereq_(39) ],
-  graphicsFactory: [ 'type', _dereq_(40) ]
+  canvas: [ 'type', _dereq_(37) ],
+  elementRegistry: [ 'type', _dereq_(39) ],
+  elementFactory: [ 'type', _dereq_(38) ],
+  eventBus: [ 'type', _dereq_(40) ],
+  graphicsFactory: [ 'type', _dereq_(41) ]
 };
-},{"36":36,"37":37,"38":38,"39":39,"40":40,"44":44}],42:[function(_dereq_,module,exports){
+},{"37":37,"38":38,"39":39,"40":40,"41":41,"45":45}],43:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(69);
+var Snap = _dereq_(71);
 
 
 /**
@@ -10599,12 +12020,12 @@ function updateLine(gfx, points) {
 
 module.exports.createLine = createLine;
 module.exports.updateLine = updateLine;
-},{"69":69}],43:[function(_dereq_,module,exports){
+},{"71":71}],44:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(148),
-    assign = _dereq_(157),
-    reduce = _dereq_(82);
+var isArray = _dereq_(150),
+    assign = _dereq_(159),
+    reduce = _dereq_(84);
 
 
 /**
@@ -10664,23 +12085,21 @@ function Styles() {
 }
 
 module.exports = Styles;
-},{"148":148,"157":157,"82":82}],44:[function(_dereq_,module,exports){
+},{"150":150,"159":159,"84":84}],45:[function(_dereq_,module,exports){
 module.exports = {
-  renderer: [ 'type', _dereq_(42) ],
-  styles: [ 'type', _dereq_(43) ]
+  renderer: [ 'type', _dereq_(43) ],
+  styles: [ 'type', _dereq_(44) ]
 };
-},{"42":42,"43":43}],45:[function(_dereq_,module,exports){
+},{"43":43,"44":44}],46:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(68);
-
-var forEach = _dereq_(78),
-    domDelegate = _dereq_(170),
-    Renderer = _dereq_(42),
+var forEach = _dereq_(80),
+    domDelegate = _dereq_(172),
+    Renderer = _dereq_(43),
     createLine = Renderer.createLine,
     updateLine = Renderer.updateLine;
 
-var Snap = _dereq_(69);
+var Snap = _dereq_(71);
 
 /**
  * A plugin that provides interaction events for diagram elements.
@@ -10747,7 +12166,7 @@ function InteractionEvents(eventBus, elementRegistry, styles) {
     click: 'element.click',
     dblclick: 'element.dblclick',
     mousedown: 'element.mousedown',
-    mouseup: 'element.mouseup',
+    mouseup: 'element.mouseup'
   };
 
   var elementSelector = 'svg, .djs-element';
@@ -10906,16 +12325,16 @@ module.exports = InteractionEvents;
  * @property {Snap<Element>} gfx
  * @property {Event} originalEvent
  */
-},{"170":170,"42":42,"68":68,"69":69,"78":78}],46:[function(_dereq_,module,exports){
+},{"172":172,"43":43,"71":71,"80":80}],47:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'interactionEvents' ],
-  interactionEvents: [ 'type', _dereq_(45) ]
+  interactionEvents: [ 'type', _dereq_(46) ]
 };
-},{"45":45}],47:[function(_dereq_,module,exports){
+},{"46":46}],48:[function(_dereq_,module,exports){
 'use strict';
 
-var Snap = _dereq_(69);
-var getBBox = _dereq_(62).getBBox;
+var Snap = _dereq_(71);
+var getBBox = _dereq_(64).getBBox;
 
 
 /**
@@ -10992,32 +12411,32 @@ Outline.$inject = ['eventBus', 'styles', 'elementRegistry'];
 
 module.exports = Outline;
 
-},{"62":62,"69":69}],48:[function(_dereq_,module,exports){
+},{"64":64,"71":71}],49:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'outline' ],
-  outline: [ 'type', _dereq_(47) ]
+  outline: [ 'type', _dereq_(48) ]
 };
-},{"47":47}],49:[function(_dereq_,module,exports){
+},{"48":48}],50:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(148),
-    isString = _dereq_(154),
-    isObject = _dereq_(152),
-    assign = _dereq_(157),
-    forEach = _dereq_(78),
-    filter = _dereq_(76),
-    debounce = _dereq_(85);
+var isArray = _dereq_(150),
+    isString = _dereq_(156),
+    isObject = _dereq_(154),
+    assign = _dereq_(159),
+    forEach = _dereq_(80),
+    filter = _dereq_(78),
+    debounce = _dereq_(87);
 
-var domify = _dereq_(171),
-    domClasses = _dereq_(168),
-    domRemove = _dereq_(174);
+var domify = _dereq_(173),
+    domClasses = _dereq_(170),
+    domRemove = _dereq_(176);
 
-var getBBox = _dereq_(62).getBBox;
+var getBBox = _dereq_(64).getBBox;
 
 // document wide unique overlay ids
-var ids = new (_dereq_(65))('ov');
+var ids = new (_dereq_(67))('ov');
 
 
 function createRoot(parent) {
@@ -11509,18 +12928,18 @@ Overlays.prototype._init = function(config) {
   });
 };
 
-},{"148":148,"152":152,"154":154,"157":157,"168":168,"171":171,"174":174,"62":62,"65":65,"76":76,"78":78,"85":85}],50:[function(_dereq_,module,exports){
+},{"150":150,"154":154,"156":156,"159":159,"170":170,"173":173,"176":176,"64":64,"67":67,"78":78,"80":80,"87":87}],51:[function(_dereq_,module,exports){
 'use strict';
 
 module.exports = {
   __init__: [ 'overlays' ],
-  overlays: [ 'type', _dereq_(49) ]
+  overlays: [ 'type', _dereq_(50) ]
 };
-},{"49":49}],51:[function(_dereq_,module,exports){
+},{"50":50}],52:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(148),
-    forEach = _dereq_(78);
+var isArray = _dereq_(150),
+    forEach = _dereq_(80);
 
 
 /**
@@ -11610,11 +13029,11 @@ Selection.prototype.select = function(elements, add) {
   this._eventBus.fire('selection.changed', { oldSelection: oldSelection, newSelection: selectedElements });
 };
 
-},{"148":148,"78":78}],52:[function(_dereq_,module,exports){
+},{"150":150,"80":80}],53:[function(_dereq_,module,exports){
 'use strict';
 
 
-var getOriginalEvent = _dereq_(63).getOriginal;
+var getOriginalEvent = _dereq_(65).getOriginal;
 
 function SelectionBehavior(eventBus, selection, canvas) {
 
@@ -11663,10 +13082,10 @@ SelectionBehavior.$inject = [ 'eventBus', 'selection', 'canvas' ];
 
 module.exports = SelectionBehavior;
 
-},{"63":63}],53:[function(_dereq_,module,exports){
+},{"65":65}],54:[function(_dereq_,module,exports){
 'use strict';
 
-var forEach = _dereq_(78);
+var forEach = _dereq_(80);
 
 var MARKER_HOVER = 'hover',
     MARKER_SELECTED = 'selected';
@@ -11741,24 +13160,24 @@ SelectionVisuals.$inject = [
 
 module.exports = SelectionVisuals;
 
-},{"78":78}],54:[function(_dereq_,module,exports){
+},{"80":80}],55:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'selectionVisuals', 'selectionBehavior' ],
   __depends__: [
-    _dereq_(46),
-    _dereq_(48)
+    _dereq_(47),
+    _dereq_(49)
   ],
-  selection: [ 'type', _dereq_(51) ],
-  selectionVisuals: [ 'type', _dereq_(53) ],
-  selectionBehavior: [ 'type', _dereq_(52) ]
+  selection: [ 'type', _dereq_(52) ],
+  selectionVisuals: [ 'type', _dereq_(54) ],
+  selectionBehavior: [ 'type', _dereq_(53) ]
 };
 
-},{"46":46,"48":48,"51":51,"52":52,"53":53}],55:[function(_dereq_,module,exports){
+},{"47":47,"49":49,"52":52,"53":53,"54":54}],56:[function(_dereq_,module,exports){
 'use strict';
 
-var assign = _dereq_(157);
+var assign = _dereq_(159);
 
-var Refs = _dereq_(183);
+var Refs = _dereq_(185);
 
 var parentRefs = new Refs({ name: 'children', enumerable: true, collection: true }, { name: 'parent' }),
     labelRefs = new Refs({ name: 'label', enumerable: true }, { name: 'labelTarget' }),
@@ -11954,12 +13373,13 @@ module.exports.Root = Root;
 module.exports.Shape = Shape;
 module.exports.Connection = Connection;
 module.exports.Label = Label;
-},{"157":157,"183":183}],56:[function(_dereq_,module,exports){
+},{"159":159,"185":185}],57:[function(_dereq_,module,exports){
 'use strict';
 
-var Cursor = _dereq_(61),
-    domEvent = _dereq_(172),
-    Event = _dereq_(63);
+var Cursor = _dereq_(63),
+    ClickTrap = _dereq_(61),
+    domEvent = _dereq_(174),
+    Event = _dereq_(65);
 
 function substract(p1, p2) {
   return {
@@ -11990,6 +13410,10 @@ function MoveCanvas(eventBus, canvas) {
 
     if (!context.dragging && length(delta) > THRESHOLD) {
       context.dragging = true;
+
+      // prevent mouse click in this
+      // interaction sequence
+      ClickTrap.install();
 
       Cursor.set('move');
     }
@@ -12053,15 +13477,15 @@ MoveCanvas.$inject = [ 'eventBus', 'canvas' ];
 
 module.exports = MoveCanvas;
 
-},{"172":172,"61":61,"63":63}],57:[function(_dereq_,module,exports){
+},{"174":174,"61":61,"63":63,"65":65}],58:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'moveCanvas' ],
-  moveCanvas: [ 'type', _dereq_(56) ]
+  moveCanvas: [ 'type', _dereq_(57) ]
 };
-},{"56":56}],58:[function(_dereq_,module,exports){
+},{"57":57}],59:[function(_dereq_,module,exports){
 'use strict';
 
-var domEvent = _dereq_(172);
+var domEvent = _dereq_(174);
 
 function ZoomScroll(events, canvas) {
 
@@ -12081,7 +13505,6 @@ function ZoomScroll(events, canvas) {
   function zoom(direction, position) {
 
     var currentZoom = canvas.zoom();
-
     var factor = Math.pow(1 + Math.abs(direction / ZOOM_OFFSET) , direction > 0 ? 1 : -1);
 
     canvas.zoom(cap(currentZoom * factor), position);
@@ -12149,12 +13572,43 @@ ZoomScroll.$inject = [ 'eventBus', 'canvas' ];
 module.exports = ZoomScroll;
 
 
-},{"172":172}],59:[function(_dereq_,module,exports){
+},{"174":174}],60:[function(_dereq_,module,exports){
 module.exports = {
   __init__: [ 'zoomScroll' ],
-  zoomScroll: [ 'type', _dereq_(58) ]
+  zoomScroll: [ 'type', _dereq_(59) ]
 };
-},{"58":58}],60:[function(_dereq_,module,exports){
+},{"59":59}],61:[function(_dereq_,module,exports){
+'use strict';
+
+var domEvent = _dereq_(174),
+    stopEvent = _dereq_(65).stopEvent;
+
+function trap(event) {
+  stopEvent(event);
+
+  toggle(false);
+}
+
+function toggle(active) {
+  domEvent[active ? 'bind' : 'unbind'](document.body, 'click', trap, true);
+}
+
+/**
+ * Installs a click trap that prevents a ghost click following a dragging operation.
+ *
+ * @return {Function} a function to immediately remove the installed trap.
+ */
+function install() {
+
+  toggle(true);
+
+  return function() {
+    toggle(false);
+  };
+}
+
+module.exports.install = install;
+},{"174":174,"65":65}],62:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -12246,10 +13700,10 @@ module.exports.indexOf = function(collection, element) {
   return collection.indexOf(element);
 };
 
-},{}],61:[function(_dereq_,module,exports){
+},{}],63:[function(_dereq_,module,exports){
 'use strict';
 
-var domClasses = _dereq_(168);
+var domClasses = _dereq_(170);
 
 var CURSOR_CLS_PATTERN = /^djs-cursor-.*$/;
 
@@ -12267,13 +13721,13 @@ module.exports.set = function(mode) {
 module.exports.unset = function() {
   this.set(null);
 };
-},{"168":168}],62:[function(_dereq_,module,exports){
+},{"170":170}],64:[function(_dereq_,module,exports){
 'use strict';
 
-var isArray = _dereq_(148),
-    isNumber = _dereq_(151),
-    groupBy = _dereq_(79),
-    forEach = _dereq_(78);
+var isArray = _dereq_(150),
+    isNumber = _dereq_(153),
+    groupBy = _dereq_(81),
+    forEach = _dereq_(80);
 
 /**
  * Adds an element to a collection and returns true if the
@@ -12533,7 +13987,7 @@ module.exports.getEnclosedElements = getEnclosedElements;
 
 module.exports.getClosure = getClosure;
 
-},{"148":148,"151":151,"78":78,"79":79}],63:[function(_dereq_,module,exports){
+},{"150":150,"153":153,"80":80,"81":81}],65:[function(_dereq_,module,exports){
 'use strict';
 
 function __preventDefault(event) {
@@ -12604,7 +14058,7 @@ function toPoint(event) {
 
 module.exports.toPoint = toPoint;
 
-},{}],64:[function(_dereq_,module,exports){
+},{}],66:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -12650,16 +14104,15 @@ function getBBox(gfx) {
 module.exports.getVisual = getVisual;
 module.exports.getChildren = getChildren;
 module.exports.getBBox = getBBox;
-},{}],65:[function(_dereq_,module,exports){
+},{}],67:[function(_dereq_,module,exports){
 'use strict';
 
 /**
  * Util that provides unique IDs.
  *
  * @class djs.util.IdGenerator
- * @memberOf djs.util
- *
  * @constructor
+ * @memberOf djs.util
  *
  * The ids can be customized via a given prefix and contain a random value to avoid collisions.
  *
@@ -12684,16 +14137,16 @@ IdGenerator.prototype.next = function() {
   return this._prefix + (++this._counter);
 };
 
-},{}],66:[function(_dereq_,module,exports){
+},{}],68:[function(_dereq_,module,exports){
 'use strict';
 
-var isObject = _dereq_(152),
-    assign = _dereq_(157),
-    forEach = _dereq_(78),
-    reduce = _dereq_(82),
-    merge = _dereq_(160);
+var isObject = _dereq_(154),
+    assign = _dereq_(159),
+    forEach = _dereq_(80),
+    reduce = _dereq_(84),
+    merge = _dereq_(162);
 
-var Snap = _dereq_(69);
+var Snap = _dereq_(71);
 
 var DEFAULT_BOX_PADDING = 0;
 
@@ -12932,7 +14385,7 @@ Text.prototype.createText = function(parent, text, options) {
 
 
 module.exports = Text;
-},{"152":152,"157":157,"160":160,"69":69,"78":78,"82":82}],67:[function(_dereq_,module,exports){
+},{"154":154,"159":159,"162":162,"71":71,"80":80,"84":84}],69:[function(_dereq_,module,exports){
 // Copyright (c) 2013 Adobe Systems Incorporated. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -13337,7 +14790,7 @@ module.exports = Text;
     (typeof module != "undefined" && module.exports) ? (module.exports = eve) : (typeof define === "function" && define.amd ? (define("eve", [], function() { return eve; })) : (glob.eve = eve));
 })(this);
 
-},{}],68:[function(_dereq_,module,exports){
+},{}],70:[function(_dereq_,module,exports){
 // Snap.svg 0.3.0
 //
 // Copyright (c) 2013 – 2014 Adobe Systems Incorporated. All rights reserved.
@@ -13365,7 +14818,7 @@ module.exports = Text;
         });
     } else if (typeof exports !== 'undefined') {
         // Next for Node.js or CommonJS
-        var eve = _dereq_(67);
+        var eve = _dereq_(69);
         module.exports = factory(glob, eve);
     } else {
         // Browser globals (glob is window)
@@ -19990,10 +21443,10 @@ Snap.plugin(function (Snap, Element, Paper, glob) {
 
 return Snap;
 }));
-},{"67":67}],69:[function(_dereq_,module,exports){
+},{"69":69}],71:[function(_dereq_,module,exports){
 'use strict';
 
-var snapsvg = module.exports = _dereq_(68);
+var snapsvg = module.exports = _dereq_(70);
 
 snapsvg.plugin(function(Snap, Element) {
 
@@ -20199,7 +21652,7 @@ snapsvg.plugin(function(Snap, Element, Paper, global) {
     return new Snap(svg);
   };
 });
-},{"68":68}],70:[function(_dereq_,module,exports){
+},{"70":70}],72:[function(_dereq_,module,exports){
 
 var isArray = function(obj) {
   return Object.prototype.toString.call(obj) === '[object Array]';
@@ -20249,18 +21702,18 @@ exports.annotate = annotate;
 exports.parse = parse;
 exports.isArray = isArray;
 
-},{}],71:[function(_dereq_,module,exports){
+},{}],73:[function(_dereq_,module,exports){
 module.exports = {
-  annotate: _dereq_(70).annotate,
-  Module: _dereq_(73),
-  Injector: _dereq_(72)
+  annotate: _dereq_(72).annotate,
+  Module: _dereq_(75),
+  Injector: _dereq_(74)
 };
 
-},{"70":70,"72":72,"73":73}],72:[function(_dereq_,module,exports){
-var Module = _dereq_(73);
-var autoAnnotate = _dereq_(70).parse;
-var annotate = _dereq_(70).annotate;
-var isArray = _dereq_(70).isArray;
+},{"72":72,"74":74,"75":75}],74:[function(_dereq_,module,exports){
+var Module = _dereq_(75);
+var autoAnnotate = _dereq_(72).parse;
+var annotate = _dereq_(72).annotate;
+var isArray = _dereq_(72).isArray;
 
 
 var Injector = function(modules, parent) {
@@ -20472,7 +21925,7 @@ var Injector = function(modules, parent) {
 
 module.exports = Injector;
 
-},{"70":70,"73":73}],73:[function(_dereq_,module,exports){
+},{"72":72,"75":75}],75:[function(_dereq_,module,exports){
 var Module = function() {
   var providers = [];
 
@@ -20498,8 +21951,8 @@ var Module = function() {
 
 module.exports = Module;
 
-},{}],74:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(96);
+},{}],76:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(98);
 
 /**
  * This method is like `_.find` except that it returns the index of the first
@@ -20564,11 +22017,11 @@ function findIndex(array, predicate, thisArg) {
 
 module.exports = findIndex;
 
-},{"96":96}],75:[function(_dereq_,module,exports){
-var arrayEvery = _dereq_(90),
-    baseCallback = _dereq_(96),
-    baseEvery = _dereq_(101),
-    isArray = _dereq_(148);
+},{"98":98}],77:[function(_dereq_,module,exports){
+var arrayEvery = _dereq_(92),
+    baseCallback = _dereq_(98),
+    baseEvery = _dereq_(103),
+    isArray = _dereq_(150);
 
 /**
  * Checks if `predicate` returns truthy for **all** elements of `collection`.
@@ -20628,11 +22081,11 @@ function every(collection, predicate, thisArg) {
 
 module.exports = every;
 
-},{"101":101,"148":148,"90":90,"96":96}],76:[function(_dereq_,module,exports){
-var arrayFilter = _dereq_(91),
-    baseCallback = _dereq_(96),
-    baseFilter = _dereq_(102),
-    isArray = _dereq_(148);
+},{"103":103,"150":150,"92":92,"98":98}],78:[function(_dereq_,module,exports){
+var arrayFilter = _dereq_(93),
+    baseCallback = _dereq_(98),
+    baseFilter = _dereq_(104),
+    isArray = _dereq_(150);
 
 /**
  * Iterates over elements of `collection`, returning an array of all elements
@@ -20691,12 +22144,12 @@ function filter(collection, predicate, thisArg) {
 
 module.exports = filter;
 
-},{"102":102,"148":148,"91":91,"96":96}],77:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(96),
-    baseEach = _dereq_(100),
-    baseFind = _dereq_(103),
-    findIndex = _dereq_(74),
-    isArray = _dereq_(148);
+},{"104":104,"150":150,"93":93,"98":98}],79:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(98),
+    baseEach = _dereq_(102),
+    baseFind = _dereq_(105),
+    findIndex = _dereq_(76),
+    isArray = _dereq_(150);
 
 /**
  * Iterates over elements of `collection`, returning the first element
@@ -20759,11 +22212,11 @@ function find(collection, predicate, thisArg) {
 
 module.exports = find;
 
-},{"100":100,"103":103,"148":148,"74":74,"96":96}],78:[function(_dereq_,module,exports){
-var arrayEach = _dereq_(89),
-    baseEach = _dereq_(100),
-    bindCallback = _dereq_(125),
-    isArray = _dereq_(148);
+},{"102":102,"105":105,"150":150,"76":76,"98":98}],80:[function(_dereq_,module,exports){
+var arrayEach = _dereq_(91),
+    baseEach = _dereq_(102),
+    bindCallback = _dereq_(127),
+    isArray = _dereq_(150);
 
 /**
  * Iterates over elements of `collection` invoking `iteratee` for each element.
@@ -20803,8 +22256,8 @@ function forEach(collection, iteratee, thisArg) {
 
 module.exports = forEach;
 
-},{"100":100,"125":125,"148":148,"89":89}],79:[function(_dereq_,module,exports){
-var createAggregator = _dereq_(128);
+},{"102":102,"127":127,"150":150,"91":91}],81:[function(_dereq_,module,exports){
+var createAggregator = _dereq_(130);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -20864,12 +22317,12 @@ var groupBy = createAggregator(function(result, value, key) {
 
 module.exports = groupBy;
 
-},{"128":128}],80:[function(_dereq_,module,exports){
-var baseIndexOf = _dereq_(108),
-    isArray = _dereq_(148),
-    isLength = _dereq_(138),
-    isString = _dereq_(154),
-    values = _dereq_(163);
+},{"130":130}],82:[function(_dereq_,module,exports){
+var baseIndexOf = _dereq_(110),
+    isArray = _dereq_(150),
+    isLength = _dereq_(140),
+    isString = _dereq_(156),
+    values = _dereq_(165);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeMax = Math.max;
@@ -20927,11 +22380,11 @@ function includes(collection, target, fromIndex) {
 
 module.exports = includes;
 
-},{"108":108,"138":138,"148":148,"154":154,"163":163}],81:[function(_dereq_,module,exports){
-var arrayMap = _dereq_(92),
-    baseCallback = _dereq_(96),
-    baseMap = _dereq_(113),
-    isArray = _dereq_(148);
+},{"110":110,"140":140,"150":150,"156":156,"165":165}],83:[function(_dereq_,module,exports){
+var arrayMap = _dereq_(94),
+    baseCallback = _dereq_(98),
+    baseMap = _dereq_(115),
+    isArray = _dereq_(150);
 
 /**
  * Creates an array of values by running each element in `collection` through
@@ -20997,12 +22450,12 @@ function map(collection, iteratee, thisArg) {
 
 module.exports = map;
 
-},{"113":113,"148":148,"92":92,"96":96}],82:[function(_dereq_,module,exports){
-var arrayReduce = _dereq_(93),
-    baseCallback = _dereq_(96),
-    baseEach = _dereq_(100),
-    baseReduce = _dereq_(119),
-    isArray = _dereq_(148);
+},{"115":115,"150":150,"94":94,"98":98}],84:[function(_dereq_,module,exports){
+var arrayReduce = _dereq_(95),
+    baseCallback = _dereq_(98),
+    baseEach = _dereq_(102),
+    baseReduce = _dereq_(121),
+    isArray = _dereq_(150);
 
 /**
  * Reduces `collection` to a value which is the accumulated result of running
@@ -21047,11 +22500,11 @@ function reduce(collection, iteratee, accumulator, thisArg) {
 
 module.exports = reduce;
 
-},{"100":100,"119":119,"148":148,"93":93,"96":96}],83:[function(_dereq_,module,exports){
-var arraySome = _dereq_(94),
-    baseCallback = _dereq_(96),
-    baseSome = _dereq_(122),
-    isArray = _dereq_(148);
+},{"102":102,"121":121,"150":150,"95":95,"98":98}],85:[function(_dereq_,module,exports){
+var arraySome = _dereq_(96),
+    baseCallback = _dereq_(98),
+    baseSome = _dereq_(124),
+    isArray = _dereq_(150);
 
 /**
  * Checks if `predicate` returns truthy for **any** element of `collection`.
@@ -21112,8 +22565,8 @@ function some(collection, predicate, thisArg) {
 
 module.exports = some;
 
-},{"122":122,"148":148,"94":94,"96":96}],84:[function(_dereq_,module,exports){
-var isNative = _dereq_(150);
+},{"124":124,"150":150,"96":96,"98":98}],86:[function(_dereq_,module,exports){
+var isNative = _dereq_(152);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeNow = isNative(nativeNow = Date.now) && nativeNow;
@@ -21138,9 +22591,9 @@ var now = nativeNow || function() {
 
 module.exports = now;
 
-},{"150":150}],85:[function(_dereq_,module,exports){
-var isObject = _dereq_(152),
-    now = _dereq_(84);
+},{"152":152}],87:[function(_dereq_,module,exports){
+var isObject = _dereq_(154),
+    now = _dereq_(86);
 
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -21326,8 +22779,8 @@ function debounce(func, wait, options) {
 
 module.exports = debounce;
 
-},{"152":152,"84":84}],86:[function(_dereq_,module,exports){
-var baseDelay = _dereq_(98);
+},{"154":154,"86":86}],88:[function(_dereq_,module,exports){
+var baseDelay = _dereq_(100);
 
 /**
  * Defers invoking the `func` until the current call stack has cleared. Any
@@ -21352,10 +22805,10 @@ function defer(func) {
 
 module.exports = defer;
 
-},{"98":98}],87:[function(_dereq_,module,exports){
+},{"100":100}],89:[function(_dereq_,module,exports){
 (function (global){
-var cachePush = _dereq_(127),
-    isNative = _dereq_(150);
+var cachePush = _dereq_(129),
+    isNative = _dereq_(152);
 
 /** Native method references. */
 var Set = isNative(Set = global.Set) && Set;
@@ -21386,7 +22839,7 @@ module.exports = SetCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"127":127,"150":150}],88:[function(_dereq_,module,exports){
+},{"129":129,"152":152}],90:[function(_dereq_,module,exports){
 /**
  * Copies the values of `source` to `array`.
  *
@@ -21408,7 +22861,7 @@ function arrayCopy(source, array) {
 
 module.exports = arrayCopy;
 
-},{}],89:[function(_dereq_,module,exports){
+},{}],91:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.forEach` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21432,7 +22885,7 @@ function arrayEach(array, iteratee) {
 
 module.exports = arrayEach;
 
-},{}],90:[function(_dereq_,module,exports){
+},{}],92:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.every` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21457,7 +22910,7 @@ function arrayEvery(array, predicate) {
 
 module.exports = arrayEvery;
 
-},{}],91:[function(_dereq_,module,exports){
+},{}],93:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.filter` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21484,7 +22937,7 @@ function arrayFilter(array, predicate) {
 
 module.exports = arrayFilter;
 
-},{}],92:[function(_dereq_,module,exports){
+},{}],94:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.map` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21507,7 +22960,7 @@ function arrayMap(array, iteratee) {
 
 module.exports = arrayMap;
 
-},{}],93:[function(_dereq_,module,exports){
+},{}],95:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.reduce` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21535,7 +22988,7 @@ function arrayReduce(array, iteratee, accumulator, initFromArray) {
 
 module.exports = arrayReduce;
 
-},{}],94:[function(_dereq_,module,exports){
+},{}],96:[function(_dereq_,module,exports){
 /**
  * A specialized version of `_.some` for arrays without support for callback
  * shorthands or `this` binding.
@@ -21560,9 +23013,9 @@ function arraySome(array, predicate) {
 
 module.exports = arraySome;
 
-},{}],95:[function(_dereq_,module,exports){
-var baseCopy = _dereq_(97),
-    keys = _dereq_(158);
+},{}],97:[function(_dereq_,module,exports){
+var baseCopy = _dereq_(99),
+    keys = _dereq_(160);
 
 /**
  * The base implementation of `_.assign` without support for argument juggling,
@@ -21587,7 +23040,7 @@ function baseAssign(object, source, customizer) {
         value = object[key],
         result = customizer(value, source[key], key, object, source);
 
-    if ((result === result ? result !== value : value === value) ||
+    if ((result === result ? (result !== value) : (value === value)) ||
         (typeof value == 'undefined' && !(key in object))) {
       object[key] = result;
     }
@@ -21597,13 +23050,13 @@ function baseAssign(object, source, customizer) {
 
 module.exports = baseAssign;
 
-},{"158":158,"97":97}],96:[function(_dereq_,module,exports){
-var baseMatches = _dereq_(114),
-    baseMatchesProperty = _dereq_(115),
-    baseProperty = _dereq_(118),
-    bindCallback = _dereq_(125),
-    identity = _dereq_(167),
-    isBindable = _dereq_(135);
+},{"160":160,"99":99}],98:[function(_dereq_,module,exports){
+var baseMatches = _dereq_(116),
+    baseMatchesProperty = _dereq_(117),
+    baseProperty = _dereq_(120),
+    bindCallback = _dereq_(127),
+    identity = _dereq_(169),
+    isBindable = _dereq_(137);
 
 /**
  * The base implementation of `_.callback` which supports specifying the
@@ -21635,7 +23088,7 @@ function baseCallback(func, thisArg, argCount) {
 
 module.exports = baseCallback;
 
-},{"114":114,"115":115,"118":118,"125":125,"135":135,"167":167}],97:[function(_dereq_,module,exports){
+},{"116":116,"117":117,"120":120,"127":127,"137":137,"169":169}],99:[function(_dereq_,module,exports){
 /**
  * Copies the properties of `source` to `object`.
  *
@@ -21662,8 +23115,8 @@ function baseCopy(source, object, props) {
 
 module.exports = baseCopy;
 
-},{}],98:[function(_dereq_,module,exports){
-var baseSlice = _dereq_(121);
+},{}],100:[function(_dereq_,module,exports){
+var baseSlice = _dereq_(123);
 
 /** Used as the `TypeError` message for "Functions" methods. */
 var FUNC_ERROR_TEXT = 'Expected a function';
@@ -21687,10 +23140,10 @@ function baseDelay(func, wait, args, fromIndex) {
 
 module.exports = baseDelay;
 
-},{"121":121}],99:[function(_dereq_,module,exports){
-var baseIndexOf = _dereq_(108),
-    cacheIndexOf = _dereq_(126),
-    createCache = _dereq_(130);
+},{"123":123}],101:[function(_dereq_,module,exports){
+var baseIndexOf = _dereq_(110),
+    cacheIndexOf = _dereq_(128),
+    createCache = _dereq_(132);
 
 /**
  * The base implementation of `_.difference` which accepts a single array
@@ -21732,7 +23185,7 @@ function baseDifference(array, values) {
       }
       result.push(value);
     }
-    else if (indexOf(values, value) < 0) {
+    else if (indexOf(values, value, 0) < 0) {
       result.push(value);
     }
   }
@@ -21741,10 +23194,10 @@ function baseDifference(array, values) {
 
 module.exports = baseDifference;
 
-},{"108":108,"126":126,"130":130}],100:[function(_dereq_,module,exports){
-var baseForOwn = _dereq_(107),
-    isLength = _dereq_(138),
-    toObject = _dereq_(146);
+},{"110":110,"128":128,"132":132}],102:[function(_dereq_,module,exports){
+var baseForOwn = _dereq_(109),
+    isLength = _dereq_(140),
+    toObject = _dereq_(148);
 
 /**
  * The base implementation of `_.forEach` without support for callback
@@ -21773,8 +23226,8 @@ function baseEach(collection, iteratee) {
 
 module.exports = baseEach;
 
-},{"107":107,"138":138,"146":146}],101:[function(_dereq_,module,exports){
-var baseEach = _dereq_(100);
+},{"109":109,"140":140,"148":148}],103:[function(_dereq_,module,exports){
+var baseEach = _dereq_(102);
 
 /**
  * The base implementation of `_.every` without support for callback
@@ -21797,8 +23250,8 @@ function baseEvery(collection, predicate) {
 
 module.exports = baseEvery;
 
-},{"100":100}],102:[function(_dereq_,module,exports){
-var baseEach = _dereq_(100);
+},{"102":102}],104:[function(_dereq_,module,exports){
+var baseEach = _dereq_(102);
 
 /**
  * The base implementation of `_.filter` without support for callback
@@ -21821,7 +23274,7 @@ function baseFilter(collection, predicate) {
 
 module.exports = baseFilter;
 
-},{"100":100}],103:[function(_dereq_,module,exports){
+},{"102":102}],105:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
  * without support for callback shorthands and `this` binding, which iterates
@@ -21848,11 +23301,11 @@ function baseFind(collection, predicate, eachFunc, retKey) {
 
 module.exports = baseFind;
 
-},{}],104:[function(_dereq_,module,exports){
-var isArguments = _dereq_(147),
-    isArray = _dereq_(148),
-    isLength = _dereq_(138),
-    isObjectLike = _dereq_(139);
+},{}],106:[function(_dereq_,module,exports){
+var isArguments = _dereq_(149),
+    isArray = _dereq_(150),
+    isLength = _dereq_(140),
+    isObjectLike = _dereq_(141);
 
 /**
  * The base implementation of `_.flatten` with added support for restricting
@@ -21860,13 +23313,13 @@ var isArguments = _dereq_(147),
  *
  * @private
  * @param {Array} array The array to flatten.
- * @param {boolean} [isDeep] Specify a deep flatten.
- * @param {boolean} [isStrict] Restrict flattening to arrays and `arguments` objects.
- * @param {number} [fromIndex=0] The index to start from.
+ * @param {boolean} isDeep Specify a deep flatten.
+ * @param {boolean} isStrict Restrict flattening to arrays and `arguments` objects.
+ * @param {number} fromIndex The index to start from.
  * @returns {Array} Returns the new flattened array.
  */
 function baseFlatten(array, isDeep, isStrict, fromIndex) {
-  var index = (fromIndex || 0) - 1,
+  var index = fromIndex - 1,
       length = array.length,
       resIndex = -1,
       result = [];
@@ -21877,7 +23330,7 @@ function baseFlatten(array, isDeep, isStrict, fromIndex) {
     if (isObjectLike(value) && isLength(value.length) && (isArray(value) || isArguments(value))) {
       if (isDeep) {
         // Recursively flatten arrays (susceptible to call stack limits).
-        value = baseFlatten(value, isDeep, isStrict);
+        value = baseFlatten(value, isDeep, isStrict, 0);
       }
       var valIndex = -1,
           valLength = value.length;
@@ -21895,8 +23348,8 @@ function baseFlatten(array, isDeep, isStrict, fromIndex) {
 
 module.exports = baseFlatten;
 
-},{"138":138,"139":139,"147":147,"148":148}],105:[function(_dereq_,module,exports){
-var toObject = _dereq_(146);
+},{"140":140,"141":141,"149":149,"150":150}],107:[function(_dereq_,module,exports){
+var toObject = _dereq_(148);
 
 /**
  * The base implementation of `baseForIn` and `baseForOwn` which iterates
@@ -21927,9 +23380,9 @@ function baseFor(object, iteratee, keysFunc) {
 
 module.exports = baseFor;
 
-},{"146":146}],106:[function(_dereq_,module,exports){
-var baseFor = _dereq_(105),
-    keysIn = _dereq_(159);
+},{"148":148}],108:[function(_dereq_,module,exports){
+var baseFor = _dereq_(107),
+    keysIn = _dereq_(161);
 
 /**
  * The base implementation of `_.forIn` without support for callback
@@ -21946,9 +23399,9 @@ function baseForIn(object, iteratee) {
 
 module.exports = baseForIn;
 
-},{"105":105,"159":159}],107:[function(_dereq_,module,exports){
-var baseFor = _dereq_(105),
-    keys = _dereq_(158);
+},{"107":107,"161":161}],109:[function(_dereq_,module,exports){
+var baseFor = _dereq_(107),
+    keys = _dereq_(160);
 
 /**
  * The base implementation of `_.forOwn` without support for callback
@@ -21965,8 +23418,8 @@ function baseForOwn(object, iteratee) {
 
 module.exports = baseForOwn;
 
-},{"105":105,"158":158}],108:[function(_dereq_,module,exports){
-var indexOfNaN = _dereq_(134);
+},{"107":107,"160":160}],110:[function(_dereq_,module,exports){
+var indexOfNaN = _dereq_(136);
 
 /**
  * The base implementation of `_.indexOf` without support for binary searches.
@@ -21974,14 +23427,14 @@ var indexOfNaN = _dereq_(134);
  * @private
  * @param {Array} array The array to search.
  * @param {*} value The value to search for.
- * @param {number} [fromIndex=0] The index to search from.
+ * @param {number} fromIndex The index to search from.
  * @returns {number} Returns the index of the matched value, else `-1`.
  */
 function baseIndexOf(array, value, fromIndex) {
   if (value !== value) {
     return indexOfNaN(array, fromIndex);
   }
-  var index = (fromIndex || 0) - 1,
+  var index = fromIndex - 1,
       length = array.length;
 
   while (++index < length) {
@@ -21994,8 +23447,8 @@ function baseIndexOf(array, value, fromIndex) {
 
 module.exports = baseIndexOf;
 
-},{"134":134}],109:[function(_dereq_,module,exports){
-var baseIsEqualDeep = _dereq_(110);
+},{"136":136}],111:[function(_dereq_,module,exports){
+var baseIsEqualDeep = _dereq_(112);
 
 /**
  * The base implementation of `_.isEqual` without support for `this` binding
@@ -22030,12 +23483,12 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
 
 module.exports = baseIsEqual;
 
-},{"110":110}],110:[function(_dereq_,module,exports){
-var equalArrays = _dereq_(131),
-    equalByTag = _dereq_(132),
-    equalObjects = _dereq_(133),
-    isArray = _dereq_(148),
-    isTypedArray = _dereq_(155);
+},{"112":112}],112:[function(_dereq_,module,exports){
+var equalArrays = _dereq_(133),
+    equalByTag = _dereq_(134),
+    equalObjects = _dereq_(135),
+    isArray = _dereq_(150),
+    isTypedArray = _dereq_(157);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -22133,7 +23586,7 @@ function baseIsEqualDeep(object, other, equalFunc, customizer, isWhere, stackA, 
 
 module.exports = baseIsEqualDeep;
 
-},{"131":131,"132":132,"133":133,"148":148,"155":155}],111:[function(_dereq_,module,exports){
+},{"133":133,"134":134,"135":135,"150":150,"157":157}],113:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.isFunction` without support for environments
  * with incorrect `typeof` results.
@@ -22150,8 +23603,8 @@ function baseIsFunction(value) {
 
 module.exports = baseIsFunction;
 
-},{}],112:[function(_dereq_,module,exports){
-var baseIsEqual = _dereq_(109);
+},{}],114:[function(_dereq_,module,exports){
+var baseIsEqual = _dereq_(111);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -22210,8 +23663,8 @@ function baseIsMatch(object, props, values, strictCompareFlags, customizer) {
 
 module.exports = baseIsMatch;
 
-},{"109":109}],113:[function(_dereq_,module,exports){
-var baseEach = _dereq_(100);
+},{"111":111}],115:[function(_dereq_,module,exports){
+var baseEach = _dereq_(102);
 
 /**
  * The base implementation of `_.map` without support for callback shorthands
@@ -22232,10 +23685,10 @@ function baseMap(collection, iteratee) {
 
 module.exports = baseMap;
 
-},{"100":100}],114:[function(_dereq_,module,exports){
-var baseIsMatch = _dereq_(112),
-    isStrictComparable = _dereq_(140),
-    keys = _dereq_(158);
+},{"102":102}],116:[function(_dereq_,module,exports){
+var baseIsMatch = _dereq_(114),
+    isStrictComparable = _dereq_(142),
+    keys = _dereq_(160);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -22279,9 +23732,9 @@ function baseMatches(source) {
 
 module.exports = baseMatches;
 
-},{"112":112,"140":140,"158":158}],115:[function(_dereq_,module,exports){
-var baseIsEqual = _dereq_(109),
-    isStrictComparable = _dereq_(140);
+},{"114":114,"142":142,"160":160}],117:[function(_dereq_,module,exports){
+var baseIsEqual = _dereq_(111),
+    isStrictComparable = _dereq_(142);
 
 /**
  * The base implementation of `_.matchesProperty` which does not coerce `key`
@@ -22305,15 +23758,15 @@ function baseMatchesProperty(key, value) {
 
 module.exports = baseMatchesProperty;
 
-},{"109":109,"140":140}],116:[function(_dereq_,module,exports){
-var arrayEach = _dereq_(89),
-    baseForOwn = _dereq_(107),
-    baseMergeDeep = _dereq_(117),
-    isArray = _dereq_(148),
-    isLength = _dereq_(138),
-    isObject = _dereq_(152),
-    isObjectLike = _dereq_(139),
-    isTypedArray = _dereq_(155);
+},{"111":111,"142":142}],118:[function(_dereq_,module,exports){
+var arrayEach = _dereq_(91),
+    baseForOwn = _dereq_(109),
+    baseMergeDeep = _dereq_(119),
+    isArray = _dereq_(150),
+    isLength = _dereq_(140),
+    isObject = _dereq_(154),
+    isObjectLike = _dereq_(141),
+    isTypedArray = _dereq_(157);
 
 /**
  * The base implementation of `_.merge` without support for argument juggling,
@@ -22346,7 +23799,7 @@ function baseMerge(object, source, customizer, stackA, stackB) {
       result = srcValue;
     }
     if ((isSrcArr || typeof result != 'undefined') &&
-        (isCommon || (result === result ? result !== value : value === value))) {
+        (isCommon || (result === result ? (result !== value) : (value === value)))) {
       object[key] = result;
     }
   });
@@ -22355,14 +23808,14 @@ function baseMerge(object, source, customizer, stackA, stackB) {
 
 module.exports = baseMerge;
 
-},{"107":107,"117":117,"138":138,"139":139,"148":148,"152":152,"155":155,"89":89}],117:[function(_dereq_,module,exports){
-var arrayCopy = _dereq_(88),
-    isArguments = _dereq_(147),
-    isArray = _dereq_(148),
-    isLength = _dereq_(138),
-    isPlainObject = _dereq_(153),
-    isTypedArray = _dereq_(155),
-    toPlainObject = _dereq_(156);
+},{"109":109,"119":119,"140":140,"141":141,"150":150,"154":154,"157":157,"91":91}],119:[function(_dereq_,module,exports){
+var arrayCopy = _dereq_(90),
+    isArguments = _dereq_(149),
+    isArray = _dereq_(150),
+    isLength = _dereq_(140),
+    isPlainObject = _dereq_(155),
+    isTypedArray = _dereq_(157),
+    toPlainObject = _dereq_(158);
 
 /**
  * A specialized version of `baseMerge` for arrays and objects which performs
@@ -22417,14 +23870,14 @@ function baseMergeDeep(object, source, key, mergeFunc, customizer, stackA, stack
   if (isCommon) {
     // Recursively merge objects and arrays (susceptible to call stack limits).
     object[key] = mergeFunc(result, srcValue, customizer, stackA, stackB);
-  } else if (result === result ? result !== value : value === value) {
+  } else if (result === result ? (result !== value) : (value === value)) {
     object[key] = result;
   }
 }
 
 module.exports = baseMergeDeep;
 
-},{"138":138,"147":147,"148":148,"153":153,"155":155,"156":156,"88":88}],118:[function(_dereq_,module,exports){
+},{"140":140,"149":149,"150":150,"155":155,"157":157,"158":158,"90":90}],120:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.property` which does not coerce `key` to a string.
  *
@@ -22440,7 +23893,7 @@ function baseProperty(key) {
 
 module.exports = baseProperty;
 
-},{}],119:[function(_dereq_,module,exports){
+},{}],121:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.reduce` and `_.reduceRight` without support
  * for callback shorthands or `this` binding, which iterates over `collection`
@@ -22466,9 +23919,9 @@ function baseReduce(collection, iteratee, accumulator, initFromCollection, eachF
 
 module.exports = baseReduce;
 
-},{}],120:[function(_dereq_,module,exports){
-var identity = _dereq_(167),
-    metaMap = _dereq_(141);
+},{}],122:[function(_dereq_,module,exports){
+var identity = _dereq_(169),
+    metaMap = _dereq_(143);
 
 /**
  * The base implementation of `setData` without support for hot loop detection.
@@ -22485,7 +23938,7 @@ var baseSetData = !metaMap ? identity : function(func, data) {
 
 module.exports = baseSetData;
 
-},{"141":141,"167":167}],121:[function(_dereq_,module,exports){
+},{"143":143,"169":169}],123:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.slice` without an iteratee call guard.
  *
@@ -22507,7 +23960,7 @@ function baseSlice(array, start, end) {
   if (end < 0) {
     end += length;
   }
-  length = start > end ? 0 : (end - start) >>> 0;
+  length = start > end ? 0 : ((end - start) >>> 0);
   start >>>= 0;
 
   var result = Array(length);
@@ -22519,8 +23972,8 @@ function baseSlice(array, start, end) {
 
 module.exports = baseSlice;
 
-},{}],122:[function(_dereq_,module,exports){
-var baseEach = _dereq_(100);
+},{}],124:[function(_dereq_,module,exports){
+var baseEach = _dereq_(102);
 
 /**
  * The base implementation of `_.some` without support for callback shorthands
@@ -22544,7 +23997,7 @@ function baseSome(collection, predicate) {
 
 module.exports = baseSome;
 
-},{"100":100}],123:[function(_dereq_,module,exports){
+},{"102":102}],125:[function(_dereq_,module,exports){
 /**
  * Converts `value` to a string if it is not one. An empty string is returned
  * for `null` or `undefined` values.
@@ -22562,7 +24015,7 @@ function baseToString(value) {
 
 module.exports = baseToString;
 
-},{}],124:[function(_dereq_,module,exports){
+},{}],126:[function(_dereq_,module,exports){
 /**
  * The base implementation of `_.values` and `_.valuesIn` which creates an
  * array of `object` property values corresponding to the property names
@@ -22586,8 +24039,8 @@ function baseValues(object, props) {
 
 module.exports = baseValues;
 
-},{}],125:[function(_dereq_,module,exports){
-var identity = _dereq_(167);
+},{}],127:[function(_dereq_,module,exports){
+var identity = _dereq_(169);
 
 /**
  * A specialized version of `baseCallback` which only supports `this` binding
@@ -22627,8 +24080,8 @@ function bindCallback(func, thisArg, argCount) {
 
 module.exports = bindCallback;
 
-},{"167":167}],126:[function(_dereq_,module,exports){
-var isObject = _dereq_(152);
+},{"169":169}],128:[function(_dereq_,module,exports){
+var isObject = _dereq_(154);
 
 /**
  * Checks if `value` is in `cache` mimicking the return signature of
@@ -22648,8 +24101,8 @@ function cacheIndexOf(cache, value) {
 
 module.exports = cacheIndexOf;
 
-},{"152":152}],127:[function(_dereq_,module,exports){
-var isObject = _dereq_(152);
+},{"154":154}],129:[function(_dereq_,module,exports){
+var isObject = _dereq_(154);
 
 /**
  * Adds `value` to the cache.
@@ -22670,10 +24123,10 @@ function cachePush(value) {
 
 module.exports = cachePush;
 
-},{"152":152}],128:[function(_dereq_,module,exports){
-var baseCallback = _dereq_(96),
-    baseEach = _dereq_(100),
-    isArray = _dereq_(148);
+},{"154":154}],130:[function(_dereq_,module,exports){
+var baseCallback = _dereq_(98),
+    baseEach = _dereq_(102),
+    isArray = _dereq_(150);
 
 /**
  * Creates a function that aggregates a collection, creating an accumulator
@@ -22709,9 +24162,9 @@ function createAggregator(setter, initializer) {
 
 module.exports = createAggregator;
 
-},{"100":100,"148":148,"96":96}],129:[function(_dereq_,module,exports){
-var bindCallback = _dereq_(125),
-    isIterateeCall = _dereq_(137);
+},{"102":102,"150":150,"98":98}],131:[function(_dereq_,module,exports){
+var bindCallback = _dereq_(127),
+    isIterateeCall = _dereq_(139);
 
 /**
  * Creates a function that assigns properties of source object(s) to a given
@@ -22723,24 +24176,31 @@ var bindCallback = _dereq_(125),
  */
 function createAssigner(assigner) {
   return function() {
-    var length = arguments.length,
-        object = arguments[0];
+    var args = arguments,
+        length = args.length,
+        object = args[0];
 
     if (length < 2 || object == null) {
       return object;
     }
-    if (length > 3 && isIterateeCall(arguments[1], arguments[2], arguments[3])) {
-      length = 2;
+    var customizer = args[length - 2],
+        thisArg = args[length - 1],
+        guard = args[3];
+
+    if (length > 3 && typeof customizer == 'function') {
+      customizer = bindCallback(customizer, thisArg, 5);
+      length -= 2;
+    } else {
+      customizer = (length > 2 && typeof thisArg == 'function') ? thisArg : null;
+      length -= (customizer ? 1 : 0);
     }
-    // Juggle arguments.
-    if (length > 3 && typeof arguments[length - 2] == 'function') {
-      var customizer = bindCallback(arguments[--length - 1], arguments[length--], 5);
-    } else if (length > 2 && typeof arguments[length - 1] == 'function') {
-      customizer = arguments[--length];
+    if (guard && isIterateeCall(args[1], args[2], guard)) {
+      customizer = length == 3 ? null : customizer;
+      length = 2;
     }
     var index = 0;
     while (++index < length) {
-      var source = arguments[index];
+      var source = args[index];
       if (source) {
         assigner(object, source, customizer);
       }
@@ -22751,11 +24211,11 @@ function createAssigner(assigner) {
 
 module.exports = createAssigner;
 
-},{"125":125,"137":137}],130:[function(_dereq_,module,exports){
+},{"127":127,"139":139}],132:[function(_dereq_,module,exports){
 (function (global){
-var SetCache = _dereq_(87),
-    constant = _dereq_(166),
-    isNative = _dereq_(150);
+var SetCache = _dereq_(89),
+    constant = _dereq_(168),
+    isNative = _dereq_(152);
 
 /** Native method references. */
 var Set = isNative(Set = global.Set) && Set;
@@ -22778,7 +24238,7 @@ module.exports = createCache;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"150":150,"166":166,"87":87}],131:[function(_dereq_,module,exports){
+},{"152":152,"168":168,"89":89}],133:[function(_dereq_,module,exports){
 /**
  * A specialized version of `baseIsEqualDeep` for arrays with support for
  * partial deep comparisons.
@@ -22834,7 +24294,7 @@ function equalArrays(array, other, equalFunc, customizer, isWhere, stackA, stack
 
 module.exports = equalArrays;
 
-},{}],132:[function(_dereq_,module,exports){
+},{}],134:[function(_dereq_,module,exports){
 /** `Object#toString` result references. */
 var boolTag = '[object Boolean]',
     dateTag = '[object Date]',
@@ -22885,8 +24345,8 @@ function equalByTag(object, other, tag) {
 
 module.exports = equalByTag;
 
-},{}],133:[function(_dereq_,module,exports){
-var keys = _dereq_(158);
+},{}],135:[function(_dereq_,module,exports){
+var keys = _dereq_(160);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -22949,8 +24409,10 @@ function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, sta
         othCtor = other.constructor;
 
     // Non `Object` object instances with different constructors are not equal.
-    if (objCtor != othCtor && ('constructor' in object && 'constructor' in other) &&
-        !(typeof objCtor == 'function' && objCtor instanceof objCtor && typeof othCtor == 'function' && othCtor instanceof othCtor)) {
+    if (objCtor != othCtor &&
+        ('constructor' in object && 'constructor' in other) &&
+        !(typeof objCtor == 'function' && objCtor instanceof objCtor &&
+          typeof othCtor == 'function' && othCtor instanceof othCtor)) {
       return false;
     }
   }
@@ -22959,20 +24421,20 @@ function equalObjects(object, other, equalFunc, customizer, isWhere, stackA, sta
 
 module.exports = equalObjects;
 
-},{"158":158}],134:[function(_dereq_,module,exports){
+},{"160":160}],136:[function(_dereq_,module,exports){
 /**
  * Gets the index at which the first occurrence of `NaN` is found in `array`.
  * If `fromRight` is provided elements of `array` are iterated from right to left.
  *
  * @private
  * @param {Array} array The array to search.
- * @param {number} [fromIndex] The index to search from.
+ * @param {number} fromIndex The index to search from.
  * @param {boolean} [fromRight] Specify iterating from right to left.
  * @returns {number} Returns the index of the matched `NaN`, else `-1`.
  */
 function indexOfNaN(array, fromIndex, fromRight) {
   var length = array.length,
-      index = fromRight ? (fromIndex || length) : ((fromIndex || 0) - 1);
+      index = fromIndex + (fromRight ? 0 : -1);
 
   while ((fromRight ? index-- : ++index < length)) {
     var other = array[index];
@@ -22985,10 +24447,10 @@ function indexOfNaN(array, fromIndex, fromRight) {
 
 module.exports = indexOfNaN;
 
-},{}],135:[function(_dereq_,module,exports){
-var baseSetData = _dereq_(120),
-    isNative = _dereq_(150),
-    support = _dereq_(165);
+},{}],137:[function(_dereq_,module,exports){
+var baseSetData = _dereq_(122),
+    isNative = _dereq_(152),
+    support = _dereq_(167);
 
 /** Used to detect named functions. */
 var reFuncName = /^\s*function[ \n\r\t]+\w/;
@@ -23025,7 +24487,7 @@ function isBindable(func) {
 
 module.exports = isBindable;
 
-},{"120":120,"150":150,"165":165}],136:[function(_dereq_,module,exports){
+},{"122":122,"152":152,"167":167}],138:[function(_dereq_,module,exports){
 /**
  * Used as the maximum length of an array-like value.
  * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
@@ -23049,10 +24511,10 @@ function isIndex(value, length) {
 
 module.exports = isIndex;
 
-},{}],137:[function(_dereq_,module,exports){
-var isIndex = _dereq_(136),
-    isLength = _dereq_(138),
-    isObject = _dereq_(152);
+},{}],139:[function(_dereq_,module,exports){
+var isIndex = _dereq_(138),
+    isLength = _dereq_(140),
+    isObject = _dereq_(154);
 
 /**
  * Checks if the provided arguments are from an iteratee call.
@@ -23076,14 +24538,14 @@ function isIterateeCall(value, index, object) {
   }
   if (prereq) {
     var other = object[index];
-    return value === value ? value === other : other !== other;
+    return value === value ? (value === other) : (other !== other);
   }
   return false;
 }
 
 module.exports = isIterateeCall;
 
-},{"136":136,"138":138,"152":152}],138:[function(_dereq_,module,exports){
+},{"138":138,"140":140,"154":154}],140:[function(_dereq_,module,exports){
 /**
  * Used as the maximum length of an array-like value.
  * See the [ES spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.max_safe_integer)
@@ -23108,7 +24570,7 @@ function isLength(value) {
 
 module.exports = isLength;
 
-},{}],139:[function(_dereq_,module,exports){
+},{}],141:[function(_dereq_,module,exports){
 /**
  * Checks if `value` is object-like.
  *
@@ -23122,8 +24584,8 @@ function isObjectLike(value) {
 
 module.exports = isObjectLike;
 
-},{}],140:[function(_dereq_,module,exports){
-var isObject = _dereq_(152);
+},{}],142:[function(_dereq_,module,exports){
+var isObject = _dereq_(154);
 
 /**
  * Checks if `value` is suitable for strict equality comparisons, i.e. `===`.
@@ -23139,9 +24601,9 @@ function isStrictComparable(value) {
 
 module.exports = isStrictComparable;
 
-},{"152":152}],141:[function(_dereq_,module,exports){
+},{"154":154}],143:[function(_dereq_,module,exports){
 (function (global){
-var isNative = _dereq_(150);
+var isNative = _dereq_(152);
 
 /** Native method references. */
 var WeakMap = isNative(WeakMap = global.WeakMap) && WeakMap;
@@ -23153,8 +24615,8 @@ module.exports = metaMap;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"150":150}],142:[function(_dereq_,module,exports){
-var toObject = _dereq_(146);
+},{"152":152}],144:[function(_dereq_,module,exports){
+var toObject = _dereq_(148);
 
 /**
  * A specialized version of `_.pick` that picks `object` properties specified
@@ -23183,8 +24645,8 @@ function pickByArray(object, props) {
 
 module.exports = pickByArray;
 
-},{"146":146}],143:[function(_dereq_,module,exports){
-var baseForIn = _dereq_(106);
+},{"148":148}],145:[function(_dereq_,module,exports){
+var baseForIn = _dereq_(108);
 
 /**
  * A specialized version of `_.pick` that picks `object` properties `predicate`
@@ -23207,9 +24669,9 @@ function pickByCallback(object, predicate) {
 
 module.exports = pickByCallback;
 
-},{"106":106}],144:[function(_dereq_,module,exports){
-var baseForIn = _dereq_(106),
-    isObjectLike = _dereq_(139);
+},{"108":108}],146:[function(_dereq_,module,exports){
+var baseForIn = _dereq_(108),
+    isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var objectTag = '[object Object]';
@@ -23260,13 +24722,13 @@ function shimIsPlainObject(value) {
 
 module.exports = shimIsPlainObject;
 
-},{"106":106,"139":139}],145:[function(_dereq_,module,exports){
-var isArguments = _dereq_(147),
-    isArray = _dereq_(148),
-    isIndex = _dereq_(136),
-    isLength = _dereq_(138),
-    keysIn = _dereq_(159),
-    support = _dereq_(165);
+},{"108":108,"141":141}],147:[function(_dereq_,module,exports){
+var isArguments = _dereq_(149),
+    isArray = _dereq_(150),
+    isIndex = _dereq_(138),
+    isLength = _dereq_(140),
+    keysIn = _dereq_(161),
+    support = _dereq_(167);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -23304,8 +24766,8 @@ function shimKeys(object) {
 
 module.exports = shimKeys;
 
-},{"136":136,"138":138,"147":147,"148":148,"159":159,"165":165}],146:[function(_dereq_,module,exports){
-var isObject = _dereq_(152);
+},{"138":138,"140":140,"149":149,"150":150,"161":161,"167":167}],148:[function(_dereq_,module,exports){
+var isObject = _dereq_(154);
 
 /**
  * Converts `value` to an object if it is not one.
@@ -23320,9 +24782,9 @@ function toObject(value) {
 
 module.exports = toObject;
 
-},{"152":152}],147:[function(_dereq_,module,exports){
-var isLength = _dereq_(138),
-    isObjectLike = _dereq_(139);
+},{"154":154}],149:[function(_dereq_,module,exports){
+var isLength = _dereq_(140),
+    isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]';
@@ -23360,10 +24822,10 @@ function isArguments(value) {
 
 module.exports = isArguments;
 
-},{"138":138,"139":139}],148:[function(_dereq_,module,exports){
-var isLength = _dereq_(138),
-    isNative = _dereq_(150),
-    isObjectLike = _dereq_(139);
+},{"140":140,"141":141}],150:[function(_dereq_,module,exports){
+var isLength = _dereq_(140),
+    isNative = _dereq_(152),
+    isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var arrayTag = '[object Array]';
@@ -23403,10 +24865,10 @@ var isArray = nativeIsArray || function(value) {
 
 module.exports = isArray;
 
-},{"138":138,"139":139,"150":150}],149:[function(_dereq_,module,exports){
+},{"140":140,"141":141,"152":152}],151:[function(_dereq_,module,exports){
 (function (global){
-var baseIsFunction = _dereq_(111),
-    isNative = _dereq_(150);
+var baseIsFunction = _dereq_(113),
+    isNative = _dereq_(152);
 
 /** `Object#toString` result references. */
 var funcTag = '[object Function]';
@@ -23451,9 +24913,9 @@ module.exports = isFunction;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"111":111,"150":150}],150:[function(_dereq_,module,exports){
-var escapeRegExp = _dereq_(164),
-    isObjectLike = _dereq_(139);
+},{"113":113,"152":152}],152:[function(_dereq_,module,exports){
+var escapeRegExp = _dereq_(166),
+    isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var funcTag = '[object Function]';
@@ -23508,8 +24970,8 @@ function isNative(value) {
 
 module.exports = isNative;
 
-},{"139":139,"164":164}],151:[function(_dereq_,module,exports){
-var isObjectLike = _dereq_(139);
+},{"141":141,"166":166}],153:[function(_dereq_,module,exports){
+var isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var numberTag = '[object Number]';
@@ -23552,7 +25014,7 @@ function isNumber(value) {
 
 module.exports = isNumber;
 
-},{"139":139}],152:[function(_dereq_,module,exports){
+},{"141":141}],154:[function(_dereq_,module,exports){
 /**
  * Checks if `value` is the language type of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
@@ -23584,9 +25046,9 @@ function isObject(value) {
 
 module.exports = isObject;
 
-},{}],153:[function(_dereq_,module,exports){
-var isNative = _dereq_(150),
-    shimIsPlainObject = _dereq_(144);
+},{}],155:[function(_dereq_,module,exports){
+var isNative = _dereq_(152),
+    shimIsPlainObject = _dereq_(146);
 
 /** `Object#toString` result references. */
 var objectTag = '[object Object]';
@@ -23648,8 +25110,8 @@ var isPlainObject = !getPrototypeOf ? shimIsPlainObject : function(value) {
 
 module.exports = isPlainObject;
 
-},{"144":144,"150":150}],154:[function(_dereq_,module,exports){
-var isObjectLike = _dereq_(139);
+},{"146":146,"152":152}],156:[function(_dereq_,module,exports){
+var isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var stringTag = '[object String]';
@@ -23686,9 +25148,9 @@ function isString(value) {
 
 module.exports = isString;
 
-},{"139":139}],155:[function(_dereq_,module,exports){
-var isLength = _dereq_(138),
-    isObjectLike = _dereq_(139);
+},{"141":141}],157:[function(_dereq_,module,exports){
+var isLength = _dereq_(140),
+    isObjectLike = _dereq_(141);
 
 /** `Object#toString` result references. */
 var argsTag = '[object Arguments]',
@@ -23763,9 +25225,9 @@ function isTypedArray(value) {
 
 module.exports = isTypedArray;
 
-},{"138":138,"139":139}],156:[function(_dereq_,module,exports){
-var baseCopy = _dereq_(97),
-    keysIn = _dereq_(159);
+},{"140":140,"141":141}],158:[function(_dereq_,module,exports){
+var baseCopy = _dereq_(99),
+    keysIn = _dereq_(161);
 
 /**
  * Converts `value` to a plain object flattening inherited enumerable
@@ -23796,9 +25258,9 @@ function toPlainObject(value) {
 
 module.exports = toPlainObject;
 
-},{"159":159,"97":97}],157:[function(_dereq_,module,exports){
-var baseAssign = _dereq_(95),
-    createAssigner = _dereq_(129);
+},{"161":161,"99":99}],159:[function(_dereq_,module,exports){
+var baseAssign = _dereq_(97),
+    createAssigner = _dereq_(131);
 
 /**
  * Assigns own enumerable properties of source object(s) to the destination
@@ -23833,11 +25295,11 @@ var assign = createAssigner(baseAssign);
 
 module.exports = assign;
 
-},{"129":129,"95":95}],158:[function(_dereq_,module,exports){
-var isLength = _dereq_(138),
-    isNative = _dereq_(150),
-    isObject = _dereq_(152),
-    shimKeys = _dereq_(145);
+},{"131":131,"97":97}],160:[function(_dereq_,module,exports){
+var isLength = _dereq_(140),
+    isNative = _dereq_(152),
+    isObject = _dereq_(154),
+    shimKeys = _dereq_(147);
 
 /* Native method references for those with the same name as other `lodash` methods. */
 var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
@@ -23875,7 +25337,7 @@ var keys = !nativeKeys ? shimKeys : function(object) {
         length = object.length;
   }
   if ((typeof Ctor == 'function' && Ctor.prototype === object) ||
-     (typeof object != 'function' && (length && isLength(length)))) {
+      (typeof object != 'function' && (length && isLength(length)))) {
     return shimKeys(object);
   }
   return isObject(object) ? nativeKeys(object) : [];
@@ -23883,13 +25345,13 @@ var keys = !nativeKeys ? shimKeys : function(object) {
 
 module.exports = keys;
 
-},{"138":138,"145":145,"150":150,"152":152}],159:[function(_dereq_,module,exports){
-var isArguments = _dereq_(147),
-    isArray = _dereq_(148),
-    isIndex = _dereq_(136),
-    isLength = _dereq_(138),
-    isObject = _dereq_(152),
-    support = _dereq_(165);
+},{"140":140,"147":147,"152":152,"154":154}],161:[function(_dereq_,module,exports){
+var isArguments = _dereq_(149),
+    isArray = _dereq_(150),
+    isIndex = _dereq_(138),
+    isLength = _dereq_(140),
+    isObject = _dereq_(154),
+    support = _dereq_(167);
 
 /** Used for native method references. */
 var objectProto = Object.prototype;
@@ -23950,9 +25412,9 @@ function keysIn(object) {
 
 module.exports = keysIn;
 
-},{"136":136,"138":138,"147":147,"148":148,"152":152,"165":165}],160:[function(_dereq_,module,exports){
-var baseMerge = _dereq_(116),
-    createAssigner = _dereq_(129);
+},{"138":138,"140":140,"149":149,"150":150,"154":154,"167":167}],162:[function(_dereq_,module,exports){
+var baseMerge = _dereq_(118),
+    createAssigner = _dereq_(131);
 
 /**
  * Recursively merges own enumerable properties of the source object(s), that
@@ -24006,14 +25468,14 @@ var merge = createAssigner(baseMerge);
 
 module.exports = merge;
 
-},{"116":116,"129":129}],161:[function(_dereq_,module,exports){
-var arrayMap = _dereq_(92),
-    baseDifference = _dereq_(99),
-    baseFlatten = _dereq_(104),
-    bindCallback = _dereq_(125),
-    keysIn = _dereq_(159),
-    pickByArray = _dereq_(142),
-    pickByCallback = _dereq_(143);
+},{"118":118,"131":131}],163:[function(_dereq_,module,exports){
+var arrayMap = _dereq_(94),
+    baseDifference = _dereq_(101),
+    baseFlatten = _dereq_(106),
+    bindCallback = _dereq_(127),
+    keysIn = _dereq_(161),
+    pickByArray = _dereq_(144),
+    pickByCallback = _dereq_(145);
 
 /**
  * The opposite of `_.pick`; this method creates an object composed of the
@@ -24059,11 +25521,11 @@ function omit(object, predicate, thisArg) {
 
 module.exports = omit;
 
-},{"104":104,"125":125,"142":142,"143":143,"159":159,"92":92,"99":99}],162:[function(_dereq_,module,exports){
-var baseFlatten = _dereq_(104),
-    bindCallback = _dereq_(125),
-    pickByArray = _dereq_(142),
-    pickByCallback = _dereq_(143);
+},{"101":101,"106":106,"127":127,"144":144,"145":145,"161":161,"94":94}],164:[function(_dereq_,module,exports){
+var baseFlatten = _dereq_(106),
+    bindCallback = _dereq_(127),
+    pickByArray = _dereq_(144),
+    pickByCallback = _dereq_(145);
 
 /**
  * Creates an object composed of the picked `object` properties. Property
@@ -24102,9 +25564,9 @@ function pick(object, predicate, thisArg) {
 
 module.exports = pick;
 
-},{"104":104,"125":125,"142":142,"143":143}],163:[function(_dereq_,module,exports){
-var baseValues = _dereq_(124),
-    keys = _dereq_(158);
+},{"106":106,"127":127,"144":144,"145":145}],165:[function(_dereq_,module,exports){
+var baseValues = _dereq_(126),
+    keys = _dereq_(160);
 
 /**
  * Creates an array of the own enumerable property values of `object`.
@@ -24137,8 +25599,8 @@ function values(object) {
 
 module.exports = values;
 
-},{"124":124,"158":158}],164:[function(_dereq_,module,exports){
-var baseToString = _dereq_(123);
+},{"126":126,"160":160}],166:[function(_dereq_,module,exports){
+var baseToString = _dereq_(125);
 
 /**
  * Used to match `RegExp` special characters.
@@ -24171,9 +25633,9 @@ function escapeRegExp(string) {
 
 module.exports = escapeRegExp;
 
-},{"123":123}],165:[function(_dereq_,module,exports){
+},{"125":125}],167:[function(_dereq_,module,exports){
 (function (global){
-var isNative = _dereq_(150);
+var isNative = _dereq_(152);
 
 /** Used to detect functions containing a `this` reference. */
 var reThis = /\bthis\b/;
@@ -24251,7 +25713,7 @@ module.exports = support;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 
-},{"150":150}],166:[function(_dereq_,module,exports){
+},{"152":152}],168:[function(_dereq_,module,exports){
 /**
  * Creates a function that returns `value`.
  *
@@ -24276,7 +25738,7 @@ function constant(value) {
 
 module.exports = constant;
 
-},{}],167:[function(_dereq_,module,exports){
+},{}],169:[function(_dereq_,module,exports){
 /**
  * This method returns the first argument provided to it.
  *
@@ -24298,9 +25760,9 @@ function identity(value) {
 
 module.exports = identity;
 
-},{}],168:[function(_dereq_,module,exports){
-module.exports = _dereq_(175);
-},{"175":175}],169:[function(_dereq_,module,exports){
+},{}],170:[function(_dereq_,module,exports){
+module.exports = _dereq_(177);
+},{"177":177}],171:[function(_dereq_,module,exports){
 module.exports = function(el) {
 
   var c;
@@ -24312,24 +25774,24 @@ module.exports = function(el) {
 
   return el;
 };
-},{}],170:[function(_dereq_,module,exports){
-module.exports = _dereq_(178);
-},{"178":178}],171:[function(_dereq_,module,exports){
-module.exports = _dereq_(182);
-},{"182":182}],172:[function(_dereq_,module,exports){
-module.exports = _dereq_(179);
-},{"179":179}],173:[function(_dereq_,module,exports){
+},{}],172:[function(_dereq_,module,exports){
+module.exports = _dereq_(180);
+},{"180":180}],173:[function(_dereq_,module,exports){
+module.exports = _dereq_(184);
+},{"184":184}],174:[function(_dereq_,module,exports){
 module.exports = _dereq_(181);
-},{"181":181}],174:[function(_dereq_,module,exports){
+},{"181":181}],175:[function(_dereq_,module,exports){
+module.exports = _dereq_(183);
+},{"183":183}],176:[function(_dereq_,module,exports){
 module.exports = function(el) {
   el.parentNode && el.parentNode.removeChild(el);
 };
-},{}],175:[function(_dereq_,module,exports){
+},{}],177:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
-var index = _dereq_(176);
+var index = _dereq_(178);
 
 /**
  * Whitespace regexp.
@@ -24491,7 +25953,8 @@ ClassList.prototype.toggle = function(name, force){
  */
 
 ClassList.prototype.array = function(){
-  var str = this.el.className.replace(/^\s+|\s+$/g, '');
+  var className = this.el.getAttribute('class') || '';
+  var str = className.replace(/^\s+|\s+$/g, '');
   var arr = str.split(re);
   if ('' === arr[0]) arr.shift();
   return arr;
@@ -24512,7 +25975,7 @@ ClassList.prototype.contains = function(name){
     : !! ~index(this.array(), name);
 };
 
-},{"176":176}],176:[function(_dereq_,module,exports){
+},{"178":178}],178:[function(_dereq_,module,exports){
 module.exports = function(arr, obj){
   if (arr.indexOf) return arr.indexOf(obj);
   for (var i = 0; i < arr.length; ++i) {
@@ -24520,8 +25983,8 @@ module.exports = function(arr, obj){
   }
   return -1;
 };
-},{}],177:[function(_dereq_,module,exports){
-var matches = _dereq_(180)
+},{}],179:[function(_dereq_,module,exports){
+var matches = _dereq_(182)
 
 module.exports = function (element, selector, checkYoSelf, root) {
   element = checkYoSelf ? {parentNode: element} : element
@@ -24541,13 +26004,13 @@ module.exports = function (element, selector, checkYoSelf, root) {
   }
 }
 
-},{"180":180}],178:[function(_dereq_,module,exports){
+},{"182":182}],180:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
-var closest = _dereq_(177)
-  , event = _dereq_(179);
+var closest = _dereq_(179)
+  , event = _dereq_(181);
 
 /**
  * Delegate event `type` to `selector`
@@ -24585,7 +26048,7 @@ exports.unbind = function(el, type, fn, capture){
   event.unbind(el, type, fn, capture);
 };
 
-},{"177":177,"179":179}],179:[function(_dereq_,module,exports){
+},{"179":179,"181":181}],181:[function(_dereq_,module,exports){
 var bind = window.addEventListener ? 'addEventListener' : 'attachEvent',
     unbind = window.removeEventListener ? 'removeEventListener' : 'detachEvent',
     prefix = bind !== 'addEventListener' ? 'on' : '';
@@ -24621,12 +26084,12 @@ exports.unbind = function(el, type, fn, capture){
   el[unbind](prefix + type, fn, capture || false);
   return fn;
 };
-},{}],180:[function(_dereq_,module,exports){
+},{}],182:[function(_dereq_,module,exports){
 /**
  * Module dependencies.
  */
 
-var query = _dereq_(181);
+var query = _dereq_(183);
 
 /**
  * Element prototype.
@@ -24669,7 +26132,7 @@ function match(el, selector) {
   return false;
 }
 
-},{"181":181}],181:[function(_dereq_,module,exports){
+},{"183":183}],183:[function(_dereq_,module,exports){
 function one(selector, el) {
   return el.querySelector(selector);
 }
@@ -24692,7 +26155,7 @@ exports.engine = function(obj){
   return exports;
 };
 
-},{}],182:[function(_dereq_,module,exports){
+},{}],184:[function(_dereq_,module,exports){
 
 /**
  * Expose `parse`.
@@ -24737,14 +26200,15 @@ map.colgroup =
 map.caption =
 map.tfoot = [1, '<table>', '</table>'];
 
-map.text =
-map.circle =
+map.polyline =
 map.ellipse =
+map.polygon =
+map.circle =
+map.text =
 map.line =
 map.path =
-map.polygon =
-map.polyline =
-map.rect = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
+map.rect =
+map.g = [1, '<svg xmlns="http://www.w3.org/2000/svg" version="1.1">','</svg>'];
 
 /**
  * Parse `html` and return a DOM Node instance, which could be a TextNode,
@@ -24801,11 +26265,11 @@ function parse(html, doc) {
   return fragment;
 }
 
-},{}],183:[function(_dereq_,module,exports){
-module.exports = _dereq_(185);
+},{}],185:[function(_dereq_,module,exports){
+module.exports = _dereq_(187);
 
-module.exports.Collection = _dereq_(184);
-},{"184":184,"185":185}],184:[function(_dereq_,module,exports){
+module.exports.Collection = _dereq_(186);
+},{"186":186,"187":187}],186:[function(_dereq_,module,exports){
 'use strict';
 
 /**
@@ -24887,10 +26351,10 @@ function extend(collection, refs, property, target) {
 
 
 module.exports.extend = extend;
-},{}],185:[function(_dereq_,module,exports){
+},{}],187:[function(_dereq_,module,exports){
 'use strict';
 
-var Collection = _dereq_(184);
+var Collection = _dereq_(186);
 
 function hasOwnProperty(e, property) {
   return Object.prototype.hasOwnProperty.call(e, property.name || property);
@@ -25069,1420 +26533,6 @@ module.exports = Refs;
  * @property {boolean} [collection=false]
  * @property {boolean} [enumerable=false]
  */
-},{"184":184}],186:[function(_dereq_,module,exports){
-(function (Buffer){
-// wrapper for non-node envs
-;(function (sax) {
-
-sax.parser = function (strict, opt) { return new SAXParser(strict, opt) }
-sax.SAXParser = SAXParser
-sax.SAXStream = SAXStream
-sax.createStream = createStream
-
-// When we pass the MAX_BUFFER_LENGTH position, start checking for buffer overruns.
-// When we check, schedule the next check for MAX_BUFFER_LENGTH - (max(buffer lengths)),
-// since that's the earliest that a buffer overrun could occur.  This way, checks are
-// as rare as required, but as often as necessary to ensure never crossing this bound.
-// Furthermore, buffers are only tested at most once per write(), so passing a very
-// large string into write() might have undesirable effects, but this is manageable by
-// the caller, so it is assumed to be safe.  Thus, a call to write() may, in the extreme
-// edge case, result in creating at most one complete copy of the string passed in.
-// Set to Infinity to have unlimited buffers.
-sax.MAX_BUFFER_LENGTH = 64 * 1024
-
-var buffers = [
-  "comment", "sgmlDecl", "textNode", "tagName", "doctype",
-  "procInstName", "procInstBody", "entity", "attribName",
-  "attribValue", "cdata", "script"
-]
-
-sax.EVENTS = // for discoverability.
-  [ "text"
-  , "processinginstruction"
-  , "sgmldeclaration"
-  , "doctype"
-  , "comment"
-  , "attribute"
-  , "opentag"
-  , "closetag"
-  , "opencdata"
-  , "cdata"
-  , "closecdata"
-  , "error"
-  , "end"
-  , "ready"
-  , "script"
-  , "opennamespace"
-  , "closenamespace"
-  ]
-
-function SAXParser (strict, opt) {
-  if (!(this instanceof SAXParser)) return new SAXParser(strict, opt)
-
-  var parser = this
-  clearBuffers(parser)
-  parser.q = parser.c = ""
-  parser.bufferCheckPosition = sax.MAX_BUFFER_LENGTH
-  parser.opt = opt || {}
-  parser.opt.lowercase = parser.opt.lowercase || parser.opt.lowercasetags
-  parser.looseCase = parser.opt.lowercase ? "toLowerCase" : "toUpperCase"
-  parser.tags = []
-  parser.closed = parser.closedRoot = parser.sawRoot = false
-  parser.tag = parser.error = null
-  parser.strict = !!strict
-  parser.noscript = !!(strict || parser.opt.noscript)
-  parser.state = S.BEGIN
-  parser.ENTITIES = Object.create(sax.ENTITIES)
-  parser.attribList = []
-
-  // namespaces form a prototype chain.
-  // it always points at the current tag,
-  // which protos to its parent tag.
-  if (parser.opt.xmlns) parser.ns = Object.create(rootNS)
-
-  // mostly just for error reporting
-  parser.trackPosition = parser.opt.position !== false
-  if (parser.trackPosition) {
-    parser.position = parser.line = parser.column = 0
-  }
-  emit(parser, "onready")
-}
-
-if (!Object.create) Object.create = function (o) {
-  function f () { this.__proto__ = o }
-  f.prototype = o
-  return new f
-}
-
-if (!Object.getPrototypeOf) Object.getPrototypeOf = function (o) {
-  return o.__proto__
-}
-
-if (!Object.keys) Object.keys = function (o) {
-  var a = []
-  for (var i in o) if (o.hasOwnProperty(i)) a.push(i)
-  return a
-}
-
-function checkBufferLength (parser) {
-  var maxAllowed = Math.max(sax.MAX_BUFFER_LENGTH, 10)
-    , maxActual = 0
-  for (var i = 0, l = buffers.length; i < l; i ++) {
-    var len = parser[buffers[i]].length
-    if (len > maxAllowed) {
-      // Text/cdata nodes can get big, and since they're buffered,
-      // we can get here under normal conditions.
-      // Avoid issues by emitting the text node now,
-      // so at least it won't get any bigger.
-      switch (buffers[i]) {
-        case "textNode":
-          closeText(parser)
-        break
-
-        case "cdata":
-          emitNode(parser, "oncdata", parser.cdata)
-          parser.cdata = ""
-        break
-
-        case "script":
-          emitNode(parser, "onscript", parser.script)
-          parser.script = ""
-        break
-
-        default:
-          error(parser, "Max buffer length exceeded: "+buffers[i])
-      }
-    }
-    maxActual = Math.max(maxActual, len)
-  }
-  // schedule the next check for the earliest possible buffer overrun.
-  parser.bufferCheckPosition = (sax.MAX_BUFFER_LENGTH - maxActual)
-                             + parser.position
-}
-
-function clearBuffers (parser) {
-  for (var i = 0, l = buffers.length; i < l; i ++) {
-    parser[buffers[i]] = ""
-  }
-}
-
-function flushBuffers (parser) {
-  closeText(parser)
-  if (parser.cdata !== "") {
-    emitNode(parser, "oncdata", parser.cdata)
-    parser.cdata = ""
-  }
-  if (parser.script !== "") {
-    emitNode(parser, "onscript", parser.script)
-    parser.script = ""
-  }
-}
-
-SAXParser.prototype =
-  { end: function () { end(this) }
-  , write: write
-  , resume: function () { this.error = null; return this }
-  , close: function () { return this.write(null) }
-  , flush: function () { flushBuffers(this) }
-  }
-
-try {
-  var Stream = _dereq_("stream").Stream
-} catch (ex) {
-  var Stream = function () {}
-}
-
-
-var streamWraps = sax.EVENTS.filter(function (ev) {
-  return ev !== "error" && ev !== "end"
-})
-
-function createStream (strict, opt) {
-  return new SAXStream(strict, opt)
-}
-
-function SAXStream (strict, opt) {
-  if (!(this instanceof SAXStream)) return new SAXStream(strict, opt)
-
-  Stream.apply(this)
-
-  this._parser = new SAXParser(strict, opt)
-  this.writable = true
-  this.readable = true
-
-
-  var me = this
-
-  this._parser.onend = function () {
-    me.emit("end")
-  }
-
-  this._parser.onerror = function (er) {
-    me.emit("error", er)
-
-    // if didn't throw, then means error was handled.
-    // go ahead and clear error, so we can write again.
-    me._parser.error = null
-  }
-
-  this._decoder = null;
-
-  streamWraps.forEach(function (ev) {
-    Object.defineProperty(me, "on" + ev, {
-      get: function () { return me._parser["on" + ev] },
-      set: function (h) {
-        if (!h) {
-          me.removeAllListeners(ev)
-          return me._parser["on"+ev] = h
-        }
-        me.on(ev, h)
-      },
-      enumerable: true,
-      configurable: false
-    })
-  })
-}
-
-SAXStream.prototype = Object.create(Stream.prototype,
-  { constructor: { value: SAXStream } })
-
-SAXStream.prototype.write = function (data) {
-  if (typeof Buffer === 'function' &&
-      typeof Buffer.isBuffer === 'function' &&
-      Buffer.isBuffer(data)) {
-    if (!this._decoder) {
-      var SD = _dereq_('string_decoder').StringDecoder
-      this._decoder = new SD('utf8')
-    }
-    data = this._decoder.write(data);
-  }
-
-  this._parser.write(data.toString())
-  this.emit("data", data)
-  return true
-}
-
-SAXStream.prototype.end = function (chunk) {
-  if (chunk && chunk.length) this.write(chunk)
-  this._parser.end()
-  return true
-}
-
-SAXStream.prototype.on = function (ev, handler) {
-  var me = this
-  if (!me._parser["on"+ev] && streamWraps.indexOf(ev) !== -1) {
-    me._parser["on"+ev] = function () {
-      var args = arguments.length === 1 ? [arguments[0]]
-               : Array.apply(null, arguments)
-      args.splice(0, 0, ev)
-      me.emit.apply(me, args)
-    }
-  }
-
-  return Stream.prototype.on.call(me, ev, handler)
-}
-
-
-
-// character classes and tokens
-var whitespace = "\r\n\t "
-  // this really needs to be replaced with character classes.
-  // XML allows all manner of ridiculous numbers and digits.
-  , number = "0124356789"
-  , letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  // (Letter | "_" | ":")
-  , quote = "'\""
-  , entity = number+letter+"#"
-  , attribEnd = whitespace + ">"
-  , CDATA = "[CDATA["
-  , DOCTYPE = "DOCTYPE"
-  , XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace"
-  , XMLNS_NAMESPACE = "http://www.w3.org/2000/xmlns/"
-  , rootNS = { xml: XML_NAMESPACE, xmlns: XMLNS_NAMESPACE }
-
-// turn all the string character sets into character class objects.
-whitespace = charClass(whitespace)
-number = charClass(number)
-letter = charClass(letter)
-
-// http://www.w3.org/TR/REC-xml/#NT-NameStartChar
-// This implementation works on strings, a single character at a time
-// as such, it cannot ever support astral-plane characters (10000-EFFFF)
-// without a significant breaking change to either this  parser, or the
-// JavaScript language.  Implementation of an emoji-capable xml parser
-// is left as an exercise for the reader.
-var nameStart = /[:_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD]/
-
-var nameBody = /[:_A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u02FF\u0370-\u037D\u037F-\u1FFF\u200C-\u200D\u2070-\u218F\u2C00-\u2FEF\u3001-\uD7FF\uF900-\uFDCF\uFDF0-\uFFFD\u00B7\u0300-\u036F\u203F-\u2040\.\d-]/
-
-quote = charClass(quote)
-entity = charClass(entity)
-attribEnd = charClass(attribEnd)
-
-function charClass (str) {
-  return str.split("").reduce(function (s, c) {
-    s[c] = true
-    return s
-  }, {})
-}
-
-function isRegExp (c) {
-  return Object.prototype.toString.call(c) === '[object RegExp]'
-}
-
-function is (charclass, c) {
-  return isRegExp(charclass) ? !!c.match(charclass) : charclass[c]
-}
-
-function not (charclass, c) {
-  return !is(charclass, c)
-}
-
-var S = 0
-sax.STATE =
-{ BEGIN                     : S++
-, TEXT                      : S++ // general stuff
-, TEXT_ENTITY               : S++ // &amp and such.
-, OPEN_WAKA                 : S++ // <
-, SGML_DECL                 : S++ // <!BLARG
-, SGML_DECL_QUOTED          : S++ // <!BLARG foo "bar
-, DOCTYPE                   : S++ // <!DOCTYPE
-, DOCTYPE_QUOTED            : S++ // <!DOCTYPE "//blah
-, DOCTYPE_DTD               : S++ // <!DOCTYPE "//blah" [ ...
-, DOCTYPE_DTD_QUOTED        : S++ // <!DOCTYPE "//blah" [ "foo
-, COMMENT_STARTING          : S++ // <!-
-, COMMENT                   : S++ // <!--
-, COMMENT_ENDING            : S++ // <!-- blah -
-, COMMENT_ENDED             : S++ // <!-- blah --
-, CDATA                     : S++ // <![CDATA[ something
-, CDATA_ENDING              : S++ // ]
-, CDATA_ENDING_2            : S++ // ]]
-, PROC_INST                 : S++ // <?hi
-, PROC_INST_BODY            : S++ // <?hi there
-, PROC_INST_ENDING          : S++ // <?hi "there" ?
-, OPEN_TAG                  : S++ // <strong
-, OPEN_TAG_SLASH            : S++ // <strong /
-, ATTRIB                    : S++ // <a
-, ATTRIB_NAME               : S++ // <a foo
-, ATTRIB_NAME_SAW_WHITE     : S++ // <a foo _
-, ATTRIB_VALUE              : S++ // <a foo=
-, ATTRIB_VALUE_QUOTED       : S++ // <a foo="bar
-, ATTRIB_VALUE_CLOSED       : S++ // <a foo="bar"
-, ATTRIB_VALUE_UNQUOTED     : S++ // <a foo=bar
-, ATTRIB_VALUE_ENTITY_Q     : S++ // <foo bar="&quot;"
-, ATTRIB_VALUE_ENTITY_U     : S++ // <foo bar=&quot;
-, CLOSE_TAG                 : S++ // </a
-, CLOSE_TAG_SAW_WHITE       : S++ // </a   >
-, SCRIPT                    : S++ // <script> ...
-, SCRIPT_ENDING             : S++ // <script> ... <
-}
-
-sax.ENTITIES =
-{ "amp" : "&"
-, "gt" : ">"
-, "lt" : "<"
-, "quot" : "\""
-, "apos" : "'"
-, "AElig" : 198
-, "Aacute" : 193
-, "Acirc" : 194
-, "Agrave" : 192
-, "Aring" : 197
-, "Atilde" : 195
-, "Auml" : 196
-, "Ccedil" : 199
-, "ETH" : 208
-, "Eacute" : 201
-, "Ecirc" : 202
-, "Egrave" : 200
-, "Euml" : 203
-, "Iacute" : 205
-, "Icirc" : 206
-, "Igrave" : 204
-, "Iuml" : 207
-, "Ntilde" : 209
-, "Oacute" : 211
-, "Ocirc" : 212
-, "Ograve" : 210
-, "Oslash" : 216
-, "Otilde" : 213
-, "Ouml" : 214
-, "THORN" : 222
-, "Uacute" : 218
-, "Ucirc" : 219
-, "Ugrave" : 217
-, "Uuml" : 220
-, "Yacute" : 221
-, "aacute" : 225
-, "acirc" : 226
-, "aelig" : 230
-, "agrave" : 224
-, "aring" : 229
-, "atilde" : 227
-, "auml" : 228
-, "ccedil" : 231
-, "eacute" : 233
-, "ecirc" : 234
-, "egrave" : 232
-, "eth" : 240
-, "euml" : 235
-, "iacute" : 237
-, "icirc" : 238
-, "igrave" : 236
-, "iuml" : 239
-, "ntilde" : 241
-, "oacute" : 243
-, "ocirc" : 244
-, "ograve" : 242
-, "oslash" : 248
-, "otilde" : 245
-, "ouml" : 246
-, "szlig" : 223
-, "thorn" : 254
-, "uacute" : 250
-, "ucirc" : 251
-, "ugrave" : 249
-, "uuml" : 252
-, "yacute" : 253
-, "yuml" : 255
-, "copy" : 169
-, "reg" : 174
-, "nbsp" : 160
-, "iexcl" : 161
-, "cent" : 162
-, "pound" : 163
-, "curren" : 164
-, "yen" : 165
-, "brvbar" : 166
-, "sect" : 167
-, "uml" : 168
-, "ordf" : 170
-, "laquo" : 171
-, "not" : 172
-, "shy" : 173
-, "macr" : 175
-, "deg" : 176
-, "plusmn" : 177
-, "sup1" : 185
-, "sup2" : 178
-, "sup3" : 179
-, "acute" : 180
-, "micro" : 181
-, "para" : 182
-, "middot" : 183
-, "cedil" : 184
-, "ordm" : 186
-, "raquo" : 187
-, "frac14" : 188
-, "frac12" : 189
-, "frac34" : 190
-, "iquest" : 191
-, "times" : 215
-, "divide" : 247
-, "OElig" : 338
-, "oelig" : 339
-, "Scaron" : 352
-, "scaron" : 353
-, "Yuml" : 376
-, "fnof" : 402
-, "circ" : 710
-, "tilde" : 732
-, "Alpha" : 913
-, "Beta" : 914
-, "Gamma" : 915
-, "Delta" : 916
-, "Epsilon" : 917
-, "Zeta" : 918
-, "Eta" : 919
-, "Theta" : 920
-, "Iota" : 921
-, "Kappa" : 922
-, "Lambda" : 923
-, "Mu" : 924
-, "Nu" : 925
-, "Xi" : 926
-, "Omicron" : 927
-, "Pi" : 928
-, "Rho" : 929
-, "Sigma" : 931
-, "Tau" : 932
-, "Upsilon" : 933
-, "Phi" : 934
-, "Chi" : 935
-, "Psi" : 936
-, "Omega" : 937
-, "alpha" : 945
-, "beta" : 946
-, "gamma" : 947
-, "delta" : 948
-, "epsilon" : 949
-, "zeta" : 950
-, "eta" : 951
-, "theta" : 952
-, "iota" : 953
-, "kappa" : 954
-, "lambda" : 955
-, "mu" : 956
-, "nu" : 957
-, "xi" : 958
-, "omicron" : 959
-, "pi" : 960
-, "rho" : 961
-, "sigmaf" : 962
-, "sigma" : 963
-, "tau" : 964
-, "upsilon" : 965
-, "phi" : 966
-, "chi" : 967
-, "psi" : 968
-, "omega" : 969
-, "thetasym" : 977
-, "upsih" : 978
-, "piv" : 982
-, "ensp" : 8194
-, "emsp" : 8195
-, "thinsp" : 8201
-, "zwnj" : 8204
-, "zwj" : 8205
-, "lrm" : 8206
-, "rlm" : 8207
-, "ndash" : 8211
-, "mdash" : 8212
-, "lsquo" : 8216
-, "rsquo" : 8217
-, "sbquo" : 8218
-, "ldquo" : 8220
-, "rdquo" : 8221
-, "bdquo" : 8222
-, "dagger" : 8224
-, "Dagger" : 8225
-, "bull" : 8226
-, "hellip" : 8230
-, "permil" : 8240
-, "prime" : 8242
-, "Prime" : 8243
-, "lsaquo" : 8249
-, "rsaquo" : 8250
-, "oline" : 8254
-, "frasl" : 8260
-, "euro" : 8364
-, "image" : 8465
-, "weierp" : 8472
-, "real" : 8476
-, "trade" : 8482
-, "alefsym" : 8501
-, "larr" : 8592
-, "uarr" : 8593
-, "rarr" : 8594
-, "darr" : 8595
-, "harr" : 8596
-, "crarr" : 8629
-, "lArr" : 8656
-, "uArr" : 8657
-, "rArr" : 8658
-, "dArr" : 8659
-, "hArr" : 8660
-, "forall" : 8704
-, "part" : 8706
-, "exist" : 8707
-, "empty" : 8709
-, "nabla" : 8711
-, "isin" : 8712
-, "notin" : 8713
-, "ni" : 8715
-, "prod" : 8719
-, "sum" : 8721
-, "minus" : 8722
-, "lowast" : 8727
-, "radic" : 8730
-, "prop" : 8733
-, "infin" : 8734
-, "ang" : 8736
-, "and" : 8743
-, "or" : 8744
-, "cap" : 8745
-, "cup" : 8746
-, "int" : 8747
-, "there4" : 8756
-, "sim" : 8764
-, "cong" : 8773
-, "asymp" : 8776
-, "ne" : 8800
-, "equiv" : 8801
-, "le" : 8804
-, "ge" : 8805
-, "sub" : 8834
-, "sup" : 8835
-, "nsub" : 8836
-, "sube" : 8838
-, "supe" : 8839
-, "oplus" : 8853
-, "otimes" : 8855
-, "perp" : 8869
-, "sdot" : 8901
-, "lceil" : 8968
-, "rceil" : 8969
-, "lfloor" : 8970
-, "rfloor" : 8971
-, "lang" : 9001
-, "rang" : 9002
-, "loz" : 9674
-, "spades" : 9824
-, "clubs" : 9827
-, "hearts" : 9829
-, "diams" : 9830
-}
-
-Object.keys(sax.ENTITIES).forEach(function (key) {
-    var e = sax.ENTITIES[key]
-    var s = typeof e === 'number' ? String.fromCharCode(e) : e
-    sax.ENTITIES[key] = s
-})
-
-for (var S in sax.STATE) sax.STATE[sax.STATE[S]] = S
-
-// shorthand
-S = sax.STATE
-
-function emit (parser, event, data) {
-  parser[event] && parser[event](data)
-}
-
-function emitNode (parser, nodeType, data) {
-  if (parser.textNode) closeText(parser)
-  emit(parser, nodeType, data)
-}
-
-function closeText (parser) {
-  parser.textNode = textopts(parser.opt, parser.textNode)
-  if (parser.textNode) emit(parser, "ontext", parser.textNode)
-  parser.textNode = ""
-}
-
-function textopts (opt, text) {
-  if (opt.trim) text = text.trim()
-  if (opt.normalize) text = text.replace(/\s+/g, " ")
-  return text
-}
-
-function error (parser, er) {
-  closeText(parser)
-  if (parser.trackPosition) {
-    er += "\nLine: "+parser.line+
-          "\nColumn: "+parser.column+
-          "\nChar: "+parser.c
-  }
-  er = new Error(er)
-  parser.error = er
-  emit(parser, "onerror", er)
-  return parser
-}
-
-function end (parser) {
-  if (!parser.closedRoot) strictFail(parser, "Unclosed root tag")
-  if ((parser.state !== S.BEGIN) && (parser.state !== S.TEXT)) error(parser, "Unexpected end")
-  closeText(parser)
-  parser.c = ""
-  parser.closed = true
-  emit(parser, "onend")
-  SAXParser.call(parser, parser.strict, parser.opt)
-  return parser
-}
-
-function strictFail (parser, message) {
-  if (typeof parser !== 'object' || !(parser instanceof SAXParser))
-    throw new Error('bad call to strictFail');
-  if (parser.strict) error(parser, message)
-}
-
-function newTag (parser) {
-  if (!parser.strict) parser.tagName = parser.tagName[parser.looseCase]()
-  var parent = parser.tags[parser.tags.length - 1] || parser
-    , tag = parser.tag = { name : parser.tagName, attributes : {} }
-
-  // will be overridden if tag contails an xmlns="foo" or xmlns:foo="bar"
-  if (parser.opt.xmlns) tag.ns = parent.ns
-  parser.attribList.length = 0
-}
-
-function qname (name, attribute) {
-  var i = name.indexOf(":")
-    , qualName = i < 0 ? [ "", name ] : name.split(":")
-    , prefix = qualName[0]
-    , local = qualName[1]
-
-  // <x "xmlns"="http://foo">
-  if (attribute && name === "xmlns") {
-    prefix = "xmlns"
-    local = ""
-  }
-
-  return { prefix: prefix, local: local }
-}
-
-function attrib (parser) {
-  if (!parser.strict) parser.attribName = parser.attribName[parser.looseCase]()
-
-  if (parser.attribList.indexOf(parser.attribName) !== -1 ||
-      parser.tag.attributes.hasOwnProperty(parser.attribName)) {
-    return parser.attribName = parser.attribValue = ""
-  }
-
-  if (parser.opt.xmlns) {
-    var qn = qname(parser.attribName, true)
-      , prefix = qn.prefix
-      , local = qn.local
-
-    if (prefix === "xmlns") {
-      // namespace binding attribute; push the binding into scope
-      if (local === "xml" && parser.attribValue !== XML_NAMESPACE) {
-        strictFail( parser
-                  , "xml: prefix must be bound to " + XML_NAMESPACE + "\n"
-                  + "Actual: " + parser.attribValue )
-      } else if (local === "xmlns" && parser.attribValue !== XMLNS_NAMESPACE) {
-        strictFail( parser
-                  , "xmlns: prefix must be bound to " + XMLNS_NAMESPACE + "\n"
-                  + "Actual: " + parser.attribValue )
-      } else {
-        var tag = parser.tag
-          , parent = parser.tags[parser.tags.length - 1] || parser
-        if (tag.ns === parent.ns) {
-          tag.ns = Object.create(parent.ns)
-        }
-        tag.ns[local] = parser.attribValue
-      }
-    }
-
-    // defer onattribute events until all attributes have been seen
-    // so any new bindings can take effect; preserve attribute order
-    // so deferred events can be emitted in document order
-    parser.attribList.push([parser.attribName, parser.attribValue])
-  } else {
-    // in non-xmlns mode, we can emit the event right away
-    parser.tag.attributes[parser.attribName] = parser.attribValue
-    emitNode( parser
-            , "onattribute"
-            , { name: parser.attribName
-              , value: parser.attribValue } )
-  }
-
-  parser.attribName = parser.attribValue = ""
-}
-
-function openTag (parser, selfClosing) {
-  if (parser.opt.xmlns) {
-    // emit namespace binding events
-    var tag = parser.tag
-
-    // add namespace info to tag
-    var qn = qname(parser.tagName)
-    tag.prefix = qn.prefix
-    tag.local = qn.local
-    tag.uri = tag.ns[qn.prefix] || ""
-
-    if (tag.prefix && !tag.uri) {
-      strictFail(parser, "Unbound namespace prefix: "
-                       + JSON.stringify(parser.tagName))
-      tag.uri = qn.prefix
-    }
-
-    var parent = parser.tags[parser.tags.length - 1] || parser
-    if (tag.ns && parent.ns !== tag.ns) {
-      Object.keys(tag.ns).forEach(function (p) {
-        emitNode( parser
-                , "onopennamespace"
-                , { prefix: p , uri: tag.ns[p] } )
-      })
-    }
-
-    // handle deferred onattribute events
-    // Note: do not apply default ns to attributes:
-    //   http://www.w3.org/TR/REC-xml-names/#defaulting
-    for (var i = 0, l = parser.attribList.length; i < l; i ++) {
-      var nv = parser.attribList[i]
-      var name = nv[0]
-        , value = nv[1]
-        , qualName = qname(name, true)
-        , prefix = qualName.prefix
-        , local = qualName.local
-        , uri = prefix == "" ? "" : (tag.ns[prefix] || "")
-        , a = { name: name
-              , value: value
-              , prefix: prefix
-              , local: local
-              , uri: uri
-              }
-
-      // if there's any attributes with an undefined namespace,
-      // then fail on them now.
-      if (prefix && prefix != "xmlns" && !uri) {
-        strictFail(parser, "Unbound namespace prefix: "
-                         + JSON.stringify(prefix))
-        a.uri = prefix
-      }
-      parser.tag.attributes[name] = a
-      emitNode(parser, "onattribute", a)
-    }
-    parser.attribList.length = 0
-  }
-
-  parser.tag.isSelfClosing = !!selfClosing
-
-  // process the tag
-  parser.sawRoot = true
-  parser.tags.push(parser.tag)
-  emitNode(parser, "onopentag", parser.tag)
-  if (!selfClosing) {
-    // special case for <script> in non-strict mode.
-    if (!parser.noscript && parser.tagName.toLowerCase() === "script") {
-      parser.state = S.SCRIPT
-    } else {
-      parser.state = S.TEXT
-    }
-    parser.tag = null
-    parser.tagName = ""
-  }
-  parser.attribName = parser.attribValue = ""
-  parser.attribList.length = 0
-}
-
-function closeTag (parser) {
-  if (!parser.tagName) {
-    strictFail(parser, "Weird empty close tag.")
-    parser.textNode += "</>"
-    parser.state = S.TEXT
-    return
-  }
-
-  if (parser.script) {
-    if (parser.tagName !== "script") {
-      parser.script += "</" + parser.tagName + ">"
-      parser.tagName = ""
-      parser.state = S.SCRIPT
-      return
-    }
-    emitNode(parser, "onscript", parser.script)
-    parser.script = ""
-  }
-
-  // first make sure that the closing tag actually exists.
-  // <a><b></c></b></a> will close everything, otherwise.
-  var t = parser.tags.length
-  var tagName = parser.tagName
-  if (!parser.strict) tagName = tagName[parser.looseCase]()
-  var closeTo = tagName
-  while (t --) {
-    var close = parser.tags[t]
-    if (close.name !== closeTo) {
-      // fail the first time in strict mode
-      strictFail(parser, "Unexpected close tag")
-    } else break
-  }
-
-  // didn't find it.  we already failed for strict, so just abort.
-  if (t < 0) {
-    strictFail(parser, "Unmatched closing tag: "+parser.tagName)
-    parser.textNode += "</" + parser.tagName + ">"
-    parser.state = S.TEXT
-    return
-  }
-  parser.tagName = tagName
-  var s = parser.tags.length
-  while (s --> t) {
-    var tag = parser.tag = parser.tags.pop()
-    parser.tagName = parser.tag.name
-    emitNode(parser, "onclosetag", parser.tagName)
-
-    var x = {}
-    for (var i in tag.ns) x[i] = tag.ns[i]
-
-    var parent = parser.tags[parser.tags.length - 1] || parser
-    if (parser.opt.xmlns && tag.ns !== parent.ns) {
-      // remove namespace bindings introduced by tag
-      Object.keys(tag.ns).forEach(function (p) {
-        var n = tag.ns[p]
-        emitNode(parser, "onclosenamespace", { prefix: p, uri: n })
-      })
-    }
-  }
-  if (t === 0) parser.closedRoot = true
-  parser.tagName = parser.attribValue = parser.attribName = ""
-  parser.attribList.length = 0
-  parser.state = S.TEXT
-}
-
-function parseEntity (parser) {
-  var entity = parser.entity
-    , entityLC = entity.toLowerCase()
-    , num
-    , numStr = ""
-  if (parser.ENTITIES[entity])
-    return parser.ENTITIES[entity]
-  if (parser.ENTITIES[entityLC])
-    return parser.ENTITIES[entityLC]
-  entity = entityLC
-  if (entity.charAt(0) === "#") {
-    if (entity.charAt(1) === "x") {
-      entity = entity.slice(2)
-      num = parseInt(entity, 16)
-      numStr = num.toString(16)
-    } else {
-      entity = entity.slice(1)
-      num = parseInt(entity, 10)
-      numStr = num.toString(10)
-    }
-  }
-  entity = entity.replace(/^0+/, "")
-  if (numStr.toLowerCase() !== entity) {
-    strictFail(parser, "Invalid character entity")
-    return "&"+parser.entity + ";"
-  }
-
-  return String.fromCodePoint(num)
-}
-
-function write (chunk) {
-  var parser = this
-  if (this.error) throw this.error
-  if (parser.closed) return error(parser,
-    "Cannot write after close. Assign an onready handler.")
-  if (chunk === null) return end(parser)
-  var i = 0, c = ""
-  while (parser.c = c = chunk.charAt(i++)) {
-    if (parser.trackPosition) {
-      parser.position ++
-      if (c === "\n") {
-        parser.line ++
-        parser.column = 0
-      } else parser.column ++
-    }
-    switch (parser.state) {
-
-      case S.BEGIN:
-        if (c === "<") {
-          parser.state = S.OPEN_WAKA
-          parser.startTagPosition = parser.position
-        } else if (not(whitespace,c)) {
-          // have to process this as a text node.
-          // weird, but happens.
-          strictFail(parser, "Non-whitespace before first tag.")
-          parser.textNode = c
-          parser.state = S.TEXT
-        }
-      continue
-
-      case S.TEXT:
-        if (parser.sawRoot && !parser.closedRoot) {
-          var starti = i-1
-          while (c && c!=="<" && c!=="&") {
-            c = chunk.charAt(i++)
-            if (c && parser.trackPosition) {
-              parser.position ++
-              if (c === "\n") {
-                parser.line ++
-                parser.column = 0
-              } else parser.column ++
-            }
-          }
-          parser.textNode += chunk.substring(starti, i-1)
-        }
-        if (c === "<") {
-          parser.state = S.OPEN_WAKA
-          parser.startTagPosition = parser.position
-        } else {
-          if (not(whitespace, c) && (!parser.sawRoot || parser.closedRoot))
-            strictFail(parser, "Text data outside of root node.")
-          if (c === "&") parser.state = S.TEXT_ENTITY
-          else parser.textNode += c
-        }
-      continue
-
-      case S.SCRIPT:
-        // only non-strict
-        if (c === "<") {
-          parser.state = S.SCRIPT_ENDING
-        } else parser.script += c
-      continue
-
-      case S.SCRIPT_ENDING:
-        if (c === "/") {
-          parser.state = S.CLOSE_TAG
-        } else {
-          parser.script += "<" + c
-          parser.state = S.SCRIPT
-        }
-      continue
-
-      case S.OPEN_WAKA:
-        // either a /, ?, !, or text is coming next.
-        if (c === "!") {
-          parser.state = S.SGML_DECL
-          parser.sgmlDecl = ""
-        } else if (is(whitespace, c)) {
-          // wait for it...
-        } else if (is(nameStart,c)) {
-          parser.state = S.OPEN_TAG
-          parser.tagName = c
-        } else if (c === "/") {
-          parser.state = S.CLOSE_TAG
-          parser.tagName = ""
-        } else if (c === "?") {
-          parser.state = S.PROC_INST
-          parser.procInstName = parser.procInstBody = ""
-        } else {
-          strictFail(parser, "Unencoded <")
-          // if there was some whitespace, then add that in.
-          if (parser.startTagPosition + 1 < parser.position) {
-            var pad = parser.position - parser.startTagPosition
-            c = new Array(pad).join(" ") + c
-          }
-          parser.textNode += "<" + c
-          parser.state = S.TEXT
-        }
-      continue
-
-      case S.SGML_DECL:
-        if ((parser.sgmlDecl+c).toUpperCase() === CDATA) {
-          emitNode(parser, "onopencdata")
-          parser.state = S.CDATA
-          parser.sgmlDecl = ""
-          parser.cdata = ""
-        } else if (parser.sgmlDecl+c === "--") {
-          parser.state = S.COMMENT
-          parser.comment = ""
-          parser.sgmlDecl = ""
-        } else if ((parser.sgmlDecl+c).toUpperCase() === DOCTYPE) {
-          parser.state = S.DOCTYPE
-          if (parser.doctype || parser.sawRoot) strictFail(parser,
-            "Inappropriately located doctype declaration")
-          parser.doctype = ""
-          parser.sgmlDecl = ""
-        } else if (c === ">") {
-          emitNode(parser, "onsgmldeclaration", parser.sgmlDecl)
-          parser.sgmlDecl = ""
-          parser.state = S.TEXT
-        } else if (is(quote, c)) {
-          parser.state = S.SGML_DECL_QUOTED
-          parser.sgmlDecl += c
-        } else parser.sgmlDecl += c
-      continue
-
-      case S.SGML_DECL_QUOTED:
-        if (c === parser.q) {
-          parser.state = S.SGML_DECL
-          parser.q = ""
-        }
-        parser.sgmlDecl += c
-      continue
-
-      case S.DOCTYPE:
-        if (c === ">") {
-          parser.state = S.TEXT
-          emitNode(parser, "ondoctype", parser.doctype)
-          parser.doctype = true // just remember that we saw it.
-        } else {
-          parser.doctype += c
-          if (c === "[") parser.state = S.DOCTYPE_DTD
-          else if (is(quote, c)) {
-            parser.state = S.DOCTYPE_QUOTED
-            parser.q = c
-          }
-        }
-      continue
-
-      case S.DOCTYPE_QUOTED:
-        parser.doctype += c
-        if (c === parser.q) {
-          parser.q = ""
-          parser.state = S.DOCTYPE
-        }
-      continue
-
-      case S.DOCTYPE_DTD:
-        parser.doctype += c
-        if (c === "]") parser.state = S.DOCTYPE
-        else if (is(quote,c)) {
-          parser.state = S.DOCTYPE_DTD_QUOTED
-          parser.q = c
-        }
-      continue
-
-      case S.DOCTYPE_DTD_QUOTED:
-        parser.doctype += c
-        if (c === parser.q) {
-          parser.state = S.DOCTYPE_DTD
-          parser.q = ""
-        }
-      continue
-
-      case S.COMMENT:
-        if (c === "-") parser.state = S.COMMENT_ENDING
-        else parser.comment += c
-      continue
-
-      case S.COMMENT_ENDING:
-        if (c === "-") {
-          parser.state = S.COMMENT_ENDED
-          parser.comment = textopts(parser.opt, parser.comment)
-          if (parser.comment) emitNode(parser, "oncomment", parser.comment)
-          parser.comment = ""
-        } else {
-          parser.comment += "-" + c
-          parser.state = S.COMMENT
-        }
-      continue
-
-      case S.COMMENT_ENDED:
-        if (c !== ">") {
-          strictFail(parser, "Malformed comment")
-          // allow <!-- blah -- bloo --> in non-strict mode,
-          // which is a comment of " blah -- bloo "
-          parser.comment += "--" + c
-          parser.state = S.COMMENT
-        } else parser.state = S.TEXT
-      continue
-
-      case S.CDATA:
-        if (c === "]") parser.state = S.CDATA_ENDING
-        else parser.cdata += c
-      continue
-
-      case S.CDATA_ENDING:
-        if (c === "]") parser.state = S.CDATA_ENDING_2
-        else {
-          parser.cdata += "]" + c
-          parser.state = S.CDATA
-        }
-      continue
-
-      case S.CDATA_ENDING_2:
-        if (c === ">") {
-          if (parser.cdata) emitNode(parser, "oncdata", parser.cdata)
-          emitNode(parser, "onclosecdata")
-          parser.cdata = ""
-          parser.state = S.TEXT
-        } else if (c === "]") {
-          parser.cdata += "]"
-        } else {
-          parser.cdata += "]]" + c
-          parser.state = S.CDATA
-        }
-      continue
-
-      case S.PROC_INST:
-        if (c === "?") parser.state = S.PROC_INST_ENDING
-        else if (is(whitespace, c)) parser.state = S.PROC_INST_BODY
-        else parser.procInstName += c
-      continue
-
-      case S.PROC_INST_BODY:
-        if (!parser.procInstBody && is(whitespace, c)) continue
-        else if (c === "?") parser.state = S.PROC_INST_ENDING
-        else parser.procInstBody += c
-      continue
-
-      case S.PROC_INST_ENDING:
-        if (c === ">") {
-          emitNode(parser, "onprocessinginstruction", {
-            name : parser.procInstName,
-            body : parser.procInstBody
-          })
-          parser.procInstName = parser.procInstBody = ""
-          parser.state = S.TEXT
-        } else {
-          parser.procInstBody += "?" + c
-          parser.state = S.PROC_INST_BODY
-        }
-      continue
-
-      case S.OPEN_TAG:
-        if (is(nameBody, c)) parser.tagName += c
-        else {
-          newTag(parser)
-          if (c === ">") openTag(parser)
-          else if (c === "/") parser.state = S.OPEN_TAG_SLASH
-          else {
-            if (not(whitespace, c)) strictFail(
-              parser, "Invalid character in tag name")
-            parser.state = S.ATTRIB
-          }
-        }
-      continue
-
-      case S.OPEN_TAG_SLASH:
-        if (c === ">") {
-          openTag(parser, true)
-          closeTag(parser)
-        } else {
-          strictFail(parser, "Forward-slash in opening tag not followed by >")
-          parser.state = S.ATTRIB
-        }
-      continue
-
-      case S.ATTRIB:
-        // haven't read the attribute name yet.
-        if (is(whitespace, c)) continue
-        else if (c === ">") openTag(parser)
-        else if (c === "/") parser.state = S.OPEN_TAG_SLASH
-        else if (is(nameStart, c)) {
-          parser.attribName = c
-          parser.attribValue = ""
-          parser.state = S.ATTRIB_NAME
-        } else strictFail(parser, "Invalid attribute name")
-      continue
-
-      case S.ATTRIB_NAME:
-        if (c === "=") parser.state = S.ATTRIB_VALUE
-        else if (c === ">") {
-          strictFail(parser, "Attribute without value")
-          parser.attribValue = parser.attribName
-          attrib(parser)
-          openTag(parser)
-        }
-        else if (is(whitespace, c)) parser.state = S.ATTRIB_NAME_SAW_WHITE
-        else if (is(nameBody, c)) parser.attribName += c
-        else strictFail(parser, "Invalid attribute name")
-      continue
-
-      case S.ATTRIB_NAME_SAW_WHITE:
-        if (c === "=") parser.state = S.ATTRIB_VALUE
-        else if (is(whitespace, c)) continue
-        else {
-          strictFail(parser, "Attribute without value")
-          parser.tag.attributes[parser.attribName] = ""
-          parser.attribValue = ""
-          emitNode(parser, "onattribute",
-                   { name : parser.attribName, value : "" })
-          parser.attribName = ""
-          if (c === ">") openTag(parser)
-          else if (is(nameStart, c)) {
-            parser.attribName = c
-            parser.state = S.ATTRIB_NAME
-          } else {
-            strictFail(parser, "Invalid attribute name")
-            parser.state = S.ATTRIB
-          }
-        }
-      continue
-
-      case S.ATTRIB_VALUE:
-        if (is(whitespace, c)) continue
-        else if (is(quote, c)) {
-          parser.q = c
-          parser.state = S.ATTRIB_VALUE_QUOTED
-        } else {
-          strictFail(parser, "Unquoted attribute value")
-          parser.state = S.ATTRIB_VALUE_UNQUOTED
-          parser.attribValue = c
-        }
-      continue
-
-      case S.ATTRIB_VALUE_QUOTED:
-        if (c !== parser.q) {
-          if (c === "&") parser.state = S.ATTRIB_VALUE_ENTITY_Q
-          else parser.attribValue += c
-          continue
-        }
-        attrib(parser)
-        parser.q = ""
-        parser.state = S.ATTRIB_VALUE_CLOSED
-      continue
-
-      case S.ATTRIB_VALUE_CLOSED:
-        if (is(whitespace, c)) {
-          parser.state = S.ATTRIB
-        } else if (c === ">") openTag(parser)
-        else if (c === "/") parser.state = S.OPEN_TAG_SLASH
-        else if (is(nameStart, c)) {
-          strictFail(parser, "No whitespace between attributes")
-          parser.attribName = c
-          parser.attribValue = ""
-          parser.state = S.ATTRIB_NAME
-        } else strictFail(parser, "Invalid attribute name")
-      continue
-
-      case S.ATTRIB_VALUE_UNQUOTED:
-        if (not(attribEnd,c)) {
-          if (c === "&") parser.state = S.ATTRIB_VALUE_ENTITY_U
-          else parser.attribValue += c
-          continue
-        }
-        attrib(parser)
-        if (c === ">") openTag(parser)
-        else parser.state = S.ATTRIB
-      continue
-
-      case S.CLOSE_TAG:
-        if (!parser.tagName) {
-          if (is(whitespace, c)) continue
-          else if (not(nameStart, c)) {
-            if (parser.script) {
-              parser.script += "</" + c
-              parser.state = S.SCRIPT
-            } else {
-              strictFail(parser, "Invalid tagname in closing tag.")
-            }
-          } else parser.tagName = c
-        }
-        else if (c === ">") closeTag(parser)
-        else if (is(nameBody, c)) parser.tagName += c
-        else if (parser.script) {
-          parser.script += "</" + parser.tagName
-          parser.tagName = ""
-          parser.state = S.SCRIPT
-        } else {
-          if (not(whitespace, c)) strictFail(parser,
-            "Invalid tagname in closing tag")
-          parser.state = S.CLOSE_TAG_SAW_WHITE
-        }
-      continue
-
-      case S.CLOSE_TAG_SAW_WHITE:
-        if (is(whitespace, c)) continue
-        if (c === ">") closeTag(parser)
-        else strictFail(parser, "Invalid characters in closing tag")
-      continue
-
-      case S.TEXT_ENTITY:
-      case S.ATTRIB_VALUE_ENTITY_Q:
-      case S.ATTRIB_VALUE_ENTITY_U:
-        switch(parser.state) {
-          case S.TEXT_ENTITY:
-            var returnState = S.TEXT, buffer = "textNode"
-          break
-
-          case S.ATTRIB_VALUE_ENTITY_Q:
-            var returnState = S.ATTRIB_VALUE_QUOTED, buffer = "attribValue"
-          break
-
-          case S.ATTRIB_VALUE_ENTITY_U:
-            var returnState = S.ATTRIB_VALUE_UNQUOTED, buffer = "attribValue"
-          break
-        }
-        if (c === ";") {
-          parser[buffer] += parseEntity(parser)
-          parser.entity = ""
-          parser.state = returnState
-        }
-        else if (is(entity, c)) parser.entity += c
-        else {
-          strictFail(parser, "Invalid character entity")
-          parser[buffer] += "&" + parser.entity + c
-          parser.entity = ""
-          parser.state = returnState
-        }
-      continue
-
-      default:
-        throw new Error(parser, "Unknown state: " + parser.state)
-    }
-  } // while
-  // cdata blocks can get very big under normal conditions. emit and move on.
-  // if (parser.state === S.CDATA && parser.cdata) {
-  //   emitNode(parser, "oncdata", parser.cdata)
-  //   parser.cdata = ""
-  // }
-  if (parser.position >= parser.bufferCheckPosition) checkBufferLength(parser)
-  return parser
-}
-
-/*! http://mths.be/fromcodepoint v0.1.0 by @mathias */
-if (!String.fromCodePoint) {
-        (function() {
-                var stringFromCharCode = String.fromCharCode;
-                var floor = Math.floor;
-                var fromCodePoint = function() {
-                        var MAX_SIZE = 0x4000;
-                        var codeUnits = [];
-                        var highSurrogate;
-                        var lowSurrogate;
-                        var index = -1;
-                        var length = arguments.length;
-                        if (!length) {
-                                return '';
-                        }
-                        var result = '';
-                        while (++index < length) {
-                                var codePoint = Number(arguments[index]);
-                                if (
-                                        !isFinite(codePoint) || // `NaN`, `+Infinity`, or `-Infinity`
-                                        codePoint < 0 || // not a valid Unicode code point
-                                        codePoint > 0x10FFFF || // not a valid Unicode code point
-                                        floor(codePoint) != codePoint // not an integer
-                                ) {
-                                        throw RangeError('Invalid code point: ' + codePoint);
-                                }
-                                if (codePoint <= 0xFFFF) { // BMP code point
-                                        codeUnits.push(codePoint);
-                                } else { // Astral code point; split in surrogate halves
-                                        // http://mathiasbynens.be/notes/javascript-encoding#surrogate-formulae
-                                        codePoint -= 0x10000;
-                                        highSurrogate = (codePoint >> 10) + 0xD800;
-                                        lowSurrogate = (codePoint % 0x400) + 0xDC00;
-                                        codeUnits.push(highSurrogate, lowSurrogate);
-                                }
-                                if (index + 1 == length || codeUnits.length > MAX_SIZE) {
-                                        result += stringFromCharCode.apply(null, codeUnits);
-                                        codeUnits.length = 0;
-                                }
-                        }
-                        return result;
-                };
-                if (Object.defineProperty) {
-                        Object.defineProperty(String, 'fromCodePoint', {
-                                'value': fromCodePoint,
-                                'configurable': true,
-                                'writable': true
-                        });
-                } else {
-                        String.fromCodePoint = fromCodePoint;
-                }
-        }());
-}
-
-})(typeof exports === "undefined" ? sax = {} : exports)
-
-}).call(this,undefined)
-
-},{"undefined":undefined}]},{},[1])(1)
+},{"186":186}]},{},[1])(1)
 });
+//# sourceMappingURL=bpmn-navigated-viewer.js.map

@@ -35,8 +35,7 @@
     "moment": "2.9.0",
     "requirejs": "2.1.14",
     "requirejs-angular-define": "git://github.com/camunda/requirejs-angular-define#master",
-    "requirejs-text": "2.0.12",
-    "sax": "0.6.0"
+    "requirejs-text": "2.0.12"
   },
   "devDependencies": {
     "chai": "1.9.1",
