@@ -1,0 +1,75 @@
+<div ng-if="display && isShown('type')"
+     class="type">{{ variable.type }}</div>
+<div ng-if="display && isShown('name')"
+     class="name">{{ variable.name }}</div>
+<div ng-if="display && isShown('value')"
+     ng-class="{null: isNull()}"
+     class="value">
+  <span ng-if="isNull()"
+        class="null-symbol">&lt;null&gt;</span>
+  {{ (variable.value || '') }}
+</div>
+
+<div ng-if="!display"
+     class="input-group editing"
+     ng-class="{invalid: !valid}">
+  <!-- <div ng-if="isShown('type')"
+       class="input-group-btn dropdown type">
+    <select ng-options="label for value in variableTypes"
+            ng-model="variable.type"
+            class="form-control">
+      <option>Type</option>
+    </select>
+  </div> --><!-- /btn-group -->
+
+  <div ng-if="isShown('type')"
+       class="input-group-btn dropdown type">
+    <button class="btn btn-default dropdown-toggle">
+      {{ (variable.type || 'Type') }}
+      <span class="caret"></span>
+    </button>
+
+    <ul class="dropdown-menu dropdown-menu-right">
+      <li ng-repeat="variableType in variableTypes">
+        <a ng-click="variable.type = variableType">{{ variableType }}</a>
+      </li>
+    </ul>
+  </div><!-- /btn-group -->
+
+  <input ng-if="isShown('name')"
+         type="text"
+         class="form-control name"
+         ng-model="variable.name"
+         placeholder="varName" />
+
+  <div ng-if="isShown('value') && !isNull()"
+       class="value-wrapper input-group"
+       ng-class="{checkbox: useCheckbox()}">
+    <div class="input-group-btn">
+      <a ng-click="setNull()"
+         class="btn btn-default set-null"
+         tooltip="Set value to &quot;null&quot;">
+        <span class="glyphicon glyphicon-remove"></span>
+      </a>
+    </div>
+
+    <input ng-if="isPrimitive() && !useCheckbox()"
+           type="text"
+           class="form-control value"
+           ng-model="variable.value"
+           placeholder="Value of the variable" />
+
+    <input ng-if="useCheckbox()"
+           type="checkbox"
+           class="value"
+           ng-model="variable.value"
+           placeholder="Value of the variable" />
+  </div>
+
+  <div ng-if="isShown('value') && isNull()"
+       ng-click="setNonNull()"
+       class="value-wrapper value null-value btn btn-default"
+       tooltip="Re-set to previous or default value">
+    <span class="null-symbol">&lt;null&gt;</span>
+  </div>
+</div>
