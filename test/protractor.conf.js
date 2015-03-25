@@ -1,30 +1,71 @@
-var jasmineReporters = require('jasmine-reporters');
+
+'use strict';
+var chai     = require('chai');
+var promised = require('chai-as-promised');
+chai.use(promised);
+global.expect   = chai.expect;
+
+var tested = process.env.TESTED || '*';
 
 exports.config = {
+
+  // The timeout for each script run on the browser. This should be longer
+  // than the maximum time your application needs to stabilize between tasks.
+  allScriptsTimeout: 11000,
+
   // Capabilities to be passed to the webdriver instance.
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {
+      'args': ['incognito', 'disable-extensions', 'start-maximized', 'enable-crash-reporter-for-testing']
+    },
+    'loggingPrefs': {
+      'browser': 'ALL'
+    }
   },
+
+  /*    multiCapabilities: [{
+   'browserName': 'chrome'
+   }, {
+   'browserName': 'firefox'
+   }],
+   */
+
+  // ----- What tests to run -----
+  //
+  // Spec patterns are relative to the location of the spec file. They may
+  // include glob patterns.
   specs: [
-    '../lib/widgets/inline-field/test/cam-widget-inline-field.spec.js',
-    '../lib/widgets/search-pill/test/search-pill.spec.js',
-    '../lib/widgets/header/test/cam-widget-header.spec.js',
-    '../lib/widgets/loader/test/cam-widget-loader.spec.js',
-    '../lib/widgets/search/test/cam-widget-search.spec.js',
-    '../lib/widgets/bpmn-viewer/test/cam-widget-bpmn-viewer.spec.js'
+    '../lib/widgets/' + tested + '/test/cam-widget-' + tested + '.spec.js'
   ],
 
-  framework: 'jasmine2',
+  // A base URL for your application under test. Calls to protractor.get()
+  // with relative paths will be prepended with this.
+  baseUrl: 'http://localhost:8070',
 
-  onPrepare: function () {
-      jasmine.getEnv().addReporter(new jasmineReporters.JUnitXmlReporter({
-          savePath: 'test',
-          consolidateAll: true
-      }));
-  },
+  // ----- The test framework -----
+  //
+  // Jasmine is fully supported as a test and assertion framework.
+  // Mocha has limited beta support. You will need to include your own
+  // assertion framework if working with mocha.
+  framework: 'mocha',
+
+/*
+  // ----- Options to be passed to minijasminenode -----
+  //
+  // Options to be passed to Jasmine-node.
+  // See the full list at https://github.com/juliemr/minijasminenode
   jasmineNodeOpts: {
-      showColors: false,
-      defaultTimeoutInterval: 60000,
-      print: function() {}
+    defaultTimeoutInterval: 15000, // Default time to wait in ms before a test fails.
+    showColors: true, // Use colors in the command line report.
+    includeStackTrace: true // If true, include stack traces in failures.
+  }
+  */
+
+  mochaOpts: {
+    timeout: 15000,
+    colors: true,
+    reporter: 'spec',
+    slow: 3000
   }
 };
