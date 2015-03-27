@@ -39,6 +39,7 @@ function requirejsConf(options) {
       'angular-translate':          'node_modules/angular-translate/dist/angular-translate',
       'angular-moment':             'node_modules/angular-moment/angular-moment',
       'camunda-bpm-sdk-js':         'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular',
+      'camunda-bpm-sdk-js-type-utils':   'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-type-utils',
       jquery:                       'node_modules/jquery/dist/jquery',
       moment:                       'node_modules/moment/moment',
       requirejs:                    'node_modules/requirejs/require',
