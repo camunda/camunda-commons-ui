@@ -67,6 +67,17 @@ npm install
 grunt
 ```
 
+While developing widgets, you may want to run the tests as a change occurs, here is a way to achieve that:
+```sh
+npm install -g nodemon
+nodemon -w lib/widgets/ --exec "protractor ./test/protractor.conf.js"
+```
+
+You can also run the tests on a single widget like that:
+```
+TESTED=variable nodemon -w lib/widgets/ --exec "protractor ./test/protractor.conf.js"
+```
+This will only run the `cam-widget-variable` tests.
 
 
 ## License
