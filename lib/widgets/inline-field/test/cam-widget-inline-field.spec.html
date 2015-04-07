@@ -223,9 +223,16 @@ ngModule.controller('testController', ['$scope', function($scope) {
             $scope.dateText = "Foobar";
           }]);
 
-          angular.bootstrap(document.body, [ngModule.name]);
+          angular.element(document).ready(function() {
+            if (location.search.indexOf('test=protractor') > -1) {
+              window.name = 'NG_DEFER_BOOTSTRAP!' + window.name;
+              document.body.setAttribute('ng-app', '');
+            }
+
+            angular.bootstrap(document.body, [ngModule.name]);
+          });
         });
-      })
+      });
     </script>
   </body>
 </html>
