@@ -173,7 +173,7 @@
         <h3>Scope Variables</h3>
         Here are the variable settings which are used for the examples above:
         <pre ng-non-bindable>
-ngModule.controller('testController', ['$scope', function($scope) {
+testModule.controller('testController', ['$scope', function($scope) {
   $scope.name = 'Mr. Prosciutto';
   $scope.date = '2015-01-22T15:11:59';
   $scope.options = ['foobar', '1', '2', '3'];
@@ -204,6 +204,7 @@ ngModule.controller('testController', ['$scope', function($scope) {
         paths: {text: '/node_modules/requirejs-text/text'}
       });
       require(['text!/test-conf.json'], function(rConf) {
+        'use strict';
         rConf = JSON.parse(rConf);
         require.config(rConf);
         require([
@@ -211,21 +212,23 @@ ngModule.controller('testController', ['$scope', function($scope) {
           'camunda-commons-ui/widgets'
         ], function (angular, camCommonsUi) {
 
-          var ngModule = angular.module('myModule', [camCommonsUi.name]);
+          var testModule = angular.module('myModule', [camCommonsUi.name]);
 
-          ngModule.controller('testController', ['$scope', function($scope) {
+          testModule.controller('testController', ['$scope', function($scope) {
             $scope.name = 'Mr. Prosciutto';
             $scope.date = '2015-01-22T15:11:59';
             $scope.options = ['foobar', '1', '2', '3'];
             $scope.selectedOption = 'foobar';
             $scope.keyOptions = [{key: 'foobar', value: 'Barfoo'}, {key: '1', value: 'One'}, {key: '2', value: 'Two'}, {key: '3', value: 'Three'}];
             $scope.selectedKeyOption = {key: 'foobar', value: 'Barfoo'};
-            $scope.dateText = "Foobar";
+            $scope.dateText = 'Foobar';
           }]);
 
-          angular.bootstrap(document.body, [ngModule.name]);
+          angular.element(document).ready(function() {
+            angular.bootstrap(document.body, [testModule.name]);
+          });
         });
-      })
+      });
     </script>
   </body>
 </html>

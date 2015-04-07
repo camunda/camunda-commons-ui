@@ -115,7 +115,18 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('build', ['less:widgets']);
+  grunt.registerTask('build-sdk-type-utils', function () {
+    var done = this.async();
+    grunt.util.spawn({
+      cmd: 'grunt',
+      args: [
+        '--gruntfile', './node_modules/camunda-bpm-sdk-js/Gruntfile.js',
+        'browserify:distTypeUtils'
+      ]
+    }, done);
+  });
+
+  grunt.registerTask('build', ['build-sdk-type-utils', 'less:widgets']);
 
   grunt.registerTask('auto-build', ['build', 'connect:widgetTests', 'watch']);
 

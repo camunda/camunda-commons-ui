@@ -333,7 +333,9 @@
           }]);
 
 
-          angular.bootstrap(document.body, [testModule.name]);
+          angular.element(document).ready(function() {
+            angular.bootstrap(document.body, [testModule.name]);
+          });
         });
       });
     </script>
