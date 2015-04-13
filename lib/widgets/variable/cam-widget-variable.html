@@ -2,25 +2,25 @@
      class="type">{{ variable.type }}</div>
 <div ng-if="display && isShown('name')"
      class="name">{{ variable.name }}</div>
-<div ng-if="display && isShown('value')"
+<div ng-if="display && isShown('value') && isPrimitive()"
      ng-class="{null: isNull()}"
      class="value">
   <span ng-if="isNull()"
         class="null-symbol">&lt;null&gt;</span>
   {{ (variable.value || '') }}
 </div>
+<div ng-if="display && isShown('value') && variable.type === 'Object'"
+     ng-class="{null: isNull()}"
+     class="value">
+  <a ng-click="editVariableValue()">
+    {{ variable.valueInfo.objectTypeName }}
+  </a>
+</div>
+
 
 <div ng-if="!display"
      class="input-group editing"
      ng-class="{invalid: !valid}">
-  <!-- <div ng-if="isShown('type')"
-       class="input-group-btn dropdown type">
-    <select ng-options="label for value in variableTypes"
-            ng-model="variable.type"
-            class="form-control">
-      <option>Type</option>
-    </select>
-  </div> --><!-- /btn-group -->
 
   <div ng-if="isShown('type')"
        class="input-group-btn dropdown type">
@@ -64,6 +64,13 @@
            class="value"
            ng-model="variable.value"
            placeholder="Value of the variable" />
+
+    <div ng-if="variable.type === 'Object'"
+         class="value form-control-static">
+      <a ng-click="editVariableValue()">
+        {{ variable.valueInfo.objectTypeName }}
+      </a>
+    </div>
   </div>
 
   <div ng-if="isShown('value') && isNull()"

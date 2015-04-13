@@ -1,1 +1,31 @@
-yada yada
+<!-- # CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->
+<div class="modal-header">
+  <h3>Inspect "{{ variable.name }}" variable</h3>
+</div>
+
+<div class="modal-body">
+  <p>
+    <strong>Value Info:</strong>
+  </p>
+
+  <p>
+   Object type name: <code>{{ variable.valueInfo.objectTypeName }}</code>
+  </p>
+  <p>
+   Serialization Data Format: <code>{{ variable.valueInfo.serializationDataFormat }}</code>
+  </p>
+
+  <textarea ng-model="variable.value"
+            rows="10"
+            class="form-control"></textarea>
+
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-default"
+          ng-click="$dismiss()"
+          ng-hide="status === 'changeSuccess'">
+    Close
+  </button>
+</div>
+<!-- / CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->

@@ -3,6 +3,13 @@
   &[display] {
     .make-row();
 
+    > .type,
+    > .name,
+    > .value {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     > .type {
       .make-xs-column(2);
     }
@@ -38,7 +45,7 @@
       width: 67%;
       &.null-value {
         border-left: none;
-        // width: auto;
+        margin-left: -1px;
       }
     }
 
@@ -86,6 +93,24 @@
     }
   }
 
+  .form-control-static {
+    display: table-cell;
+    position: relative;
+    > a {
+      position: absolute;
+      top: @padding-base-vertical;
+      bottom: @padding-base-vertical;
+      left: @padding-base-horizontal;
+      right: @padding-base-horizontal;
+      overflow: hidden;
+      display: block;
+      text-overflow: ellipsis;
+      font-family: monospace;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
   // &.show-name{
   //   &.show-value {
 
@@ -106,4 +131,16 @@
   margin-top: 1px;
   // border-top: 1px dashed @gray-light;
   padding-top: 1px;
+}
+
+.cam-widget-variable-dialog {
+  form {
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  .tab-content {
+    padding-top: @grid-gutter-width / 2;
+  }
 }
