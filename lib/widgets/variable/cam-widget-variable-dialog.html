@@ -4,28 +4,55 @@
 </div>
 
 <div class="modal-body">
-  <p>
-    <strong>Value Info:</strong>
-  </p>
+  <div ng-if="readonly">
+    <p>
+      Object type name: <code>{{ variable.valueInfo.objectTypeName }}</code>
+    </p>
 
-  <p>
-   Object type name: <code>{{ variable.valueInfo.objectTypeName }}</code>
-  </p>
-  <p>
-   Serialization Data Format: <code>{{ variable.valueInfo.serializationDataFormat }}</code>
-  </p>
+    <p>
+      Serialization Data Format: <code>{{ variable.valueInfo.serializationDataFormat }}</code>
+    </p>
+  </div>
 
-  <textarea ng-model="variable.value"
-            rows="10"
-            class="form-control"></textarea>
+  <div ng-if="!readonly"
+       class="form-group">
+    <label for="object-type-name">Object type name</label>
+    <input type="text"
+           id="object-type-name"
+           class="form-control"
+           ng-model="variable.valueInfo.objectTypeName" />
+  </div>
 
+  <div ng-if="!readonly"
+       class="form-group">
+    <label for="serialization-data-format">Serialization data format</label>
+    <input type="text"
+           id="serialization-data-format"
+           class="form-control"
+           ng-model="variable.valueInfo.serializationDataFormat" />
+  </div>
+
+  <div class="form-group">
+    <label for="serialized-value">Serialized value</label>
+    <textarea ng-model="variable.value"
+              id="serialized-value"
+              rows="10"
+              class="form-control"
+              ng-disabled="readonly"></textarea>
+  </div>
 </div>
 
 <div class="modal-footer">
   <button class="btn btn-default"
-          ng-click="$dismiss()"
-          ng-hide="status === 'changeSuccess'">
+          ng-click="$dismiss('close')">
     Close
+  </button>
+
+  <button class="btn btn-primary"
+          ng-if="!readonly"
+          ng-disabled="!hasChanged('serialized')"
+          ng-click="$close(variable)">
+    Change
   </button>
 </div>
 <!-- / CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->
