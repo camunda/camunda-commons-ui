@@ -45,7 +45,8 @@
   <div ng-if="isShown('value') && !isNull()"
        class="value-wrapper input-group"
        ng-class="{checkbox: useCheckbox()}">
-    <div class="input-group-btn">
+    <div ng-if="variable.type !== 'Null'"
+         class="input-group-btn">
       <a ng-click="setNull()"
          class="btn btn-default set-null"
          tooltip="Set value to &quot;null&quot;">
@@ -73,10 +74,15 @@
     </div>
   </div>
 
-  <div ng-if="isShown('value') && isNull()"
+  <div ng-if="variable.type !== 'Null' && isShown('value') && isNull()"
        ng-click="setNonNull()"
        class="value-wrapper value null-value btn btn-default"
        tooltip="Re-set to previous or default value">
+    <span class="null-symbol">&lt;null&gt;</span>
+  </div>
+
+  <div ng-if="variable.type === 'Null'"
+       class="value-wrapper value btn no-click null-value">
     <span class="null-symbol">&lt;null&gt;</span>
   </div>
 </div>
