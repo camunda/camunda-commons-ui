@@ -7,7 +7,7 @@
      class="value">
   <span ng-if="isNull()"
         class="null-symbol">&lt;null&gt;</span>
-  {{ (variable.value || '') }}
+  {{ (variable.value === null ? '' : variable.value.toString()) }}
 </div>
 <div ng-if="display && isShown('value') && variable.type === 'Object'"
      ng-class="{null: isNull()}"
