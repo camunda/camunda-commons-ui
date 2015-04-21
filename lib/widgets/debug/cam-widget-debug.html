@@ -1,7 +1,8 @@
 <div class="debug">
   <div class="col-xs-2">
     <button class="btn btn-default btn-round"
-            ng-click="open = !open">
+            ng-click="toggleOpen()"
+            tooltip="{{tooltip}}">
       <span class="glyphicon"
             ng-class="{'glyphicon-eye-open': !open, 'glyphicon-eye-close': open}"></span>
     </button>
