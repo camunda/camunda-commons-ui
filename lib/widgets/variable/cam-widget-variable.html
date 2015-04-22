@@ -23,8 +23,8 @@
      ng-class="{invalid: !valid}">
 
   <div ng-if="isShown('type')"
-       class="input-group-btn dropdown type">
-    <button class="btn btn-default dropdown-toggle">
+       class="form-control-static type">
+    <!--button class="btn btn-default dropdown-toggle">
       {{ (variable.type || 'Type') }}
       <span class="caret"></span>
     </button>
@@ -33,7 +33,13 @@
       <li ng-repeat="variableType in variableTypes">
         <a ng-click="variable.type = variableType">{{ variableType }}</a>
       </li>
-    </ul>
+    </ul-->
+    <select
+      class="form-control"
+      ng-model="variable.type"
+      ng-options="variableType for variableType in variableTypes">
+    </select>
+
   </div><!-- /btn-group -->
 
   <input ng-if="isShown('name')"
