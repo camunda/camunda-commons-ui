@@ -1,22 +1,25 @@
-module.exports = function(config) {
-  return {
+module.exports = function(config, lessConfig, pathConfig) {
+  'use strict';
+
+  var file = {};
+  file[pathConfig.buildTarget+'/styles/styles.css'] = pathConfig.sourceDir+'/styles/styles.less';
+
+  lessConfig[pathConfig.appName + '_styles'] = {
     options: {
       paths: [
         'styles',
         'scripts'
       ],
 
-      dumpLineNumbers: '<%= buildTarget === "dist" ? "" : "comments" %>',
-      compress: '<%= buildTarget === "dist" ? "true" : "" %>',
-      sourceMap: '<%= buildTarget === "dist" ? "true" : "" %>',
+
+      dumpLineNumbers: '<%= buildMode === "prod" ? "" : "comments" %>',
+      compress: '<%= buildMode === "prod" ? "true" : "" %>',
+      sourceMap: '<%= buildMode === "prod" ? "true" : "" %>',
 
       sourceMapURL: './styles.css.map',
-      sourceMapFilename: '<%= buildTarget %>/styles/styles.css.map'
+      sourceMapFilename: pathConfig.buildTarget+'/styles/styles.css.map'
     },
-    styles: {
-      files: {
-        '<%= buildTarget %>/styles/styles.css': '<%= pkg.gruntConfig.clientDir %>/styles/styles.less'
-      }
-    }
+    files: file
   };
+
 };

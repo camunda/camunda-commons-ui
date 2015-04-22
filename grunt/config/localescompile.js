@@ -1,19 +1,16 @@
-module.exports = function() {
+module.exports = function(config, localesConfig, pathConfig) {
   'use strict';
-  return {
-    options: {
-      dest: '<%= buildTarget %>/locales'
-    },
-    prod: {
+
+  localesConfig[pathConfig.appName + '_locales'] = {
       options: {
+        dest: pathConfig.buildTarget + '/locales',
         onlyProd: 1,
         anOption: 'for production'
       },
       src: [
-        'node_modules/camunda-commons-ui/resources/locales/*.json',
-        'node_modules/camunda-commons-ui/lib/*/locales/*.json',
-        'client/scripts/**/locales/*.json'
+        pathConfig.sourceDir + '/../node_modules/camunda-commons-ui/resources/locales/*.json',
+        pathConfig.sourceDir + '/../node_modules/camunda-commons-ui/lib/*/locales/*.json',
+        pathConfig.sourceDir + '/scripts/**/locales/*.json'
       ]
-    }
   };
 };

@@ -58,13 +58,6 @@ module.exports = function(config) {
       tasks: [
         'karma:integration'
       ]
-    },
-
-    served: {
-      files: ['<%= buildTarget %>/**/*.{html,js,css,jpg,png,webp,eot,svg,ttf,otf,woff}'],
-      options: {
-        livereload: config.livereloadPort || false
-      }
     }
   };
 };
