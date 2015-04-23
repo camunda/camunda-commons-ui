@@ -141,10 +141,12 @@
         require([
           'angular',
           'lib/widgets/variable/cam-widget-variable',
+          'lib/widgets/variable/cam-variable-validator',
           'angular-bootstrap'
         ], function (
           angular,
-          variableDefinition
+          variableDefinition,
+          variableValidator
         ) {
 
           var variableModule = angular.module('variableModule', [
@@ -152,6 +154,7 @@
           ]);
 
           variableModule.directive('camWidgetVariable', variableDefinition);
+          variableModule.directive('camVariableValidator', variableValidator);
 
 
           var testModule = angular.module('testModule', [variableModule.name]);
