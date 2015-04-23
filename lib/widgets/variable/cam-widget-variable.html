@@ -25,7 +25,8 @@
        class="input-group-btn type">
     <select class="form-control"
             ng-model="variable.type"
-            ng-options="variableType for variableType in variableTypes track by variableType">
+            ng-options="variableType for variableType in variableTypes track by variableType"
+            required>
     </select>
   </div><!-- /btn-group -->
 
@@ -33,7 +34,8 @@
          type="text"
          class="form-control name"
          ng-model="variable.name"
-         placeholder="varName" />
+         placeholder="varName"
+         required />
 
   <div ng-if="isShown('value') && !isNull()"
        class="value-wrapper input-group"
@@ -51,13 +53,15 @@
            type="text"
            class="form-control value"
            ng-model="variable.value"
-           placeholder="Value of the variable" />
+           placeholder="Value of the variable"
+           cam-variable-validator="{{variable.type}}" />
 
     <input ng-if="useCheckbox()"
            type="checkbox"
            class="value"
            ng-model="variable.value"
-           placeholder="Value of the variable" />
+           placeholder="Value of the variable"
+           cam-variable-validator="{{variable.type}}" />
 
     <div ng-if="variable.type === 'Object'"
          class="value form-control-static">
