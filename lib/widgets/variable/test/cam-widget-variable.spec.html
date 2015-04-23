@@ -114,6 +114,38 @@
                shown="typeName"></div>
         </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
+
+     <div class="widget-example"
+           id="example-4"
+           ng-controller="example3Controller">
+        <h3>Use within form</h3>
+        <pre ng-non-bindable>&lt;form name="testForm"&gt;
+            &lt;div cam-widget-variable
+                 cam-variable="vars[4]"&gt;&lt;/div&gt;
+            &lt;div cam-widget-variable
+                 cam-variable="vars[5]"&gt;&lt;/div&gt;
+            &lt;div cam-widget-variable
+                 cam-variable="vars[6]"&gt;&lt;/div&gt;
+            &lt;button class="btn btn-primary"
+                   ng-disabled="testForm.$invalid"&gt;
+              Submit changes
+            &lt;/button&gt;
+          &lt;/form&gt;</pre>
+        <div class="test-container">
+          <form name="testForm">
+            <div cam-widget-variable
+                 cam-variable="vars[4]"></div>
+            <div cam-widget-variable
+                 cam-variable="vars[5]"></div>
+            <div cam-widget-variable
+                 cam-variable="vars[6]"></div>
+            <button class="btn btn-primary"
+                   ng-disabled="testForm.$invalid">
+              Submit changes
+            </button>
+          </form>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
     </section>
 
     <footer>
