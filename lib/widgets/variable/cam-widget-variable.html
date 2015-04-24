@@ -65,7 +65,7 @@
     <div ng-if="variable.type === 'Object'"
          class="value form-control-static">
       <a ng-click="editVariableValue()">
-        {{ variable.valueInfo.objectTypeName }}
+        {{ variable.valueInfo.objectTypeName || '&lt;undefined&gt;' }}
       </a>
     </div>
   </div>
