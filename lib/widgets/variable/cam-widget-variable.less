@@ -28,16 +28,11 @@
     }
   }
 
+
+
+
   // styles to edit
   .input-group {
-    &.invalid {
-      .form-control-validation(@state-danger-text; @state-danger-text; @state-danger-bg);
-      // z-index: 3;
-      .btn {
-        border-color: @state-danger-text;
-      }
-    }
-
     .name {
       width: 33%;
     }
@@ -59,24 +54,39 @@
         margin: -7px 0 0 7px;
       }
     }
+  }
 
-    .value-wrapper {
-      width: 67%;
 
-      .value {
-        width: 100%;
-        border-left: none;
-      }
 
-      .btn {
-        margin-left: -1px;
-        margin-right: -1px;
 
-        height: 34px;
-        line-height: 34px;
-        .glyphicon {
-          margin-top: 2px;
-        }
+  .set-null {
+    border-right-width: 0;
+  }
+
+  &.var-type-boolean,
+  &.var-type-bytes,
+  &.var-type-object {
+    .set-null {
+      border-right-width: 1px;
+    }
+  }
+
+
+  .value-wrapper {
+    width: 67%;
+
+    .value {
+      width: 100%;
+    }
+
+    .btn {
+      margin-left: -1px;
+      margin-right: -1px;
+
+      height: 34px;
+      line-height: 34px;
+      .glyphicon {
+        margin-top: 2px;
       }
     }
   }
@@ -123,7 +133,6 @@
 
 [cam-widget-variable] + [cam-widget-variable] {
   margin-top: 1px;
-  // border-top: 1px dashed @gray-light;
   padding-top: 1px;
 }
 
