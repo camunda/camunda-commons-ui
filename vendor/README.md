@@ -61,27 +61,6 @@ License: [MIT](https://github.com/angular-ui/bootstrap/blob/master/LICENSE)
 
 
 
-## Mousewheel
-
-Version: 3.1.10-pre
-Source: https://raw.github.com/brandonaaron/jquery-mousewheel/09bb82c73c5650812e36dfd27d605d64d3ed32b8/jquery.mousewheel.js
-
-- jquery.mousewheel.js
-
-License: [MIT](https://raw.githubusercontent.com/brandonaaron/jquery-mousewheel/09bb82c73c5650812e36dfd27d605d64d3ed32b8/LICENSE.txt)
-
-
-
-## Overscroll
-
-Version: 1.7.3
-Source: https://raw.github.com/azoff/overscroll/1579345a5d7cf2601a290e64d04aaa2a22449cac/src/jquery.overscroll.js
-
-- jquery.overscroll.js
-
-License: [MIT](https://github.com/azoff/overscroll/blob/master/mit.license)
-
-
 ## domReady
 
 Version: 2.0.1
