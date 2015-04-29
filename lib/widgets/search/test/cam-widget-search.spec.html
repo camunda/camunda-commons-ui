@@ -43,6 +43,8 @@
         <dd>An object specifying the available operator by variable type. Is used when the type does not specify an operators array. Keys of the object are variable types. Each key must contain an array specifying the operators according to the operator.values array of the search-pill widget. Available variable types are <b>undefined, number, string, object, date, boolean</b>.</dd>
         <dt><span class="badge">=</span> cam-widget-search-translations</dt>
         <dd>An object specifying the tooltips for the search. Available keys are: <b>inputPlaceholder, invalid, deleteSearch, type, name, operator and value</b>. Value must be a string.</dd>
+        <dt><span class="badge">@</span> cam-widget-search-id</dt>
+        <dd><b>Optional.</b> A string specifying the id of the search. This should be used when having multiple instances of the search widget on the same page.</dd>
       </dl>
     </section>
 
@@ -52,7 +54,7 @@
       </header>
 
       <div class='widget-example'
-           id='example'>
+           id='example1'>
         <div ng-controller='testController'>
           <div>
             <div cam-widget-search
@@ -61,6 +63,7 @@
                  cam-widget-search-translations='translations'
                  cam-widget-search-types='types'
                  cam-widget-search-operators='operators'
+                 cam-widget-search-id='search1'
             />
           </div>
           <b>All Searches:</b> <span id="allSearchesCount">{{ searches.length }}</span><br />
@@ -146,10 +149,52 @@ $scope.operators =  {
        cam-widget-search-translations='translations'
        cam-widget-search-types='types'
        cam-widget-search-operators='operators'
+       cam-widget-search-id='search1'
   /&gt;
 &lt;/div&gt;
 &lt;b&gt;All Searches:&lt;/b&gt; {{ searches.length }}&lt;br /&gt;
 &lt;b&gt;Valid Searches:&lt;/b&gt; {{ validSearches.length }}</pre>
+        </div>
+      </div><!-- /.widget-example -->
+    </section>
+
+    <section class='widget-examples'>
+      <header>
+        <h2>Second Example</h2>
+      </header>
+
+      <div class='widget-example'
+           id='example2'>
+        <div ng-controller='testController'>
+          <div>
+            <div cam-widget-search
+                 cam-widget-search-searches='searches2'
+                 cam-widget-search-valid-searches='validSearches2'
+                 cam-widget-search-translations='translations'
+                 cam-widget-search-types='types'
+                 cam-widget-search-operators='operators'
+                 cam-widget-search-id='search2'
+            />
+          </div>
+          <b>All Searches:</b> <span id="allSearchesCount">{{ searches2.length }}</span><br />
+          <b>Valid Searches:</b> <span id="validSearchesCount">{{ validSearches2.length }}</span>
+
+          <pre ng-non-bindable>
+$scope.searches2 = [];
+$scope.validSearches2 = [];
+
+&lt;div&gt;
+  &lt;div cam-widget-search
+       cam-widget-search-searches='searches2'
+       cam-widget-search-valid-searches='validSearches2'
+       cam-widget-search-translations='translations'
+       cam-widget-search-types='types'
+       cam-widget-search-operators='operators'
+       cam-widget-search-id='search2'
+  /&gt;
+&lt;/div&gt;
+&lt;b&gt;All Searches:&lt;/b&gt; {{ searches2.length }}&lt;br /&gt;
+&lt;b&gt;Valid Searches:&lt;/b&gt; {{ validSearches2.length }}</pre>
         </div>
       </div><!-- /.widget-example -->
     </section>
@@ -187,6 +232,8 @@ $scope.operators =  {
           testModule.controller('testController', ['$scope', function($scope) {
             $scope.searches = [];
             $scope.validSearches = [];
+            $scope.searches2 = [];
+            $scope.validSearches2 = [];
             $scope.translations = {
               'inputPlaceholder': 'Search for Anything',
               'invalid': 'This search query is not valid',
