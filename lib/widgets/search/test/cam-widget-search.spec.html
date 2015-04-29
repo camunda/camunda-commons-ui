@@ -34,9 +34,10 @@
           <ul>
             <li><b>id</b>: An object containing the properties key and value - corresponding to the type field of the search-pill widget</li>
             <li><b>operators</b>: An array containing objects describing possible operators for the type, corresponding to the operator.values array of the search-pill widget. If omitted, available operators are determined by variable type and the cam-widget-search-operators property.</li>
-            <li><b>default</b>: Boolean indicating if this is the default type. The default type is used to create search pills if the user enters a string in the text input, which can not be matched with any type.</li>
+            <li><b>default</b>: Boolean indicating if this is the default type. The default type is used to create search pills if the user enters a string in the text input, which can not be matched with any type. Can not be used in combination with groups.</li>
             <li><b>allowDates</b>: Corresponds to the allowDates property of the search-pill widget</li>
             <li><b>enforceDates</b>: Corresponds to the enforceDates property of the search-pill widget</li>
+            <li><b>groups</b>: An array containing the groups this type is member of. A search query can only contain search elements which are in the same group.</li>
           </ul>
         </dd>
         <dt><span class="badge">=</span> cam-widget-search-operators</dt>
@@ -160,18 +161,19 @@ $scope.operators =  {
 
     <section class='widget-examples'>
       <header>
-        <h2>Second Example</h2>
+        <h2>Groups</h2>
       </header>
 
       <div class='widget-example'
            id='example2'>
+        In this example, we have three types: A, B and C. Type A is in group A and type B is in group B. Therefore, both are mutually exclusive. It is not possible to construct a search query with search components of both types A and B (multiple As and multiple Bs are allowed, as are as many Cs as you like).
         <div ng-controller='testController'>
           <div>
             <div cam-widget-search
                  cam-widget-search-searches='searches2'
                  cam-widget-search-valid-searches='validSearches2'
                  cam-widget-search-translations='translations'
-                 cam-widget-search-types='types'
+                 cam-widget-search-types='types2'
                  cam-widget-search-operators='operators'
                  cam-widget-search-id='search2'
             />
@@ -182,13 +184,35 @@ $scope.operators =  {
           <pre ng-non-bindable>
 $scope.searches2 = [];
 $scope.validSearches2 = [];
+$scope.types2 = [
+  {
+    'id': {
+      'key': 'A',
+      'value': 'A'
+    },
+    'groups': ['A']
+  },
+  {
+    'id': {
+      'key': 'B',
+      'value': 'B'
+    },
+    'groups': ['B']
+  },
+  {
+    'id': {
+      'key': 'C',
+      'value': 'C'
+    },
+  }
+];
 
 &lt;div&gt;
   &lt;div cam-widget-search
        cam-widget-search-searches='searches2'
        cam-widget-search-valid-searches='validSearches2'
        cam-widget-search-translations='translations'
-       cam-widget-search-types='types'
+       cam-widget-search-types='types2'
        cam-widget-search-operators='operators'
        cam-widget-search-id='search2'
   /&gt;
@@ -274,6 +298,28 @@ $scope.validSearches2 = [];
                 },
                 allowDates: true,
                 extended: true
+              }
+            ];
+            $scope.types2 = [
+              {
+                'id': {
+                  'key': 'A',
+                  'value': 'A'
+                },
+                'groups': ['A']
+              },
+              {
+                'id': {
+                  'key': 'B',
+                  'value': 'B'
+                },
+                'groups': ['B']
+              },
+              {
+                'id': {
+                  'key': 'C',
+                  'value': 'C'
+                },
               }
             ];
             $scope.operators =  {

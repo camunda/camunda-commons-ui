@@ -23,7 +23,7 @@
            placeholder="{{ translations.inputPlaceholder }}"
            ng-model="inputQuery"
            ng-keydown="onKeydown($event)"
-           typeahead="type as type.id.value for type in types | filter:$viewValue:instantTypeahead"
+           typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
            typeahead-on-select="createSearch($item)"
            instant-typeahead
     />
