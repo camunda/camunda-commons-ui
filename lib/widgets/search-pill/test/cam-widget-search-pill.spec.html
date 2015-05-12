@@ -45,6 +45,8 @@
         <dd>An object specifying possible operators for the search pill. Keys of this object must be values, which contains an array of key/value-pairs of possible oeprator values, and value, which will contain the selected operator. Can also specify an optional tooltip field.</dd>
         <dt><span class="badge">=</span> value</dt>
         <dd>An object containing a value and an optional tooltip field.</dd>
+        <dt><span class="badge">=?</span> potential-names</dt>
+        <dd>An array containing key,value pairs of possible values that can be used in the name field. This list is non-exclusive, the user can still enter names not in the array.</dd>
         <dt><span class="badge">&amp;</span> on-change</dt>
         <dd>Function which is called whenever a component of the search pill is changed. Gets the arguments field, before and value.</dd>
         <dt><span class="badge">&amp;</span> on-delete</dt>
@@ -172,11 +174,47 @@ $scope.search4.update = function() {
                 id="pill4"
                 valid="search4.valid"
                 name="search4.name"
+                potential-names="search4.potentialNames"
                 type="search4.type"
                 operator="search4.operator"
                 value="search4.value"
                 extended="search4.extended"
                 on-change="search4.update()" />
+        </div>
+      </div><!-- /.widget-example -->
+
+      <div class="widget-example"
+           id="names">
+        <h3>Potential Names</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
+$scope.search5 = angular.copy($scope.search1);
+$scope.search5.potentialNames = [
+  {key:'name1', value:'Value 1 (name1)'},
+  {key:'name2', value:'Value 2 (name2)'}
+];
+$scope.search5.name = {
+  value: ''
+};
+$scope.search5.extended = true;
+
+&lt;span cam-widget-search-pill
+            valid="search5.valid"
+            name="search5.name"
+            type="search5.type"
+            operator="search5.operator"
+            value="search5.value"
+            extended="search5.extended"
+            potential-names="search5.potentialNames" /&gt;</pre>
+          <span cam-widget-search-pill
+                id="pill5"
+                valid="search5.valid"
+                name="search5.name"
+                potential-names="search5.potentialNames"
+                type="search5.type"
+                operator="search5.operator"
+                value="search5.value"
+                extended="search5.extended" />
         </div>
       </div><!-- /.widget-example -->
     </section>
@@ -244,8 +282,18 @@ $scope.search4.update = function() {
               value: ''
             };
             $scope.search4.update = function() {
-              $scope.search4.extended = $scope.search4.type.value && $scope.search4.type.value.key === "bar";
+              $scope.search4.extended = $scope.search4.type.value && $scope.search4.type.value.key === 'bar';
             };
+
+            $scope.search5 = angular.copy($scope.search1);
+            $scope.search5.potentialNames = [
+              {key:'name1', value:'Value 1 (name1)'},
+              {key:'name2', value:'Value 2 (name2)'}
+            ];
+            $scope.search5.name = {
+              value: ''
+            };
+            $scope.search5.extended = true;
 
           }]);
 
@@ -253,7 +301,7 @@ $scope.search4.update = function() {
             angular.bootstrap(document.body, [ngModule.name]);
           });
         });
-      })
+      });
     </script>
   </body>
 </html>

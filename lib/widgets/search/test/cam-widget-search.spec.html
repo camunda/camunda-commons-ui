@@ -67,6 +67,7 @@
                  cam-widget-search-id='search1'
             />
           </div>
+          {{validSearches}}
           <b>All Searches:</b> <span id="allSearchesCount">{{ searches.length }}</span><br />
           <b>Valid Searches:</b> <span id="validSearchesCount">{{ validSearches.length }}</span>
 
@@ -297,7 +298,11 @@ $scope.types2 = [
                   'value': 'Variable Operator'
                 },
                 allowDates: true,
-                extended: true
+                extended: true,
+                potentialNames: [
+                  {key:'key1', value:'Label (key1)'},
+                  {key:'key2', value:'Label2 (key2)'}
+                ]
               }
             ];
             $scope.types2 = [

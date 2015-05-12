@@ -41,6 +41,8 @@
         <dd>A text which is displayed in the empty text edit field.</dd>
         <dt><span class="badge">=</span> options</dt>
         <dd>An array of either Strings or key-value objects which is used for the option input type.</dd>
+        <dt><span class="badge">@</span> allow-non-options</dt>
+        <dd>Only relevant in combination with options. Allows the user to enter values which are not part of the options array. In this case, the returned value will be the entered string. Defaults to false.</dd>
         <dt><span class="badge">@</span> flexible</dt>
         <dd>If set to true, the user can switch between a datetime and a text input field.</dd>
       </dl>
@@ -139,7 +141,33 @@
                 options="keyOptions"
                 value="selectedKeyOption"
                 id="field4">
-            {{ selectedKeyOption.key }} : {{ selectedKeyOption.value }}
+                {{ selectedKeyOption.key }} : {{ selectedKeyOption.value }}
+          </span>
+        </div>
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="options-allow">
+        <h3>Options with allow Non Options</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
+&lt;span cam-widget-inline-field
+      class="set-value"
+      type="option"
+      options="options"
+      allow-non-options="true"
+      value="selectedOption2"&gt;
+  {{ selectedOption2 }}
+&lt;/span&gt;</pre>
+          <span cam-widget-inline-field
+                class="set-value"
+                type="option"
+                options="options"
+                value="selectedOption2"
+                allow-non-options="true"
+                id="field6">
+                  {{ selectedOption2 }}
           </span>
         </div>
       </div><!-- /.widget-example -->
@@ -219,6 +247,7 @@ testModule.controller('testController', ['$scope', function($scope) {
             $scope.date = '2015-01-22T15:11:59';
             $scope.options = ['foobar', '1', '2', '3'];
             $scope.selectedOption = 'foobar';
+            $scope.selectedOption2 = 'foobar';
             $scope.keyOptions = [{key: 'foobar', value: 'Barfoo'}, {key: '1', value: 'One'}, {key: '2', value: 'Two'}, {key: '3', value: 'Three'}];
             $scope.selectedKeyOption = {key: 'foobar', value: 'Barfoo'};
             $scope.dateText = 'Foobar';
