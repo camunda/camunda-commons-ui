@@ -34,19 +34,38 @@
   <span ng-if="extended">
     :
     <span ng-if="potentialNames.length <= 0">
-      <span cam-widget-inline-field
-            class="set-value"
-            type="text"
-            change="changeSearch('name', varValue, $event)"
-            on-start-editing="clearEditTrigger('name')"
-            value="name.value">
-        <span ng-if="name.tooltip"
-              tooltip-placement="top"
-              tooltip="{{name.tooltip}}">
-          {{ name.value | camQueryComponent }}
+      <span ng-if="!!name.value.value">
+        <span cam-widget-inline-field
+              class="set-value"
+              type="text"
+              change="changeSearch('name', varValue, $event)"
+              on-start-editing="clearEditTrigger('name')"
+              value="name.value.value">
+          <span ng-if="name.tooltip"
+                tooltip-placement="top"
+                tooltip="{{name.tooltip}}">
+              {{ name.value.value | camQueryComponent }}
+          </span>
+          <span ng-if="!name.tooltip">
+              {{ name.value.value | camQueryComponent }}
+          </span>
         </span>
-        <span ng-if="!name.tooltip">
-          {{ name.value | camQueryComponent }}
+      </span>
+      <span ng-if="!name.value.value">
+        <span cam-widget-inline-field
+              class="set-value"
+              type="text"
+              change="changeSearch('name', varValue, $event)"
+              on-start-editing="clearEditTrigger('name')"
+              value="name.value">
+          <span ng-if="name.tooltip"
+                tooltip-placement="top"
+                tooltip="{{name.tooltip}}">
+              {{ name.value | camQueryComponent }}
+          </span>
+          <span ng-if="!name.tooltip">
+              {{ name.value | camQueryComponent }}
+          </span>
         </span>
       </span>
     </span>
