@@ -1,5 +1,6 @@
 /* global require: false */
-var specHtmlExp = /\.spec\.html$/;
+'use strict';
+
 /**
   This file is used to configure the [grunt](http://gruntjs.com/) tasks
   aimed to generate the web frontend of the camunda BPM platform.
@@ -8,7 +9,6 @@ var specHtmlExp = /\.spec\.html$/;
  */
 
 module.exports = function(grunt) {
-  'use strict';
   require('load-grunt-tasks')(grunt);
   try {
     grunt.task.loadNpmTasks('grunt-contrib-watch');
