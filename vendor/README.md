@@ -5,6 +5,16 @@ The scripts located in this directory are dependencies of the
 and were downloaded manually.
 
 
+## Open Sans fonts
+
+Source: http://www.fontsquirrel.com/fonts/open-sans
+
+Note: The webfonts were generated from
+http://www.fontsquirrel.com/tools/webfont-generator
+
+License: [Apache 2.0](http://www.fontsquirrel.com/license/open-sans)
+
+
 
 ## AngularJS
 
