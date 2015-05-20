@@ -46,12 +46,15 @@ Widgets are reusable components which should be easy to integrate in the Camunda
 
 #### Available widgets
 
+- `cam-widget-bpmn-viewer`
+- `cam-widget-debug`
 - `cam-widget-footer`
 - `cam-widget-header`
 - `cam-widget-inline-field`
 - `cam-widget-loader`
 - `cam-widget-search`
 - `cam-widget-search-pill`
+- `cam-widget-variable`
 
 #### Developing the widgets
 
