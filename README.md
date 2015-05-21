@@ -21,7 +21,7 @@ Common frontend / UI resources and libraries for camunda web applications:
   - `locales` - translation files
   - `img`
   - `less` - base less files to generate CSS stylesheets
-- (`widgets`)[#widgets]
+- [`widgets`](#widgets)
 
 
 ## Test
@@ -93,8 +93,9 @@ Unless otherwise specified this project is licensed under [Apache License Versio
  - [Daniel _meyerdan_ Meyer](https://github.com/meyerdan) - [@meyerdan](http://twitter.com/meyerdan)
  - [Valentin _zeropaper_ Vago](https://github.com/zeropaper) - [@zeropaper](http://twitter.com/zeropaper)
  - [Nico _Nikku_ Rehwaldt](https://github.com/nikku) - [@nrehwaldt](http://twitter.com/nrehwaldt)
+ - [Sebastian Stamm](https://github.com/SebastianStamm) - [@seb_stamm](https://twitter.com/seb_stamm)
 
 
-[admin][//github.com/camunda/camunda-admin-ui]
-[cockpit][//github.com/camunda/camunda-cockpit-ui]
-[tasklist][//github.com/camunda/camunda-tasklist-ui]
+[admin]: https://github.com/camunda/camunda-admin-ui
+[cockpit]: https://github.com/camunda/camunda-cockpit-ui
+[tasklist]: https://github.com/camunda/camunda-tasklist-ui
