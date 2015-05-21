@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/camunda/camunda-commons-ui",
   "dependencies": {
-    "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#master",
+    "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",
     "angular-moment": "0.9.0",
     "angular-translate": "2.4.2",
     "bootstrap": "3.3.1",
