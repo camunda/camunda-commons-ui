@@ -1,25 +1,53 @@
 @import "common-variables.less";
 @brand-logo:      'resources/img/camunda-logo.png';
 @header-height:   41px;
-@icon-font-path:  "/node_modules/bootstrap/fonts/";
 
-@import "common.less";
+@bpmn-font-path:  "node_modules/bpmn-font/dist/font/";
+@icon-font-path:  "node_modules/bootstrap/fonts/";
+@font-path:       "vendor/fonts/";
 
-@import "../../lib/widgets/inline-field/cam-widget-inline-field.less";
-@import "../../lib/widgets/search/cam-widget-search.less";
-@import "../../lib/widgets/loader/cam-widget-loader.less";
-@import "../../lib/widgets/variable/cam-widget-variable.less";
+@import "common";
+@import "_fonts";
+
+@import "../../lib/widgets/inline-field/cam-widget-inline-field";
+@import "../../lib/widgets/search/cam-widget-search";
+@import "../../lib/widgets/loader/cam-widget-loader";
+@import "../../lib/widgets/variable/cam-widget-variable";
+
 
 
 // custom styles for the testing suite -----------------------------------------
 
 body {
-  // @see node_modules/bootstrap/less/grid.less
-  > header > div,
-  > footer > nav,
-  > section {
-    .container-fixed();
+  padding-top: 0;
+  > header,
+  > .page-wrapper {
+    .container-fluid();
+  }
 
+  > header {
+    color: @body-bg;
+    background-color: @brand-primary;
+
+    h1 {
+      &:before {
+        font-family: bpmn;
+        font-weight: normal;
+        content: '\e831';
+        display: inline-block;
+        margin-right: (@grid-gutter-width / 2);
+      }
+    }
+
+    a,
+    a:hover,
+    small {
+      color: @body-bg;
+      margin-right: (@grid-gutter-width / 2);
+    }
+  }
+
+  > .page-wrapper {
     @media (min-width: @screen-sm-min) {
       width: @container-sm;
     }
@@ -31,12 +59,53 @@ body {
     }
   }
 
+  &.gh-pages {
+    &.readme .content {
+      margin-top: 39px;
+    }
+
+    > .page-wrapper {
+      padding-left: 160px;
+      > nav {
+        width: (160px - @grid-gutter-width);
+        position: fixed;
+        left: (@grid-gutter-width / 2);
+        margin: 0;
+
+        li {
+          display: block;
+        }
+
+        a {
+          display: inline-block;
+          font-size: 1.2em;
+        }
+
+        .active a {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
   > footer,
   > footer > nav {
     text-align: right;
     overflow: hidden;
   }
 }
+
+h1,
+h2,
+h3,
+h4 {
+  .font-light;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
 
 dd {
   padding-left: @grid-gutter-width;
