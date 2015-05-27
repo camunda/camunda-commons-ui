@@ -194,7 +194,7 @@ module.exports = function (grunt) {
                     .replace('<!-- gh-pages-footer -->', footerTemplate())
                     .replace('<body class="', '<body class="gh-pages ')
                     .replace('<body>', '<body class="gh-pages">')
-                    .replace('<base href="/" />', '<base href="/'+ pkg.name +'/" />')
+                    .replace('<base href="/" />', '<base href="/'+ pkg.name +'/' + pkg.version + '/" />')
                     ;
           }
         });
@@ -206,7 +206,7 @@ module.exports = function (grunt) {
       grunt.file.write(generatedDir + '/index.html', [
         '<html>',
           '<head>',
-            '<base href="/'+ pkg.name +'/" />',
+            '<base href="/'+ pkg.name +'/' + pkg.version + '" />',
             '<title>Camunda commons UI library</title>',
             '<link type="text/css" rel="icon" href="resources/img/favicon.ico" />',
             '<link type="text/css" rel="stylesheet" href="styles.css" />',
