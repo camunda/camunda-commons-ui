@@ -6,6 +6,9 @@ Common frontend / UI resources and libraries for camunda web applications:
 - [cockpit][cockpit]
 - [tasklist][tasklist]
 
+> **Important note:**
+> This project is used internally and the API of its components are subject to changes at any time.
+
 ## Content
 
 - `lib`

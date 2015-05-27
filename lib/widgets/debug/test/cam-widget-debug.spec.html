@@ -1,16 +1,21 @@
 <html>
   <head>
-    <link href="/styles.css" rel="stylesheet" />
-    <link href="/test-styles.css" rel="stylesheet" />
+    <title>Camunda commons UI library</title>
+    <base href="/" />
+    <link rel="icon" href="resources/img/favicon.ico" />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="test-styles.css" rel="stylesheet" />
   </head>
   <body class="cam-widget-debug-test-page">
+    <!-- gh-pages-menu -->
+
     <header>
       <div>
-        <h1>debug</h1>
+        <h1>Debug</h1>
       </div>
     </header>
 
-    <section class="widget-description">
+        <section class="widget-description">
       <header>
         <h2>Description</h2>
       </header>
@@ -52,25 +57,14 @@
       </div><!-- /.widget-example -->
     </section>
 
-    <footer>
-      <nav>
-        <ul class="list-inline">
-          <li>
-            <a href="http://camunda.org">camunda.org</a>
-          </li>
-          <li>
-            <a href="http://github.com/camunda-commons-ui">commons UI lib</a>
-          </li>
-        </ul>
-      </nav>
-    </footer>
+    <!-- gh-pages-footer -->
 
-    <script src="/node_modules/requirejs/require.js"></script>
+    <script src="node_modules/requirejs/require.js"></script>
     <script>
       require.config({
-        paths: {text: '/node_modules/requirejs-text/text'}
+        paths: {text: 'node_modules/requirejs-text/text'}
       });
-      require(['text!/test-conf.json'], function(rConf) {
+      require(['text!test-conf.json'], function(rConf) {
         'use strict';
         rConf = JSON.parse(rConf);
         require.config(rConf);
