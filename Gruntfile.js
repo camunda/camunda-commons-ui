@@ -19,6 +19,18 @@ module.exports = function(grunt) {
 
   var commons = require('./index');
 
+  function commonsConf() {
+    var conf = commons.requirejs({ pathPrefix: '' });
+    conf.baseUrl = '/';
+    conf.packages.push({
+      name: 'camunda-commons-ui/widgets',
+      location: 'lib/widgets',
+      main: 'index'
+    });
+    return conf;
+    // return JSON.stringify(conf, null, 2);
+  }
+
   var pkg = require('./package.json');
 
   var config = pkg.gruntConfig || {};
@@ -27,6 +39,7 @@ module.exports = function(grunt) {
   config.pkg = pkg;
 
   grunt.initConfig({
+    commonsConf: commonsConf,
 
     karma: {
       unit: {
@@ -55,14 +68,7 @@ module.exports = function(grunt) {
             middlewares.unshift(function (req, res, next) {
               if (req.url === '/test-conf.json') {
                 res.setHeader('Content-Type', 'application/json');
-                var conf = commons.requirejs({ pathPrefix: '' });
-                conf.baseUrl = '/';
-                conf.packages.push({
-                  name: 'camunda-commons-ui/widgets',
-                  location: 'lib/widgets',
-                  main: 'index'
-                });
-                return res.end(JSON.stringify(conf));
+                return res.end(JSON.stringify(commonsConf()));
               }
               next();
             });
@@ -71,6 +77,13 @@ module.exports = function(grunt) {
           base: [
             '.'
           ]
+        }
+      },
+      'gh-pages': {
+        options: {
+          // livereload: false,
+          port: (pkg.gruntConfig.connectPort + 3),
+          base: ['gh-pages']
         }
       }
     },
@@ -115,6 +128,8 @@ module.exports = function(grunt) {
     }
   });
 
+  require('./grunt/tasks/gh-pages')(grunt);
+
   grunt.registerTask('build-sdk-type-utils', function () {
     var done = this.async();
     grunt.util.spawn({
@@ -127,6 +142,8 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('build', ['build-sdk-type-utils', 'less:widgets']);
+
+  grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 
   grunt.registerTask('auto-build', ['build', 'connect:widgetTests', 'watch']);
 

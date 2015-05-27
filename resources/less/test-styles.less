@@ -3,23 +3,39 @@
 @header-height:   41px;
 @icon-font-path:  "/node_modules/bootstrap/fonts/";
 
-@import "common.less";
+@import "common";
+@import "_fonts";
 
-@import "../../lib/widgets/inline-field/cam-widget-inline-field.less";
-@import "../../lib/widgets/search/cam-widget-search.less";
-@import "../../lib/widgets/loader/cam-widget-loader.less";
-@import "../../lib/widgets/variable/cam-widget-variable.less";
+@import "../../lib/widgets/inline-field/cam-widget-inline-field";
+@import "../../lib/widgets/search/cam-widget-search";
+@import "../../lib/widgets/loader/cam-widget-loader";
+@import "../../lib/widgets/variable/cam-widget-variable";
+
 
 
 // custom styles for the testing suite -----------------------------------------
 
 body {
-  // @see node_modules/bootstrap/less/grid.less
-  > header > div,
-  > footer > nav,
-  > section {
-    .container-fixed();
+  padding-top: 0;
+  > header,
+  > .page-wrapper {
+    .container-fluid();
+  }
 
+  > header {
+    color: @body-bg;
+    background-color: @brand-primary;
+    h1 {
+      &:before {
+        content: '';
+        display: inline-block;
+
+      }
+      .icon-bpmn-io;
+    }
+  }
+
+  > .page-wrapper {
     @media (min-width: @screen-sm-min) {
       width: @container-sm;
     }
@@ -28,6 +44,47 @@ body {
     }
     @media (min-width: @screen-lg-min) {
       width: @container-lg;
+    }
+  }
+
+  &.gh-pages {
+    h1,
+    h2,
+    h3,
+    h4 {
+      .font-light;
+    }
+
+    h1 {
+      text-transform: uppercase;
+    }
+
+    > .page-wrapper {
+      padding-left: 160px;
+      > nav {
+        width: (160px - @grid-gutter-width);
+        position: fixed;
+        left: (@grid-gutter-width / 2);
+        margin: 0;
+
+        ul {
+          list-style: none;
+          padding: 0;
+        }
+
+        li {
+          display: block;
+        }
+
+        a {
+          display: inline-block;
+          font-size: 1.2em;
+        }
+
+        .active a {
+          text-decoration: underline;
+        }
+      }
     }
   }
 
