@@ -4,59 +4,74 @@ module.exports = function (grunt) {
   var path = require('path');
   var projectRoot = path.resolve(__dirname, '../../');
 
+
   var marked = require('marked');
   var amdConf = grunt.config.data.commonsConf();
   var pkg = grunt.file.readJSON(projectRoot +'/package.json');
 
+  // var generatedDir = '/tmp/' + pkg.name + '-gh-pages';
+  var generatedDir = projectRoot + '/gh-pages';
+  var forceDelete = false;
+
+  function checkoutGhPages(done, orphan) {
+    var args = ['checkout'];
+    if (orphan) { args.push('--orphan'); }
+    args.push('gh-pages');
+
+    grunt.util.spawn({
+      opts: {cwd: generatedDir},
+      cmd: 'git',
+      args: args
+    }, function (err) {
+      if (!orphan && err && err.message === 'error: pathspec \'gh-pages\' did not match any file(s) known to git.') {
+        grunt.log.writeln('Create orphan branch');
+        return checkoutGhPages(function (err) {
+          if (err) { return done(err); }
+          // done();
+          grunt.util.spawn({
+            opts: {cwd: generatedDir},
+            cmd: 'git',
+            args: [
+              'rm',
+              '-rf',
+              '.'
+            ]
+          }, done);
+        }, true);
+      }
+      done(err);
+    });
+  }
+
   function cloneGhPages(done) {
-    if (grunt.file.isDir('gh-pages')) {
-      grunt.file.delete('gh-pages');
+    if (grunt.file.isDir(generatedDir)) {
+      grunt.file.delete(generatedDir, {force: forceDelete});
     }
 
     grunt.util.spawn({
       cmd: 'git',
       args: [
         'clone',
-        pkg.repository.url,
-        projectRoot + '/gh-pages'
+        // pkg.repository.url,
+        'git@github.com:camunda/camunda-commons-ui.git',
+        generatedDir
       ]
     }, function (err) {
       if (err) { return done(err); }
 
-      grunt.util.spawn({
-        cwd: projectRoot + '/gh-pages',
-        cmd: 'git',
-        args: [
-          'checkout',
-          'gh-pages'
-        ]
-      }, function (err) {
+      checkoutGhPages(function (err) {
         if (err) { return done(err); }
 
         grunt.log.writeln('repository checked out on "gh-pages" branch');
         done();
-
-        // grunt.util.spawn({
-        //   cwd: projectRoot + '/gh-pages',
-        //   cmd: 'git',
-        //   args: [
-        //     'rm',
-        //     '-rf',
-        //     '.'
-        //   ]
-        // }, function (err) {
-        //   if (err) { return done(err); }
-
-        //   grunt.log.writeln('repository checked out on "gh-pages" branch');
-        //   done();
-        // });
       });
     });
   }
 
   function pushGhPages(done) {
+
     grunt.util.spawn({
-        cwd: projectRoot + '/gh-pages',
+        opts: {cwd: generatedDir},
         cmd: 'git',
         args: [
           'add',
@@ -68,7 +83,7 @@ module.exports = function (grunt) {
       grunt.verbose.writeln('added changed files');
 
       grunt.util.spawn({
-          cwd: projectRoot + '/gh-pages',
+          opts: {cwd: generatedDir},
           cmd: 'git',
           args: [
             'commit',
@@ -79,8 +94,11 @@ module.exports = function (grunt) {
         if (err) { return done(err); }
         grunt.verbose.writeln('commited changed files');
 
+        // done();
+        // return;
+
         grunt.util.spawn({
-            cwd: projectRoot + '/gh-pages',
+            opts: {cwd: generatedDir},
             cmd: 'git',
             args: [
               'push',
@@ -92,7 +110,7 @@ module.exports = function (grunt) {
           if (err) { return done(err); }
           grunt.log.writeln('pushed to gh-pages branch');
 
-          grunt.file.delete('gh-pages');
+          grunt.file.delete(generatedDir, {force: forceDelete});
           done();
         });
       });
@@ -105,7 +123,13 @@ module.exports = function (grunt) {
     cloneGhPages(function (err) {
       if (err) { return done(err); }
 
-
+      grunt.file.expand([
+        generatedDir +'/{*,**/*}',
+        '!' + generatedDir +'/.git'
+      ]).forEach(function (filepath) {
+        console.info('remove...', filepath);
+        // grunt.file.delete(filepath, {force: forceDelete});
+      });
 
       var sources = grunt.file.expand([
         'lib/widgets/*/test/*.spec.html'
@@ -153,13 +177,14 @@ module.exports = function (grunt) {
       ].join(''));
 
       sources.forEach(function (source, i) {
-        grunt.file.copy(source, 'gh-pages/' + destinations[i] + '.html', {
+        grunt.file.copy(source, generatedDir + '/' + destinations[i] + '.html', {
           process: function (content) {
             return content
                     .replace('<!-- gh-pages-menu -->', ghPagesMenu(destinations[i]))
                     .replace('<!-- gh-pages-footer -->', footerTemplate())
                     .replace('<body class="', '<body class="gh-pages ')
                     .replace('<body>', '<body class="gh-pages">')
+                    .replace('<head>', '<head><base href="/'+ pkg.name +'" />')
                     ;
           }
         });
@@ -168,9 +193,10 @@ module.exports = function (grunt) {
 
       var readme = marked(grunt.file.read(projectRoot + '/README.md').toString());
       readme = readme.replace(/<h1 id="camunda-commons-ui.*<\/h1>/, '');
-      grunt.file.write('gh-pages/index.html', [
+      grunt.file.write(generatedDir + '/index.html', [
         '<html>',
           '<head>',
+            '<base href="/'+ pkg.name +'" />',
             '<title>Camunda commons UI library</title>',
             '<link type="text/css" rel="stylesheet" href="/styles.css" />',
             '<link type="text/css" rel="stylesheet" href="/test-styles.css" />',
@@ -194,7 +220,7 @@ module.exports = function (grunt) {
         'node_modules/bootstrap/fonts/*',
         'vendor/fonts/*'
       ]).forEach(function (filepath) {
-        grunt.file.copy(filepath, 'gh-pages/' + filepath);
+        grunt.file.copy(filepath, generatedDir + '/' + filepath);
       });
 
 
@@ -208,18 +234,18 @@ module.exports = function (grunt) {
           amdConf.paths[lib].slice(1) +'{*,/**/*}'
         ]).forEach(function (filepath) {
           if (!grunt.file.isFile(filepath)) { return; }
-          grunt.file.copy(filepath, 'gh-pages/' + filepath);
+          grunt.file.copy(filepath, generatedDir + '/' + filepath);
         });
       });
       amdConf.paths = paths;
-      grunt.file.write('gh-pages/test-conf.json', JSON.stringify(amdConf, null, 2));
+      grunt.file.write(generatedDir + '/test-conf.json', JSON.stringify(amdConf, null, 2));
 
 
 
 
-      grunt.file.copy('styles.css', 'gh-pages/styles.css');
-      grunt.file.copy('test-styles.css', 'gh-pages/test-styles.css');
-      grunt.file.copy('lib/widgets/index.js', 'gh-pages/index.js');
+      grunt.file.copy('styles.css', generatedDir + '/styles.css');
+      grunt.file.copy('test-styles.css', generatedDir + '/test-styles.css');
+      grunt.file.copy('lib/widgets/index.js', generatedDir + '/index.js');
 
 
       pushGhPages(done);
