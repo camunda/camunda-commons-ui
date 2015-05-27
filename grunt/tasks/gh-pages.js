@@ -150,7 +150,7 @@ module.exports = function (grunt) {
           '<% destinations.forEach(function (destination, i) { %><li',
             '<% if (destination === current) { %> class="active"<% } %>',
             '>',
-            '<a href="/<%- destination %>.html">',
+            '<a href="<%- destination %>.html">',
               '<%- destination.replace("cam-widget-", "") %>',
             '</a>',
           '</li><% }); %>',
