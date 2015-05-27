@@ -258,6 +258,14 @@ module.exports = function (grunt) {
       grunt.file.copy('test-styles.css', generatedDir + '/test-styles.css');
       grunt.file.copy('lib/widgets/index.js', generatedDir + '/index.js');
 
+      grunt.file.expand([
+        generatedDir + '/**'
+      ]).forEach(function (filepath) {
+        console.info('filepath', filepath);
+        // grunt.file.copy(filepath, , function () {
+
+        // });
+      });
 
       pushGhPages(done);
     });
