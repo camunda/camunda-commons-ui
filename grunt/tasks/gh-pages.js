@@ -94,8 +94,8 @@ module.exports = function (grunt) {
         if (err) { return done(err); }
         grunt.verbose.writeln('commited changed files');
 
-        // done();
-        // return;
+        done();
+        return;
 
         grunt.util.spawn({
             opts: {cwd: generatedDir},
@@ -128,7 +128,7 @@ module.exports = function (grunt) {
         '!' + generatedDir +'/.git'
       ]).forEach(function (filepath) {
         console.info('remove...', filepath);
-        // grunt.file.delete(filepath, {force: forceDelete});
+        grunt.file.delete(filepath, {force: forceDelete});
       });
 
       var sources = grunt.file.expand([
@@ -184,7 +184,7 @@ module.exports = function (grunt) {
                     .replace('<!-- gh-pages-footer -->', footerTemplate())
                     .replace('<body class="', '<body class="gh-pages ')
                     .replace('<body>', '<body class="gh-pages">')
-                    .replace('<head>', '<head><base href="/'+ pkg.name +'" />')
+                    .replace('<base href="/" />', '<base href="/'+ pkg.name +'/" />')
                     ;
           }
         });
@@ -196,10 +196,11 @@ module.exports = function (grunt) {
       grunt.file.write(generatedDir + '/index.html', [
         '<html>',
           '<head>',
-            '<base href="/'+ pkg.name +'" />',
+            '<base href="/'+ pkg.name +'/" />',
             '<title>Camunda commons UI library</title>',
-            '<link type="text/css" rel="stylesheet" href="/styles.css" />',
-            '<link type="text/css" rel="stylesheet" href="/test-styles.css" />',
+            '<link type="text/css" rel="icon" href="resources/img/favicon.ico" />',
+            '<link type="text/css" rel="stylesheet" href="styles.css" />',
+            '<link type="text/css" rel="stylesheet" href="test-styles.css" />',
           '</head>',
           '<body class="gh-pages readme">',
             ghPagesMenu(),
