@@ -9,8 +9,9 @@ module.exports = function (grunt) {
   var amdConf = grunt.config.data.commonsConf();
   var pkg = grunt.file.readJSON(projectRoot +'/package.json');
 
-  // var generatedDir = '/tmp/' + pkg.name + '-gh-pages';
-  var generatedDir = projectRoot + '/gh-pages';
+  // var gitDir = '/tmp/' + pkg.name + '-gh-pages';
+  var gitDir = projectRoot + '/gh-pages';
+  var generatedDir = gitDir + '/' + pkg.version;
   var forceDelete = false;
 
   function checkoutGhPages(done, orphan) {
@@ -19,17 +20,18 @@ module.exports = function (grunt) {
     args.push('gh-pages');
 
     grunt.util.spawn({
-      opts: {cwd: generatedDir},
+      opts: {cwd: gitDir},
       cmd: 'git',
       args: args
     }, function (err) {
       if (!orphan && err && err.message === 'error: pathspec \'gh-pages\' did not match any file(s) known to git.') {
         grunt.log.writeln('Create orphan branch');
+
         return checkoutGhPages(function (err) {
           if (err) { return done(err); }
-          // done();
+
           grunt.util.spawn({
-            opts: {cwd: generatedDir},
+            opts: {cwd: gitDir},
             cmd: 'git',
             args: [
               'rm',
@@ -39,6 +41,7 @@ module.exports = function (grunt) {
           }, done);
         }, true);
       }
+
       done(err);
     });
   }
@@ -54,7 +57,7 @@ module.exports = function (grunt) {
         'clone',
         // pkg.repository.url,
         'git@github.com:camunda/camunda-commons-ui.git',
-        generatedDir
+        gitDir
       ]
     }, function (err) {
       if (err) { return done(err); }
@@ -71,7 +74,7 @@ module.exports = function (grunt) {
   function pushGhPages(done) {
 
     grunt.util.spawn({
-        opts: {cwd: generatedDir},
+        opts: {cwd: gitDir},
         cmd: 'git',
         args: [
           'add',
@@ -83,7 +86,7 @@ module.exports = function (grunt) {
       grunt.verbose.writeln('added changed files');
 
       grunt.util.spawn({
-          opts: {cwd: generatedDir},
+          opts: {cwd: gitDir},
           cmd: 'git',
           args: [
             'commit',
@@ -98,7 +101,7 @@ module.exports = function (grunt) {
         return;
 
         grunt.util.spawn({
-            opts: {cwd: generatedDir},
+            opts: {cwd: gitDir},
             cmd: 'git',
             args: [
               'push',
@@ -142,20 +145,25 @@ module.exports = function (grunt) {
       });
 
       var menuTemplate = require('lodash').template([
-        '<header><h1><a href="/">Camunda commons UI</a><small><%- version %></small></h1></header>',
+        '<header>',
+          '<h1>',
+            '<a href="/">Camunda commons UI</a>',
+            '<small><%- version %></small>',
+          '</h1>',
+        '</header>',
         '<div class="page-wrapper">',
-        '<nav>',
-          '<h4>Widgets</h4>',
-          '<ul class="list-inline">',
-          '<% destinations.forEach(function (destination, i) { %><li',
-            '<% if (destination === current) { %> class="active"<% } %>',
-            '>',
-            '<a href="<%- destination %>.html">',
-              '<%- destination.replace("cam-widget-", "") %>',
-            '</a>',
-          '</li><% }); %>',
-          '</ul>',,
-        '</nav>'
+          '<nav>',
+            '<h4>Widgets</h4>',
+            '<ul class="list-inline">',
+            '<% destinations.forEach(function (destination, i) { %><li',
+              '<% if (destination === current) { %> class="active"<% } %>',
+              '>',
+              '<a href="<%- destination %>.html">',
+                '<%- destination.replace("cam-widget-", "") %>',
+              '</a>',
+            '</li><% }); %>',
+            '</ul>',,
+          '</nav>'
       ].join(''));
 
       function ghPagesMenu(current) {
@@ -168,12 +176,14 @@ module.exports = function (grunt) {
 
       var footerTemplate = require('lodash').template([
         '</div>',
-        '<footer><nav>',
-          '<ul class="list-inline">',
-            '<li><a href="//camunda.org">Camunda BPM</a></li>',
-            '<li><a href="//github.com/camunda/camunda-commons-ui">commons UI lib</a></li>',
-          '</ul>',
-        '</nav></footer>'
+        '<footer>',
+          '<nav>',
+            '<ul class="list-inline">',
+              '<li><a href="//camunda.org">Camunda BPM</a></li>',
+              '<li><a href="//github.com/camunda/camunda-commons-ui">commons UI lib</a></li>',
+            '</ul>',
+          '</nav>',
+        '</footer>'
       ].join(''));
 
       sources.forEach(function (source, i) {
