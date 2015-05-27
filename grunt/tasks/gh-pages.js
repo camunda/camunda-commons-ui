@@ -2,7 +2,7 @@
 
 module.exports = function (grunt) {
   var path = require('path');
-  var projectRoot = path.resolve(__dirname, '../../');//process.env.PWD;
+  var projectRoot = path.resolve(__dirname, '../../');
 
   var marked = require('marked');
   var amdConf = grunt.config.data.commonsConf();
@@ -30,50 +30,57 @@ module.exports = function (grunt) {
           'checkout',
           'gh-pages'
         ]
-      }, done);
+      }, function (err) {
+        if (err) { return done(err); }
+        grunt.log.writeln('repository checked out on "gh-pages" branch');
+        done();
+      });
     });
   }
 
   function pushGhPages(done) {
-    done();
-    // grunt.util.spawn({
-    //     cwd: projectRoot + '/gh-pages',
-    //     cmd: 'git',
-    //     args: [
-    //       'add',
-    //       '--all',
-    //       '.'
-    //     ]
-    // }, function (err) {
-    //   if (err) { return done(err); }
+    grunt.util.spawn({
+        cwd: projectRoot + '/gh-pages',
+        cmd: 'git',
+        args: [
+          'add',
+          '--all',
+          '.'
+        ]
+    }, function (err) {
+      if (err) { return done(err); }
+      grunt.verbose.writeln('added changed files');
 
-    //   grunt.util.spawn({
-    //       cwd: projectRoot + '/gh-pages',
-    //       cmd: 'git',
-    //       args: [
-    //         'commit',
-    //         '-m',
-    //         '"gh-pages update"'
-    //       ]
-    //   }, function (err) {
-    //     if (err) { return done(err); }
+      grunt.util.spawn({
+          cwd: projectRoot + '/gh-pages',
+          cmd: 'git',
+          args: [
+            'commit',
+            '-m',
+            '"gh-pages update"'
+          ]
+      }, function (err) {
+        if (err) { return done(err); }
+        grunt.verbose.writeln('commited changed files');
 
-    //     grunt.util.spawn({
-    //         cwd: projectRoot + '/gh-pages',
-    //         cmd: 'git',
-    //         args: [
-    //           'push',
-    //           'origin',
-    //           'gh-pages'
-    //         ]
-    //     }, function (err) {
-    //       if (err) { return done(err); }
+        grunt.util.spawn({
+            cwd: projectRoot + '/gh-pages',
+            cmd: 'git',
+            args: [
+              'push',
+              '--force',
+              'origin',
+              'gh-pages'
+            ]
+        }, function (err) {
+          if (err) { return done(err); }
+          grunt.log.writeln('pushed to gh-pages branch');
 
-    //       grunt.file.delete('gh-pages');
-    //       done();
-    //     });
-    //   });
-    // });
+          grunt.file.delete('gh-pages');
+          done();
+        });
+      });
+    });
   }
 
   grunt.registerTask('gh-pages', function () {
