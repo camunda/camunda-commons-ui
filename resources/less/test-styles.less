@@ -2,9 +2,9 @@
 @brand-logo:      'resources/img/camunda-logo.png';
 @header-height:   41px;
 
-@bpmn-font-path:  "/node_modules/bpmn-font/dist/font/";
-@icon-font-path:  "/node_modules/bootstrap/fonts/";
-@font-path:       "/vendor/fonts/";
+@bpmn-font-path:  "node_modules/bpmn-font/dist/font/";
+@icon-font-path:  "node_modules/bootstrap/fonts/";
+@font-path:       "vendor/fonts/";
 
 @import "common";
 @import "_fonts";
@@ -60,17 +60,6 @@ body {
   }
 
   &.gh-pages {
-    h1,
-    h2,
-    h3,
-    h4 {
-      .font-light;
-    }
-
-    h1 {
-      text-transform: uppercase;
-    }
-
     &.readme .content {
       margin-top: 39px;
     }
@@ -105,6 +94,18 @@ body {
     overflow: hidden;
   }
 }
+
+h1,
+h2,
+h3,
+h4 {
+  .font-light;
+}
+
+h1 {
+  text-transform: uppercase;
+}
+
 
 dd {
   padding-left: @grid-gutter-width;
