@@ -32,8 +32,24 @@ module.exports = function (grunt) {
         ]
       }, function (err) {
         if (err) { return done(err); }
+
         grunt.log.writeln('repository checked out on "gh-pages" branch');
         done();
+
+        // grunt.util.spawn({
+        //   cwd: projectRoot + '/gh-pages',
+        //   cmd: 'git',
+        //   args: [
+        //     'rm',
+        //     '-rf',
+        //     '.'
+        //   ]
+        // }, function (err) {
+        //   if (err) { return done(err); }
+
+        //   grunt.log.writeln('repository checked out on "gh-pages" branch');
+        //   done();
+        // });
       });
     });
   }
