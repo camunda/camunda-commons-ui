@@ -47,8 +47,8 @@ module.exports = function (grunt) {
   }
 
   function cloneGhPages(done) {
-    if (grunt.file.isDir(generatedDir)) {
-      grunt.file.delete(generatedDir, {force: forceDelete});
+    if (grunt.file.isDir(gitDir)) {
+      grunt.file.delete(gitDir, {force: forceDelete});
     }
 
     grunt.util.spawn({
@@ -261,10 +261,14 @@ module.exports = function (grunt) {
       grunt.file.expand([
         generatedDir + '/**'
       ]).forEach(function (filepath) {
-        console.info('filepath', filepath);
-        // grunt.file.copy(filepath, , function () {
+        if (!grunt.file.isFile(filepath)) { return; }
 
-        // });
+        grunt.file.copy(filepath, filepath.replace('/' + pkg.version, ''), function (content) {
+          if (filepath.match(/\.html$/)) {
+            content = content.replace('/' + pkg.version, '');
+          }
+          return content;
+        });
       });
 
       pushGhPages(done);
