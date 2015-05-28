@@ -68,7 +68,7 @@ module.exports = function (grunt) {
       checkoutGhPages(function (err) {
         if (err) { return done(err); }
 
-        grunt.log.writeln('repository checked out on "gh-pages" branch');
+        grunt.log.writeln('Repository checked out on "gh-pages" branch');
         done();
       });
     });
@@ -85,8 +85,11 @@ module.exports = function (grunt) {
           '.'
         ]
     }, function (err) {
-      if (err) { return done(err); }
-      grunt.verbose.writeln('added changed files');
+      if (err) {
+        console.info.apply(console, arguments);
+        return done(err);
+      }
+      grunt.verbose.writeln('Added changed files');
 
       grunt.util.spawn({
           opts: {cwd: gitDir},
@@ -97,8 +100,11 @@ module.exports = function (grunt) {
             '"gh-pages update"'
           ]
       }, function (err) {
-        if (err) { return done(err); }
-        grunt.verbose.writeln('commited changed files');
+        if (err) {
+          console.info.apply(console, arguments);
+          return done(err);
+        }
+        grunt.verbose.writeln('Commited changed files');
 
         // done();
         // return;
@@ -114,23 +120,65 @@ module.exports = function (grunt) {
             ]
         }, function (err) {
           if (err) { return done(err); }
-          grunt.log.writeln('pushed to gh-pages branch');
+          grunt.log.writeln('Pushed to gh-pages branch');
 
           grunt.file.delete(generatedDir, {force: forceDelete});
+
           done();
         });
       });
     });
   }
 
+  function replaceVersion(v1, v2, str) {
+    return str
+            .replace(new RegExp(v1, 'g'), v2)
+            // .replace(new RegExp('/' + v1, 'g'), '/' + v2)
+            // .replace(new RegExp(v1 + '/', 'g'), v2 + '/')
+            ;
+  }
 
-  function compileGhPages(done) {
+  function copyToVersion(version) {
+    version = version || '';
+    // var inExp = new RegExp('/' + pkg.version, 'g');
     grunt.file.expand([
-      generatedDir +'/{*,**/*}',
+      generatedDir + '/*.html'
+    ]).forEach(function (filepath) {
+      if (!grunt.file.isFile(filepath)) { return; }
+
+      var destination = filepath.replace('/' + pkg.version, version ? ('/' + version) : '');
+      grunt.file.copy(filepath, destination, {
+        process: function (content) {
+          grunt.log.writeln('Rewrite URLs for ' + destination);
+          // return content.replace(inExp, '/' + version);
+          return replaceVersion(pkg.version, version, content);
+        }
+      });
+    });
+
+    grunt.file.expand([
+      generatedDir + '/**',
+      '!{**/,}*.html'
+    ]).forEach(function (filepath) {
+      if (!grunt.file.isFile(filepath)) { return; }
+
+      grunt.file.copy(filepath, filepath
+        .replace('/' + pkg.version, '/' + version)
+      );
+    });
+
+    grunt.log.writeln('Copied to the "' + (version ? version : 'root') + '" directory');
+  }
+
+
+  function compileGhPages() {
+    grunt.file.expand([
+      generatedDir +'/{**/,}*',
       '!' + generatedDir +'/.git'
     ]).forEach(function (filepath) {
-      console.info('remove...', filepath);
-      grunt.file.delete(filepath, {force: forceDelete});
+      if (grunt.file.isFile(filepath)) {
+        grunt.file.delete(filepath, {force: forceDelete});
+      }
     });
 
     var sources = grunt.file.expand([
@@ -146,7 +194,7 @@ module.exports = function (grunt) {
     var menuTemplate = require('lodash').template([
       '<header>',
         '<h1>',
-          '<a href="/">Camunda commons UI</a>',
+          '<a href="./">Camunda commons UI</a>',
           '<small><%- version %></small>',
         '</h1>',
       '</header>',
@@ -154,16 +202,15 @@ module.exports = function (grunt) {
         '<nav>',
           '<h4>Widgets</h4>',
           '<ul class="list-inline">',
-          '<% destinations.forEach(function (destination, i) { %><li',
-            '<% if (destination === current) { %> class="active"<% } %>',
-            '>',
-            '<a href="<%- destination %>.html">',
+          '<% destinations.forEach(function (destination, i) { %>',
+            '<li<% if (destination === current) { %> class="active"<% } %>>',
+            '<a href="./<%- destination %>.html">',
               '<%- destination.replace("cam-widget-", "") %>',
             '</a>',
           '</li><% }); %>',
-          '</ul>',,
+          '</ul>',
         '</nav>'
-    ].join(''));
+    ].join('\n'));
 
     function ghPagesMenu(current) {
       return menuTemplate({
@@ -183,7 +230,7 @@ module.exports = function (grunt) {
           '</ul>',
         '</nav>',
       '</footer>'
-    ].join(''));
+    ].join('\n'));
 
     sources.forEach(function (source, i) {
       grunt.file.copy(source, generatedDir + '/' + destinations[i] + '.html', {
@@ -193,7 +240,8 @@ module.exports = function (grunt) {
                   .replace('<!-- gh-pages-footer -->', footerTemplate())
                   .replace('<body class="', '<body class="gh-pages ')
                   .replace('<body>', '<body class="gh-pages">')
-                  .replace('<base href="/" />', '<base href="/'+ pkg.name +'/' + pkg.version + '/" />')
+                  // .replace(new RegExp('<base href="/" />', 'g'), '<base href="/'+ pkg.name +'/' + pkg.version + '/" />')
+                  .replace(new RegExp('<base href="/" />', 'g'), '')
                   ;
         }
       });
@@ -204,12 +252,13 @@ module.exports = function (grunt) {
     readme = readme.replace(/<h1 id="camunda-commons-ui.*<\/h1>/, '');
     grunt.file.write(generatedDir + '/index.html', [
       '<html>',
+        '<!-- ' + (new Date()) + ' -->',
         '<head>',
-          '<base href="/'+ pkg.name +'/' + pkg.version + '" />',
+          // '<base href="/'+ pkg.name +'/' + pkg.version + '" />',
           '<title>Camunda commons UI library</title>',
           '<link rel="icon" href="resources/img/favicon.ico" />',
-          '<link type="text/css" rel="stylesheet" href="styles.css" />',
-          '<link type="text/css" rel="stylesheet" href="test-styles.css" />',
+          '<link type="text/css" rel="stylesheet" href="./styles.css" />',
+          '<link type="text/css" rel="stylesheet" href="./test-styles.css" />',
         '</head>',
         '<body class="gh-pages readme">',
           ghPagesMenu(),
@@ -219,7 +268,7 @@ module.exports = function (grunt) {
           footerTemplate(),
         '</body>',
       '</html>'
-    ].join(''));
+    ].join('\n'));
 
 
 
@@ -239,7 +288,7 @@ module.exports = function (grunt) {
     var paths = {};
     Object.keys(amdConf.paths).forEach(function (lib) {
       var libPath = amdConf.paths[lib];
-      paths[lib] = libPath.replace(/lib\/widgets\//, '');
+      paths[lib] = libPath.replace(/lib\/widgets\//g, '');
       grunt.file.expand([
         amdConf.paths[lib].slice(1) +'{*,/**/*}'
       ]).forEach(function (filepath) {
@@ -256,35 +305,6 @@ module.exports = function (grunt) {
     grunt.file.copy('styles.css', generatedDir + '/styles.css');
     grunt.file.copy('test-styles.css', generatedDir + '/test-styles.css');
     grunt.file.copy('lib/widgets/index.js', generatedDir + '/index.js');
-
-
-    copyToLatest();
-    copyToLatest('latest');
-
-    grunt.log.writeln('Compilation of gh-pages completed');
-
-    pushGhPages(done);
-  }
-
-  var htmlFileExp = /\.html$/;
-  function copyToLatest(version) {
-    version = version ? ('/' + version) : '';
-    grunt.file.expand([
-      generatedDir + '/**'
-    ]).forEach(function (filepath) {
-      if (!grunt.file.isFile(filepath)) { return; }
-
-      grunt.file.copy(filepath, filepath.replace('/' + pkg.version, version), {
-        process: function (content) {
-          if (htmlFileExp.test(filepath)) {
-            content = content.replace('/' + pkg.version, version);
-          }
-          return content;
-        }
-      });
-    });
-
-    grunt.log.writeln('Generated pages copied to the ' + (version ? version : 'root') + ' directory');
   }
 
 
@@ -292,7 +312,15 @@ module.exports = function (grunt) {
     var done = this.async();
     cloneGhPages(function (err) {
       if (err) { return done(err); }
-      compileGhPages(done);
+      compileGhPages();
+
+      copyToVersion();
+
+      copyToVersion('latest');
+
+      grunt.log.writeln('Compilation of gh-pages completed');
+
+      pushGhPages(done);
     });
   });
 };
