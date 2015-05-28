@@ -140,23 +140,23 @@ module.exports = function (grunt) {
 
   function copyToVersion(version) {
     version = version || '';
-    // var inExp = new RegExp('/' + pkg.version, 'g');
+    var versionPath = version ? ('/' + version) : '';
+    var textPluginExp = new RegExp('\'node_modules/requirejs-text/text\'', 'g');
+
     grunt.file.expand([
       generatedDir + '/*.html'
     ]).forEach(function (filepath) {
       if (!grunt.file.isFile(filepath)) { return; }
 
-      var versionPath = version ? ('/' + version) : '';
       var destination = filepath.replace('/' + pkg.version, versionPath);
 
       grunt.file.copy(filepath, destination, {
         process: function (content) {
-          var textPath = '/' + pkg.name + versionPath + '/node_modules/requirejs-text/text';
-          content = content.replace(new RegExp('/node_modules/requirejs-text/text', 'g'), textPath);
+          grunt.log.writeln('Rewrite URLs for ' + destination + ' ... ' + textPluginExp.test(content));
 
-          grunt.log.writeln('Rewrite URLs for ' + destination);
+          var textPluginPath = '\'' + pkg.name + versionPath + '/node_modules/requirejs-text/text\'';
 
-          return replaceVersion(pkg.version, version, content);
+          return replaceVersion(pkg.version, version, content).replace(textPluginExp, textPluginPath);
         }
       });
     });
@@ -325,7 +325,8 @@ module.exports = function (grunt) {
 
       grunt.log.writeln('Compilation of gh-pages completed');
 
-      pushGhPages(done);
+      done();
+      // pushGhPages(done);
     });
   });
 };
