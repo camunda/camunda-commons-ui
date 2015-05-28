@@ -61,7 +61,7 @@ body {
 
   &.gh-pages {
     &.readme .content {
-      margin-top: 39px;
+      margin-top: 10px;
     }
 
     > .page-wrapper {
@@ -69,8 +69,11 @@ body {
       > nav {
         width: (160px - @grid-gutter-width);
         position: fixed;
-        left: (@grid-gutter-width / 2);
         margin: 0;
+        overflow: auto;
+        left: (@grid-gutter-width / 2);
+        top: 56px;
+        bottom: @grid-gutter-width * 1.5;
 
         li {
           display: block;

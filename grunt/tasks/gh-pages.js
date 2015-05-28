@@ -4,16 +4,37 @@ module.exports = function (grunt) {
   var path = require('path');
   var projectRoot = path.resolve(__dirname, '../../');
 
-
   var marked = require('marked');
   var amdConf = grunt.config.data.commonsConf();
   var pkg = grunt.file.readJSON(projectRoot +'/package.json');
 
-  // var gitDir = '/tmp/' + pkg.name + '-gh-pages';
   var gitDir = projectRoot + '/gh-pages';
   var generatedDir = gitDir + '/' + pkg.version;
-  var forceDelete = false;
 
+
+  function cloneGhPages(done) {
+    if (grunt.file.isDir(gitDir)) {
+      grunt.file.delete(gitDir);
+    }
+
+    grunt.util.spawn({
+      cmd: 'git',
+      args: [
+        'clone',
+        'git@github.com:camunda/camunda-commons-ui.git',
+        gitDir
+      ]
+    }, function (err) {
+      if (err) { return done(err); }
+
+      checkoutGhPages(function (err) {
+        if (err) { return done(err); }
+
+        grunt.log.writeln('Repository checked out on "gh-pages" branch');
+        done();
+      });
+    });
+  }
 
 
   function checkoutGhPages(done, orphan) {
@@ -49,87 +70,6 @@ module.exports = function (grunt) {
   }
 
 
-  function cloneGhPages(done) {
-    if (grunt.file.isDir(gitDir)) {
-      grunt.file.delete(gitDir, {force: forceDelete});
-    }
-
-    grunt.util.spawn({
-      cmd: 'git',
-      args: [
-        'clone',
-        // pkg.repository.url,
-        'git@github.com:camunda/camunda-commons-ui.git',
-        gitDir
-      ]
-    }, function (err) {
-      if (err) { return done(err); }
-
-      checkoutGhPages(function (err) {
-        if (err) { return done(err); }
-
-        grunt.log.writeln('Repository checked out on "gh-pages" branch');
-        done();
-      });
-    });
-  }
-
-
-  function pushGhPages(done) {
-    grunt.util.spawn({
-        opts: {cwd: gitDir},
-        cmd: 'git',
-        args: [
-          'add',
-          '--all',
-          '.'
-        ]
-    }, function (err) {
-      if (err) {
-        console.info.apply(console, arguments);
-        return done(err);
-      }
-      grunt.verbose.writeln('Added changed files');
-
-      grunt.util.spawn({
-          opts: {cwd: gitDir},
-          cmd: 'git',
-          args: [
-            'commit',
-            '-m',
-            '"gh-pages update"'
-          ]
-      }, function (err) {
-        if (err) {
-          console.info.apply(console, arguments);
-          return done(err);
-        }
-        grunt.verbose.writeln('Commited changed files');
-
-        // done();
-        // return;
-
-        grunt.util.spawn({
-            opts: {cwd: gitDir},
-            cmd: 'git',
-            args: [
-              'push',
-              // '--force',
-              'origin',
-              'gh-pages'
-            ]
-        }, function (err) {
-          if (err) { return done(err); }
-          grunt.log.writeln('Pushed to gh-pages branch');
-
-          grunt.file.delete(generatedDir, {force: forceDelete});
-
-          done();
-        });
-      });
-    });
-  }
-
   function replaceVersion(v1, v2, str) {
     return str
             .replace(new RegExp(v1, 'g'), v2)
@@ -137,6 +77,7 @@ module.exports = function (grunt) {
             // .replace(new RegExp(v1 + '/', 'g'), v2 + '/')
             ;
   }
+
 
   function copyToVersion(version) {
     version = version || '';
@@ -152,11 +93,12 @@ module.exports = function (grunt) {
 
       grunt.file.copy(filepath, destination, {
         process: function (content) {
-          grunt.log.writeln('Rewrite URLs for ' + destination + ' ... ' + textPluginExp.test(content));
+          grunt.log.writeln('Rewrite URLs for ' + destination);
 
           var textPluginPath = '\'' + pkg.name + versionPath + '/node_modules/requirejs-text/text\'';
 
-          return replaceVersion(pkg.version, version, content).replace(textPluginExp, textPluginPath);
+          return replaceVersion(pkg.version, version, content)
+                  .replace(textPluginExp, textPluginPath);
         }
       });
     });
@@ -182,7 +124,7 @@ module.exports = function (grunt) {
       '!' + generatedDir +'/.git'
     ]).forEach(function (filepath) {
       if (grunt.file.isFile(filepath)) {
-        grunt.file.delete(filepath, {force: forceDelete});
+        grunt.file.delete(filepath);
       }
     });
 
@@ -324,6 +266,62 @@ module.exports = function (grunt) {
   }
 
 
+  function pushGhPages(done) {
+    grunt.util.spawn({
+        opts: {cwd: gitDir},
+        cmd: 'git',
+        args: [
+          'add',
+          '--all',
+          '.'
+        ]
+    }, function (err) {
+      if (err) {
+        console.info.apply(console, arguments);
+        return done(err);
+      }
+      grunt.verbose.writeln('Added changed files');
+
+      grunt.util.spawn({
+          opts: {cwd: gitDir},
+          cmd: 'git',
+          args: [
+            'commit',
+            '-m',
+            '"gh-pages update"'
+          ]
+      }, function (err) {
+        if (err) {
+          console.info.apply(console, arguments);
+          return done(err);
+        }
+        grunt.verbose.writeln('Commited changed files');
+
+        // done();
+        // return;
+
+        grunt.util.spawn({
+            opts: {cwd: gitDir},
+            cmd: 'git',
+            args: [
+              'push',
+              // '--force',
+              'origin',
+              'gh-pages'
+            ]
+        }, function (err) {
+          if (err) { return done(err); }
+          grunt.log.writeln('Pushed to gh-pages branch');
+
+          grunt.file.delete(generatedDir);
+
+          done();
+        });
+      });
+    });
+  }
+
+
   grunt.registerTask('gh-pages', function () {
     var done = this.async();
     cloneGhPages(function (err) {
@@ -336,7 +334,6 @@ module.exports = function (grunt) {
 
       grunt.log.writeln('Compilation of gh-pages completed');
 
-      // done();
       pushGhPages(done);
     });
   });
