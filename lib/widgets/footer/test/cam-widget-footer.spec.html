@@ -56,9 +56,9 @@
     <script src="node_modules/requirejs/require.js"></script>
     <script>
       require.config({
-        paths: {text: '/node_modules/requirejs-text/text'}
+        paths: {text: 'node_modules/requirejs-text/text'}
       });
-      require(['text!/test-conf.json'], function(rConf) {
+      require(['text!test-conf.json'], function(rConf) {
         'use strict';
         rConf = JSON.parse(rConf);
         require.config(rConf);

@@ -293,7 +293,9 @@ module.exports = function (grunt) {
     var paths = {};
     Object.keys(amdConf.paths).forEach(function (lib) {
       var libPath = amdConf.paths[lib];
-      paths[lib] = libPath.replace(/lib\/widgets\//g, '');
+
+      paths[lib] = libPath.replace(/^\//, '');
+
       grunt.file.expand([
         amdConf.paths[lib].slice(1) +'{*,/**/*}'
       ]).forEach(function (filepath) {
@@ -302,6 +304,15 @@ module.exports = function (grunt) {
       });
     });
     amdConf.paths = paths;
+
+    amdConf.packages = amdConf.packages.map(function (info) {
+      if (info.location) {
+        info.location = info.location.replace(/^\//, '');
+      }
+      return info;
+    });
+
+    amdConf.baseUrl = './';
     grunt.file.write(generatedDir + '/test-conf.json', JSON.stringify(amdConf, null, 2));
 
 
@@ -325,8 +336,8 @@ module.exports = function (grunt) {
 
       grunt.log.writeln('Compilation of gh-pages completed');
 
-      done();
-      // pushGhPages(done);
+      // done();
+      pushGhPages(done);
     });
   });
 };
