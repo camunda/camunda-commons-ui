@@ -146,11 +146,16 @@ module.exports = function (grunt) {
     ]).forEach(function (filepath) {
       if (!grunt.file.isFile(filepath)) { return; }
 
-      var destination = filepath.replace('/' + pkg.version, version ? ('/' + version) : '');
+      var versionPath = version ? ('/' + version) : '';
+      var destination = filepath.replace('/' + pkg.version, versionPath);
+
       grunt.file.copy(filepath, destination, {
         process: function (content) {
+          var textPath = '/' + pkg.name + versionPath + '/node_modules/requirejs-text/text';
+          content = content.replace(new RegExp('/node_modules/requirejs-text/text', 'g'), textPath);
+
           grunt.log.writeln('Rewrite URLs for ' + destination);
-          // return content.replace(inExp, '/' + version);
+
           return replaceVersion(pkg.version, version, content);
         }
       });
@@ -158,7 +163,7 @@ module.exports = function (grunt) {
 
     grunt.file.expand([
       generatedDir + '/**',
-      '!{**/,}*.html'
+      '!*.html'
     ]).forEach(function (filepath) {
       if (!grunt.file.isFile(filepath)) { return; }
 
