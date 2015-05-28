@@ -100,15 +100,15 @@ module.exports = function (grunt) {
         if (err) { return done(err); }
         grunt.verbose.writeln('commited changed files');
 
-        done();
-        return;
+        // done();
+        // return;
 
         grunt.util.spawn({
             opts: {cwd: gitDir},
             cmd: 'git',
             args: [
               'push',
-              '--force',
+              // '--force',
               'origin',
               'gh-pages'
             ]
@@ -207,7 +207,7 @@ module.exports = function (grunt) {
         '<head>',
           '<base href="/'+ pkg.name +'/' + pkg.version + '" />',
           '<title>Camunda commons UI library</title>',
-          '<link type="text/css" rel="icon" href="resources/img/favicon.ico" />',
+          '<link rel="icon" href="resources/img/favicon.ico" />',
           '<link type="text/css" rel="stylesheet" href="styles.css" />',
           '<link type="text/css" rel="stylesheet" href="test-styles.css" />',
         '</head>',
@@ -257,24 +257,35 @@ module.exports = function (grunt) {
     grunt.file.copy('test-styles.css', generatedDir + '/test-styles.css');
     grunt.file.copy('lib/widgets/index.js', generatedDir + '/index.js');
 
-    grunt.file.expand([
-      generatedDir + '/**'
-    ]).forEach(function (filepath) {
-      if (!grunt.file.isFile(filepath)) { return; }
 
-      grunt.file.copy(filepath, filepath.replace('/' + pkg.version, ''), function (content) {
-        if (filepath.match(/\.html$/)) {
-          content = content.replace('/' + pkg.version, '');
-        }
-        return content;
-      });
-    });
+    copyToLatest();
+    copyToLatest('latest');
 
     grunt.log.writeln('Compilation of gh-pages completed');
 
     pushGhPages(done);
   }
 
+  var htmlFileExp = /\.html$/;
+  function copyToLatest(version) {
+    version = version ? ('/' + version) : '';
+    grunt.file.expand([
+      generatedDir + '/**'
+    ]).forEach(function (filepath) {
+      if (!grunt.file.isFile(filepath)) { return; }
+
+      grunt.file.copy(filepath, filepath.replace('/' + pkg.version, version), {
+        process: function (content) {
+          if (htmlFileExp.test(filepath)) {
+            content = content.replace('/' + pkg.version, version);
+          }
+          return content;
+        }
+      });
+    });
+
+    grunt.log.writeln('Generated pages copied to the ' + (version ? version : 'root') + ' directory');
+  }
 
 
   grunt.registerTask('gh-pages', function () {
