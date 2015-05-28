@@ -32,6 +32,12 @@ This project is used internally and the API of its components are subject to cha
 
 Widgets are reusable components which should be easy to integrate in the Camunda webapps ([admin][admin], [cockpit][cockpit] and [tasklist][tasklist]) and your own projects.
 
+#### Usage
+
+A good way to get familiar with the widgets integration in your projects is by reading the source code of the `lib/widgets/*/test/*.spec.html` or their online versions (see the _widgets_ menu on the [GitHub page](//camunda.github.io/camunda-commons-ui)).   
+In those examples, we use uncompiled versions of the library and its dependencies and wire the whole with [requirejs](//requirejs.org).
+
+
 #### Available widgets
 
 - `cam-widget-bpmn-viewer`
