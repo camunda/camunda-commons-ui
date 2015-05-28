@@ -23,19 +23,17 @@
 
   var config = {
     paths: {
-      'chai':             'node_modules/chai/chai',
-      'chai-spies':       'node_modules/chai-spies/chai-spies',
-      'jquery':           'test/vendor/jquery-2.1.1',
-
-      'text': 'test/vendor/text',
-
-      'angular':          'test/vendor/angular',
-      'angular-animate':  'test/vendor/angular-animate',
-      'angular-cookies':  'test/vendor/angular-cookies',
-      'angular-mocks':    'test/vendor/angular-mocks',
-      'angular-route':    'test/vendor/angular-route',
-      'angular-sanitize': 'test/vendor/angular-sanitize',
-      'angular-bootstrap':'test/vendor/ui-bootstrap'
+      'chai':               'node_modules/chai/chai',
+      'chai-spies':         'node_modules/chai-spies/chai-spies',
+      'jquery':             'node_modules/jquery/dist/jquery',
+      'text':               'node_modules/requirejs-text/text',
+      'angular':            'vendor/angular',
+      'angular-animate':    'vendor/angular-animate',
+      'angular-cookies':    'vendor/angular-cookies',
+      'angular-mocks':      'vendor/angular-mocks',
+      'angular-route':      'vendor/angular-route',
+      'angular-sanitize':   'vendor/angular-sanitize',
+      'angular-bootstrap':  'vendor/ui-bootstrap-tpls-0.11.2-camunda'
     },
 
     // Karma serves files under /base, which is the basePath from your config file

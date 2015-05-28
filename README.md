@@ -28,22 +28,6 @@ This project is used internally and the API of its components are subject to cha
 - [`widgets`](#widgets)
 
 
-## Test
-
-To test the components install karma via
-
-```sh
-npm install -g karma-cli
-npm install
-```
-
-and execute the test suite via
-
-```sh
-karma start test/karma.conf.js
-```
-
-
 ### Widgets
 
 Widgets are reusable components which should be easy to integrate in the Camunda webapps ([admin][admin], [cockpit][cockpit] and [tasklist][tasklist]) and your own projects.
@@ -85,6 +69,15 @@ You can also run the tests on a single widget like that:
 TESTED=variable nodemon -w lib/widgets/ --exec "protractor ./test/protractor.conf.js"
 ```
 This will only run the `cam-widget-variable` tests.
+
+
+
+## Test
+
+```sh
+grunt karma
+```
+
 
 
 ## License
