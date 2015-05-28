@@ -18,7 +18,11 @@ module.exports = function(config) {
     files: [
       {pattern: 'node_modules/chai/chai.js', included: false},
       {pattern: 'node_modules/chai-spies/chai-spies.js', included: false},
-      {pattern: 'test/vendor/**/*.js', included: false},
+
+      {pattern: 'node_modules/requirejs-text/text.js', included: false},
+      {pattern: 'node_modules/jquery/dist/jquery.js', included: false},
+      {pattern: 'vendor{/**,}/*.js', included: false},
+
       {pattern: 'test/loadingSpec.js', included: false},
       {pattern: 'lib/**/test/*Spec.js', included: false},
       {pattern: 'lib/**/*.js', included: false},
