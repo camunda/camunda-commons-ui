@@ -70,15 +70,6 @@ module.exports = function (grunt) {
   }
 
 
-  function replaceVersion(v1, v2, str) {
-    return str
-            .replace(new RegExp(v1, 'g'), v2)
-            // .replace(new RegExp('/' + v1, 'g'), '/' + v2)
-            // .replace(new RegExp(v1 + '/', 'g'), v2 + '/')
-            ;
-  }
-
-
   function copyToVersion(version) {
     version = version || '';
     var versionPath = version ? ('/' + version) : '';
@@ -97,7 +88,8 @@ module.exports = function (grunt) {
 
           var textPluginPath = '\'' + pkg.name + versionPath + '/node_modules/requirejs-text/text\'';
 
-          return replaceVersion(pkg.version, version, content)
+          return content
+                  .replace(new RegExp(pkg.version, 'g'), version)
                   .replace(textPluginExp, textPluginPath);
         }
       });
@@ -187,7 +179,6 @@ module.exports = function (grunt) {
                   .replace('<!-- gh-pages-footer -->', footerTemplate())
                   .replace('<body class="', '<body class="gh-pages ')
                   .replace('<body>', '<body class="gh-pages">')
-                  // .replace(new RegExp('<base href="/" />', 'g'), '<base href="/'+ pkg.name +'/' + pkg.version + '/" />')
                   .replace(new RegExp('<base href="/" />', 'g'), '')
                   ;
         }
@@ -201,7 +192,6 @@ module.exports = function (grunt) {
       '<html>',
         '<!-- ' + (new Date()) + ' -->',
         '<head>',
-          // '<base href="/'+ pkg.name +'/' + pkg.version + '" />',
           '<title>Camunda commons UI library</title>',
           '<link rel="icon" href="resources/img/favicon.ico" />',
           '<link type="text/css" rel="stylesheet" href="./styles.css" />',
@@ -260,7 +250,6 @@ module.exports = function (grunt) {
 
 
 
-    grunt.file.copy('styles.css', generatedDir + '/styles.css');
     grunt.file.copy('test-styles.css', generatedDir + '/test-styles.css');
     grunt.file.copy('lib/widgets/index.js', generatedDir + '/index.js');
   }
