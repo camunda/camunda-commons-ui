@@ -31,7 +31,7 @@
       <h3>Options</h3>
       <dl>
         <dt><span class="badge">=</span> cam-widget-search-searches</dt>
-        <dd>An array containing all searches. The elements of the array are objects which represent a single search pill. The properties of the objects are explained in the <a href='/lib/widgets/search-pill/test/search-pill.spec.html'>seach pill widget documentation</a>. Functions, invalid-text and delete-text are not included. </dd>
+        <dd>An array containing all searches. The elements of the array are objects which represent a single search pill. The properties of the objects are explained in the <a href='/lib/widgets/search-pill/test/cam-widget-search-pill.spec.html'>seach pill widget documentation</a>. Functions, invalid-text and delete-text are not included. </dd>
         <dt><span class="badge">=</span> cam-widget-search-valid-searches</dt>
         <dd>Like cam-widget-search-searches, but only includes valid searches.</dd>
         <dt><span class="badge">=</span> cam-widget-search-types</dt>
@@ -72,7 +72,6 @@
                  cam-widget-search-id='search1'
             />
           </div>
-          {{validSearches}}
           <b>All Searches:</b> <span id="allSearchesCount">{{ searches.length }}</span><br />
           <b>Valid Searches:</b> <span id="validSearchesCount">{{ validSearches.length }}</span>
 
