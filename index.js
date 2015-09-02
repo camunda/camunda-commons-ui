@@ -143,9 +143,9 @@ function requirejsConf(options) {
 
 function livereloadSnippet(grunt) {
   return function (data) {
-    var buildTarget = grunt.config('buildTarget');
+    var buildMode = grunt.config('buildMode');
     var livereloadPort = grunt.config('pkg.gruntConfig.livereloadPort');
-    if (buildTarget !== 'dist' && livereloadPort) {
+    if (buildMode !== 'prod' && livereloadPort) {
       grunt.log.writeln('Enabling livereload for ' + data.name + ' on port: ' + livereloadPort);
       var contents = grunt.file.read(data.path);
 
