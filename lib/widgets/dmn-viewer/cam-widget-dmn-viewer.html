@@ -1,0 +1,15 @@
+<div class="alert alert-danger"
+     ng-if="error">
+  <span>
+    <strong>Could not render table:</strong>
+  </span>
+  <span>
+   {{ error.message }}
+  </span>
+</div>
+
+<div ng-show="!error">
+
+  <div class="table-holder"></div>
+
+</div>
