@@ -1,0 +1,119 @@
+<html>
+  <head>
+    <title>Camunda commons UI library</title>
+    <base href="/" />
+    <link rel="icon" href="resources/img/favicon.ico" />
+    <link href="styles.css" rel="stylesheet" />
+    <link href="test-styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- gh-pages-menu -->
+
+    <header>
+      <div>
+        <h1>Dmn-Viewer</h1>
+      </div>
+    </header>
+
+    <section class='widget-description'>
+      <header>
+        <h2>Description</h2>
+      </header>
+      <p>This widget displays a DMN table.</p>
+    </section>
+
+    <section class='widget-reference'>
+      <header>
+        <h2>Usage</h2>
+      </header>
+
+      <h3>Options</h3>
+      <dl>
+        <dt><span class="badge">=</span> tableXml</dt>
+        <dd>A string containing the XML content of the DMN model to render.</dd>
+        <dt><span class="badge">=</span> control</dt>
+        <dd>An object containing the control API of the widget. After initialization of the widget, the object provided in by this variable contains the following methods:
+          <ul>
+            <li>
+              <b>getViewer()</b>: Returns the dmn.io viewer instance of the table
+            </li>
+            <li>
+              <b>getElement(id)</b>: Returns the dmn.io object representing an element with a given ID.
+            </li>
+            <li>
+              <b>isLoaded()</b>: Returns whether the table is loaded and displayed.
+            </li>
+          </ul>
+        </dd>
+      </dl>
+    </section>
+
+    <section class='widget-examples'>
+      <header>
+        <h2>Example</h2>
+      </header>
+
+      <div class='widget-example'
+           id='example'>
+        <h3>Viewer</h3>
+        <div ng-controller='testController'>
+          <div cam-widget-dmn-viewer
+            table-xml='decisionTable'
+            control='control'
+            id="viewer1"
+            style='height: 300px;'>
+          </div>
+        </div>
+
+        <pre ng-non-bindable>
+$scope.tableXML = /* dmn xml string */;
+$scope.control = {};
+
+&lt;div cam-widget-dmn-viewer
+            table-xml='decisionTable'
+            control='control'
+            style='height: 300px;'&gt;&lt;/div&gt;
+</pre>
+      </div><!-- /.widget-example -->
+
+    </section>
+
+
+
+    </div>
+    <footer>
+      <!-- gh-pages-footer -->
+    </footer>
+
+    <script src="node_modules/requirejs/require.js"></script>
+    <script>
+      require.config({
+        paths: {text: 'node_modules/requirejs-text/text'}
+      });
+      require(['text!test-conf.json'], function(rConf) {
+        'use strict';
+        rConf = JSON.parse(rConf);
+        require.config(rConf);
+        require([
+          'angular',
+          'camunda-commons-ui/widgets',
+          'text!lib/widgets/dmn-viewer/test/test.xml'
+        ], function (angular, camCommonsUi, testXML) {
+
+          var testModule = angular.module('myModule', [camCommonsUi.name]);
+
+          testModule.controller('testController', ['$scope', function($scope) {
+            $scope.decisionTable = testXML;
+
+            $scope.control = {};
+          }]);
+
+
+          angular.element(document).ready(function() {
+            angular.bootstrap(document.body, [testModule.name]);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
