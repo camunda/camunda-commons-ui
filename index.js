@@ -23,7 +23,7 @@ function requirejsConf(options) {
   options = options || {};
 
   if (typeof options.pathPrefix === 'undefined') {
-    options.pathPrefix = '../node_modules/camunda-commons-ui';
+    options.pathPrefix = '../../camunda-commons-ui';
   }
 
   var conf = {
