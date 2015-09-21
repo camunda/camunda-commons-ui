@@ -25,6 +25,7 @@
     <select class="form-control"
             ng-model="variable.type"
             ng-options="variableType for variableType in variableTypes track by variableType"
+            ng-disabled="isDisabled('type')"
             required>
     </select>
   </div><!-- /btn-group -->
@@ -34,6 +35,7 @@
          class="form-control name"
          ng-model="variable.name"
          placeholder="varName"
+         ng-disabled="isDisabled('name')"
          required />
 
   <div ng-if="isShown('value') && !isNull()"
@@ -43,6 +45,7 @@
          class="input-group-btn">
       <a ng-click="setNull()"
          class="btn btn-default set-null"
+         ng-disabled="isDisabled('value')"
          tooltip="Set value to &quot;null&quot;">
         <span class="glyphicon glyphicon-remove"></span>
       </a>
@@ -52,6 +55,7 @@
            type="text"
            class="form-control value"
            ng-model="variable.value"
+           ng-disabled="isDisabled('value')"
            placeholder="Value of the variable"
            cam-variable-validator="{{variable.type}}" />
 
@@ -59,12 +63,13 @@
            type="checkbox"
            class="value"
            ng-model="variable.value"
+           ng-disabled="isDisabled('value')"
            placeholder="Value of the variable"
            cam-variable-validator="{{variable.type}}" />
 
     <div ng-if="variable.type === 'Object'"
          class="value form-control-static">
-      <a ng-click="editVariableValue()">
+      <a ng-click="editVariableValue()" ng-disabled="isDisabled('value')">
         {{ variable.valueInfo.objectTypeName || '&lt;undefined&gt;' }}
       </a>
     </div>
@@ -73,11 +78,13 @@
   <div ng-if="variable.type !== 'Null' && isShown('value') && isNull()"
        ng-click="setNonNull()"
        class="value-wrapper value null-value btn btn-default"
+       ng-disabled="isDisabled('value')"
        tooltip="Re-set to previous or default value">
     <span class="null-symbol">&lt;null&gt;</span>
   </div>
 
   <div ng-if="variable.type === 'Null'"
+       ng-disabled="isDisabled('value')"
        class="value-wrapper value btn no-click null-value">
     <span class="null-symbol">&lt;null&gt;</span>
   </div>

@@ -38,7 +38,7 @@
           <a href="#example-3">Example</a>
         </dd>
 
-        <dt><span class="badge">@?</span> shown</dt>
+        <dt><span class="badge">=?</span> shown</dt>
         <dd>
           Takes an array of strings to determine which parts of the variable is shown.<br/>
           Valid strings:
@@ -48,6 +48,17 @@
             <li><code>value</code></li>
           </ul>
           <a href="#example-3">Example</a>
+        </dd>
+
+        <dt><span class="badge">=?</span> disabled</dt>
+        <dd>
+          Takes an array of strings to determine what parts of the variable can not be edited.<br/>
+          Valid strings:
+          <ul>
+            <li><code>type</code></li>
+            <li><code>name</code></li>
+            <li><code>value</code></li>
+          </ul>
         </dd>
       </dl>
     </section>
@@ -149,6 +160,32 @@
               Submit changes
             </button>
           </form>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+
+     <div class="widget-example"
+           id="example-5"
+           ng-controller="example3Controller">
+        <h3>Disable input fields</h3>
+        <pre ng-non-bindable>&lt;div cam-widget-variable
+     cam-variable="vars[9]"
+     disabled="nameValue"&gt;&lt;/div&gt;
+&lt;div cam-widget-variable
+     cam-variable="vars[9]"
+     disabled="typeValue"&gt;&lt;/div&gt;
+&lt;div cam-widget-variable
+     cam-variable="vars[9]"
+     disabled="typeName"&gt;&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-variable
+               cam-variable="vars[9]"
+               disabled="nameValue"></div>
+          <div cam-widget-variable
+               cam-variable="vars[9]"
+               disabled="typeValue"></div>
+          <div cam-widget-variable
+               cam-variable="vars[9]"
+               disabled="typeName"></div>
         </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
     </section>
