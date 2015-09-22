@@ -48,6 +48,7 @@ In those examples, we use uncompiled versions of the library and its dependencie
 - `cam-widget-search`
 - `cam-widget-search-pill`
 - `cam-widget-variable`
+- `cam-widget-variables-table`
 
 #### Developing the widgets
 

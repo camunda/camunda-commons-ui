@@ -1,7 +1,15 @@
 <html>
   <head>
     <title>Camunda commons UI library</title>
-    <base href="/" />
+    <base href="/">
+    <!--[if IE]><script type="text/javascript">
+        // Fix for IE ignoring relative base tags.
+        // See http://stackoverflow.com/questions/3926197/html-base-tag-and-local-folder-path-with-internet-explorer
+        (function() {
+            var baseTag = document.getElementsByTagName('base');
+            if (baseTag[0]) { baseTag[0].href = baseTag[0].href; }
+        })();
+    </script><![endif]-->
     <link rel="icon" href="resources/img/favicon.ico" />
     <link href="styles.css" rel="stylesheet" />
     <link href="test-styles.css" rel="stylesheet" />
