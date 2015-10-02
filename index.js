@@ -67,6 +67,7 @@ function requirejsConf(options) {
       'jquery-overscroll':          'vendor/jquery.overscroll',
       domReady:                     'vendor/domReady',
       'placeholders-js':            'vendor/placeholders.main',
+      'prismjs':                    'vendor/prism',
       'bpmn-io':                    'node_modules/bower-bpmn-js/dist/bpmn-navigated-viewer',
       'dmn-io':                     'node_modules/dmn-js/dist/dmn-viewer'
     },
