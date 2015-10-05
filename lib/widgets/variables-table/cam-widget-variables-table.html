@@ -118,7 +118,11 @@
         <!-- ................................................................................... -->
 
 
-        <div ng-switch-default ng-bind-html="info.additions[headerName]"></div>
+        <div ng-switch-default
+             cam-render-var-template
+             info="info"
+             header-name="headerName">
+        </div>
       </td>
 
       <td class="actions"
