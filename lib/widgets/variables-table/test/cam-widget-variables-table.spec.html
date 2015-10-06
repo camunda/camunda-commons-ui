@@ -215,6 +215,7 @@
         require([
           'angular',
           'lib/widgets/variables-table/cam-widget-variables-table',
+          'lib/widgets/variables-table/cam-render-var-template',
           'text!lib/widgets/variables-table/test/fancy-modal.html',
           'lib/widgets/variable/cam-widget-variable',
           'lib/widgets/variable/cam-variable-utils',
@@ -222,6 +223,7 @@
         ], function (
           angular,
           variablesTableDefinition,
+          renderVarTemplateDefinition,
           fancyDialogTemplate,
           variableDefinition,
           varUtils
@@ -232,6 +234,7 @@
           ]);
 
           variableModule.directive('camWidgetVariablesTable', variablesTableDefinition);
+          variableModule.directive('camRenderVarTemplate', renderVarTemplateDefinition);
           variableModule.directive('camWidgetVariable', variableDefinition);
 
           var testModule = angular.module('testModule', [variableModule.name]);
@@ -381,9 +384,9 @@
                 variable: variable,
 
                 additions: {
-                  plain:      $sce.trustAsHtml('variable #' + v),
-                  formatted:  $sce.trustAsHtml('<i>HTML</i>'),
-                  missing:    $sce.trustAsHtml('should not be printed')
+                  plain:      {html: 'variable #' + v},
+                  formatted:  {html: '<i>HTML</i>{{ variable.value }}'},
+                  missing:    {html: 'should not be printed'}
                 }
               };
             });
