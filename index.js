@@ -69,7 +69,7 @@ function requirejsConf(options) {
       'placeholders-js':            'vendor/placeholders.main',
       'prismjs':                    'vendor/prism',
       'bpmn-io':                    'node_modules/bower-bpmn-js/dist/bpmn-navigated-viewer',
-      'dmn-io':                     'node_modules/dmn-js/dist/dmn-viewer'
+      'dmn-io':                     'node_modules/dmn-js/dist/dmn-modeler'
     },
 
     shim: {
