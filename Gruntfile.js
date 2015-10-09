@@ -92,7 +92,10 @@ module.exports = function(grunt) {
       options: {
         dumpLineNumbers: 'comments',
         compress: false,
-        sourceMap: false
+        sourceMap: false,
+        paths: [
+          'node_modules'
+        ]
       },
 
       widgets: {
@@ -110,7 +113,8 @@ module.exports = function(grunt) {
       styles: {
         files: [
           'lib/**/*.less',
-          'resources/less/**/*.less'
+          'resources/less/**/*.less',
+          'node_modules/dmn-js/styles/**/*.less'
         ],
         tasks: ['less']
       },

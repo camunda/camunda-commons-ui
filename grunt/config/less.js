@@ -7,6 +7,8 @@ module.exports = function(config, lessConfig, pathConfig) {
   lessConfig[pathConfig.appName + '_styles'] = {
     options: {
       paths: [
+        'node_modules',
+        'node_modules/camunda-commons-ui/node_modules',
         'styles',
         'scripts'
       ],
