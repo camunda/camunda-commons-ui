@@ -42,6 +42,8 @@
         <dd>Boolean flag which indicates whether the search pill is valid or not. Invalid pills are rendered differently</dd>
         <dt><span class="badge">=</span> extended</dt>
         <dd>If set to true, the pill will contain an additional name field</dd>
+        <dt><span class="badge">=</span> basic</dt>
+        <dd>If set to true, the pill will only contain the type field (no operator and no value field)</dd>
         <dt><span class="badge">=</span> allow-dates</dt>
         <dd>Allows the user to enter date values via a datepicker in addition to standard text input</dd>
         <dt><span class="badge">=</span> enforce-dates</dt>
@@ -230,6 +232,26 @@ $scope.search5.extended = true;
                 extended="search5.extended" />
         </div>
       </div><!-- /.widget-example -->
+
+      <div class="widget-example"
+           id="basic-attribute">
+        <h3>Basic</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
+$scope.search6 = angular.copy($scope.search1);
+$scope.search6.basic = true;
+
+&lt;span cam-widget-search-pill
+            valid="search6.valid"
+            type="search6.type"
+            basic="search6.basic" /&gt;</pre>
+          <span cam-widget-search-pill
+                id="pill6"
+                valid="search6.valid"
+                type="search6.type"
+                basic="search6.basic" />
+        </div>
+      </div><!-- /.widget-example -->
     </section>
 
 
@@ -296,6 +318,9 @@ $scope.search5.extended = true;
               value: ''
             };
             $scope.search5.extended = true;
+
+            $scope.search6 = angular.copy($scope.search1);
+            $scope.search6.basic = true;
 
           }]);
 

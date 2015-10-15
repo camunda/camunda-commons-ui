@@ -106,6 +106,7 @@
         options="operator.values"
         change="changeSearch('operator', varValue, $event)"
         on-start-editing="clearEditTrigger('operator')"
+        ng-if="!basic"
         value="operator.value">
     <span ng-if="operator.tooltip"
           tooltip-placement="top"
@@ -122,6 +123,7 @@
         type="{{ valueType }}"
         change="changeSearch('value', varValue, $event)"
         on-start-editing="clearEditTrigger('value')"
+        ng-if="!basic"
         value="value.value"
         flexible="{{ allowDates }}">
     <span class="visible-whitespace"
