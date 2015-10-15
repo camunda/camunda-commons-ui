@@ -144,8 +144,18 @@ module.exports = function(grunt) {
       ]
     }, done);
   });
+  grunt.registerTask('build-sdk-angular', function () {
+    var done = this.async();
+    grunt.util.spawn({
+      cmd: 'grunt',
+      args: [
+        '--gruntfile', './node_modules/camunda-bpm-sdk-js/Gruntfile.js',
+        'browserify:distAngular'
+      ]
+    }, done);
+  });
 
-  grunt.registerTask('build', ['build-sdk-type-utils', 'less:widgets']);
+  grunt.registerTask('build', ['build-sdk-type-utils', 'build-sdk-angular', 'less:widgets']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 
