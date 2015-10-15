@@ -33,6 +33,7 @@
       'angular-mocks':      'vendor/angular-mocks',
       'angular-route':      'vendor/angular-route',
       'angular-sanitize':   'vendor/angular-sanitize',
+      'camunda-bpm-sdk-js': 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular',
       'angular-bootstrap':  'vendor/ui-bootstrap-tpls-0.11.2-camunda'
     },
 
