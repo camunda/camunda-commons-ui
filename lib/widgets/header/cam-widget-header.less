@@ -46,6 +46,7 @@ body {
     }
   }
 
+  > [ng-transclude],
   > .cam-nav {
     float: right;
     &.collapse {
@@ -62,10 +63,11 @@ body {
       float: left;
       margin-left: 0;
       width: 100%;
-    }
-    > .cam-nav.collapse {
-      visibility: hidden;
-      display: none;
+
+      &.collapse {
+        visibility: hidden;
+        display: none;
+      }
     }
   }
 }
