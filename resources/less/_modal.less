@@ -1,10 +1,26 @@
 .modal {
   background-color: fade(@gray-darker, 50%);
+  cursor: auto;
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 1;
+  }
+}
+
+.modal-dialog {
+  position: relative;
+  z-index: 2;
 }
 
 .modal-content {
   background-color: @gray-lighter;
-  cursor: default;
 }
 
 .modal-body {

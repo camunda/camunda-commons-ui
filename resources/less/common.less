@@ -98,6 +98,17 @@ a {
   }
 }
 
+
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+
 @import "_animate-spin";
 @import "_modal";
 @import "_cam-table";
