@@ -48,13 +48,15 @@ body {
 
   > [ng-transclude],
   > .cam-nav {
-    float: right;
     &.collapse {
       visibility: visible;
       display: block;
     }
   }
 
+  > .cam-nav {
+    float: right;
+  }
 
 
   @media screen and (max-width: @grid-float-breakpoint) {
