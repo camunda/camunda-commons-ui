@@ -45,6 +45,8 @@
         <dd>Indicate on which app the user currently is (used to limit the choices in the app switch dropdown).</dd>
         <dt><span class="badge">=</span> authentication</dt>
         <dd>can be passed to customize the dropdown menus (showing or not the account and limit the choices of apps the user can switch to according to its authorizations).</dd>
+        <dt><span class="badge">=</span> user-name</dt>
+        <dd>can be passed to load user full name.</dd>
       </dl>
     </section>
 
@@ -116,6 +118,7 @@
         <h3>Authenticated</h3>
         <pre ng-non-bindable>&lt;div cam-widget-header
      authentication="auth"
+     user-name="fullName"
      brand-name="Cammunda Commons UI"
      current-app="{{ ctrlCurrentApp }}"&gt;
 &lt;/div&gt;
@@ -127,6 +130,7 @@
         <div class="test-container">
           <div cam-widget-header
                authentication="auth"
+               user-name="fullName"
                brand-name="Cammunda Commons UI"
                current-app="{{ ctrlCurrentApp }}">
             Transcluded
@@ -172,8 +176,9 @@
           var mockedDependenciesModule = angular.module('mockedDependencies', []);
 
           mockedDependenciesModule.service('AuthenticationService', [function () {
+            console.info('AuthenticationService', arguments, this);
             this.logout = function () {
-              console.info('loging out');
+              console.info('loging out', arguments, this);
             };
           }]);
 
@@ -201,9 +206,16 @@
             $scope.auth = new Authentication();
           }]);
 
-          testModule.controller('testAuthenticatedController', ['$scope', function($scope) {
+          testModule.controller('testAuthenticatedController', ['$scope', '$timeout', function($scope, $timeout) {
             $scope.ctrlCurrentApp = 'tasklist';
+
             $scope.auth = new Authentication('mustermann', ['tasklist', 'admin']);
+
+            // $scope.fullName = $scope.auth.name;
+
+            $timeout(function () {
+              $scope.fullName = 'Max Mustermann';
+            }, 400);
           }]);
 
           angular.element(document).ready(function() {

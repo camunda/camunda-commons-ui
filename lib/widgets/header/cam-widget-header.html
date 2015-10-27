@@ -27,7 +27,7 @@
     <a href
        class="dropdown-toggle">
       <span class="glyphicon glyphicon-user "></span>
-      {{ authentication.name }}
+      {{ (userName || authentication.name) }}
     </a>
 
     <ul class="dropdown-menu dropdown-menu-right">
