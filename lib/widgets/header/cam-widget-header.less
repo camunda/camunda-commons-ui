@@ -6,6 +6,7 @@ body {
   .navbar;
   .navbar-inverse;
   .navbar-fixed-top;
+  margin-bottom: 0;
 
   color: @navbar-inverse-brand-color;
 
@@ -60,7 +61,21 @@ body {
   }
 
 
+  .small-screen-warning {
+    display: none;
+    font-size: (@navbar-height / 2);
+    height: (@navbar-height / 2);
+    margin-top: (@navbar-height / 4);
+    margin-right: (@navbar-height / 4);
+    float: right;
+  }
+
+
   @media screen and (max-width: @grid-float-breakpoint) {
+    .small-screen-warning {
+      display: inline-block;
+    }
+
     > [ng-transclude],
     > .cam-nav {
       float: left;
