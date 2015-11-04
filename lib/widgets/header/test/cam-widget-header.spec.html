@@ -47,6 +47,15 @@
         <dd>can be passed to customize the dropdown menus (showing or not the account and limit the choices of apps the user can switch to according to its authorizations).</dd>
         <dt><span class="badge">=</span> user-name</dt>
         <dd>can be passed to load user full name.</dd>
+
+        <dt><span class="badge">@?</span> sign-out</dt>
+        <dd>a string to be place in the sign out link, by default: <span class="default">Sign out</span>.</dd>
+
+        <dt><span class="badge">@?</span> toggle-navigation</dt>
+        <dd>a string to be place in the navigation toggle link, by default: <span class="default">Toggle navigation</span>.</dd>
+
+        <dt><span class="badge">@?</span> myProfile</dt>
+        <dd>a string to be place in the link to the user profile, by default: <span class="default">My profile</span>.</dd>
       </dl>
     </section>
 
@@ -118,6 +127,8 @@
         <h3>Authenticated</h3>
         <pre ng-non-bindable>&lt;div cam-widget-header
      authentication="auth"
+     my-profile="Your profile"
+     sign-out="Log out"
      user-name="fullName"
      brand-name="Cammunda Commons UI"
      current-app="{{ ctrlCurrentApp }}"&gt;
@@ -130,6 +141,8 @@
         <div class="test-container">
           <div cam-widget-header
                authentication="auth"
+               my-profile="Your profile"
+               sign-out="Log out"
                user-name="fullName"
                brand-name="Cammunda Commons UI"
                current-app="{{ ctrlCurrentApp }}">
