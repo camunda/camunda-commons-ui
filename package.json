@@ -34,7 +34,7 @@
     "bpmn-font": "0.2.0",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "bpmn-js": "0.9.2",
-    "dmn-js": "git://github.com/bpmn-io/dmn-js#100da5f8dd6ea12d62c5fdb392c18cf8f1dbd074",
+    "dmn-js": "git://github.com/bpmn-io/dmn-js#master",
     "jquery": "2.1.1",
     "lodash": "2.4.1",
     "moment": "2.9.0",
