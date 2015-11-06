@@ -49,6 +49,7 @@ body {
 
   > [ng-transclude],
   > .cam-nav {
+    min-height: @navbar-height;
     &.collapse {
       visibility: visible;
       display: block;
@@ -65,13 +66,13 @@ body {
     display: none;
     font-size: (@navbar-height / 2);
     height: (@navbar-height / 2);
-    margin-top: (@navbar-height / 4);
+    line-height: @navbar-height + 4;
     margin-right: (@navbar-height / 4);
     float: right;
   }
 
 
-  @media screen and (max-width: @grid-float-breakpoint) {
+  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
     .small-screen-warning {
       display: inline-block;
     }
