@@ -21,6 +21,7 @@ module.exports = function(config) {
 
       {pattern: 'node_modules/requirejs-text/text.js', included: false},
       {pattern: 'node_modules/jquery/dist/jquery.js', included: false},
+      {pattern: 'node_modules/angular*/*.js', included: false},
       {pattern: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular.js', included: false},
       {pattern: 'vendor{/**,}/*.js', included: false},
 
