@@ -15,27 +15,6 @@ http://www.fontsquirrel.com/tools/webfont-generator
 License: [Apache 2.0](http://www.fontsquirrel.com/license/open-sans)
 
 
-
-## AngularJS
-
-Version: 1.2.16
-Source: https://code.angularjs.org/1.2.16/ and includes:
-
-- angular-animate.js
-- angular-cookies.js
-- angular.js
-- angular-loader.js
-- angular-mocks.js
-- angular-resource.js
-- angular-route.js
-- angular-sanitize.js
-- angular-scenario.js
-- angular-touch.js
-
-License: [MIT](https://raw.githubusercontent.com/angular/angular/master/LICENSE)
-
-
-
 ## jQuery UI
 
 Version: 1.10.4
