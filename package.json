@@ -25,6 +25,9 @@
   "bugs": {
     "url": "https://github.com/camunda/camunda-commons-ui/issues"
   },
+  "browserify": {
+    "transform": ["brfs"]
+  },
   "homepage": "https://github.com/camunda/camunda-commons-ui",
   "dependencies": {
     "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",

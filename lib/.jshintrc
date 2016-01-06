@@ -1,9 +1,7 @@
 {
   "globals": {
-    "require": false,
-    "define": false
   },
-  "node": false,
+  "node": true,
   "browser": true,
   "indent": 2,
   "strict": true
