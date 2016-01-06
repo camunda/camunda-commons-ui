@@ -129,33 +129,35 @@ module.exports = function(grunt) {
         ],
         tasks: []
       }
+    },
+
+    browserify: {
+      dist: {
+        files: [{
+          expand: true,     // Enable dynamic expansion.
+          src: ['lib/widgets/**/test/*.src.js'], // Actual pattern(s) to match.
+          ext: '.build.js',   // Dest filepaths will have this extension.
+          extDot: 'first'   // Extensions in filenames begin after the first dot
+        }]
+      },
+
+      watch: {
+        files: [{
+          expand: true,     // Enable dynamic expansion.
+          src: ['lib/widgets/**/test/*.src.js'], // Actual pattern(s) to match.
+          ext: '.build.js',   // Dest filepaths will have this extension.
+          extDot: 'first'   // Extensions in filenames begin after the first dot
+        }],
+        options: {
+          watch: true
+        }
+      }
     }
   });
 
   require('./grunt/tasks/gh-pages')(grunt);
 
-  grunt.registerTask('build-sdk-type-utils', function () {
-    var done = this.async();
-    grunt.util.spawn({
-      cmd: 'grunt',
-      args: [
-        '--gruntfile', './node_modules/camunda-bpm-sdk-js/Gruntfile.js',
-        'browserify:distTypeUtils'
-      ]
-    }, done);
-  });
-  grunt.registerTask('build-sdk-angular', function () {
-    var done = this.async();
-    grunt.util.spawn({
-      cmd: 'grunt',
-      args: [
-        '--gruntfile', './node_modules/camunda-bpm-sdk-js/Gruntfile.js',
-        'browserify:distAngular'
-      ]
-    }, done);
-  });
-
-  grunt.registerTask('build', ['build-sdk-type-utils', 'build-sdk-angular', 'less:widgets']);
+  grunt.registerTask('build', ['less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 

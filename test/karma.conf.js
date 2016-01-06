@@ -11,38 +11,31 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'requirejs'],
+    frameworks: ['mocha', 'browserify'],
 
 
     // list of files / patterns to load in the browser
     files: [
-      {pattern: 'node_modules/chai/chai.js', included: false},
-      {pattern: 'node_modules/chai-spies/chai-spies.js', included: false},
-
-      {pattern: 'node_modules/requirejs-text/text.js', included: false},
-      {pattern: 'node_modules/jquery/dist/jquery.js', included: false},
-      {pattern: 'node_modules/angular*/*.js', included: false},
-      {pattern: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular.js', included: false},
-      {pattern: 'vendor{/**,}/*.js', included: false},
-
-      {pattern: 'test/loadingSpec.js', included: false},
-      {pattern: 'lib/**/test/*Spec.js', included: false},
-      {pattern: 'lib/**/*.js', included: false},
-      {pattern: 'lib/**/*.html', included: false},
-      // at last!
-      'test/karma-test-main.js'
+      'test/karma-test-main.js',
+      'test/loadingSpec.js',
+      'lib/**/test/*Spec.js'
     ],
 
 
     // list of files to exclude
-    exclude: [
-      'lib/**/*.spec.js'
-    ],
+    exclude: [],
 
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      'test/karma-test-main.js': [ 'browserify' ],
+      'test/loadingSpec.js': [ 'browserify' ],
+      'lib/**/test/*Spec.js': [ 'browserify' ]
+    },
+
+    browserify: {
+      debug: true
     },
 
 

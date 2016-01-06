@@ -94,35 +94,6 @@ $scope.control = {};
       <!-- gh-pages-footer -->
     </footer>
 
-    <script src="node_modules/requirejs/require.js"></script>
-    <script>
-      require.config({
-        paths: {text: 'node_modules/requirejs-text/text'}
-      });
-      require(['text!test-conf.json'], function(rConf) {
-        'use strict';
-        rConf = JSON.parse(rConf);
-        require.config(rConf);
-        require([
-          'angular',
-          'camunda-commons-ui/widgets',
-          'text!lib/widgets/dmn-viewer/test/test.xml'
-        ], function (angular, camCommonsUi, testXML) {
-
-          var testModule = angular.module('myModule', [camCommonsUi.name]);
-
-          testModule.controller('testController', ['$scope', function($scope) {
-            $scope.decisionTable = testXML;
-
-            $scope.control = {};
-          }]);
-
-
-          angular.element(document).ready(function() {
-            angular.bootstrap(document.body, [testModule.name]);
-          });
-        });
-      });
-    </script>
+    <script src="lib/widgets/dmn-viewer/test/cam-widget-dmn-viewer.build.js"></script>
   </body>
 </html>
