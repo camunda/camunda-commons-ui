@@ -11,7 +11,7 @@ module.exports = function(config) {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha', 'requirejs'],
+    frameworks: ['mocha', 'browserify'],
 
 
     // list of files / patterns to load in the browser
@@ -19,7 +19,7 @@ module.exports = function(config) {
       {pattern: 'node_modules/chai/chai.js', included: false},
       {pattern: 'node_modules/chai-spies/chai-spies.js', included: false},
 
-      {pattern: 'node_modules/requirejs-text/text.js', included: false},
+      // {pattern: 'node_modules/requirejs-text/text.js', included: false},
       {pattern: 'node_modules/jquery/dist/jquery.js', included: false},
       {pattern: 'node_modules/angular*/*.js', included: false},
       {pattern: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular.js', included: false},
@@ -43,6 +43,14 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+      // 'test/loadingSpec.js': [ 'browserify' ],
+      // 'lib/**/test/*Spec.js': [ 'browserify' ],
+      '**/*.js': [ 'browserify' ]
+    },
+
+    browserify: {
+      debug: true,
+      // transform: [ 'brfs' ]
     },
 
 
@@ -67,7 +75,7 @@ module.exports = function(config) {
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-    logLevel: config.LOG_INFO,
+    logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
