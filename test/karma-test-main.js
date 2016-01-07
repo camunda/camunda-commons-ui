@@ -69,9 +69,13 @@
 
     // load test files
     // require(allTestFiles, function() {
+       // for(var i = 0; i < allTestFiles.length; i++) {
+       //   require(allTestFiles[i]);
+       // }
+      // console.log(allTestFiles);
 
       // start karma
-      window.__karma__.start();
+      // window.__karma__.start();
     // });
 
   // });

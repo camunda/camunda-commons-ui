@@ -25,12 +25,14 @@ module.exports = function(config) {
       {pattern: 'node_modules/camunda-bpm-sdk-js/dist/camunda-bpm-sdk-angular.js', included: false},
       {pattern: 'vendor{/**,}/*.js', included: false},
 
-      {pattern: 'test/loadingSpec.js', included: false},
+      // {pattern: 'test/loadingSpec.js', included: false},
       {pattern: 'lib/**/test/*Spec.js', included: false},
       {pattern: 'lib/**/*.js', included: false},
       {pattern: 'lib/**/*.html', included: false},
       // at last!
-      'test/karma-test-main.js'
+      // 'lib/**/*Spec.js',
+      'test/karma-test-main.js',
+      'test/loadingSpec.js'
     ],
 
 
@@ -45,7 +47,10 @@ module.exports = function(config) {
     preprocessors: {
       // 'test/loadingSpec.js': [ 'browserify' ],
       // 'lib/**/test/*Spec.js': [ 'browserify' ],
-      '**/*.js': [ 'browserify' ]
+      'lib/**/*.js': [ 'browserify' ],
+      'test/karma-test-main.js': [ 'browserify' ],
+      // 'lib/**/*Spec.js': [ 'browserify' ],
+      'test/loadingSpec.js': [ 'browserify' ]
     },
 
     browserify: {
