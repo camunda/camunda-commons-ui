@@ -67,50 +67,6 @@
 
     <!-- gh-pages-footer -->
 
-    <script src="node_modules/requirejs/require.js"></script>
-    <script>
-      require.config({
-        paths: {text: 'node_modules/requirejs-text/text'}
-      });
-      require(['text!test-conf.json'], function(rConf) {
-        'use strict';
-        rConf = JSON.parse(rConf);
-        require.config(rConf);
-        require([
-          'angular',
-          'lib/widgets/debug/cam-widget-debug'
-        ], function (
-          angular,
-          debugDefinition
-        ) {
-          var debugModule = angular.module('debugModule', []);
-          debugModule.directive('camWidgetDebug', debugDefinition);
-
-
-
-          var testModule = angular.module('testModule', [debugModule.name]);
-          testModule.controller('testController', [
-            '$scope',
-          function(
-            $scope
-          ) {
-            $scope.varToDebug = {
-              something: {
-                to: {
-                  debug: new Date()
-                }
-              },
-              array: 'abcdef'.split('')
-            };
-          }]);
-
-
-
-          angular.element(document).ready(function() {
-            angular.bootstrap(document.body, [testModule.name]);
-          });
-        });
-      });
-    </script>
+    <script src="lib/widgets/debug/test/cam-widget-debug.build.js"></script>
   </body>
 </html>

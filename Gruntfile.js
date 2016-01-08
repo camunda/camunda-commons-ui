@@ -139,13 +139,25 @@ module.exports = function(grunt) {
           ext: '.build.js',   // Dest filepaths will have this extension.
           extDot: 'first'   // Extensions in filenames begin after the first dot
         }]
+      },
+
+      watch: {
+        files: [{
+          expand: true,     // Enable dynamic expansion.
+          src: ['lib/widgets/**/test/*.src.js'], // Actual pattern(s) to match.
+          ext: '.build.js',   // Dest filepaths will have this extension.
+          extDot: 'first'   // Extensions in filenames begin after the first dot
+        }],
+        options: {
+          watch: true
+        }
       }
     }
   });
 
   require('./grunt/tasks/gh-pages')(grunt);
 
-  grunt.registerTask('build', ['less:widgets']);
+  grunt.registerTask('build', ['less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 

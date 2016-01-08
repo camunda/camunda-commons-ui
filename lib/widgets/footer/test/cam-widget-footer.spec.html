@@ -61,29 +61,6 @@
 
     <!-- gh-pages-footer -->
 
-    <script src="node_modules/requirejs/require.js"></script>
-    <script>
-      require.config({
-        paths: {text: 'node_modules/requirejs-text/text'}
-      });
-      require(['text!test-conf.json'], function(rConf) {
-        'use strict';
-        rConf = JSON.parse(rConf);
-        require.config(rConf);
-        require([
-          'angular',
-          'lib/widgets/footer/cam-widget-footer'
-        ], function (
-          angular,
-          footerDefinition
-        ) {
-          var footerModule = angular.module('footerModule', []);
-
-          footerModule.directive('camWidgetFooter', footerDefinition);
-
-          angular.bootstrap(document.body, [footerModule.name]);
-        });
-      });
-    </script>
+    <script src="lib/widgets/footer/test/cam-widget-footer.build.js"></script>
   </body>
 </html>
