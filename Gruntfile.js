@@ -129,6 +129,17 @@ module.exports = function(grunt) {
         ],
         tasks: []
       }
+    },
+
+    browserify: {
+      dist: {
+        files: [{
+          expand: true,     // Enable dynamic expansion.
+          src: ['lib/widgets/**/test/*.src.js'], // Actual pattern(s) to match.
+          ext: '.build.js',   // Dest filepaths will have this extension.
+          extDot: 'first'   // Extensions in filenames begin after the first dot
+        }]
+      }
     }
   });
 
