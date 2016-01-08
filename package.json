@@ -50,10 +50,7 @@
     "dmn-js": "0.3.1",
     "jquery": "2.1.1",
     "lodash": "2.4.1",
-    "moment": "2.9.0",
-    "requirejs": "2.1.14",
-    "requirejs-angular-define": "git://github.com/camunda/requirejs-angular-define#v1.1.1-camunda",
-    "requirejs-text": "2.0.12"
+    "moment": "2.9.0"
   },
   "devDependencies": {
     "brfs": "^1.4.2",
@@ -72,7 +69,6 @@
     "karma-junit-reporter": "0.2.2",
     "karma-mocha": "0.1.6",
     "karma-phantomjs-launcher": "0.1.4",
-    "karma-requirejs": "0.2.2",
     "load-grunt-tasks": "2.0.0",
     "mocha": "2.1.0",
     "xunit-file": "0.0.6"
