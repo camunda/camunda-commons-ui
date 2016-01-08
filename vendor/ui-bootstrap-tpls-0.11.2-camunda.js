@@ -2535,11 +2535,11 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
               if (appendToBody) {
                 var box = {
                   left: 5,
-                  width: angular.element($window).width() - 5
+                  width: window.innerWidth - 5
                 };
 
-                var ttArrow = tooltip.find('.tooltip-arrow');
-                var ttWidth = tooltip.width();
+                var ttArrow = angular.element(tooltip[0].querySelector('.tooltip-arrow'));
+                var ttWidth = tooltip[0].clientWidth;
                 var diffX = Math.abs((ttPosition.left + ttWidth) - box.width);
 
                 if (ttPosition.left < box.left) {

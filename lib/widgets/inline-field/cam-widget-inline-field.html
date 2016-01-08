@@ -30,14 +30,14 @@
                 show-button-bar="false"
 
                 ng-model="dateValue"
-                ng-change="changeDate(this)" />
+                ng-change="changeDate(this)"></datepicker>
 
     <timepicker class="timepicker"
                 ng-if="varType === 'datetime' || varType === 'time'"
                 show-meridian="false"
 
                 ng-model="dateValue"
-                ng-change="changeDate(this)" />
+                ng-change="changeDate(this)"></timepicker>
   </span>
 
   <input ng-if="varType === 'option' && options[0].value"
