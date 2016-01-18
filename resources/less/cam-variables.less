@@ -1,15 +1,4 @@
-/********************************************************************\
- * Web interface customization variables                            *
- *                                                                  *
- * You can find some information about less variables here:         *
- * http://lesscss.org/features/#features-overview-feature-variables *
-\********************************************************************/
-
-// Note: the import paths might need to be configured in your project
-// see: https://github.com/gruntjs/grunt-contrib-less#paths
-
-@import "../../node_modules/bootstrap/less/variables";
-@import "../../node_modules/bootstrap/less/mixins";
+@import "variables.less"; // from bootstrap
 
 // Colors ------------------------------------------------------------
 
@@ -42,6 +31,7 @@
 @line-color:                      @gray-light;
 
 @link-color:                      #08c;
+// @link-hover-color:                lighten(@link-color, 15%);
 
 @highlight-bg:                    #FFFDAB;
 
@@ -79,3 +69,13 @@
 
 @bpmn-font-path: '../fonts/';
 @font-path:      '../fonts/';
+@brand-logo:     '../assets/images/app-logo.png';
+
+
+// @font-family-sans-serif:  'Alegreya Sans', sans-serif;//"Helvetica Neue", Helvetica, Arial, sans-serif;
+@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
+@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
+@font-family-base:        @font-family-sans-serif;
+
+@font-size-base:          14px;

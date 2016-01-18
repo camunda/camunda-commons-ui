@@ -12,6 +12,8 @@ body {
 
   .navbar-brand {
     background: no-repeat url(@brand-logo);
+    text-indent: -999em;
+    width: 220px;
   }
 
   a {
@@ -25,7 +27,8 @@ body {
       margin: 0;
       padding: 0;
       list-style: none;
-      > li > a {
+      > li > a,
+      > li > view > a {
         position: relative;
         display: block;
         padding: 10px 15px;
@@ -37,7 +40,8 @@ body {
   > ul,
   > [ng-transclude] > ul {
     > li {
-      > a {
+      > a,
+      > view > a {
         line-height: (@navbar-height / 2);
         height: @navbar-height;
         > .glyphicon {
@@ -71,6 +75,14 @@ body {
     float: right;
   }
 
+  // this should probably refactored
+  @media screen and (max-width: 875px) {
+    > [ng-transclude] > ul > li > a,
+    > [ng-transclude] > ul > li > view > a,
+    .nav > li > a {
+      padding: 10px 7px;
+    }
+  }
 
   @media screen and (max-width: (@grid-float-breakpoint - 1)) {
     .small-screen-warning {
