@@ -94,7 +94,9 @@ module.exports = function(grunt) {
         compress: false,
         sourceMap: false,
         paths: [
-          'node_modules'
+          'node_modules',
+          'node_modules/bootstrap/less',
+          'lib/widgets'
         ]
       },
 

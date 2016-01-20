@@ -1,4 +1,5 @@
-@import "common-variables.less";
+@import "cam-variables.less";
+
 @brand-logo:      'resources/img/camunda-logo.png';
 @header-height:   41px;
 
@@ -6,12 +7,12 @@
 @icon-font-path:  "./node_modules/bootstrap/fonts/";
 @font-path:       "./vendor/fonts/";
 
-@import "common";
-@import "_fonts";
+@import "cam-bootstrap.less";
+@import "cam-common.less";
 
-@import "../../lib/widgets/inline-field/cam-widget-inline-field";
-@import "../../lib/widgets/search/cam-widget-search";
-@import "../../lib/widgets/loader/cam-widget-loader";
+@import "inline-field/cam-widget-inline-field";
+@import "search/cam-widget-search";
+@import "loader/cam-widget-loader";
 
 @dmn-font-path: '../../vendor/fonts/';
 @import "../../node_modules/dmn-js/styles/dmn-font";
@@ -30,6 +31,7 @@ body {
     background-color: @brand-primary;
 
     h1 {
+      margin: 10px 0;
       &:before {
         font-family: bpmn;
         font-weight: normal;
