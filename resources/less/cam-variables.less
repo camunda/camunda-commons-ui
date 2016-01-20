@@ -57,27 +57,39 @@
 @pagination-active-border:        @gray-light;
 
 // navigation
-@navbar-height:                   40px;
+@navbar-height:                   45px;
 @navbar-inverse-bg:               @brand-primary;
 @navbar-inverse-color:            @body-bg;
 @navbar-inverse-link-color:       @body-bg;
 @navbar-inverse-link-hover-color: @body-bg;
 
-@header-height:                   @navbar-height + 1;
+@header-height:                   @navbar-height;// + 1;
 @footer-height:                   31px;
 
 
 @bpmn-font-path: '../fonts/';
 @font-path:      '../fonts/';
-@brand-logo:     '../assets/images/app-logo.png';
+@brand-logo:     '../assets/images/app-logo-alt.png';
 
 
-// @font-family-sans-serif:  'open_sansregular', Helvetica, Arial, Verdana, sans-serif;
-// @font-family-sans-serif:  'Alegreya Sans', sans-serif;
-// @font-family-serif:       Georgia, "Times New Roman", Times, serif;
-
-//** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-@font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
-@font-family-base:        @font-family-sans-serif;
 
 @font-size-base:          14px;
+
+
+@shadow-color: fade(mix(@brand-primary, @gray-lighter), 40%);
+
+
+@color-shift:                       12%;
+@column-left-bg:                    darken(@body-bg, @color-shift * 6.18);
+@column-center-bg:                  darken(@body-bg, @color-shift * (6.18 * 0.618));
+@column-right-bg:                   darken(@body-bg, @color-shift * 0);
+@column-top-height:                 22px;
+@border-thick-width:                5px;
+@border-thin-width:                 1px;
+
+
+@hover-color-bg:                    mix(@column-center-bg, @column-right-bg, 50%);
+
+
+@layout-transition-timing: ease-in-out;
+@layout-transition-duration: 0.536s;
