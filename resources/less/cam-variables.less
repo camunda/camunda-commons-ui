@@ -18,7 +18,7 @@
 @warning-darker:                  darken(@warning-color, 45%);
 
 // process state colors
-@running-color:                   desaturate(lighten(@link-color, 25%), 40%);
+@running-color:                   desaturate(lighten(#08c, 25%), 40%);
 @running-darker:                  darken(@running-color, 45%);
 
 @completed-color:                 #bbb;
@@ -30,8 +30,8 @@
 @line-style:                      dotted;
 @line-color:                      @gray-light;
 
-@link-color:                      #08c;
-// @link-hover-color:                lighten(@link-color, 15%);
+@link-color:                      #2E6886;
+@link-hover-color:                lighten(@link-color, 15%);
 
 @highlight-bg:                    #FFFDAB;
 
@@ -72,8 +72,10 @@
 @brand-logo:     '../assets/images/app-logo.png';
 
 
-// @font-family-sans-serif:  'Alegreya Sans', sans-serif;//"Helvetica Neue", Helvetica, Arial, sans-serif;
-@font-family-serif:       Georgia, "Times New Roman", Times, serif;
+// @font-family-sans-serif:  'open_sansregular', Helvetica, Arial, Verdana, sans-serif;
+// @font-family-sans-serif:  'Alegreya Sans', sans-serif;
+// @font-family-serif:       Georgia, "Times New Roman", Times, serif;
+
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
 @font-family-monospace:   Menlo, Monaco, Consolas, "Courier New", monospace;
 @font-family-base:        @font-family-sans-serif;
