@@ -1,6 +1,9 @@
 /* global require: false */
 'use strict';
 
+var child_process = require('child_process');
+
+
 /**
   This file is used to configure the [grunt](http://gruntjs.com/) tasks
   aimed to generate the web frontend of the camunda BPM platform.
@@ -157,6 +160,15 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask('ensureSelenium', function() {
+    // async task
+    var done = this.async();
+
+    child_process.execFile('node', [__dirname + '/node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager', '--chrome', 'update'], function(err) {
+      done();
+    });
+  });
+
   require('./grunt/tasks/gh-pages')(grunt);
 
   grunt.registerTask('build', ['less:widgets', 'browserify:watch']);
@@ -165,7 +177,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('auto-build', ['build', 'connect:widgetTests', 'watch']);
 
-  grunt.registerTask('default', ['build', 'karma', 'connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('default', ['build', 'karma', 'ensureSelenium', 'connect:widgetTests', 'protractor:widgets']);
 
-  grunt.registerTask('protractorTests', ['connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('protractorTests', ['ensureSelenium', 'connect:widgetTests', 'protractor:widgets']);
 };
