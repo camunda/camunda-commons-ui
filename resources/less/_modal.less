@@ -1,5 +1,4 @@
 .modal {
-  background-color: fade(@gray-darker, 50%);
   cursor: auto;
   &:after {
     content: '';
@@ -14,12 +13,23 @@
   }
 }
 
+.modal-backdrop {
+  background-color: fade(@body-bg, 85%);
+  bottom: 0;
+  cursor: pointer;
+  &.in {
+    opacity: 1;
+    filter: alpha(opacity=100);
+  }
+}
+
 .modal-dialog {
   position: relative;
   z-index: 2;
 }
 
 .modal-content {
+  .shadow();
   background-color: @gray-lighter;
 }
 
