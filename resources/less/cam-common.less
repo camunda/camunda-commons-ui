@@ -14,8 +14,11 @@
 
 h1,
 h2,
-h3 {
-  .font-light;
+h3,
+h4,
+h5,
+h6 {
+  .font-regular();
 }
 
 h1 {
@@ -26,7 +29,10 @@ h1 {
 }
 
 
+th,
+dt,
 label,
+legend,
 strong {
   .font-bold();
 }
@@ -46,81 +52,3 @@ strong {
 [onclick] {
   cursor: pointer;
 }
-
-
-
-.align-left {
-  text-align: left;
-}
-
-.align-right {
-  text-align: right;
-}
-
-
-
-.text-help {
-  font-style: italic;
-  font-size: 90%;
-  color: @gray;
-  margin-bottom: (@grid-gutter-width / 2);
-}
-
-
-
-
-
-.list-inline > li {
-  padding: 1px 5px;
-}
-
-
-.tab-content {
-  position: relative;
-  padding-top: @grid-gutter-width;
-}
-
-
-.tooltip .tooltip-inner {
-  word-wrap: break-word;
-}
-
-
-.pagination {
-  display: block;
-  clear: both;
-  overflow: visible;
-  text-align: center;
-  margin: (@grid-gutter-width / 2) auto;
-  li {
-    overflow: visible;
-    a {
-      float: none;
-      border: none;
-    }
-  }
-  .active a {
-    background-color: @gray-light;
-  }
-}
-
-
-
-.btn-link:hover {
-  color: @link-hover-color;
-}
-
-
-
-
-@import "_animate-spin";
-@import "_modal";
-@import "_cam-table";
-
-@import "_ng-validation";
-@import "directives/notifications-panel";
-
-@import "../../lib/auth/page/login";
-
-@import "header/cam-widget-header.less";
-@import "footer/cam-widget-footer.less";
