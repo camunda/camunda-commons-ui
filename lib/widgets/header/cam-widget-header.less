@@ -3,21 +3,31 @@ body {
 }
 
 [cam-widget-header] {
-  @computed-height: @header-height - @border-thick-width;
-  @computed-half-height: (@header-height * 0.5) - @border-thick-width;
+  @computed-half-height: (@header-height * 0.5) - @header-border-bottom-width;;
 
   .navbar;
   .navbar-fixed-top;
-  margin-bottom: 0;
 
-  background-color: @body-bg;
+  margin-bottom: 0;
   border-bottom: @border-thick-width solid @brand-primary;
+
+  color: @navbar-default-color;
+  background-color: @navbar-default-bg;
+  font-size: @navbar-font-size;
+
+  a {
+    color: @navbar-default-link-color;
+    &:hover,
+    &:focus {
+      color: @navbar-default-link-hover-color;
+    }
+  }
 
   .navbar-brand {
     background: no-repeat url(@brand-logo);
     text-indent: -999em;
     width: 220px;
-    height: @computed-height;
+    height: @header-computed-height;
   }
 
   .navbar-toggle {
@@ -36,8 +46,8 @@ body {
     display: none;
     font-size: @computed-half-height;
     height: @computed-half-height;
-    line-height: @computed-height + 4;
-    margin-right: (@computed-height / 4);
+    line-height: @header-computed-height + 4;
+    margin-right: (@header-computed-height / 4);
     float: right;
   }
 
@@ -45,13 +55,13 @@ body {
   > [ng-transclude] > ul,
   > .cam-nav {
     > li {
-      height: @computed-height;
+      height: @header-computed-height;
       &.active {
-        background-color: @gray-lighter;
+        background-color: @navbar-default-link-active-bg;
       }
       > view > a,
       > a {
-        line-height: @computed-height;
+        line-height: @header-computed-height;
         padding-top: 0;
         padding-bottom: 0;
       }

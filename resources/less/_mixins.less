@@ -30,3 +30,123 @@
   background-image:     -ms-linear-gradient(@origin, @start, @stop);
   background-image:         linear-gradient(@origin, @start, @stop);
 }
+
+
+.link(@color, @hover-color) {
+  a {
+    color: @color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      outline: none;
+      color: @hover-color;
+    }
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      display: inline-block;
+      content: '';
+      border-bottom: 1px dotted mix(@color, @body-bg);
+    }
+  }
+}
+
+.link-no-decoration() {
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+}
+
+.hamburger-button() {
+  border: none;
+  background-color: transparent;
+  outline: none;
+
+  > span {
+    height: 2px;
+    display: block;
+    width: 100%;
+    min-width: 16px;
+    margin: 3px 0;
+    background-color: @navbar-default-link-color;
+    transition: transform 0.218s ease,
+                opacity 0.218s ease;
+    &:first-of-type {
+      margin-top: 0;
+    }
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &:hover {
+    span {
+      background-color: @navbar-default-link-hover-color;
+      &:first-of-type {
+        transform: translateY(-2px);
+      }
+      &:last-of-type {
+        transform: translateY(2px);
+      }
+    }
+  }
+  // display: none;
+  // background: none;
+
+  // width: 26px;
+  // padding: 2px 5px;
+  // margin-left: 10px;
+
+  // border: 1px solid transparent;
+
+  // transition: border-color 0.218s linear,
+  //             background-color 0.218s linear;
+
+  // > span {
+  //   display: block;
+  //   height: 2px;
+  //   margin-bottom: 3px;
+  //   background: @navbar-default-link-color;
+  //   transition: background-color 0.218s linear;
+
+  //   &:first-child {
+  //     margin-top: 3px;
+  //   }
+  // }
+  // &:hover {
+  //   > span {
+  //     background-color: @navbar-default-link-hover-color;
+  //   }
+  // }
+}
+
+.hamburger-button-open() {
+  > span {
+    opacity: 0;
+    &:first-of-type {
+      opacity: 1;
+      transform: translateY(5px) rotateZ(45deg);
+    }
+    &:last-of-type {
+      opacity: 1;
+      transform: translateY(-5px) rotateZ(-45deg);
+    }
+  }
+}

@@ -58,14 +58,46 @@
 
 // navigation
 @navbar-height:                   45px;
-@navbar-inverse-bg:               @brand-primary;
-@navbar-inverse-color:            @body-bg;
-@navbar-inverse-link-color:       @body-bg;
-@navbar-inverse-link-hover-color: @body-bg;
+// @navbar-inverse-bg:               @brand-primary;
+// @navbar-inverse-color:            @body-bg;
+// @navbar-inverse-link-color:       @body-bg;
+// @navbar-inverse-link-hover-color: @body-bg;
+
+@navbar-font-size: @font-size-base;
+
+@navbar-default-color:             #777;
+@navbar-default-bg:                @body-bg;
+@navbar-default-border:            darken(@navbar-default-bg, 6.5%);
+
+// Navbar links
+@navbar-default-link-color:                #545454;
+@navbar-default-link-hover-color:          #333;
+@navbar-default-link-hover-bg:             transparent;
+@navbar-default-link-active-color:         #555;
+@navbar-default-link-active-bg:            @gray-lighter;
+@navbar-default-link-disabled-color:       #ccc;
+@navbar-default-link-disabled-bg:          transparent;
+
+// Navbar brand label
+@navbar-default-brand-color:               @navbar-default-link-color;
+@navbar-default-brand-hover-color:         darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-hover-bg:            transparent;
+
+// Navbar toggle
+@navbar-default-toggle-hover-bg:           #ddd;
+@navbar-default-toggle-icon-bar-bg:        #888;
+@navbar-default-toggle-border-color:       #ddd;
+
+
+
+
+@header-height:                   @navbar-height;
+@header-border-bottom-width:      5px;
+@header-computed-height:          @navbar-height - @header-border-bottom-width;
+@header-border-bottom-color:      @brand-primary;
 
 @breadcrumb-height:               @grid-gutter-width;
 
-@header-height:                   @navbar-height;// + 1;
 @footer-height:                   31px;
 
 
