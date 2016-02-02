@@ -1,4 +1,3 @@
-// Camunda custom mixins
 .abs-box(@top: 0, @right: 0, @bottom: 0, @left: 0) {
   position: absolute;
   top: @top;
@@ -107,34 +106,6 @@
       }
     }
   }
-  // display: none;
-  // background: none;
-
-  // width: 26px;
-  // padding: 2px 5px;
-  // margin-left: 10px;
-
-  // border: 1px solid transparent;
-
-  // transition: border-color 0.218s linear,
-  //             background-color 0.218s linear;
-
-  // > span {
-  //   display: block;
-  //   height: 2px;
-  //   margin-bottom: 3px;
-  //   background: @navbar-default-link-color;
-  //   transition: background-color 0.218s linear;
-
-  //   &:first-child {
-  //     margin-top: 3px;
-  //   }
-  // }
-  // &:hover {
-  //   > span {
-  //     background-color: @navbar-default-link-hover-color;
-  //   }
-  // }
 }
 
 .hamburger-button-open() {
@@ -148,5 +119,66 @@
       opacity: 1;
       transform: translateY(-5px) rotateZ(-45deg);
     }
+  }
+}
+
+
+.navbar-a() {
+  font-size: 14px;
+  line-height: 18px;
+  color: @navbar-default-link-color;
+  &:hover,
+  &:focus {
+    background-color: transparent;
+    color: @navbar-default-link-hover-color;
+  }
+}
+
+.navbar-li(
+  @border-width: 5px;
+  @hover-color: @navbar-default-link-hover-bg;
+  @active-color: @navbar-default-link-active-bg;
+  @outer-height: @navbar-height
+) {
+  margin: 0;
+  padding: 0;
+  float: left;
+  display: inline-block;
+  height: (@outer-height - @border-width);
+  border-bottom: @border-width solid transparent;
+  transition: border-color 0.218s ease;
+
+  &:hover,
+  &:focus {
+    border-bottom: @border-width solid @hover-color;
+    &.external {
+      border-bottom-color: transparent;
+    }
+  }
+
+  &.active,
+  &.active:hover,
+  &.active:focus {
+    border-bottom: @border-width solid @active-color;
+  }
+
+  > a,
+  > view > a {
+    .navbar-a();
+    display: inline-block;
+    padding: 0 @padding-base-horizontal;
+    line-height: (@outer-height - @border-width);
+    @media (max-width: 875px) {
+      padding: 0 (@padding-base-horizontal * 0.5);
+    }
+  }
+
+  &.divider {
+    width: 1px;
+    background-color: darken(@gray-lighter, 10%);
+    display: block;
+    height: (@outer-height - @border-width);
+    margin: 0;
+    border: none;
   }
 }

@@ -57,16 +57,7 @@ body {
   > [ng-transclude] > ul,
   > .cam-nav {
     > li {
-      height: @header-computed-height;
-      &.active {
-        background-color: @navbar-default-link-active-bg;
-      }
-      > view > a,
-      > a {
-        line-height: @header-computed-height;
-        padding-top: 0;
-        padding-bottom: 0;
-      }
+      .navbar-li();
     }
   }
 
@@ -81,18 +72,6 @@ body {
   > [ng-transclude] {
     float: right;
     border-right: 1px solid darken(@gray-lighter, 10%);
-    > ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      > li > a,
-      > li > view > a {
-        position: relative;
-        display: block;
-        padding-left: @padding-base-horizontal;
-        padding-right: @padding-base-horizontal;
-      }
-    }
   }
 
   > .cam-nav {
