@@ -63,7 +63,6 @@ body {
 
   > [ng-transclude],
   > .cam-nav {
-    float: right;
     &.collapse {
       visibility: visible;
       display: block;
@@ -71,13 +70,22 @@ body {
   }
 
   > [ng-transclude] {
+    float: right;
     border-right: 1px solid darken(@gray-lighter, 10%);
   }
 
   > .cam-nav {
-    padding: 0;
-    margin: 0;
+    float: right;
     border-left: 1px solid lighten(@gray-lighter, 10%);
+  }
+
+  @media screen and (max-width: 875px) {
+    > [ng-transclude] > ul > li > a,
+    > [ng-transclude] > ul > li > view > a,
+    .cam-nav > li > a {
+      padding-left: (@padding-base-horizontal * 0.5);
+      padding-right: (@padding-base-horizontal * 0.5);
+    }
   }
 
   @media screen and (max-width: (@grid-float-breakpoint - 1)) {
@@ -101,8 +109,10 @@ body {
     > [ng-transclude] > ul,
     > .cam-nav {
       > li {
-        display: block;
         height: auto;
+        &.active {
+          background-color: @gray-lighter;
+        }
         > view > a,
         > a {
           line-height: @line-height-computed;
@@ -112,16 +122,7 @@ body {
     }
 
     > [ng-transclude] {
-      width: 100%;
-      max-width: 100%;
-      margin: 0;
-      padding: 0;// (@grid-gutter-width * 0.5);
       border-top: 1px solid @gray-lighter;
-      > ul {
-        margin: @padding-base-vertical 0 0 0;
-        padding: 0;
-        overflow: hidden;
-      }
     }
 
     .cam-nav .open > a {
