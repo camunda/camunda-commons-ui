@@ -43,7 +43,7 @@
     "angular-scenario": "1.2.29",
     "angular-touch": "1.2.29",
     "angular-translate": "2.4.2",
-    "bootstrap": "3.3.1",
+    "bootstrap": "3.3.6",
     "bpmn-font": "0.2.0",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "bpmn-js": "0.9.2",
