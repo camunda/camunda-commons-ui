@@ -61,6 +61,18 @@ body {
     }
   }
 
+  > .cam-nav {
+    > li {
+      &.active,
+      &:hover,
+      &:focus,
+      &.active:hover,
+      &.active:focus {
+        border-bottom: none;
+      }
+    }
+  }
+
   > [ng-transclude],
   > .cam-nav {
     &.collapse {
