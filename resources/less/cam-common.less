@@ -1,7 +1,3 @@
-@import "_fonts";
-
-@import "_mixins";
-
 @import "_bpmn-font";
 
 @import "_mixins";
@@ -17,11 +13,10 @@ h3,
 h4,
 h5,
 h6 {
-  .font-regular();
+  font-weight: 400;
 }
 
 h1 {
-  // text-transform: uppercase;
   .glyphicon {
     font-size: 0.83em;
   }
@@ -33,7 +28,7 @@ dt,
 label,
 legend,
 strong {
-  .font-bold();
+  font-weight: 700;
 }
 
 [ng\:cloak],
