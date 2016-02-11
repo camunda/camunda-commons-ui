@@ -33,13 +33,13 @@ body {
   }
 
   .navbar-toggle {
-    margin-top: 4px;
+    .hamburger-button();
+    margin-top: 0;
     margin-bottom: 0;
-    span {
-      background-color: @link-color;
-    }
-    &:hover span {
-      background-color: @link-hover-color;
+    padding: 1px 6px;
+    height: @header-computed-height;
+    &.open {
+      .hamburger-button-open();
     }
   }
 
@@ -122,9 +122,6 @@ body {
     > .cam-nav {
       > li {
         height: auto;
-        &.active {
-          background-color: @gray-lighter;
-        }
         > view > a,
         > a {
           line-height: @line-height-computed;
@@ -135,6 +132,10 @@ body {
 
     > [ng-transclude] {
       border-top: 1px solid @gray-lighter;
+      ul {
+        padding-right: 0;
+        padding-left: 0;
+      }
     }
 
     .cam-nav .open > a {

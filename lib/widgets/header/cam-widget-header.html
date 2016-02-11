@@ -1,11 +1,12 @@
 <div class="navbar-header">
   <button type="button"
-          class="navbar-toggle collapsed"
+          class="navbar-toggle"
+          ng-class="{open: !!navbarOpen}"
           ng-click="navbarOpen = !navbarOpen">
-    <span class="sr-only">{{ toggleNavigation }}</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
+    <strong class="sr-only">{{ toggleNavigation }}</strong>
+    <span></span>
+    <span></span>
+    <span></span>
   </button>
 
   <a class="navbar-brand"
