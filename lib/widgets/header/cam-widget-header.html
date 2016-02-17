@@ -3,7 +3,7 @@
           class="navbar-toggle"
           ng-class="{open: !!navbarOpen}"
           ng-click="navbarOpen = !navbarOpen">
-    <strong class="sr-only">{{ toggleNavigation }}</strong>
+    <em class="sr-only">{{ toggleNavigation }}</em>
     <span></span>
     <span></span>
     <span></span>
@@ -11,8 +11,9 @@
 
   <a class="navbar-brand"
      href="#/"
-     title="{{ brandName }}">
-    {{ brandName }}
+     title="{{ brandName }} {{ appName }}">
+    <span class="brand-logo"></span>
+    <span class="brand-name" ng-cloak>{{ brandName }}</span>
   </a>
 
   <div class="small-screen-warning">
