@@ -31,7 +31,6 @@
   "homepage": "https://github.com/camunda/camunda-commons-ui",
   "dependencies": {
     "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",
-    "angular": "1.2.29",
     "angular-animate": "1.2.29",
     "angular-cookies": "1.2.29",
     "angular-loader": "1.2.29",
