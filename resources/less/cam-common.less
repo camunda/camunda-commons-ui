@@ -44,3 +44,19 @@ strong {
 [onclick] {
   cursor: pointer;
 }
+
+
+.well {
+  min-height: 20px;
+  padding: ((@grid-gutter-width * 0.5) - 2px);
+  margin-bottom: (@grid-gutter-width * 0.5);
+  color: @well-border;
+  background-color: @well-bg;
+  border: 2px solid @well-border;
+  border-radius: @border-radius-base;
+  .box-shadow(none);
+  blockquote {
+    border-color: #ddd;
+    border-color: rgba(0,0,0,.15);
+  }
+}
