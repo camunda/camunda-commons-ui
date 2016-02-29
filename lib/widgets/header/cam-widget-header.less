@@ -95,8 +95,13 @@ body {
 
       > a {
         height: @header-computed-height;
-        display: inline-block;
+        display: block;
+        line-height: @header-height;
         padding: 0 @padding-base-horizontal;
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
       }
 
       &.active,
