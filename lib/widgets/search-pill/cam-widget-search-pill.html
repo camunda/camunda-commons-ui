@@ -17,6 +17,8 @@
 
   <span cam-widget-inline-field
         class="set-value"
+        tabindex="0"
+        ng-keydown="onKeydown($event, 'type')"
         type="option"
         options="type.values"
         change="changeSearch('type', varValue, $event)"
@@ -38,6 +40,8 @@
         <span cam-widget-inline-field
               class="set-value"
               type="text"
+              tabindex="0"
+              ng-keydown="onKeydown($event,'name')"
               change="changeSearch('name', varValue, $event)"
               on-start-editing="clearEditTrigger('name')"
               value="name.value.value">
@@ -54,6 +58,8 @@
       <span ng-if="!name.value.value">
         <span cam-widget-inline-field
               class="set-value"
+              tabindex="0"
+              ng-keydown="onKeydown($event, 'name')"
               type="text"
               change="changeSearch('name', varValue, $event)"
               on-start-editing="clearEditTrigger('name')"
@@ -72,6 +78,8 @@
     <span ng-if="potentialNames.length > 0">
       <span cam-widget-inline-field
             class="set-value"
+            tabindex="0"
+            ng-keydown="onKeydown($event, 'name')"
             type="option"
             options="potentialNames"
             allow-non-options="true"
@@ -102,6 +110,8 @@
 
   <span cam-widget-inline-field
         class="set-value"
+        tabindex="0"
+        ng-keydown="onKeydown($event, 'operator')"
         type="option"
         options="operator.values"
         change="changeSearch('operator', varValue, $event)"
@@ -120,6 +130,8 @@
 
   <span cam-widget-inline-field
         class="set-value"
+        tabindex="0"
+        ng-keydown="onKeydown($event, 'value')"
         type="{{ valueType }}"
         change="changeSearch('value', varValue, $event)"
         on-start-editing="clearEditTrigger('value')"
