@@ -123,37 +123,43 @@
 }
 
 
-.navbar-a() {
+.navbar-a(
+  @color: @navbar-default-link-color;
+  @hover-color: @navbar-default-link-hover-color
+) {
   font-size: @menu-font-size;
-  // line-height: @menu-line-height;
-  color: @navbar-default-link-color;
+  color: @color;
+  padding-left: 4px;
+  padding-right: 4px;
 
   &:hover,
   &:focus {
     background-color: transparent;
-    color: @navbar-default-link-hover-color;
+    color: @hover-color;
   }
 }
 
 .navbar-li(
-  @border-width: 5px;
   @hover-bg: @navbar-default-link-hover-bg;
   @hover-color: @navbar-default-link-hover-color;
   @active-color: @navbar-default-link-active-color;
   @active-bg: @navbar-default-link-active-bg;
   @height: @header-computed-height
 ) {
-  margin: 0;
+  margin: 0 4px;
   padding: 0;
   float: left;
   display: inline-block;
   height: @height;
-  border-bottom: @border-width solid transparent;
+  border-bottom: 3px solid transparent;
   transition: border-color 0.218s ease;
+  @media (max-width: 875px) {
+    margin: 0 2px;
+  }
 
   &:hover,
   &:focus {
-    border-bottom: @border-width solid @hover-bg;
+    border-bottom: 3px solid @hover-bg;
     &.external {
       border-bottom-color: transparent;
     }
@@ -162,17 +168,20 @@
   &.active,
   &.active:hover,
   &.active:focus {
-    border-bottom: @border-width solid @active-bg;
+    border-bottom: 3px solid @active-bg;
   }
 
   > a,
   > view > a {
     .navbar-a();
     display: inline-block;
-    padding: 0 @padding-base-horizontal;
     line-height: @header-height;
-    @media (max-width: 875px) {
-      padding: 0 (@padding-base-horizontal * 0.5);
+    height: @height;
+  }
+  &.active {
+    > a,
+    > view > a {
+      color: @active-color;
     }
   }
 

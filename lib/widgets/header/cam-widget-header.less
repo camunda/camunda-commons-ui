@@ -38,6 +38,7 @@ body {
     padding-bottom: 0;
     padding-left: @header-computed-height / 4;
     padding-right: @grid-gutter-width / 2;
+    color: @gray-base;
   }
 
   .brand-logo:before {
@@ -97,7 +98,7 @@ body {
         height: @header-computed-height;
         display: block;
         line-height: @header-height;
-        padding: 0 @padding-base-horizontal;
+        padding: 0 6px;
         &:hover,
         &:focus {
           background-color: transparent;
@@ -117,6 +118,7 @@ body {
       &.active:focus {
         background-color: transparent;
         > a {
+          color: @gray-base;
           background-color: transparent;
         }
       }
