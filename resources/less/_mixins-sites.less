@@ -1,0 +1,41 @@
+.link(@color, @hover-color) {
+  a {
+    color: @color;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+      text-decoration: none;
+      outline: none;
+      color: @hover-color;
+    }
+  }
+
+  a {
+    display: inline-block;
+    position: relative;
+
+    &:after {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      bottom: 0;
+      display: inline-block;
+      content: '';
+      border-bottom: 1px dotted mix(@color, @body-bg);
+    }
+  }
+}
+
+.link-no-decoration() {
+  a {
+    &:hover,
+    &:focus {
+      text-decoration: none;
+    }
+
+    &:after {
+      display: none;
+    }
+  }
+}
