@@ -1,6 +1,4 @@
 [cam-widget-inline-field] {
-  border-radius: @border-radius-small;
-  border: 1px solid transparent;
   display: inline-block;
   max-width: 100%;
   position: relative;
@@ -8,12 +6,8 @@
   margin: 0;
   white-space: nowrap;
   vertical-align: middle;
+  cursor: pointer;
 
-  &:hover {
-    background-color: @gray-lighter;
-    border: 1px @line-style @line-color;
-    cursor: pointer;
-  }
 
   >.view-value,
   .preview {
@@ -25,6 +19,10 @@
     margin: 0;
     position: relative;
     vertical-align: middle;
+    color: @link-color;
+    &:hover {
+      color: @link-hover-color;
+    }
   }
 
   >.edit {
