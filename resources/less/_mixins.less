@@ -162,32 +162,10 @@
   display: block;
   font-size: @size;
   line-height: @line-height;
-  color: @navbar-default-link-color;
   padding: 0 @padding-base-horizontal;
   text-decoration: none;
   position: relative;
   background-color: transparent;
-
-
-  &:before,
-  &:after {
-    position: absolute;
-    display: block;
-    content: '';
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    border: none;
-  }
-
-  &:before {
-    left: 0;
-    right: auto;
-  }
-  &:after {
-    left: auto;
-    right: 0;
-  }
 }
 
 .menu-li(
@@ -203,24 +181,11 @@
 
   a {
     .menu-a(@size, @line-height, @hover-color);
-
-    &:hover {
-      &:before,
-      &:after {
-        background-color: @hover-color;
-      }
-    }
   }
 
   &.active {
     > a {
       color: @navbar-default-link-active-color;
-    }
-    > a:before,
-    > a:after,
-    > a:hover:before,
-    > a:hover:after {
-      background-color: @active-color;
     }
   }
 }
