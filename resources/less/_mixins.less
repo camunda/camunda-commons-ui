@@ -170,7 +170,7 @@
 
 .menu-li(
   @hover-color: @navbar-default-link-hover-bg;
-  @active-color: @navbar-default-link-active-bg;
+  @active-color: @gray-base;
   @size: @menu-font-size;
   @line-height: @menu-line-height;
 ) {
@@ -185,7 +185,7 @@
 
   &.active {
     > a {
-      color: @navbar-default-link-active-color;
+      color: @active-color;
     }
   }
 }
@@ -194,7 +194,7 @@
   @size;
   @line-height;
   @hover-color: @navbar-default-link-hover-bg;
-  @active-color: @navbar-default-link-active-bg;
+  @active-color: @gray-base;
 ) {
   display: block;
   margin: 0;
