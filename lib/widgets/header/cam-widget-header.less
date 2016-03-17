@@ -78,6 +78,11 @@ body {
       visibility: visible;
       display: block;
     }
+    > li > a,
+    > li > view > a {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
   }
 
   > [ng-transclude] {
@@ -98,7 +103,8 @@ body {
         height: @header-computed-height;
         display: block;
         line-height: @header-height;
-        padding: 0 6px;
+
+        &,
         &:hover,
         &:focus {
           background-color: transparent;
@@ -111,12 +117,11 @@ body {
         }
       }
 
-      &.active,
+      &,
       &:hover,
-      &:focus,
-      &.active:hover,
-      &.active:focus {
+      &:focus {
         background-color: transparent;
+
         > a {
           color: @gray-base;
           background-color: transparent;
@@ -124,15 +129,6 @@ body {
       }
     }
   }
-
-  // @media screen and (max-width: 875px) {
-  //   > [ng-transclude] > ul > li > a,
-  //   > [ng-transclude] > ul > li > view > a,
-  //   .cam-nav > li > a {
-  //     padding-left: (@padding-base-horizontal * 0.5);
-  //     padding-right: (@padding-base-horizontal * 0.5);
-  //   }
-  // }
 
   @media screen and (max-width: (@grid-float-breakpoint - 1)) {
     .small-screen-warning {
@@ -175,9 +171,9 @@ body {
       }
     }
 
-    .cam-nav .open {
+    .cam-nav li.open {
       > a {
-        background-color: transparent;
+        &,
         &:hover,
         &:focus {
           background-color: transparent;
