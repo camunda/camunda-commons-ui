@@ -3,190 +3,35 @@ body {
 }
 
 [cam-widget-header] {
-  @computed-half-height: (@header-height * 0.5) - @header-border-bottom-width;
+  .cam-corporate-header();
 
-  .navbar;
-  .navbar-fixed-top;
+  [ng-transclude] {
+    float: left;
 
-  margin-bottom: 0;
-  border-bottom: @header-border-bottom-width solid @brand-primary;
-
-  color: @navbar-default-color;
-  background-color: @navbar-default-bg;
-  font-size: @navbar-font-size;
-
-  a {
-    color: @navbar-default-link-color;
-    text-decoration: none;
-    &:hover,
-    &:focus {
-      color: @navbar-default-link-hover-color;
-      text-decoration: none;
-    }
-  }
-
-  ul {
-    margin: 0;
-    padding: 0;
-  }
-
-  .navbar-brand {
-    font-size: @header-computed-height / 2;
-    line-height: @header-computed-height;
-    height: @header-computed-height;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: @header-computed-height / 4;
-    padding-right: @grid-gutter-width / 2;
-    color: @gray-base;
-  }
-
-  .brand-logo:before {
-    color: @brand-primary;
-    display: inline-block;
-    font-family: "bpmn";
-    font-style: normal;
-    font-weight: normal;
-    content: '\e831';
-  }
-
-  .navbar-toggle {
-    .hamburger-button();
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 1px 6px;
-    height: @header-computed-height;
-    &.open {
-      .hamburger-button-open();
-    }
-  }
-
-
-  .small-screen-warning {
-    display: none;
-    font-size: @computed-half-height;
-    height: @computed-half-height;
-    line-height: @header-computed-height + 4;
-    margin-right: (@header-computed-height / 4);
-    float: right;
-  }
-
-
-  > [ng-transclude],
-  > .cam-nav {
     &.collapse {
       visibility: visible;
       display: block;
-    }
-    > li > a,
-    > li > view > a {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-  }
 
-  > [ng-transclude] {
-    float: left;
-    > ul > li {
-      .navbar-li();
-    }
-  }
-
-  > .cam-nav {
-    float: right;
-    line-height: @header-height;
-
-    > li {
-      height: @header-computed-height;
-
-      > a {
-        height: @header-computed-height;
-        display: block;
-        line-height: @header-height;
-
-        &,
-        &:hover,
-        &:focus {
-          background-color: transparent;
-        }
-
-        &:focus {
-          outline: thin dotted;
-          outline: 5px auto -webkit-focus-ring-color;
-          outline-offset: -2px;
-        }
-      }
-
-      &,
-      &:hover,
-      &:focus {
-        background-color: transparent;
-
-        > a {
-          color: @gray-base;
-          background-color: transparent;
-        }
-      }
-    }
-  }
-
-  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
-    .small-screen-warning {
-      display: inline-block;
-    }
-
-    > [ng-transclude],
-    > .cam-nav {
-      text-align: right;
-      margin-left: 0;
-      width: 100%;
-      border: none;
-
-      &.collapse {
+      @media screen and (max-width: (@grid-float-breakpoint - 1)) {
         visibility: hidden;
         display: none;
       }
     }
+  }
 
-    > [ng-transclude] > ul,
-    > .cam-nav {
-      line-height: 1.6;
-      > li {
-        display: inline-block;
-        height: auto;
-        > view > a,
-        > a {
-          line-height: @grid-gutter-width;
-          height: @grid-gutter-width;
-          padding: 0 @padding-base-horizontal;
-        }
-      }
+  .small-screen-warning {
+    display: none;
+    font-size: 18px;
+    height: @header-computed-height;
+    margin-right: (@header-computed-height / 4);
+    float: right;
+
+    .glyphicon {
+      margin-top: 10px;
     }
 
-    > [ng-transclude] {
-      border-top: 1px solid @gray-lighter;
-      border-right: none;
-      ul {
-        padding-right: 0;
-        padding-left: 0;
-      }
-    }
-
-    .cam-nav li.open {
-      > a {
-        &,
-        &:hover,
-        &:focus {
-          background-color: transparent;
-        }
-      }
-
-      .dropdown-menu {
-        .dropdown-menu;
-        display: block;
-        left: auto;
-        right: 0;
-      }
+    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+      display: inline-block;
     }
   }
 }

@@ -200,3 +200,195 @@
     .menu-li(@hover-color, @active-color, @size, @line-height);
   }
 }
+
+.cam-corporate-header() {
+  .cam-corporate-header-base();
+
+  a {
+    .cam-corporate-header-link();
+  }
+
+  .navbar-brand {
+    .cam-corporate-header-branding();
+  }
+
+  .container .navbar-brand {
+    padding-left: 0;
+  }
+
+  .brand-logo:before {
+    color: @brand-primary;
+    display: inline-block;
+    font-family: "bpmn";
+    font-style: normal;
+    font-weight: normal;
+    content: '\e831';
+  }
+
+  .navbar-toggle {
+    .cam-corporate-header-hamburger();
+  }
+
+  .sections-menu > ul {
+    .cam-corporate-header-menu();
+  }
+
+  .app-menu > ul {
+    .cam-corporate-header-nav();
+  }
+}
+
+.cam-corporate-header-base() {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+
+  margin-bottom: 0;
+  border-bottom: @header-border-bottom-width solid @brand-primary;
+
+  color: @navbar-default-color;
+  background-color: @navbar-default-bg;
+  font-size: @navbar-font-size;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.cam-corporate-header-link() {
+  color: @navbar-default-link-color;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @navbar-default-link-hover-color;
+    text-decoration: none;
+  }
+}
+
+.cam-corporate-header-branding() {
+  font-size: @header-computed-height / 2;
+  line-height: @header-computed-height;
+  height: @header-computed-height;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: @header-computed-height / 4;
+  padding-right: @grid-gutter-width / 2;
+  color: @gray-base;
+}
+
+.cam-corporate-header-hamburger() {
+  .hamburger-button();
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1px 6px;
+  height: @header-computed-height;
+
+  &.open {
+    .hamburger-button-open();
+  }
+}
+
+.cam-corporate-header-menu-item-link() {
+  display: block;
+  height: @header-computed-height;
+  line-height: @header-height;
+  padding: 0 9px;
+
+
+  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+    height: auto;
+    line-height: 1.6;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
+
+  &:focus {
+    outline: thin dotted;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+  }
+}
+
+// menu is for links which will allow actions and are positioned on the left
+.cam-corporate-header-menu() {
+  float: left;
+
+  > li {
+    display: inline-block;
+    list-style: none;
+    background-color: transparent;
+
+    &:empty {
+      display: none;
+    }
+
+    > a {
+      .cam-corporate-header-menu-item-link();
+    }
+
+    &:hover,
+    &:focus {
+      background-color: transparent;
+
+      > a {
+        background-color: transparent;
+      }
+    }
+
+    &.active {
+      background-color: @gray-lighter;
+      > a {
+        color: @gray-base;
+      }
+    }
+
+    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+      padding: 0 (@header-computed-height * 0.25);
+    }
+  }
+
+  &.collapse {
+    visibility: visible;
+    display: block;
+
+    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+      visibility: hidden;
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+    text-align: right;
+    margin-left: 0;
+    width: auto;
+    border: none;
+  }
+}
+
+// navigation is for links which will keep the user in the page/app context
+// and are positioned on the right
+// it extends/overrides some parts of .cam-corporate-header-menu()
+.cam-corporate-header-nav() {
+  .cam-corporate-header-menu();
+
+  float: right;
+
+  > li {
+    > view > a {
+      .cam-corporate-header-menu-item-link();
+    }
+
+    &.active > view > a {
+      color: @gray-base;
+    }
+  }
+}

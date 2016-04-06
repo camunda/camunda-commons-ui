@@ -23,59 +23,62 @@
   </div>
 </div>
 
-<ul class="cam-nav nav navbar-nav"
-    ng-class="{collapse: !navbarOpen}">
+<nav class="cam-nav app-menu">
+  <ul ng-class="{collapse: !navbarOpen}">
 
-  <li engine-select></li>
+    <li engine-select></li>
 
-  <li class="account dropdown"
-      ng-if="authentication.name"
-      ng-cloak>
-    <a href
-       class="dropdown-toggle">
-      <span class="glyphicon glyphicon-user "></span>
-      {{ (userName || authentication.name) }}
-    </a>
+    <li class="account dropdown"
+        ng-if="authentication.name"
+        ng-cloak>
+      <a href
+         class="dropdown-toggle">
+        <span class="glyphicon glyphicon-user "></span>
+        {{ (userName || authentication.name) }}
+      </a>
 
-    <ul class="dropdown-menu dropdown-menu-right">
-      <li class="profile">
-        <a ng-href="{{ '../../admin/:engine/#/users/' + authentication.name + '?tab=profile' | uri }}">
-          {{ myProfile }}
-        </a>
-      </li>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li class="profile">
+          <a ng-href="{{ '../../admin/:engine/#/users/' + authentication.name + '?tab=profile' | uri }}">
+            {{ myProfile }}
+          </a>
+        </li>
 
-      <li class="divider"></li>
+        <li class="divider"></li>
 
-      <li class="logout">
-        <a href
-           ng-click="logout()">
-          {{ signOut }}
-        </a>
-      </li>
-    </ul>
-  </li>
+        <li class="logout">
+          <a href
+             ng-click="logout()">
+            {{ signOut }}
+          </a>
+        </li>
+      </ul>
+    </li>
 
-  <li class="divider-vertical"
-      ng-if="authentication.name"
-      ng-cloak></li>
+    <li class="divider-vertical"
+        ng-if="authentication.name"
+        ng-cloak></li>
 
-  <li class="app-switch dropdown">
-    <a href
-       class="dropdown-toggle">
-      <span class="glyphicon glyphicon-home"></span>
-      <span class="caret"></span>
-    </a>
+    <li class="app-switch dropdown">
+      <a href
+         class="dropdown-toggle">
+        <span class="glyphicon glyphicon-home"></span>
+        <span class="caret"></span>
+      </a>
 
-    <ul class="dropdown-menu dropdown-menu-right">
-      <li ng-repeat="(appName, app) in apps"
-          ng-if="appName !== currentApp && (!authentication || authentication.canAccess(appName))"
-          ng-class="appName">
-        <a ng-href="{{ '../../' + appName + '/:engine/' | uri }}">
-          {{ app.label }}
-        </a>
-      </li>
-    </ul>
-  </li>
-</ul>
+      <ul class="dropdown-menu dropdown-menu-right">
+        <li ng-repeat="(appName, app) in apps"
+            ng-if="appName !== currentApp && (!authentication || authentication.canAccess(appName))"
+            ng-class="appName">
+          <a ng-href="{{ '../../' + appName + '/:engine/' | uri }}">
+            {{ app.label }}
+          </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
-<div ng-transclude ng-class="{collapse: !navbarOpen}"></div>
+<div ng-transclude
+     class="sections-menu"
+     ng-class="{collapse: !navbarOpen}"></div>
