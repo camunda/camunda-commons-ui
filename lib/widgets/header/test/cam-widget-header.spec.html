@@ -87,6 +87,12 @@
     &lt;li&gt;
       &lt;a href&gt;Awesome&lt;/a&gt;
     &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;a href&gt;Sweet&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;a href&gt;Marvellous&lt;/a&gt;
+    &lt;/li&gt;
   &lt;/ul&gt;
 &lt;/div&gt;</pre>
         <div class="test-container">
@@ -95,6 +101,12 @@
             <ul>
               <li>
                 <a href>Awesome</a>
+              </li>
+              <li class="active">
+                <a href>Sweet</a>
+              </li>
+              <li>
+                <a href>Marvellous</a>
               </li>
             </ul>
           </div>
@@ -134,6 +146,19 @@
      user-name="fullName"
      brand-name="Cammunda Commons UI"
      current-app="{{ ctrlCurrentApp }}"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href&gt;Awesome&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;a href&gt;Sweet&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;!-- as in cockpit --&gt;
+      &lt;view&gt;
+        &lt;a href&gt;Marvellous&lt;/a&gt;
+      &lt;/view&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div class="row"&gt;
   &lt;div class="col-xs-12"&gt;
@@ -148,7 +173,19 @@
                user-name="fullName"
                brand-name="Cammunda Commons UI"
                current-app="{{ ctrlCurrentApp }}">
-            Transcluded
+            <ul>
+              <li>
+                <a href>Awesome</a>
+              </li>
+              <li class="active">
+                <a href>Sweet</a>
+              </li>
+              <li><!-- as in cockpit -->
+                <view>
+                  <a href>Marvellous</a>
+                </view>
+              </li>
+            </ul>
           </div>
           <div class="row">
             <div class="col-xs-12">
