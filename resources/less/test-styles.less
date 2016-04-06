@@ -170,10 +170,11 @@ dd li {
 
 .test-container {
   .container;
-  width: 100% !important;
   position: relative;
   background-color: @gray-lighter;
   padding: @grid-gutter-width;
+  border: 1px solid @gray-lighter;
+  background: url(resources/img/check-pattern.png);
 }
 
 
@@ -182,6 +183,7 @@ dd li {
 // header
 .cam-widget-header-test-page .test-container {
   padding-top: @header-height;
+
   .test-container {
     overflow: hidden;
     min-height: 200px;
