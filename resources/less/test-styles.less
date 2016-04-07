@@ -28,38 +28,44 @@
 
 // custom styles for the testing suite -----------------------------------------
 
-body {
-  padding-top: 0;
-  > header,
-  > .page-wrapper {
-    .container-fluid();
+
+.cam-brand-header {
+  .cam-corporate-header-base();
+
+  a {
+    .cam-corporate-header-link();
   }
 
-  > header {
-    .cam-header();
-    border-bottom: @header-border-bottom-width solid @header-border-bottom-color;
-    height: @header-height;
+  .navbar-brand {
+    .cam-corporate-header-branding();
+  }
 
-    h1 {
-      font-size: 20px;
-      height: @header-computed-height;
-      line-height: @header-computed-height;
-      margin: 0;
-      &:before {
-        font-family: bpmn;
-        font-weight: normal;
-        content: '\e831';
-        display: inline-block;
-        margin-right: (@grid-gutter-width / 2);
-      }
-    }
+  .container .navbar-brand {
+    padding-left: 0;
+  }
 
-    a,
-    a:hover,
-    small {
-      color: @body-bg;
-      margin-right: (@grid-gutter-width / 2);
-    }
+  .brand-logo:before {
+    color: @brand-primary;
+    display: inline-block;
+    font-family: "bpmn";
+    font-style: normal;
+    font-weight: normal;
+    content: '\e831';
+  }
+}
+
+
+.cam-brand-footer {
+  .cam-corporate-footer-base();
+}
+
+
+body {
+  padding-top: 0;
+  margin-top: @header-height;
+
+  > .page-wrapper {
+    .container-fluid();
   }
 
   > .page-wrapper {
@@ -170,6 +176,7 @@ dd li {
 
 .test-container {
   .container;
+  max-width: 100% !important;
   position: relative;
   background-color: @gray-lighter;
   padding: @grid-gutter-width;

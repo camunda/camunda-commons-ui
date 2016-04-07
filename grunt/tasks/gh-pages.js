@@ -131,11 +131,12 @@ module.exports = function (grunt) {
     });
 
     var menuTemplate = require('lodash').template([
-      '<header>',
-        '<h1>',
+      '<header class="cam-brand-header">',
+        '<span class="navbar-brand" href="./index.html" title="Camunda Corporate Styles">',
+          '<span class="brand-logo"></span>',
           '<a href="./">Camunda commons UI</a>',
           '<small><%- version %></small>',
-        '</h1>',
+        '</span>',
       '</header>',
       '<div class="page-wrapper">',
         '<nav>',
@@ -161,7 +162,7 @@ module.exports = function (grunt) {
 
     var footerTemplate = require('lodash').template([
       '</div>',
-      '<footer>',
+      '<footer class="cam-brand-footer">',
         '<nav>',
           '<ul class="list-inline">',
             '<li><a href="//camunda.org">Camunda BPM</a></li>',
@@ -310,6 +311,7 @@ module.exports = function (grunt) {
     });
   }
 
+  grunt.registerTask('gh-pages-compile', compileGhPages);
 
   grunt.registerTask('gh-pages', function () {
     var done = this.async();
