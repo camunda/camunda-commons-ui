@@ -17,6 +17,28 @@ body {
         display: none;
       }
     }
+
+    li {
+      > view > a {
+        .cam-corporate-header-menu-item-link();
+      }
+
+      &:hover,
+      &:focus {
+        background-color: transparent;
+
+        > view > a {
+          background-color: transparent;
+        }
+      }
+
+      &.active {
+        background-color: @gray-lighter;
+        > view > a {
+          color: @gray-base;
+        }
+      }
+    }
   }
 
   .small-screen-warning {
