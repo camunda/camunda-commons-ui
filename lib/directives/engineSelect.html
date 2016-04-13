@@ -10,7 +10,8 @@
     {{ currentEngine.name }}
   </a>
   <ul class="dropdown-menu dropdown-menu-right">
-    <li ng-repeat="(id, engine) in engines">
+    <li ng-repeat="(id, engine) in engines"
+        ng-class="{ active: currentEngine.name === engine.name }">
       <a ng-href="{{ 'app://../' + engine.name + '/' | uri }}">
         {{ engine.name }}
       </a>
