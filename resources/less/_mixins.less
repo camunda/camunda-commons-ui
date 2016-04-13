@@ -13,14 +13,6 @@
   overflow: hidden;
 }
 
-.shadow (@color: @shadow-color) {
-  box-shadow: /*1px 1px 0 0 @color,
-              2px 2px 0 0 @color,
-              3px 3px 0 0 @color,
-              4px 4px 0 0 @color,*/
-              5px 5px 0 0 @color;
-}
-
 .gradient(@origin: top, @start: rgba(255, 255, 255, 0), @stop: rgba(255, 255, 255, 1)) {
   background-color: @start;
   background-image: -webkit-linear-gradient(@origin, @start, @stop);
