@@ -189,10 +189,12 @@ module.exports = function (grunt) {
 
     var readme = marked(grunt.file.read(projectRoot + '/README.md').toString());
     readme = readme.replace(/<h1 id="camunda-commons-ui.*<\/h1>/, '');
+    var d = new Date();
     grunt.file.write(generatedDir + '/index.html', [
       '<html>',
-        '<!-- ' + (new Date()) + ' -->',
+        '<!-- ' + d + ' -->',
         '<head>',
+          '<meta charset="utf-8" />',
           '<title>Camunda commons UI library</title>',
           '<link rel="icon" href="resources/img/favicon.ico" />',
           '<link type="text/css" rel="stylesheet" href="./styles.css" />',
@@ -216,6 +218,14 @@ module.exports = function (grunt) {
       'node_modules/bpmn-font/dist/font/*',
       'node_modules/bootstrap/fonts/*',
       'vendor/fonts/*'
+    ]).forEach(function (filepath) {
+      grunt.file.copy(filepath, generatedDir + '/' + filepath);
+    });
+
+
+
+    grunt.file.expand([
+      'node_modules/dmn-js/fonts/*.{eot,svg,ttf,woff,woff2}',
     ]).forEach(function (filepath) {
       grunt.file.copy(filepath, generatedDir + '/' + filepath);
     });
