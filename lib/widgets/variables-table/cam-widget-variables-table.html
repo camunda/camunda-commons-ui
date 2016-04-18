@@ -63,7 +63,14 @@
         </div>
 
         <div ng-switch-when="value"
-             ng-if="!isEditable('value', info) && variable.type !== 'Object'"
+             ng-if="!isEditable('value', info) && variable.type === 'String'"
+             ng-click="readStringVar(v)"
+             class="read-only value-wrapper">
+          {{ variable.value}}
+        </div>
+
+        <div ng-switch-when="value"
+             ng-if="!isEditable('value', info) && variable.type !== 'Object' && variable.type !== 'String'"
              class="read-only value-wrapper">
           {{ variable.value }}
         </div>
