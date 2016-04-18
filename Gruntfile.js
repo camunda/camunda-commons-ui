@@ -129,6 +129,7 @@ module.exports = function(grunt) {
           livereload: pkg.gruntConfig.livereloadPort
         },
         files: [
+          'kitchen-sink.html',
           '*.css',
           'lib/**/*.{html,js}'
         ],
