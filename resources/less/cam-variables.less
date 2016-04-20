@@ -5,7 +5,7 @@
 // this is the "main" color (like in the header)
 @main-color:                      #b5152b;
 @brand-primary:                   @main-color;
-@text-color: @gray;
+@text-color:                      @gray;
 
 // slightly darker variant
 // @main-darker:                     #9c3930;
@@ -50,14 +50,14 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       transparent;
-//** `<input disabled>` background color
-@input-bg-disabled:              transparent;
+@input-bg:                       @custom-gray-lighter;//transparent;
+// //** `<input disabled>` background color
+// @input-bg-disabled:              transparent;
 
 //** Text color for `<input>`s
-@input-color:                    currentColor;//@gray-dark;
-// //** `<input>` border color
-@input-border:                   @gray;
+@input-color:                    @text-color;
+//** `<input>` border color
+@input-border:                   lighten(@input-color, 33);
 
 // // TODO: Rename `@input-border-radius` to `@input-border-radius-base` in v4
 // //** Default `.form-control` border radius
@@ -69,20 +69,27 @@
 // @input-border-radius-small:      @border-radius-small;
 
 //** Border color for inputs on focus
-@input-border-focus:             @link-color;
+@input-border-focus:             @link-hover-color;
 
-// //** Placeholder text color
-// @input-color-placeholder:        #999;
+//** Placeholder text color
+@input-color-placeholder:        @input-border;
 
 // //** Default `.form-control` height
-// @input-height-base:              (@line-height-computed + (@padding-base-vertical * 2) + 2);
+// @input-height-base:              (@line-height-computed + (@padding-base-vertical * 0) + 2);
 // //** Large `.form-control` height
-// @input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 2) + 2);
+// @input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 0) + 2);
 // //** Small `.form-control` height
-// @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 2) + 2);
+// @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 0) + 2);
+
+// //** Default `.form-control` height
+// @input-height-base:              (@line-height-computed + (@padding-base-vertical * 0) + 2);
+// //** Large `.form-control` height
+// @input-height-large:             (ceil(@font-size-large * @line-height-large) + (@padding-large-vertical * 0) + 2);
+// //** Small `.form-control` height
+// @input-height-small:             (floor(@font-size-small * @line-height-small) + (@padding-small-vertical * 0) + 2);
 
 // //** `.form-group` margin
-// @form-group-margin-bottom:       15px;
+// @form-group-margin-bottom:       30px;
 
 // @legend-color:                   @gray-dark;
 // @legend-border-color:            #e5e5e5;
@@ -96,7 +103,7 @@
 // @cursor-disabled:                not-allowed;
 
 
-@cam-input-border-style:              dashed;
+@cam-input-border-style:              solid;
 @cam-input-required-border-style:     solid;
 @cam-input-border-width:              1px;
 

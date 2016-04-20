@@ -1,15 +1,73 @@
 .form-control {
   border-width: 0 0 @cam-input-border-width 0;
   border-bottom-style: @cam-input-border-style;
-  .box-shadow(none);
 
+
+  // Firefox
+  &::-moz-placeholder {
+    font-style: italic;
+  }
+  &:-ms-input-placeholder { font-style: italic; } // Internet Explorer 10+
+  &::-webkit-input-placeholder  { font-style: italic; } // Safari and Chrome
+
+  &,
+  .has-success &,
+  .has-warning &,
+  .has-error &,
   &:focus {
     .box-shadow(none);
+  }
+
+  .has-success &,
+  .has-warning &,
+  .has-error & {
+    &:focus {
+      .box-shadow(none);
+      // border-width: 0 0 @cam-input-border-width @cam-input-border-width;
+    }
+  }
+
+  // &:focus {
+  //   border-width: 0 0 @cam-input-border-width @cam-input-border-width;
+  // }
+
+  .has-success & {
+    background-color: mix(@input-bg, @state-success-bg);
+  }
+  .has-warning & {
+    background-color: mix(@input-bg, @state-warning-bg);
+  }
+  .has-error & {
+    background-color: mix(@input-bg, @state-danger-bg);
   }
 
   &[required] {
     border-style: @cam-input-required-border-style;
   }
+
+  &[disabled],
+  &[readonly],
+  .disabled-form &,
+  fieldset[disabled] & {
+    color: @gray-light;
+    border-color: darken(@gray-lighter, 10);
+    .placeholder(darken(@gray-lighter, 20));
+  }
+
+  textarea& {
+    border-width: 0 0 0 @cam-input-border-width;
+    border-style: @cam-input-border-style;
+
+    &[required] {
+      border-style: @cam-input-required-border-style;
+    }
+
+    &:focus {
+      border-color: @input-border-focus;
+      border-width: @cam-input-border-width 0 0 @cam-input-border-width;
+    }
+  }
+
 
   &[type="checkbox"],
   &[type="radio"] {
@@ -22,96 +80,28 @@
     &.ng-invalid {
       color: @state-danger-text;
       border-color: @state-danger-text;
-      // background-color: @state-danger-bg;
+      background-color: mix(@input-bg, @state-danger-bg);
     }
   }
 }
 
-textarea.form-control {
-  border-width: 0 0 0 @cam-input-border-width;
-  border-style: @cam-input-border-style;
-
-  &[required] {
-    border-style: @cam-input-required-border-style;
-  }
-
-  &:focus {
-    border-color: @input-border-focus;
-  }
+a.form-control-static {
+  display: block;
 }
 
-:not(.form-inline) {
-  .form-control {
-    // &[type=button],
-    // &[type=checkbox],
-    &[type=color],
-    &[type=date],
-    &[type=datetime],
-    &[type=email],
-    // &[type=file],
-    // &[type=hidden],
-    &[type=image],
-    &[type=month],
-    &[type=number],
-    &[type=password],
-    // &[type=radio],
-    &[type=range],
-    &[type=min],
-    &[type=max],
-    &[type=value],
-    &[type=step],
-    // &[type=reset],
-    &[type=search],
-    // &[type=submit],
-    &[type=tel],
-    &[type=text],
-    &[type=time],
-    &[type=url],
-    &[type=week] {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
-    &.padded {
-      padding-left: @padding-base-horizontal;
-      padding-right: @padding-base-horizontal;
-    }
-  }
-
-  select.form-control {
-    padding-left: 0;
-    padding-right: 0;
-
-    &.padded {
-      padding-left: @padding-base-horizontal;
-      padding-right: @padding-base-horizontal;
-    }
-  }
-}
-
-.input-group .form-control {
-  border-width: 1px;
-  border-style: solid;
-
-  &:not([type=checkbox]),
-  &:not([type=radio]) {
-    padding-left: @padding-base-horizontal;
-    padding-right: @padding-base-horizontal;
+.input-group {
+  .input-group-addon,
+  .form-control-feedback {
+    border-width: 0 0 @cam-input-border-width 0;
   }
 }
 
 .help-block {
-  margin-top: @padding-base-vertical;
   font-size: 90%;
 }
 
-.control-group {
-  padding-top: @padding-base-vertical;
-  padding-bottom: @padding-base-vertical;
-
-  .help {
-    .help-block;
-  }
+.form-group + .help-block {
+  margin-top: (0 - @padding-base-vertical);
 }
 
 .disabled-form {
@@ -120,12 +110,12 @@ textarea.form-control {
   &:before {
     display: block;
     content: ' ';
-    background-color: fade(@body-bg, 33%);
+    background-color: fade(@gray-lighter, 33%);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: -3px;
+    left: -3px;
+    bottom: -3px;
+    right: -3px;
     cursor: not-allowed;
     z-index: 1000;
   }
