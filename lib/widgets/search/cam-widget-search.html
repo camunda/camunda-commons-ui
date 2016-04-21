@@ -1,6 +1,7 @@
 <form class="search-field"
       ng-submit="createSearch()"
       ng-class="{'has-search': searches.length}">
+
   <div class="form-container search-container">
     <span cam-widget-search-pill
           ng-repeat="search in searches"
@@ -18,14 +19,12 @@
           delete-text="{{ translations.deleteSearch }}"
           on-change="handleChange($index, field, before, value, $event)"
           on-delete="deleteSearch($index)"></span>
-
     <input class="form-control main-field"
            type="text"
            ng-model="inputQuery"
            ng-keydown="onKeydown($event)"
            typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
            typeahead-on-select="createSearch($item)"
-           instant-typeahead></input>
-
+           instant-typeahead />
   </div>
 </form>

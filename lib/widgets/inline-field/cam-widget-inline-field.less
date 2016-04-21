@@ -4,37 +4,42 @@
   position: relative;
   padding: 0;
   margin: 0;
-  white-space: nowrap;
-  vertical-align: middle;
   cursor: pointer;
 
+  > .view-value,
+  > .preview {
+    .form-control-static;
+    display: block;
+    float: left;
 
-  >.view-value,
-  .preview {
-    max-width: 100%;
-    display: inline-block;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 1px 3px;
-    margin: 0;
-    position: relative;
-    vertical-align: middle;
+
+    min-height: auto;
+
     color: @link-color;
     &:hover {
       color: @link-hover-color;
     }
   }
 
-  >.edit {
-    input {
-      padding: 1px 3px;
-      height: auto;
-      width: auto;
-      min-width: 40px;
-      max-width: 100%;
-      display: inline-block;
-      border-radius: @border-radius-small 0 @border-radius-small @border-radius-small;
-    }
+  > .view-value,
+  > .preview,
+  .form-control {
+    padding-left: 3px;
+    padding-right: 3px;
+
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .form-control {
+    width: auto;
+    min-width: 40px;
+    max-width: 100%;
+    margin-bottom: -1px;
+    height: auto;
   }
 
   .dropdown-menu {
@@ -45,8 +50,7 @@
   &[type="date"],
   &[type="time"],
   &[type="datetime"] {
-    >.edit {
-      display: block;
+    > .edit {
       position: relative;
       z-index: 99;
       min-width: 90px;
@@ -57,12 +61,18 @@
       top: 30px;
       left: 0;
       background-color: @body-bg;
-      .box-shadow(0 3px 9px rgba(0,0,0,.5));
     }
+  }
+
+
+  .visible-whitespace {
+    white-space: nowrap;
+    width: auto;
+    max-width: none;
   }
 }
 
-.list-inline>[cam-widget-inline-field] {
+.list-inline > [cam-widget-inline-field] {
   padding-right: 0;
 }
 
@@ -85,13 +95,9 @@ body > .cam-widget-inline-field {
   }
 
   &.btn-group {
-    margin-top: 2px;
-    margin-left: -1px;
-
     border-radius: @border-radius-small @border-radius-small 0 0;
 
     > button.btn {
-      // padding-bottom: 3px;
       &:first-child {
         border-radius: @border-radius-small 0 0 0;
       }

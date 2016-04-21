@@ -106,13 +106,60 @@ $scope.search1 = {
             operator="search1.operator"
             value="search1.value"
             on-change="search1.update()" /&gt;</pre>
-          <span cam-widget-search-pill
+          <div class="test-container">
+            <span cam-widget-search-pill
                 id="pill1"
                 valid="search1.valid"
                 type="search1.type"
                 operator="search1.operator"
                 value="search1.value"
                 on-change="search1.update()" />
+          </div>
+        </div>
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="basic">
+        <h3>Single operator</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
+$scope.singleOperator = {
+  type: {
+    values: [{key: 'foo', value: 'Foo'}, {key: 'bar', value: 'Bar'}],
+    value: null
+  },
+  operator: {
+    values: [{key:'eq', value: '='}],
+    value: null
+  },
+  value: {
+    value: ''
+  },
+  valid: false,
+  update: function() {
+    $scope.singleOperator.valid =
+      $scope.singleOperator.type.value !== null &amp;&amp;
+      $scope.singleOperator.operator.value !== null &amp;&amp;
+      $scope.singleOperator.value.value !== '';
+  }
+};
+
+&lt;span cam-widget-search-pill
+            valid="singleOperator.valid"
+            type="singleOperator.type"
+            operator="singleOperator.operator"
+            value="singleOperator.value"
+            on-change="singleOperator.update()" /&gt;</pre>
+          <div class="test-container">
+            <span cam-widget-search-pill
+                id="single-operator"
+                valid="singleOperator.valid"
+                type="singleOperator.type"
+                operator="singleOperator.operator"
+                value="singleOperator.value"
+                on-change="singleOperator.update()" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
 
@@ -130,13 +177,15 @@ $scope.search2.enforceDates = true;
             operator="search2.operator"
             value="search2.value"
             enforce-dates="search2.enforceDates" /&gt;</pre>
-          <span cam-widget-search-pill
+          <div class="test-container">
+            <span cam-widget-search-pill
                 id="pill2"
                 valid="search2.valid"
                 type="search2.type"
                 operator="search2.operator"
                 value="search2.value"
                 enforce-dates="search2.enforceDates" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
 
@@ -154,13 +203,15 @@ $scope.search3.allowDates = true;
             operator="search3.operator"
             value="search3.value"
             allow-dates="search3.allowDates" /&gt;</pre>
-          <span cam-widget-search-pill
+          <div class="test-container">
+            <span cam-widget-search-pill
                 id="pill3"
                 valid="search3.valid"
                 type="search3.type"
                 operator="search3.operator"
                 value="search3.value"
                 allow-dates="search3.allowDates" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
 
@@ -185,16 +236,18 @@ $scope.search4.update = function() {
             value="search4.value"
             extended="search4.extended"
             on-change="search4.update()" /&gt;</pre>
-          <span cam-widget-search-pill
-                id="pill4"
-                valid="search4.valid"
-                name="search4.name"
-                potential-names="search4.potentialNames"
-                type="search4.type"
-                operator="search4.operator"
-                value="search4.value"
-                extended="search4.extended"
-                on-change="search4.update()" />
+          <div class="test-container">
+            <span cam-widget-search-pill
+                  id="pill4"
+                  valid="search4.valid"
+                  name="search4.name"
+                  potential-names="search4.potentialNames"
+                  type="search4.type"
+                  operator="search4.operator"
+                  value="search4.value"
+                  extended="search4.extended"
+                  on-change="search4.update()" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
 
@@ -221,15 +274,17 @@ $scope.search5.extended = true;
             value="search5.value"
             extended="search5.extended"
             potential-names="search5.potentialNames" /&gt;</pre>
-          <span cam-widget-search-pill
-                id="pill5"
-                valid="search5.valid"
-                name="search5.name"
-                potential-names="search5.potentialNames"
-                type="search5.type"
-                operator="search5.operator"
-                value="search5.value"
-                extended="search5.extended" />
+          <div class="test-container">
+            <span cam-widget-search-pill
+                  id="pill5"
+                  valid="search5.valid"
+                  name="search5.name"
+                  potential-names="search5.potentialNames"
+                  type="search5.type"
+                  operator="search5.operator"
+                  value="search5.value"
+                  extended="search5.extended" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
 
@@ -245,11 +300,13 @@ $scope.search6.basic = true;
             valid="search6.valid"
             type="search6.type"
             basic="search6.basic" /&gt;</pre>
-          <span cam-widget-search-pill
-                id="pill6"
-                valid="search6.valid"
-                type="search6.type"
-                basic="search6.basic" />
+          <div class="test-container">
+            <span cam-widget-search-pill
+                  id="pill6"
+                  valid="search6.valid"
+                  type="search6.type"
+                  basic="search6.basic" />
+          </div>
         </div>
       </div><!-- /.widget-example -->
     </section>

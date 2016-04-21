@@ -1,47 +1,39 @@
 [cam-widget-search-pill] {
-  .valid-hide {
-    display: none;
-  }
+  display: inline-block;
 
-  .invalid .valid-hide {
-    display: inline-block;
-  }
+  > .search-label {
+    display: table;
+    border: 1px solid transparent;
 
-  .search-label {
-    clear: both;
+    background-color: @custom-gray-lighter;
+    color: @text-color;
+    border-radius: 3px;
+    border-color: @custom-gray-light;
 
-    padding: 1px 2px;
-    margin: 0 0 2px 0;
-    border-radius: @border-radius-large;
-    display: inline-block;
-    vertical-align: middle;
-
-
-    &.invalid {
-      .alert-danger();
-      border-width: 1px;
-      border-style: solid;
-    }
-
-    > .glyphicon {
+    > * {
+      display: table-cell;
       vertical-align: middle;
-      margin-top: -2px;
-    }
-
-    [cam-widget-inline-field] {
-      margin-top: -2px;
-      margin-bottom: -2px;
-
-      .visible-whitespace {
-        white-space: pre-wrap;
+      margin-top: -1px;
+      margin-bottom: -1px;
+      &:empty {
+        display: none;
       }
     }
 
-    .view-value,
-    .preview {
-      white-space: initial;
-      word-wrap: break-word;
+    &.invalid {
+      background-color: @state-danger-bg;
+      border-color: @state-danger-border;
+      color: @state-danger-text;
     }
+
+    > .glyphicon {
+      padding-left: 3px;
+      padding-right: 3px;
+    }
+  }
+
+  &.inline-editing > .search-label {
+    overflow: visible;
   }
 
   .search-dropdown {

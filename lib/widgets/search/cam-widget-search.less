@@ -1,21 +1,76 @@
-[cam-widget-search] {
-  .search-container {
-    .form-control();
-    padding-left: 0;
-    padding-right: 0;
-    height: auto;
-    position: relative;
+.cam-widget-search-multiline-pill() {
+  .search-label,
+  .type-field,
+  .name-field,
+  .operator-field {
+    display: inline-block;
   }
 
-  .search-container > input {
-    padding: 0;
-    height: auto;
-    border: none;
-    .box-shadow(none);
+  .type-field,
+  .name-field,
+  .operator-field {
+    margin-top: 0;
+    float: left;
+    clear: left;
+  }
 
-    &:focus {
-      border: none;
-      .box-shadow(none);
-    }
+  .name-field {
+    width: 100%;
+    display: inline-block;
+  }
+
+  .search-label {
+    position: relative;
+    padding-left: 1.4em;
+  }
+
+  .glyphicon-exclamation-sign {
+    padding-bottom: 2px;
+  }
+
+  .remove-search {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+
+
+[cam-widget-search] {
+  form {
+    display: block;
+    height: auto;
+    overflow: visible;
+    position: relative;
+    background-color: @input-bg;
+    border-bottom: 1px solid @input-border;
+  }
+
+  .main-field {
+    width: auto;
+    height: auto;
+    display: inline-block;
+    padding: 0;
+    border: none;
+    vertical-align: top;
+    margin: (@padding-base-vertical + 1) 0 1px 0;
+  }
+
+  .search-container {
+    position: relative;
+    display: block;
+    min-height: 37px;
+    padding: (@padding-base-vertical - 3px) @padding-base-horizontal (@padding-base-vertical - 4px) @padding-base-horizontal;
+  }
+
+  .main-field,
+  [cam-widget-search-pill] {
+    margin-top: @padding-base-vertical;
+    margin-right: @padding-base-horizontal;
+  }
+
+  &.multiline-pills {
+    .cam-widget-search-multiline-pill();
   }
 }
