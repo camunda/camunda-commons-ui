@@ -1,8 +1,6 @@
 .form-control {
   border-width: 0 0 @cam-input-border-width 0;
   border-bottom-style: @cam-input-border-style;
-
-
   // Firefox
   &::-moz-placeholder {
     font-style: italic;
@@ -73,6 +71,13 @@
   &[type="radio"] {
     width: auto;
     height: auto;
+  }
+
+
+  &[type=file] {
+    border: none !important;
+    background-color: transparent;
+    padding-left: 0;
   }
 
 
