@@ -1,16 +1,26 @@
 .cam-widget-search-multiline-pill() {
+  [cam-widget-search-pill] {
+    width: 100%;
+  }
+
   .search-label,
   .type-field,
   .name-field,
-  .operator-field {
+  .operator-field,
+  .value-field {
     display: inline-block;
+    margin-top: 0;
+    margin-bottom: 0;
+    float: left;
   }
 
   .type-field,
   .name-field,
   .operator-field {
-    margin-top: 0;
-    float: left;
+    clear: both;
+  }
+
+  .operator-field {
     clear: left;
   }
 
@@ -20,17 +30,14 @@
   }
 
   .search-label {
+    width: 100%;
     position: relative;
     padding-left: 1.4em;
   }
 
-  .glyphicon-exclamation-sign {
-    padding-bottom: 2px;
-  }
-
   .remove-search {
     position: absolute;
-    top: 0;
+    top: 2px;
     left: 0;
   }
 }
