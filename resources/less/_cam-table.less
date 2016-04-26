@@ -31,4 +31,23 @@ table.cam-table {
   tbody tr:first-child td {
     border-top: none;
   }
+
+  > thead {
+    border-bottom: 2px solid @table-border-color;
+  }
+  > tfoot {
+    border-top: 2px solid @table-border-color;
+  }
+
+  > thead,
+  > tbody,
+  > tfoot {
+    > tr {
+      > th,
+      > td {
+        border-top: none;
+        border-bottom: none;
+      }
+    }
+  }
 }
