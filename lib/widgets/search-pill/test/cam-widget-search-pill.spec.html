@@ -48,6 +48,8 @@
         <dd>Allows the user to enter date values via a datepicker in addition to standard text input</dd>
         <dt><span class="badge">=</span> enforce-dates</dt>
         <dd>Enforces the date picker as input method.</dd>
+        <dt><span class="badge">=</span> enforce-string</dt>
+        <dd>Enforces that numbers will be parsed as string.</dd>
         <dt><span class="badge">@</span> invalid-text</dt>
         <dd>Text which will be rendered as tooltip when the valid flag is set to false</dd>
         <dt><span class="badge">@</span> delete-text</dt>
@@ -309,6 +311,33 @@ $scope.search6.basic = true;
           </div>
         </div>
       </div><!-- /.widget-example -->
+    </section>
+
+    <div class="widget-example"
+         id="enforceString-attribute">
+        <h3>Enforce String</h3>
+        <div ng-controller="testController">
+          <pre ng-non-bindable>
+$scope.search7 = angular.copy($scope.search1);
+$scope.search7.enforceString = true;
+
+&lt;span cam-widget-search-pill
+            valid="search7.valid"
+            type="search7.type"
+            operator="search7.operator"
+            value="search7.value"
+            enforce-string="search7.enforceString" /&gt;</pre>
+            <div class="test-container">
+            <span cam-widget-search-pill
+                  id="pill7"
+                  valid="search7.valid"
+                  type="search7.type"
+                  operator="search7.operator"
+                  value="search7.value"
+                  enforce-string="search7.enforceString"/>
+            </div>
+        </div>
+    </div><!-- /.widget-example -->
     </section>
 
 

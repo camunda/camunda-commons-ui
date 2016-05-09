@@ -50,6 +50,7 @@
             <li><b>default</b>: Boolean indicating if this is the default type. The default type is used to create search pills if the user enters a string in the text input, which can not be matched with any type. Can not be used in combination with groups.</li>
             <li><b>allowDates</b>: Corresponds to the allowDates property of the search-pill widget</li>
             <li><b>enforceDates</b>: Corresponds to the enforceDates property of the search-pill widget</li>
+            <li><b>enforceString</b>: Corresponds to the enforceString property of the search-pill widget</li>
             <li><b>extended</b>: Corresponds to the extended property of the search-pill widget</li>
             <li><b>basic</b>: Corresponds to the basic property of the search-pill widget</li>
             <li><b>groups</b>: An array containing the groups this type is member of. A search query can only contain search elements which are in the same group.</li>
@@ -122,6 +123,16 @@ $scope.types = [
     ],
     allowDates: true,
     enforceDates: true
+  },
+  {
+    'id': {
+      'key': 'EnforceString',
+      'value': 'Enforce String'
+    },
+    'operators': [
+      {'key': 'eq', 'value': '='}
+    ],
+    enforceString: true
   },
   {
     'id': {
