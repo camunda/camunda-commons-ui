@@ -55,6 +55,8 @@
   textarea& {
     border-width: 0 0 0 @cam-input-border-width;
     border-style: @cam-input-border-style;
+    border-width: 0 0 @cam-input-border-width @cam-input-border-width;
+    border-bottom-color: transparent;
 
     &[required] {
       border-style: @cam-input-required-border-style;
@@ -62,7 +64,6 @@
 
     &:focus {
       border-color: @input-border-focus;
-      border-width: @cam-input-border-width 0 0 @cam-input-border-width;
     }
   }
 
