@@ -8,6 +8,14 @@
   &:-ms-input-placeholder { font-style: italic; } // Internet Explorer 10+
   &::-webkit-input-placeholder  { font-style: italic; } // Safari and Chrome
 
+  &:hover {
+    border-color: @input-border-focus;
+  }
+
+  &:focus {
+    background-color: mix(@input-bg, @table-bg-hover);
+  }
+
   &,
   .has-success &,
   .has-warning &,
@@ -21,13 +29,8 @@
   .has-error & {
     &:focus {
       .box-shadow(none);
-      // border-width: 0 0 @cam-input-border-width @cam-input-border-width;
     }
   }
-
-  // &:focus {
-  //   border-width: 0 0 @cam-input-border-width @cam-input-border-width;
-  // }
 
   .has-success & {
     background-color: mix(@input-bg, @state-success-bg);
@@ -64,6 +67,7 @@
 
     &:focus {
       border-color: @input-border-focus;
+      background-color: mix(@input-bg, @table-bg-hover);
     }
   }
 
@@ -74,18 +78,22 @@
     height: auto;
   }
 
-
-  &[type=file] {
-    border: none !important;
-    background-color: transparent;
-    padding-left: 0;
-  }
-
-
   &.ng-dirty {
     &.ng-invalid {
       color: @state-danger-text;
       border-color: @state-danger-text;
+      background-color: mix(@input-bg, @state-danger-bg);
+    }
+  }
+
+
+  &[type=file] {
+    border: none !important;
+    &:focus {
+      outline: none;
+    }
+    &.ng-invalid {
+      color: @state-danger-text;
       background-color: mix(@input-bg, @state-danger-bg);
     }
   }

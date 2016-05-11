@@ -52,6 +52,13 @@
     position: relative;
     background-color: @input-bg;
     border-bottom: 1px solid @input-border;
+
+    &:hover {
+      background-color: mix(@input-bg, @table-bg-hover);
+      .form-control {
+        background-color: mix(@input-bg, @table-bg-hover);
+      }
+    }
   }
 
   .main-field {
