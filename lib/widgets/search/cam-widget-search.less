@@ -53,11 +53,11 @@
     background-color: @input-bg;
     border-bottom: 1px solid @input-border;
 
+    .form-control {
+      background-color: transparent;
+    }
     &:hover {
-      background-color: mix(@input-bg, @table-bg-hover);
-      .form-control {
-        background-color: mix(@input-bg, @table-bg-hover);
-      }
+      border-bottom-color: @input-border-focus;
     }
   }
 
