@@ -20,7 +20,7 @@ module.exports = function(grunt) {
       console.log( 'error', err );
     } );
     var dest = this.data.dest;
-    function doBundle() {
+    function doBundle(cb) {
       b.bundle( function ( err, buff ) {
         if ( err ) {
           throw err;
@@ -30,13 +30,15 @@ module.exports = function(grunt) {
             throw err;
           }
           require( 'fs' ).writeFileSync( dest, buff.toString() );
-          done();
+          if(cb) {
+            cb();
+          }
         });
       });
 
     };
 
-    doBundle();
+    doBundle(done);
 
     b.on( 'update', function () {
       doBundle();
