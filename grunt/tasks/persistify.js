@@ -6,6 +6,9 @@ module.exports = function(grunt) {
   var path = require('path');
 
   grunt.registerMultiTask('persistify', function() {
+
+    var firstRun = true;
+
     var done = this.async();
     this.data.options.browserifyOptions.transform = this.data.options.transform;
     var b = persistify( this.data.options.browserifyOptions, this.data.options );
@@ -20,8 +23,9 @@ module.exports = function(grunt) {
       console.log( 'error', err );
     } );
     var dest = this.data.dest;
-    function doBundle(cb) {
-      b.bundle( function ( err, buff ) {
+    var opts = this.data.options;
+
+    function bundleComplete(err, buff) {
         if ( err ) {
           throw err;
         }
@@ -30,15 +34,25 @@ module.exports = function(grunt) {
             throw err;
           }
           require( 'fs' ).writeFileSync( dest, buff.toString() );
-          if(cb) {
-            cb();
+          if(firstRun) {
+            firstRun = false;
+            done();
           }
         });
-      });
+    }
 
+    function doBundle(cb) {
+      b.bundle( function ( err, buff ) {
+        if (opts.postBundleCB) {
+          opts.postBundleCB(err, buff, bundleComplete);
+        }
+        else {
+          bundleComplete(err, buff);
+        }
+      });
     };
 
-    doBundle(done);
+    doBundle();
 
     b.on( 'update', function () {
       doBundle();
