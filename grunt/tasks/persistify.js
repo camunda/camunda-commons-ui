@@ -7,14 +7,19 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('persistify', function() {
 
-    var firstRun = true;
-
     var done = this.async();
-    this.data.options.browserifyOptions.transform = this.data.options.transform;
-    var b = persistify( this.data.options.browserifyOptions, this.data.options );
 
+    var firstRun = true;
     var dest = this.data.dest;
     var opts = this.data.options;
+
+    // backwards compatibility with grunt-browserify
+    if(this.data.options.transform) {
+      this.data.options.browserifyOptions.transform = this.data.options.transform;
+    }
+
+    var b = persistify( this.data.options.browserifyOptions, this.data.options );
+
 
     b.add( this.data.src );
 
