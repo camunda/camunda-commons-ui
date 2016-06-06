@@ -70,7 +70,9 @@
     "karma-mocha": "0.1.6",
     "karma-phantomjs-launcher": "0.1.4",
     "load-grunt-tasks": "2.0.0",
+    "mkdirp": "0.5.1",
     "mocha": "2.1.0",
+    "persistify": "1.0.0",
     "xunit-file": "0.0.6"
   },
   "optionalDependencies": {
