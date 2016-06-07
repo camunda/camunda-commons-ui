@@ -1,0 +1,11 @@
+<span ng-transclude></span>
+<a ng-if="!noTooltip"
+   tooltip="{{ tooltipText }}"
+   tooltip-append-to-body="true"
+   ng-class="{'copy-ok': copyStatus === true, 'copy-error': copyStatus === false}"
+   class="glyphicon glyphicon-copy"
+   ng-click="copy()"></a>
+<a ng-if="noTooltip"
+   ng-class="{'copy-ok': copyStatus === true, 'copy-error': copyStatus === false}"
+   class="glyphicon glyphicon-copy"
+   ng-click="copy()"></a>
