@@ -1,13 +1,13 @@
+var fs = require('fs');
 var persistify = require('persistify');
-var _ = require('lodash');
 
 module.exports = function(grunt) {
   'use strict';
-  var path = require('path');
-
   grunt.registerMultiTask('persistify', function() {
 
     var done = this.async();
+
+    var externalModules = JSON.parse(fs.readFileSync(__dirname + '/../../cache/deps.json', 'utf8'));
 
     var firstRun = true;
     var dest = this.data.dest;
@@ -20,6 +20,9 @@ module.exports = function(grunt) {
 
     var b = persistify( this.data.options.browserifyOptions, this.data.options );
 
+    for(var key in externalModules) {
+      b.external(key);
+    }
 
     b.add( this.data.src );
 
@@ -39,7 +42,7 @@ module.exports = function(grunt) {
           if(err) {
             throw err;
           }
-          require( 'fs' ).writeFileSync( dest, buff.toString() );
+          fs.writeFileSync( dest, buff.toString() );
           if(firstRun) {
             firstRun = false;
             done();
@@ -61,6 +64,7 @@ module.exports = function(grunt) {
     doBundle();
 
     b.on( 'update', function () {
+      console.log('change detected, updating ' + dest);
       doBundle();
     } );
   });
