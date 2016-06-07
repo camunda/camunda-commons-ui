@@ -1,6 +1,13 @@
 <!-- CE # camunda-commons-ui/lib/widgets/search-pill/search-pill.html -->
 <span class="search-label"
       ng-class="{'invalid': !valid}">
+  <a href
+     ng-click="onDelete()"
+     tooltip-placement="top"
+     tooltip="{{ deleteText }}"
+     class="remove-search glyphicon glyphicon-remove">
+  </a>
+
   <span cam-widget-inline-field
         class="set-value type-field"
         tabindex="0"
@@ -133,12 +140,5 @@
     <span class="visible-whitespace"
           ng-if="!value.tooltip">{{ value.value | camQueryComponent }}</span>
   </span>
-
-  <a href
-     ng-click="onDelete()"
-     tooltip-placement="top"
-     tooltip="{{ deleteText }}"
-     class="remove-search glyphicon glyphicon-remove">
-  </a>
 </span>
 <!-- CE / camunda-commons-ui/lib/widgets/search-pill/search-pill.html -->
