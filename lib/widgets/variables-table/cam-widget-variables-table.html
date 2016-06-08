@@ -37,7 +37,7 @@
         <!-- ................................................................................... -->
         <div ng-switch-when="name"
              ng-if="!isEditable('name', info)">
-          {{ variable.name }}
+          <span cam-widget-clipboard="variable.name">{{ variable.name }}</span>
         </div>
 
         <input class="form-control"
@@ -57,22 +57,31 @@
 
         <div ng-switch-when="value"
              ng-if="!isEditable('value', info) && variable.type === 'Object'"
-             ng-click="editVariableValue(v)"
              class="read-only value-wrapper">
-          {{ variable.valueInfo.objectTypeName || '&lt;undefined&gt;' }}
+          <span ng-if="variable.valueInfo.objectTypeName"
+                cam-widget-clipboard="variable.valueInfo.objectTypeName">
+            <a ng-click="editVariableValue(v)"
+               href>{{ variable.valueInfo.objectTypeName }}</a>
+          </span>
+          <a ng-if="!variable.valueInfo.objectTypeName"
+             ng-click="editVariableValue(v)"
+             href>&lt;undefined&gt;</a>
         </div>
 
         <div ng-switch-when="value"
              ng-if="!isEditable('value', info) && variable.type === 'String'"
-             ng-click="readStringVar(v)"
              class="read-only value-wrapper">
-          {{ variable.value}}
+          <span cam-widget-clipboard="variable.value">
+            <span ng-click="readStringVar(v)">{{ variable.value }}</span>
+          </span>
         </div>
 
         <div ng-switch-when="value"
              ng-if="!isEditable('value', info) && variable.type !== 'Object' && variable.type !== 'String'"
              class="read-only value-wrapper">
-          {{ variable.value }}
+          <span ng-if="variable.value && variable.type !== 'Bytes'"
+                cam-widget-clipboard="variable.value">{{ variable.value }}</span>
+          <span ng-if="variable.value && variable.type === 'Bytes'">{{ variable.value }}</span>
         </div>
 
         <div class="value-wrapper"

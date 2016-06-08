@@ -44,12 +44,24 @@
 
     td {
       vertical-align: middle;
+    }
+  }
 
-      &.col-type,
-      &.col-name,
-      &.col-value {
-        font-family: monospace;
-      }
+
+  .col-type,
+  .col-name,
+  .col-value,
+  .col-scope {
+    a,
+    span,
+    div {
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      line-height: 1.2;
+      vertical-align: middle;
+      display: inline-block;
     }
   }
 
@@ -75,7 +87,7 @@
     width: 108px;
   }
 
-  .value-wrapper {
+  td.editable > .value-wrapper {
     display: table;
     width: 100%;
     table-layout: fixed;
@@ -106,6 +118,15 @@
       height: 34px;
       border: none;
       color: @gray-light;
+      span {
+        width: auto;
+      }
+    }
+
+    .editable & {
+      .set-null {
+
+      }
     }
 
     > .set-null {
@@ -114,12 +135,6 @@
 
     .null-value {
       width: auto;
-    }
-
-    &.read-only {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
     }
   }
 
@@ -133,6 +148,19 @@
     .form-control,
     .value-wrapper {
       color: @brand-danger;
+    }
+  }
+
+  [cam-widget-clipboard] {
+    > [ng-transclude] {
+      width: auto;
+      max-width: ~"calc(100% - 2em)";
+    }
+
+    > .glyphicon-copy {
+      top: 0;
+      width: auto;
+      margin-left: 0.25em;
     }
   }
 }

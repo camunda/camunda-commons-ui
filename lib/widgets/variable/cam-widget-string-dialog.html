@@ -5,12 +5,19 @@
 
 <div class="modal-body">
   <div class="form-group">
-    <label for="value">Value</label>
+    <label for="value"
+           cam-widget-clipboard="variable.value"
+           no-tooltip
+           ng-class="{hovered: hovered === 'var-value'}">
+      Value
+    </label>
     <textarea ng-model="variable.value"
               id="value"
               rows="10"
               class="form-control cam-string-variable"
-              ng-disabled="readonly"></textarea>
+              ng-readonly="readonly"
+              ng-mouseenter="toggleHover('var-value')"
+              ng-mouseleave="toggleHover()"></textarea>
   </div>
 </div>
 

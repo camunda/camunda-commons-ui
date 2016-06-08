@@ -4,19 +4,24 @@
 </div>
 
 <div class="modal-body">
-  <div ng-if="readonly">
-    <p>
-      Object type name: <code>{{ variable.valueInfo.objectTypeName }}</code>
-    </p>
+  <div ng-if="readonly"
+       class="form-group">
+    <label>Object type name:</label>
+    <code class="form-control-static"
+          cam-widget-clipboard="variable.valueInfo.objectTypeName">{{ variable.valueInfo.objectTypeName }}</code>
+  </div>
 
-    <p>
-      Serialization Data Format: <code>{{ variable.valueInfo.serializationDataFormat }}</code>
-    </p>
+  <div ng-if="readonly"
+       class="form-group">
+    <label>Serialization Data Format:</label>
+    <code class="form-control-static"
+          cam-widget-clipboard="variable.valueInfo.serializationDataFormat">{{ variable.valueInfo.serializationDataFormat }}</code>
   </div>
 
   <div ng-if="!readonly"
        class="form-group">
-    <label for="object-type-name">Object type name</label>
+    <label for="object-type-name"
+           cam-widget-clipboard="variable.valueInfo.objectTypeName">Object type name</label>
     <input type="text"
            id="object-type-name"
            class="form-control"
@@ -25,7 +30,8 @@
 
   <div ng-if="!readonly"
        class="form-group">
-    <label for="serialization-data-format">Serialization data format</label>
+    <label for="serialization-data-format"
+           cam-widget-clipboard="variable.valueInfo.serializationDataFormat">Serialization data format</label>
     <input type="text"
            id="serialization-data-format"
            class="form-control"
@@ -33,12 +39,17 @@
   </div>
 
   <div class="form-group">
-    <label for="serialized-value">Serialized value</label>
+    <label for="serialized-value"
+           cam-widget-clipboard="variable.value"
+           no-tooltip
+           ng-class="{hovered: hovered === 'var-value'}">Serialized value</label>
     <textarea ng-model="variable.value"
               id="serialized-value"
               rows="10"
               class="form-control"
-              ng-disabled="readonly"></textarea>
+              ng-readonly="readonly"
+              ng-mouseenter="toggleHover('var-value')"
+              ng-mouseleave="toggleHover()"></textarea>
   </div>
 </div>
 
@@ -50,7 +61,7 @@
 
   <button class="btn btn-primary"
           ng-if="!readonly"
-          ng-disabled="!hasChanged('serialized')"
+          ng-readonly="!hasChanged('serialized')"
           ng-click="$close(variable)">
     Change
   </button>
