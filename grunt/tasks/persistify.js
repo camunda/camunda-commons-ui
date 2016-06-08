@@ -13,6 +13,13 @@ module.exports = function(grunt) {
     var dest = this.data.dest;
     var opts = this.data.options;
 
+    this.data.options.neverCache = [
+      /\.html$/,
+      /\.json$/
+    ];
+
+    this.data.options.recreate = process.env.RECREATE || false;
+
     // backwards compatibility with grunt-browserify
     if(this.data.options.transform) {
       this.data.options.browserifyOptions.transform = this.data.options.transform;
@@ -50,7 +57,7 @@ module.exports = function(grunt) {
         });
     }
 
-    function doBundle(cb) {
+    function doBundle() {
       b.bundle( function ( err, buff ) {
         if (opts.postBundleCB) {
           opts.postBundleCB(err, buff, bundleComplete);
@@ -61,11 +68,12 @@ module.exports = function(grunt) {
       });
     };
 
-    doBundle();
-
     b.on( 'update', function () {
       console.log('change detected, updating ' + dest);
       doBundle();
-    } );
+    });
+
+    doBundle();
+
   });
 };
