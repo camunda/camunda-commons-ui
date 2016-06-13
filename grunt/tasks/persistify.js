@@ -18,7 +18,7 @@ module.exports = function(grunt) {
       /\.json$/
     ];
 
-    this.data.options.recreate = process.env.RECREATE || false;
+    this.data.options.recreate = !process.env.FAST_BUILD;
 
     // backwards compatibility with grunt-browserify
     if(this.data.options.transform) {
