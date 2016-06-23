@@ -2,7 +2,11 @@
       ng-submit="createSearch()"
       ng-class="{'has-search': searches.length}">
 
-  <div class="form-container search-container">
+  <div class="form-container search-container"
+       ng-class="{'has-icon': !!mode}">
+    <span ng-if="mode"
+          class="search-type glyphicon"
+          ng-class="'glyphicon-' + mode"></span>
     <span cam-widget-search-pill
           ng-repeat="search in searches"
           extended="search.extended"

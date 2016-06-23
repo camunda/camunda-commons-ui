@@ -45,6 +45,8 @@
 
 
 [cam-widget-search] {
+  @icon-size: 38px;
+
   form {
     display: block;
     height: auto;
@@ -74,9 +76,30 @@
   .search-container {
     position: relative;
     display: block;
-    min-height: 37px;
+    min-height: @icon-size;
     padding: (@padding-base-vertical - 3px) @padding-base-horizontal (@padding-base-vertical - 4px) @padding-base-horizontal;
+    &.has-icon {
+      padding-left: @padding-base-horizontal + @icon-size;
+    }
   }
+
+  .search-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @icon-size;
+    height: @icon-size;
+    line-height: @icon-size;
+    text-align: center;
+    display: inline-block;
+    color: @input-color-placeholder;
+    background-color: @gray-lighter;
+  }
+
+  &:hover .search-type {
+    color: @input-color;
+  }
+
 
   .main-field,
   [cam-widget-search-pill] {
