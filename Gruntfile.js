@@ -93,9 +93,10 @@ module.exports = function(grunt) {
 
     less: {
       options: {
-        dumpLineNumbers: 'comments',
-        compress: false,
-        sourceMap: false,
+        compress: true,
+        sourceMap: true,
+        sourceMapURL: './test-styles.css.map',
+        sourceMapFilename: 'test-styles.css.map',
         paths: [
           'node_modules',
           'node_modules/bootstrap/less',
