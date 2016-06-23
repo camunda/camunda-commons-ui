@@ -1,4 +1,4 @@
-table.cam-table {
+.cam-table {
   .table();
   .table-condensed();
   .table-striped();
@@ -36,22 +36,20 @@ table.cam-table {
     border-top: none;
   }
 
-  > thead {
+  thead {
     border-bottom: 2px solid @table-border-color;
   }
-  > tfoot {
+  tfoot {
     border-top: 2px solid @table-border-color;
   }
 
-  > thead,
-  > tbody,
-  > tfoot {
-    > tr {
-      > th,
-      > td {
-        border-top: none;
-        border-bottom: none;
-      }
+  thead,
+  tbody,
+  tfoot {
+    th,
+    td {
+      border-top: none;
+      border-bottom: none;
     }
   }
 }
