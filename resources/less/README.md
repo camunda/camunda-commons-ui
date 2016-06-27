@@ -5,7 +5,7 @@
 In this folder you can find 3 sub-folders:
 
  - `sites`: in which styles for sites like documentation, blog, presence, … are defined
- - `shared`: contains other files which _might_ relevant for web applications or web sites but are not improrted by default
+ - `shared`: contains other files which _might_ relevant for web applications or web sites but are not imported by default
 
 
 ## File name convention
