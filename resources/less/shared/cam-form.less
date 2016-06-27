@@ -1,6 +1,11 @@
 .form-control {
   border-width: 0 0 @cam-input-border-width 0;
   border-bottom-style: @cam-input-border-style;
+
+  transition: border 0.15s ease-in-out,
+              box-shadow 0.15s ease-in-out,
+              background-color 0.15s ease-in-out;
+
   // Firefox
   &::-moz-placeholder {
     font-style: italic;
@@ -8,12 +13,21 @@
   &:-ms-input-placeholder { font-style: italic; } // Internet Explorer 10+
   &::-webkit-input-placeholder  { font-style: italic; } // Safari and Chrome
 
-  &:hover {
-    border-color: @input-border-focus;
-  }
-
   &:focus {
     background-color: mix(@input-bg, @table-bg-hover);
+  }
+
+  .has-success & {
+    color: @state-success-text;
+    background-color: mix(@input-bg, @state-success-bg);
+  }
+  .has-warning & {
+    color: @state-warning-text;
+    background-color: mix(@input-bg, @state-warning-bg);
+  }
+  .has-error & {
+    color: @state-danger-text;
+    background-color: mix(@input-bg, @state-danger-bg);
   }
 
   &,
@@ -21,25 +35,29 @@
   .has-warning &,
   .has-error &,
   &:focus {
-    .box-shadow(none);
+    box-shadow: inset 0 1px 1px 0 rgba(0,0,0,0.2),
+                inset 0 -1px 1px 0 rgba(255,255,255,0.5),
+                0 0 0 0 currentColor;
   }
 
   .has-success &,
   .has-warning &,
   .has-error & {
     &:focus {
-      .box-shadow(none);
+      box-shadow: inset 0 1px 1px 0 rgba(0,0,0,0.2),
+                  inset 0 -1px 1px 0 rgba(255,255,255,0.5),
+                  0 1px 0 0 currentColor;
     }
   }
 
-  .has-success & {
-    background-color: mix(@input-bg, @state-success-bg);
+  &:hover {
+    border-color: @input-border-focus;
   }
-  .has-warning & {
-    background-color: mix(@input-bg, @state-warning-bg);
-  }
-  .has-error & {
-    background-color: mix(@input-bg, @state-danger-bg);
+
+  &:focus {
+    box-shadow: inset 0 1px 1px 0 rgba(0,0,0,0.2),
+                inset 0 -1px 1px 0 rgba(255,255,255,0.5),
+                0 1px 0 0 @input-border-focus;
   }
 
   &[required] {
