@@ -125,6 +125,13 @@ module.exports = function(grunt) {
         tasks: ['less']
       },
 
+      scripts: {
+        files: [
+          'lib/**/*.js'
+        ],
+        tasks: ['newer:eslint']
+      },
+
       served: {
         options: {
           livereload: pkg.gruntConfig.livereloadPort
@@ -159,6 +166,21 @@ module.exports = function(grunt) {
           watch: true
         }
       }
+    },
+
+    eslint: {
+      sources: {
+        options: {
+          ignorePattern: [
+            'lib/**/*.build.js',
+            'lib/**/*.page.js',
+            'lib/**/*Spec.js'
+          ]
+        },
+        src: [
+         'lib/**/*.js'
+        ]
+      }
     }
   });
 
@@ -173,7 +195,7 @@ module.exports = function(grunt) {
 
   require('./grunt/tasks/gh-pages')(grunt);
 
-  grunt.registerTask('build', ['less:widgets', 'browserify:watch']);
+  grunt.registerTask('build', ['newer:eslint', 'less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 
