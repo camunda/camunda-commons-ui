@@ -28,6 +28,7 @@
                 ng-required="true"
                 is-open="datePickerOptions.isOpen"
                 show-button-bar="false"
+                ng-keydown="trapKeyboard($event, true); cancelOnEsc($event);"
 
                 ng-model="dateValue"
                 ng-change="changeDate(this)"></datepicker>
@@ -37,6 +38,7 @@
                 show-meridian="false"
 
                 ng-model="dateValue"
+                ng-keydown="cancelOnEsc($event);"
                 ng-change="changeDate(this)"></timepicker>
   </span>
 
@@ -69,13 +71,15 @@
 
     <button type="button"
             class="btn btn-xs btn-default"
-            ng-click="applyChange($event)">
+            ng-click="applyChange($event);"
+            ng-keydown="cancelOnEsc($event);">
       <span class="glyphicon glyphicon-ok"></span>
     </button>
 
     <button type="button"
             class="btn btn-xs btn-default"
-            ng-click="cancelChange($event)">
+            ng-click="cancelChange($event)"
+            ng-keydown="trapKeyboard($event); cancelOnEsc($event);">
       <span class="glyphicon glyphicon-remove"></span>
     </button>
   </span>
