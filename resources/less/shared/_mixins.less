@@ -264,7 +264,7 @@
 }
 
 .cam-corporate-header-branding() {
-  font-size: @header-computed-height / 2;
+  font-size: @header-site-name-size;
   line-height: @header-computed-height;
   height: @header-computed-height;
   padding-top: 0;
@@ -272,6 +272,9 @@
   padding-left: @header-computed-height / 4;
   padding-right: @grid-gutter-width / 2;
   color: @gray-base;
+  .brand-logo {
+    font-size: @header-computed-height / 2;
+  }
 }
 
 .cam-corporate-header-hamburger() {

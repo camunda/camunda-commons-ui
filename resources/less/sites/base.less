@@ -4,6 +4,7 @@
 @import "./_mixins.less";
 
 @header-height: 65px;
+@header-site-name-size:       @header-computed-height / 3;
 
 @font-family-sans-serif:      'open_sansregular', Helvetica, Arial, Verdana, sans-serif;
 @font-size-base:              16px;
@@ -19,6 +20,11 @@
 
 .light {
   font-family: 'open_sanslight';
+}
+
+.brand-name {
+  position: relative;
+  top: -3px;
 }
 
 @import "./headers.less";
