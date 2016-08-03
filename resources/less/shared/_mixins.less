@@ -272,8 +272,11 @@
   padding-left: @header-computed-height / 4;
   padding-right: @grid-gutter-width / 2;
   color: @gray-base;
-  .brand-logo {
-    font-size: @header-computed-height / 2;
+  .brand-logo when not (@header-brand-logo-font-size) {
+    font-size: (@header-computed-height / 2);
+  }
+  .brand-logo when (@header-brand-logo-font-size) {
+    font-size: @header-brand-logo-font-size;
   }
 }
 
