@@ -56,8 +56,11 @@
         <dt><span class="badge">@?</span> toggle-navigation</dt>
         <dd>a string to be place in the navigation toggle link, by default: <span class="default">Toggle navigation</span>.</dd>
 
-        <dt><span class="badge">@?</span> myProfile</dt>
+        <dt><span class="badge">@?</span> my-profile</dt>
         <dd>a string to be place in the link to the user profile, by default: <span class="default">My profile</span>.</dd>
+
+        <dt><span class="badge">@?</span> no-app-switch</dt>
+        <dd>a boolean indicating, when `true`, that the app switch icon (house) should not be shown.</dd>
       </dl>
     </section>
 
@@ -136,6 +139,29 @@
 
 
       <div class="widget-example"
+           id="anonymous-no-app-switch"
+           ng-controller="testAnonymousController">
+        <h3>Anonymous - no app switch</h3>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     no-app-switch="true"
+     brand-name="Cammunda Commons UI"
+     current-app="{{ ctrlCurrentApp }}"&gt;
+  You are on `{{ ctrlCurrentApp }}` app.
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               no-app-switch="true"
+               brand-name="Cammunda Commons UI"
+               current-app="{{ ctrlCurrentApp }}">
+            You are on `{{ ctrlCurrentApp }}` app.
+          </div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
            id="authenticated"
            ng-controller="testAuthenticatedController">
         <h3>Authenticated</h3>
@@ -171,6 +197,70 @@
                my-profile="Your profile"
                sign-out="Log out"
                user-name="fullName"
+               brand-name="Cammunda Commons UI"
+               current-app="{{ ctrlCurrentApp }}">
+            <ul>
+              <li>
+                <a href>Awesome</a>
+              </li>
+              <li class="active">
+                <a href>Sweet</a>
+              </li>
+              <li><!-- as in cockpit -->
+                <view>
+                  <a href>Marvellous</a>
+                </view>
+              </li>
+            </ul>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+            </div>
+          </div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+    </section>
+
+
+      <div class="widget-example"
+           id="authenticated-no-app-switch"
+           ng-controller="testAuthenticatedController">
+        <h3>Authenticated - no app switch</h3>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     my-profile="Your profile"
+     sign-out="Log out"
+     user-name="fullName"
+     no-app-switch="true"
+     brand-name="Cammunda Commons UI"
+     current-app="{{ ctrlCurrentApp }}"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;a href&gt;Awesome&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li class="active"&gt;
+      &lt;a href&gt;Sweet&lt;/a&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;!-- as in cockpit --&gt;
+      &lt;view&gt;
+        &lt;a href&gt;Marvellous&lt;/a&gt;
+      &lt;/view&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="row"&gt;
+  &lt;div class="col-xs-12"&gt;
+    testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               my-profile="Your profile"
+               sign-out="Log out"
+               user-name="fullName"
+               no-app-switch="true"
                brand-name="Cammunda Commons UI"
                current-app="{{ ctrlCurrentApp }}">
             <ul>
