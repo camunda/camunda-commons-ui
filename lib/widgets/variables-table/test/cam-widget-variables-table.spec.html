@@ -130,6 +130,13 @@
           Can be used to customize create a download link for the variable.<br/>
           The <code>info</code> argument is similar to the one above.
         </dd>
+
+        <dt><span class="badge">=?</span> is-variable-editable<span class="function-definition">(<span class="params">info, delta</span>): <span class="returns">boolean</span></span></dt>
+        <dd>
+          Can be used to pass a function to check whether a variable is editable or not.
+          When the variable is not editable then the edit buttons are disabled.<br/>
+          The <code>info</code> argument is similar to the one above.
+        </dd>
       </dl>
     </section>
 
@@ -146,7 +153,8 @@
         <pre ng-non-bindable>&lt;div cam-widget-variables-table
      cam-variables="vars"
      on-edit="editFunction"
-     on-save="saveFunction"&gt;&lt;/div&gt;
+     on-save="saveFunction"
+     is-variable-editable="isVariableEditable"&gt;&lt;/div&gt;
 
 &lt;ol&gt;
   &lt;li ng-repeate="change in changes"&gt;{{ change.name }} | {{ change.type }} | {{ change.value }} | {{ change.saved }}&lt;/li&gt;
@@ -155,7 +163,8 @@
           <div cam-widget-variables-table
                cam-variables="vars"
                on-edit="editFunction"
-               on-save="saveFunction"></div>
+               on-save="saveFunction"
+               is-variable-editable="isVariableEditable"></div>
 
           <ol>
             <li ng-repeat="change in changes">{{ change.name }} | {{ change.type }} | {{ change.value }} | {{ change.saved }}</li>

@@ -146,12 +146,14 @@
         <div ng-if="!info.editMode"
              class="btn-group">
           <button class="btn btn-xs btn-primary"
+                  ng-disabled="!canEditVariable(info, v)"
                   ng-click="info.editMode = true"
                   tooltip-append-to-body="true"
                   tooltip="Edit the variable">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
           <button class="btn btn-xs btn-default"
+                  ng-disabled="!canEditVariable(info, v)"
                   ng-click="deleteVariable(v)"
                   tooltip-append-to-body="true"
                   tooltip="Delete the variable">
