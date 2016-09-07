@@ -38,13 +38,15 @@
       </a>
 
       <ul class="dropdown-menu dropdown-menu-right">
-        <li class="profile">
+        <li class="profile"
+            ng-if="currentApp !== 'welcome'">
           <a ng-href="{{ '../../welcome/:engine/' | uri }}">
             {{ myProfile }}
           </a>
         </li>
 
-        <li class="divider"></li>
+        <li class="divider"
+            ng-if="currentApp !== 'welcome'"></li>
 
         <li class="logout">
           <a href
