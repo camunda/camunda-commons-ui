@@ -118,6 +118,7 @@
            id="anonymous"
            ng-controller="testAnonymousController">
         <h3>Anonymous</h3>
+        <div class="description">Should show the app switch dropdown with all the links except Admin.</div>
         <pre ng-non-bindable>&lt;div cam-widget-header
      authentication="auth"
      brand-name="Cammunda Commons UI"
@@ -139,12 +140,13 @@
            id="authenticated"
            ng-controller="testAuthenticatedController">
         <h3>Authenticated</h3>
+        <div class="description">Should show the app switch dropdown with a link to Admin.</div>
         <pre ng-non-bindable>&lt;div cam-widget-header
      authentication="auth"
      my-profile="Your profile"
      sign-out="Log out"
      user-name="fullName"
-     brand-name="Cammunda Commons UI"
+     brand-name="Camunda Commons UI"
      current-app="{{ ctrlCurrentApp }}"&gt;
   &lt;ul&gt;
     &lt;li&gt;
@@ -162,7 +164,8 @@
 &lt;/div&gt;
 &lt;div class="row"&gt;
   &lt;div class="col-xs-12"&gt;
-    testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+    testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`&lt;br /&gt;
+    testAuthenticatedController scope.auth.authorizedApps: `{{ auth.authorizedApps }}`
   &lt;/div&gt;
 &lt;/div&gt;</pre>
         <div class="test-container">
@@ -171,7 +174,7 @@
                my-profile="Your profile"
                sign-out="Log out"
                user-name="fullName"
-               brand-name="Cammunda Commons UI"
+               brand-name="Camunda Commons UI"
                current-app="{{ ctrlCurrentApp }}">
             <ul>
               <li>
@@ -189,8 +192,87 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`
+              testAuthenticatedController scope.ctrlCurrentApp: `{{ ctrlCurrentApp }}`<br/>
+              testAuthenticatedController scope.auth.authorizedApps: `{{ auth.authorizedApps }}`
             </div>
+          </div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="welcome-page-usage"
+           ng-controller="testAuthenticatedController">
+        <h3>Authenticated on Welcome app</h3>
+        <div class="description">Should not show the app switch dropdown.</div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     my-profile="Your profile"
+     sign-out="Log out"
+     user-name="fullName"
+     brand-name="Cammunda Commons UI"
+     current-app="welcome"&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               my-profile="Your profile"
+               sign-out="Log out"
+               user-name="fullName"
+               brand-name="Cammunda Commons UI"
+               current-app="welcome">
+          </div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="authenticated-single"
+           ng-controller="testAuthenticatedSingleController">
+        <h3>Authenticated, 1 app access</h3>
+        <div class="description">Should not show the app switch dropdown.</div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     my-profile="Your profile"
+     sign-out="Log out"
+     user-name="fullName"
+     brand-name="Cammunda Commons UI"
+     current-app="tasklist"&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               my-profile="Your profile"
+               sign-out="Log out"
+               user-name="fullName"
+               brand-name="Cammunda Commons UI"
+               current-app="tasklist">
+          </div>
+        </div><!-- /.test-container -->
+      </div><!-- /.widget-example -->
+
+
+      <div class="widget-example"
+           id="authenticated-single-unauthorized"
+           ng-controller="testAuthenticatedSingleController">
+        <h3>Authenticated, 1 app access</h3>
+        <div class="description">Should only show the authorized (Tasklist) app link.</div>
+        <pre ng-non-bindable>&lt;div cam-widget-header
+     authentication="auth"
+     my-profile="Your profile"
+     sign-out="Log out"
+     user-name="fullName"
+     brand-name="Cammunda Commons UI"
+     current-app="admin"&gt;
+&lt;/div&gt;</pre>
+        <div class="test-container">
+          <div cam-widget-header
+               authentication="auth"
+               my-profile="Your profile"
+               sign-out="Log out"
+               user-name="fullName"
+               brand-name="Cammunda Commons UI"
+               current-app="admin">
           </div>
         </div><!-- /.test-container -->
       </div><!-- /.widget-example -->

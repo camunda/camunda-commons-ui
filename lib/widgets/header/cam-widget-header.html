@@ -61,7 +61,8 @@
         ng-if="authentication.name"
         ng-cloak></li>
 
-    <li class="app-switch dropdown">
+    <li class="app-switch dropdown"
+        ng-if="showAppDropDown">
       <a href
          class="dropdown-toggle">
         <span class="glyphicon glyphicon-home"></span>
@@ -70,7 +71,6 @@
 
       <ul class="dropdown-menu dropdown-menu-right">
         <li ng-repeat="(appName, app) in apps"
-            ng-if="appName !== currentApp && (!authentication || authentication.canAccess(appName))"
             ng-class="appName">
           <a ng-href="{{ '../../' + appName + '/:engine/' | uri }}">
             {{ app.label }}
