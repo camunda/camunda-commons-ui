@@ -9,6 +9,11 @@
   </div>
   <div class="col-xs-10"
        ng-show="open">
+    <span ng-show="extended" cam-widget-clipboard="extendedInfo"
+          no-tooltip>
+      <code>{{ extensionName }}</code>
+    </span>
+    <pre ng-show="extended">{{ extendedInfo }}</pre>
     <span cam-widget-clipboard="debugged | json "
           no-tooltip>
       <code>{{ varName }}</code>
