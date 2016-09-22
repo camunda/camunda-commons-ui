@@ -43,6 +43,15 @@
 
         <dt><span class="badge">=</span> debugged</dt>
         <dd>can be used to pass the variable to debug</dd>
+
+        <dt><span class="badge">=</span> extended</dt>
+        <dd>Indicate that additional info box should be displayed</dd>
+
+        <dt><span class="badge">=</span> extension-name</dt>
+        <dd>Define a label displayed on top of extended information</dd>
+
+        <dt><span class="badge">=</span> extended-info</dt>
+        <dd>variable containing extended information value</dd>
       </dl>
     </section>
 
@@ -55,13 +64,40 @@
            id="default"
            ng-controller="testController">
         <h3>Default usage</h3>
-        <pre ng-non-bindable>&lt;div cam-widget-debug
-     debugged=&quot;varToDebug&quot;&gt;&lt;/div&gt;</pre>
+        <pre ng-non-bindable>
+          &lt;div
+            cam-widget-debug
+            debugged=&quot;varToDebug&quot;&gt;
+          &lt;/div&gt;
+        </pre>
         <div class="test-container"
              id="test-container">
           <div cam-widget-debug
                debugged="varToDebug"></div>
+
         </div><!-- /.test-container -->
+
+        <div class="widget-example"
+             id="extended"
+             ng-controller="testController">
+          <h3>Extended usage</h3>
+          <pre ng-non-bindable>
+            &lt;div
+              cam-widget-debug
+              extended
+              extension-name=&quot;test&quot;
+              extended-info=&quot;info&quot;
+              debugged=&quot;varToDebug&quot;&gt;
+            &lt;/div&gt;
+          </pre>
+          <div class="test-container"
+               id="test-container2">
+            <div cam-widget-debug
+                 extended
+                 extension-name="test"
+                 extended-info="info"
+                 debugged="varToDebug"></div>
+        </div>
       </div><!-- /.widget-example -->
     </section>
 
