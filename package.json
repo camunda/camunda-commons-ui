@@ -48,11 +48,11 @@
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "clipboard": "1.5.10",
     "cmmn-js": "0.5.3",
-    "dmn-js": "0.6.1",
+    "dmn-js": "^0.7.0",
     "jquery": "2.1.1",
     "lodash": "2.4.1",
-    "moment": "2.9.0",
     "mkdirp": "0.5.1",
+    "moment": "2.9.0",
     "persistify": "1.0.0"
   },
   "devDependencies": {
