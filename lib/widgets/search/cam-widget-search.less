@@ -45,7 +45,7 @@
 
 
 [cam-widget-search] {
-  @icon-size: 38px;
+  @icon-size: 33px;
 
   form {
     display: block;
@@ -78,7 +78,7 @@
     position: relative;
     display: block;
     min-height: @icon-size;
-    padding: (@padding-base-vertical - 3px) @padding-base-horizontal (@padding-base-vertical - 4px) @padding-base-horizontal;
+    padding: (@padding-base-vertical - 4px) @padding-base-horizontal (@padding-base-vertical - 6px) @padding-base-horizontal;
     &.has-icon {
       padding-left: @padding-base-horizontal + @icon-size;
     }
@@ -104,8 +104,11 @@
 
   .main-field,
   [cam-widget-search-pill] {
-    margin-top: @padding-base-vertical;
+    margin-top: @padding-base-vertical - 2px;
     margin-right: @padding-base-horizontal;
+  }
+  .main-field {
+    margin-top: @padding-base-vertical - 1px;
   }
 
   &.multiline-pills {
