@@ -300,7 +300,7 @@
   padding: 0 6px;
 
 
-  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+  @media screen and (max-width: (@grid-float-breakpoint-max)) {
     height: auto;
     line-height: 1.6;
   }
@@ -350,7 +350,7 @@
       }
     }
 
-    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+    @media screen and (max-width: (@grid-float-breakpoint-max)) {
       padding: 0 (@header-computed-height * 0.25);
     }
   }
@@ -359,13 +359,13 @@
     visibility: visible;
     display: block;
 
-    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+    @media screen and (max-width: (@grid-float-breakpoint-max)) {
       visibility: hidden;
       display: none;
     }
   }
 
-  @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+  @media screen and (max-width: (@grid-float-breakpoint-max)) {
     text-align: right;
     margin-left: 0;
     width: auto;

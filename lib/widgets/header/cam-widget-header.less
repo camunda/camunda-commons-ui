@@ -12,7 +12,7 @@ body {
       visibility: visible;
       display: block;
 
-      @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+      @media screen and (max-width: (@grid-float-breakpoint-max)) {
         visibility: hidden;
         display: none;
       }
@@ -52,7 +52,7 @@ body {
       margin-top: 10px;
     }
 
-    @media screen and (max-width: (@grid-float-breakpoint - 1)) {
+    @media screen and (max-width: (@grid-float-breakpoint-max)) {
       display: inline-block;
     }
   }
