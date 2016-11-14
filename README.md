@@ -40,6 +40,8 @@ In those examples, we use uncompiled versions of the library and its dependencie
 #### Available widgets
 
 - `cam-widget-bpmn-viewer`
+- `cam-widget-cmmn-viewer`
+- `cam-widget-dmn-viewer`
 - `cam-widget-debug`
 - `cam-widget-footer`
 - `cam-widget-header`
@@ -49,6 +51,8 @@ In those examples, we use uncompiled versions of the library and its dependencie
 - `cam-widget-search-pill`
 - `cam-widget-variable`
 - `cam-widget-variables-table`
+- `cam-widget-clipboard`
+- `cam-widget-var-template`
 
 #### Developing the widgets
 

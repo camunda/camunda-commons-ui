@@ -192,8 +192,6 @@ $scope.control = {};
         <div class="test-container"
              style="max-height: 450px;">
           <div cam-widget-dmn-viewer
-               width="800"
-               height="400"
                xml="drdXML"
                control="control">
           </div>
@@ -217,10 +215,32 @@ $scope.control = {};
         <div class="test-container"
              style="max-height: 450px;">
           <div cam-widget-dmn-viewer
-               width="800"
-               height="400"
                xml="drdXML"
                table="season"
+               control="control">
+          </div>
+        </div>
+
+      </div><!-- /.widget-example -->
+
+      <div class="widget-example"
+           id="example-6"
+           ng-controller="testController">
+        <h3>DRD Viewer With Navigation</h3>
+        <pre ng-non-bindable>
+&lt;!--
+$scope.drdXML = /* dmn xml string */;
+$scope.control = {};
+--&gt;
+&lt;div cam-widget-dmn-viewer
+     xml="drdXML"
+     enableDrdNavigation="true"
+     control="control"&gt;&lt;/div&gt;</pre>
+        <div class="test-container"
+             style="max-height: 450px;">
+          <div cam-widget-dmn-viewer
+               xml="drdXML"
+               enable-drd-navigation="true"
                control="control">
           </div>
         </div>

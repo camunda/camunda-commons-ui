@@ -1,4 +1,5 @@
 @import "dmn-js/styles/dmn-js";
+// @import (inline) "dmn-js/node_modules/diagram-js/assets/diagram-js.css";
 
 [cam-widget-dmn-viewer] {
   .table-holder {
@@ -6,7 +7,11 @@
     overflow: visible;
   }
 
-  .dmn-js-powered-by {
+  .dmn-definitions {
+    display: none;
+  }
+
+  .dmn-js-powered-by, .bjs-powered-by {
     display: none !important;
   }
 
