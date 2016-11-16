@@ -1,7 +1,10 @@
 @import "dmn-js/styles/dmn-js";
 
 [cam-widget-dmn-viewer] {
-  @import (less) "dmn-js/node_modules/diagram-js/assets/diagram-js.css";
+
+  &[edit-mode="true"] {
+    @import (less) "dmn-js/node_modules/diagram-js/assets/diagram-js.css";
+  }
 
   .table-holder {
     width: 100%;
