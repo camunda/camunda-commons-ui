@@ -44,7 +44,7 @@
     "angular-translate": "2.4.2",
     "bootstrap": "3.3.6",
     "bpmn-font": "0.2.0",
-    "bpmn-js": "0.14.1",
+    "bpmn-js": "0.18.1",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "clipboard": "1.5.10",
     "cmmn-js": "0.5.3",
