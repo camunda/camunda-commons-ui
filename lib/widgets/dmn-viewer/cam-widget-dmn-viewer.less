@@ -1,14 +1,29 @@
 @import "dmn-js/styles/dmn-js";
 
 [cam-widget-dmn-viewer] {
-  min-height: 150px;
+  min-height: 400px;
+  position: relative;
 
   &[edit-mode="true"] {
     @import (less) "dmn-js/node_modules/diagram-js/assets/diagram-js.css";
   }
 
+  .grab-cursor {
+    cursor: move;
+    cursor: -webkit-grab;
+    cursor: grab;
+  }
+
+  .cursor-move {
+    cursor: move;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+  }
+
   .table-holder {
     width: 100%;
+    height: 100%;
+    position: absolute;
     overflow: visible;
   }
 

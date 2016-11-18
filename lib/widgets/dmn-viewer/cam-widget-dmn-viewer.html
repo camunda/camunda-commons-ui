@@ -14,7 +14,12 @@
 </div>
 
 <div ng-show="!error"
-     class="table-holder"></div>
+     ng-class="{
+      'grab-cursor': isDrd && !grabbing,
+      'cursor-move': isDrd && grabbing
+     }"
+     class="table-holder">
+</div>
 
 <div ng-if="!error && !disableNavigation && isDrd">
   <div class="navigation zoom">
