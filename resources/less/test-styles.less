@@ -3,9 +3,9 @@
 @brand-logo:      'resources/img/camunda-logo.png';
 // @header-height:   41px;
 
-@bpmn-font-path:  "./node_modules/bpmn-font/dist/font/";
-@icon-font-path:  "./node_modules/bootstrap/fonts/";
 @font-path:       "./vendor/fonts/";
+@bpmn-font-path:  @font-path;//"./node_modules/bpmn-font/dist/font/";
+@icon-font-path:  @font-path;//"./node_modules/bootstrap/fonts/";
 
 @import "shared/bootstrap.less";
 @import "shared/base.less";
@@ -14,7 +14,7 @@
 @import "bpmn-viewer/cam-widget-bpmn-viewer";
 @import "cmmn-viewer/cam-widget-cmmn-viewer";
 @import "dmn-viewer/cam-widget-dmn-viewer";
-@dmn-font-path:   "../../node_modules/dmn-js/fonts/";
+@dmn-font-path:   @font-path;//"../../node_modules/dmn-js/fonts/";
 @import "footer/cam-widget-footer";
 @import "header/cam-widget-header";
 @import "inline-field/cam-widget-inline-field";

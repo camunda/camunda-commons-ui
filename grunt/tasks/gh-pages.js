@@ -213,21 +213,24 @@ module.exports = function (grunt) {
 
 
     grunt.file.expand([
-      'resources/img/*',
-
-      'node_modules/bpmn-font/dist/font/*',
-      'node_modules/bootstrap/fonts/*',
-      'vendor/fonts/*'
+      'resources/img/*'
     ]).forEach(function (filepath) {
-      grunt.file.copy(filepath, generatedDir + '/' + filepath);
+      var fileDestination = generatedDir + '/' + filepath;
+      grunt.verbose.writeln('copy ' + filepath + ' to ' + fileDestination);
+      grunt.file.copy(filepath, fileDestination);
     });
 
 
 
     grunt.file.expand([
       'node_modules/dmn-js/fonts/*.{eot,svg,ttf,woff,woff2}',
+      'node_modules/bpmn-font/dist/font/*.{eot,svg,ttf,woff,woff2}',
+      'node_modules/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}',
+      'vendor/fonts/*.{eot,svg,ttf,woff,woff2}'
     ]).forEach(function (filepath) {
-      grunt.file.copy(filepath, generatedDir + '/' + filepath);
+      var fileDestination = generatedDir + '/vendor/fonts/' + path.basename(filepath);
+      grunt.verbose.writeln('copy ' + filepath + ' to ' + fileDestination);
+      grunt.file.copy(filepath, fileDestination);
     });
 
 
