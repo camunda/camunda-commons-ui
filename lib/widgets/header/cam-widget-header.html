@@ -72,7 +72,7 @@
       <ul class="dropdown-menu dropdown-menu-right">
         <li ng-repeat="(appName, app) in apps"
             ng-class="appName">
-          <a ng-href="{{ '../../' + appName + '/:engine/' | uri }}">
+          <a ng-href="{{ ('../../' + appName + '/:engine/' | uri) + getTargetRoute() }}">
             {{ app.label }}
           </a>
         </li>
