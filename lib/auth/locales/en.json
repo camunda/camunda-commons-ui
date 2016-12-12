@@ -7,5 +7,5 @@
   "EVENING": "evening",
   "NIGHT": "night",
   "FAILED_TO_DISPLAY_RESOURCE": "Failed to display resource",
-  "AUTHENTICATION_FAILED": "Authentication failed. Your session might have expired, you need to login.",
+  "AUTHENTICATION_FAILED": "Authentication failed. Your session might have expired, you need to login."
 }
