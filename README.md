@@ -16,6 +16,7 @@ Common frontend / UI resources and libraries for camunda web applications:
   - `util` - commonly used utilities [read more](./lib/util/README.md)
   - `directives`
   - `pages`
+  - `chart`
   - `plugin`
   - `resources`
   - `search`
@@ -47,6 +48,7 @@ In those examples, we use uncompiled versions of the library and its dependencie
 - `cam-widget-header`
 - `cam-widget-inline-field`
 - `cam-widget-loader`
+- `cam-widget-chart-line`
 - `cam-widget-search`
 - `cam-widget-search-pill`
 - `cam-widget-variable`
