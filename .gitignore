@@ -10,3 +10,4 @@ test/*results.xml
 *.log
 gh-pages
 .idea
+cache
