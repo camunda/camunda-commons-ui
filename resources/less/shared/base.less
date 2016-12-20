@@ -47,6 +47,37 @@ strong {
 
 /* ---------------------------------------------------------------- */
 
+.text-padded {
+  padding-top: @padding-base-vertical + 1;
+  padding-bottom: @padding-base-vertical + 1;
+}
+/*
+.text-xs {
+  font-size: @font-size-small;
+  &.text-padded {
+    padding-top: @padding-xs-vertical + 1;
+    padding-bottom: @padding-xs-vertical + 1;
+  }
+}
+*/
+.text-sm {
+  font-size: @font-size-small;
+  &.text-padded {
+    padding-top: @padding-small-vertical + 1;
+    padding-bottom: @padding-small-vertical + 1;
+  }
+}
+
+.text-lg {
+  font-size: @font-size-large;
+  &.text-padded {
+    padding-top: @padding-large-vertical + 1;
+    padding-bottom: @padding-large-vertical + 1;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+
 
 .well {
   min-height: 20px;
