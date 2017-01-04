@@ -11,3 +11,4 @@ test/*results.xml
 gh-pages
 .idea
 cache
+*.build.js
