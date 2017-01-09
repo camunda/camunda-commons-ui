@@ -165,7 +165,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', ['build', 'karma', 'connect:widgetTests', 'protractor:widgets']);
 
-  grunt.registerTask('protractorTests', ['connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('protractorTests', ['ensureSelenium', 'connect:widgetTests', 'protractor:widgets']);
 
   grunt.registerTask('ensureSelenium', function() {
 
