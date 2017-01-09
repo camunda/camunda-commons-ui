@@ -163,7 +163,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('auto-build', ['build', 'connect:widgetTests', 'watch']);
 
-  grunt.registerTask('default', ['build', 'karma', 'connect:widgetTests', 'protractor:widgets']);
+  grunt.registerTask('default', ['build', 'karma', 'protractorTests']);
 
   grunt.registerTask('protractorTests', ['ensureSelenium', 'connect:widgetTests', 'protractor:widgets']);
 
