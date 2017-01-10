@@ -165,7 +165,7 @@
 
 
 @header-height:                   @navbar-height;
-@header-border-bottom-width:      5px;
+@header-border-bottom-width:      3px;
 @header-computed-height:          @header-height - @header-border-bottom-width;
 @header-border-bottom-color:      @brand-primary;
 
@@ -186,7 +186,11 @@
 
 @font-size-base:          14px;
 
-@shadow-color: fade(mix(@brand-primary, @gray), 50%);
+@shadow-color: @gray;
+
+@box-shadow:        0 2px 10px -4px @shadow-color;
+@box-shadow-low:    0 2px 8px -4px @shadow-color;
+@box-shadow-lower:  0 2px 6px -4px @shadow-color;
 
 
 @color-shift:                       12%;
