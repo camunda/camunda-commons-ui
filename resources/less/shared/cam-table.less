@@ -71,4 +71,31 @@
       padding-right: 5px;
     }
   }
+
+  &.search-results {
+    th,
+    td {
+      max-width: 10vw;
+    }
+
+    th {
+      white-space: nowrap;
+      overflow: hidden;
+      > * {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .column-label {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        min-width: 5em;
+        max-width: ~"calc(100% - 2.4em)";
+      }
+    }
+
+    td[cam-widget-clipboard] {
+      max-width: 10vw;
+    }
+  }
 }
