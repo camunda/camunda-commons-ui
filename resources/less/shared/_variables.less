@@ -59,7 +59,8 @@
 //##
 
 //** `<input>` background color
-@input-bg:                       @custom-gray-lighter;//transparent;
+// @input-bg:                       @custom-gray-lighter;
+@input-bg:                       transparent;
 // //** `<input disabled>` background color
 // @input-bg-disabled:              transparent;
 
@@ -111,13 +112,16 @@
 // //** Disabled cursor for form controls and buttons.
 // @cursor-disabled:                not-allowed;
 
-@input-border-radius:            0;
-@input-border-radius-large:      0;
-@input-border-radius-small:      0;
+@input-box-shadow: 0 0 6px -3px currentColor inset;
+@input-box-shadow-focus: 0 0 6px -2px currentColor inset;
 
-@cam-input-border-style:              solid;
-@cam-input-required-border-style:     solid;
-@cam-input-border-width:              1px;
+@input-border-radius:            3px;
+@input-border-radius-large:      6px;
+@input-border-radius-small:      3px;
+
+// @cam-input-border-style:              solid;
+// @cam-input-required-border-style:     solid;
+// @cam-input-border-width:              1px;
 
 
 @dropdown-link-active-color:      @gray-dark;
