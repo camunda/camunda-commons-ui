@@ -54,10 +54,16 @@
     position: relative;
     background-color: @input-bg;
     border-bottom: 1px solid @input-border;
+    border-radius: @input-border-radius;
 
+    .search-type {
+      border-radius: @input-border-radius 0 0 @input-border-radius;
+    }
     .form-control {
       background-color: transparent;
+      background-image: none;
       box-shadow: none;
+      border-radius: 0  @input-border-radius  @input-border-radius 0;
     }
     &:hover {
       border-bottom-color: @input-border-focus;
@@ -79,6 +85,8 @@
     display: block;
     min-height: @icon-size;
     padding: (@padding-base-vertical - 4px) @padding-base-horizontal (@padding-base-vertical - 6px) @padding-base-horizontal;
+    box-shadow: @input-box-shadow;
+    border-radius: @input-border-radius;
     &.has-icon {
       padding-left: @padding-base-horizontal + @icon-size;
     }
