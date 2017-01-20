@@ -59,7 +59,7 @@
     .search-type {
       border-radius: @input-border-radius 0 0 @input-border-radius;
     }
-    .form-control {
+    .main-field {
       background-color: transparent;
       background-image: none;
       box-shadow: none;
@@ -121,5 +121,47 @@
 
   &.multiline-pills {
     .cam-widget-search-multiline-pill();
+  }
+
+  .search-field {
+    position: relative;
+  }
+  .stored-criteria {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    .dropdown-toggle {
+      border: 1px solid transparent;
+      background: none;
+    }
+
+    .dropdown-menu {
+      min-width: 200px;
+    }
+
+    .input-group {
+      margin-left: 9px;
+      margin-right: 9px;
+    }
+  }
+
+  .stored-criteria-set {
+    > div {
+      display: table;
+      padding: 2px 9px 2px 4px;
+      margin-left: 2px;
+      border-left: 3px solid transparent;
+      &:hover {
+        border-left-color: @link-hover-color;
+      }
+    }
+
+    a {
+      display: table-cell;
+      &.glyphicon-remove-sign {
+        padding-right: 9px;
+      }
+    }
   }
 }

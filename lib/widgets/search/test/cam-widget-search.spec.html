@@ -63,6 +63,8 @@
         <dd>An object specifying the tooltips for the search. Available keys are: <b>inputPlaceholder, invalid, deleteSearch, type, name, operator and value</b>. Value must be a string.</dd>
         <dt><span class="badge">@</span> cam-widget-search-id</dt>
         <dd><b>Optional.</b> A string specifying the id of the search. This should be used when having multiple instances of the search widget on the same page.</dd>
+        <dt><span class="badge">@</span> cam-widget-search-storage-group</dt>
+        <dd><b>Optional.</b> A string specifying a namespace for local persistence of search criteria.</dd>
         <dt><span class="badge">@</span> cam-widget-search-mode</dt>
         <dd><b>Optional.</b> A string specifying the name of an <a href="http://getbootstrap.com/components/#glyphicons">(glyph)icon</a> (generally, you would use either `search` or `filter`).</dd>
       </dl>
@@ -84,6 +86,8 @@
                  cam-widget-search-types='types'
                  cam-widget-search-operators='operators'
                  cam-widget-search-id='search1'
+                 cam-widget-search-storage-group='"search1"'
+                 cam-widget-search-mode='filter'
             />
           </div>
           <b>All Searches:</b> <span id="allSearchesCount">{{ searches.length }}</span><br />
@@ -187,6 +191,7 @@ $scope.operators =  {
        cam-widget-search-types='types'
        cam-widget-search-operators='operators'
        cam-widget-search-id='search1'
+       cam-widget-search-storage-group='"search1"'
        cam-widget-search-mode='filter'
   /&gt;
 &lt;/div&gt;
@@ -204,6 +209,8 @@ $scope.operators =  {
       <div class='widget-example'
            id='example2'>
         In this example, we have three types: A, B and C. Type A is in group A and type B is in group B. Therefore, both are mutually exclusive. It is not possible to construct a search query with search components of both types A and B (multiple As and multiple Bs are allowed, as are as many Cs as you like).
+        <br/>
+        The storage group will here be
         <div ng-controller='testController'>
           <div class="test-container">
             <div cam-widget-search
