@@ -1,10 +1,6 @@
 # camunda-commons-ui
 
-Common frontend / UI resources and libraries for camunda web applications:
-
-- [admin][admin]
-- [cockpit][cockpit]
-- [tasklist][tasklist]
+Common frontend / UI resources, widgets and libraries for the [Camunda web application][webapp]:
 
 > **Important note:**
 > This project is used internally and the API of its components are subject to changes at any time.
@@ -30,7 +26,7 @@ Common frontend / UI resources and libraries for camunda web applications:
 
 ### Widgets
 
-Widgets are reusable components which should be easy to integrate in the Camunda webapps ([admin][admin], [cockpit][cockpit] and [tasklist][tasklist]) and your own projects.
+Widgets are reusable components which should be easy to integrate in the [Camunda webapp][webapp] and your own projects.
 
 #### Usage
 
@@ -104,7 +100,4 @@ Unless otherwise specified this project is licensed under [Apache License Versio
  - [Nico _Nikku_ Rehwaldt](https://github.com/nikku) - [@nrehwaldt](http://twitter.com/nrehwaldt)
  - [Sebastian Stamm](https://github.com/SebastianStamm) - [@seb_stamm](https://twitter.com/seb_stamm)
 
-
-[admin]: https://github.com/camunda/camunda-admin-ui
-[cockpit]: https://github.com/camunda/camunda-cockpit-ui
-[tasklist]: https://github.com/camunda/camunda-tasklist-ui
+[webapp]: https://github.com/camunda/camunda-bpm-webapp
