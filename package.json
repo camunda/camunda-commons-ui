@@ -47,7 +47,7 @@
     "bpmn-js": "0.18.4",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "clipboard": "1.5.10",
-    "cmmn-js": "0.5.3",
+    "cmmn-js": "0.7.4",
     "diagram-js": "0.18.2",
     "dmn-js": "0.8.3",
     "jquery": "2.1.1",
