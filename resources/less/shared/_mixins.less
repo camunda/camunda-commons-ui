@@ -331,6 +331,17 @@
   }
 }
 
+.cam-corporate-header-menu-item-button() {
+  .cam-corporate-header-menu-item-link();
+  background-color: transparent;
+  border: none;
+  color: @navbar-default-link-color;
+  &:hover,
+  &:focus {
+    color: @navbar-default-link-hover-color;
+  }
+}
+
 // menu is for links which will allow actions and are positioned on the left
 .cam-corporate-header-menu() {
   float: left;
