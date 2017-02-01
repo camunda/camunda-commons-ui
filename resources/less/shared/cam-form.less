@@ -6,9 +6,8 @@
   &:-ms-input-placeholder { font-style: italic; } // Internet Explorer 10+
   &::-webkit-input-placeholder  { font-style: italic; } // Safari and Chrome
 
-  border: none;
+  border: 1px solid @input-border;
   color: @input-color;
-  .form-control-background(1px);
 
   &,
   &:hover {
@@ -17,11 +16,9 @@
 
   &:hover {
     color: @input-border-focus;
-    .form-control-background(1px);
   }
 
   &:focus {
-    .form-control-background(2px);
     box-shadow: @input-box-shadow-focus;
   }
 
@@ -57,7 +54,6 @@
     color: @gray-light;
     background-color: @gray-lighter;
     &:focus {
-      .form-control-background(1px);
       background-color: @gray-lighter;
       box-shadow: @input-box-shadow-focus;
     }
@@ -85,13 +81,6 @@
 
 a.form-control-static {
   display: block;
-}
-
-.input-group {
-  .input-group-addon,
-  .form-control-feedback {
-    border-width: 0 0 1px 0;
-  }
 }
 
 .help-block {

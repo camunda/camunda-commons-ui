@@ -53,20 +53,20 @@
     overflow: visible;
     position: relative;
     background-color: @input-bg;
-    border-bottom: 1px solid @input-border;
+    border: 1px solid @input-border;
     border-radius: @input-border-radius;
 
     .search-type {
-      border-radius: @input-border-radius 0 0 @input-border-radius;
+      border-radius: @input-border-radius;
     }
     .main-field {
       background-color: transparent;
       background-image: none;
       box-shadow: none;
-      border-radius: 0  @input-border-radius  @input-border-radius 0;
+      border-radius: @input-border-radius;
     }
     &:hover {
-      border-bottom-color: @input-border-focus;
+      border-color: @input-border-focus;
     }
   }
 
