@@ -3,7 +3,7 @@
   display: inline-block;
 
   > [ng-transclude],
-  > .glyphicon-copy {
+  > .glyphicon {
     display: inline-block;
     vertical-align: middle;
   }
@@ -12,7 +12,7 @@
     display: none;
   }
 
-  > .glyphicon-copy {
+  > .glyphicon {
     cursor: pointer;
     top: 0;
     opacity: 0;
@@ -32,7 +32,7 @@
   &:hover,
   &.hovered,
   &.no-transclusion {
-    > .glyphicon-copy {
+    > .glyphicon {
       opacity: 1;
     }
   }
@@ -40,7 +40,7 @@
   &.form-control-static {
     display: inline;
     > [ng-transclude],
-    > .glyphicon-copy {
+    > .glyphicon {
       display: inline;
     }
   }
@@ -70,4 +70,3 @@
     }
   }
 }
-
