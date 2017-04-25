@@ -32,8 +32,13 @@
              typeahead-on-select="createSearch($item)"
              instant-typeahead />
     </div>
-
   </form>
+
+  <div class="total-results"
+       tooltip="Total number of results"
+       ng-show="total !== undefined && total > 0">
+    {{total}}
+  </div>
 
   <div cam-share-link></div>
 
