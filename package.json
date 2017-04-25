@@ -49,7 +49,7 @@
     "clipboard": "1.5.10",
     "cmmn-js": "0.7.4",
     "diagram-js": "0.18.2",
-    "dmn-js": "0.8.3",
+    "dmn-js": "0.8.6",
     "jquery": "2.1.1",
     "lodash": "2.4.1",
     "mkdirp": "0.5.1",
