@@ -6,6 +6,7 @@
   "AFTERNOON": "afternoon",
   "EVENING": "evening",
   "NIGHT": "night",
+  "WEEKEND": "weekend",
   "FAILED_TO_DISPLAY_RESOURCE": "Failed to display resource",
   "AUTHENTICATION_FAILED": "Authentication failed. Your session might have expired, you need to login."
 }
