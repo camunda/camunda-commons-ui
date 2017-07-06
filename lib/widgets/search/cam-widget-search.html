@@ -34,58 +34,64 @@
              instant-typeahead />
     </div>
   </form>
+  <div class="controls">
+    <span class="total-results"
+          tooltip="Total number of results">
+      {{total}}
+    </span>
 
-  <div class="total-results"
-       tooltip="Total number of results"
-       ng-show="total !== undefined && total > 0">
-    {{total}}
+    <span ng-if="isMatchTypeActive()"
+          ng-click="switchMatchType()"
+          class="match-type glyphicon"
+          ng-class="{'glyphicon-record': matchType === 'any', 'glyphicon-asterisk': matchType === 'all'}"
+          tooltip="{{matchType === 'any' ? 'any of the conditions are met' : 'all of the conditions are met'}}"></span>
+
+    <span cam-share-link></span>
+
+    <span class="dropdown stored-criteria">
+      <button ng-disabled="!searches.length && !hasCriteriaSets()"
+              class="dropdown-toggle btn btn-default">
+        <span class="glyphicon glyphicon-floppy-disk"></span>
+        <span class="caret"></span>
+      </button>
+
+      <ul class="dropdown-menu dropdown-menu-right"
+          ng-if="searchCriteriaStorage.group || hasCriteriaSets()">
+        <li ng-if="searchCriteriaStorage.group">
+          <div class="input-group input-group-sm">
+            <input type="text"
+                   class="form-control"
+                   ng-model="searchCriteriaStorage.nameInput"
+                   ng-click="storedCriteriaInputClick($event)"
+                   ng-keydown="searchCriteriaInputKeydown($event)" />
+            <span class="input-group-btn">
+              <button ng-disabled="!searchCriteriaStorage.nameInput"
+                      ng-click="storedCriteriaSaveClick($event)"
+                      class="btn btn-default"
+                      type="button">
+                <span class="glyphicon glyphicon-ok"></span>
+              </button>
+            </span>
+          </div>
+        </li>
+
+        <li role="separator"
+            class="divider"
+            ng-if="searchCriteriaStorage.group && hasCriteriaSets()"></li>
+
+        <li class="stored-criteria-set"
+            ng-if="hasCriteriaSets()"
+            ng-repeat="(key, value) in searchCriteriaStorage.available">
+          <div>
+            <a class="glyphicon glyphicon-remove-sign"
+               ng-click="dropCriteriaSet($event, key)"
+               href></a>
+
+            <a href
+               ng-click="loadCriteriaSet($event, key)">{{ key }}</a>
+          </div>
+        </li>
+      </ul>
+    </span>
   </div>
-
-  <div cam-share-link></div>
-
-  <span class="dropdown stored-criteria">
-    <button ng-disabled="!searches.length && !hasCriteriaSets()"
-            class="dropdown-toggle btn btn-default">
-      <span class="glyphicon glyphicon-floppy-disk"></span>
-      <span class="caret"></span>
-    </button>
-
-    <ul class="dropdown-menu dropdown-menu-right"
-        ng-if="searchCriteriaStorage.group || hasCriteriaSets()">
-      <li ng-if="searchCriteriaStorage.group">
-        <div class="input-group input-group-sm">
-          <input type="text"
-                 class="form-control"
-                 ng-model="searchCriteriaStorage.nameInput"
-                 ng-click="storedCriteriaInputClick($event)"
-                 ng-keydown="searchCriteriaInputKeydown($event)" />
-          <span class="input-group-btn">
-            <button ng-disabled="!searchCriteriaStorage.nameInput"
-                    ng-click="storedCriteriaSaveClick($event)"
-                    class="btn btn-default"
-                    type="button">
-              <span class="glyphicon glyphicon-ok"></span>
-            </button>
-          </span>
-        </div>
-      </li>
-
-      <li role="separator"
-          class="divider"
-          ng-if="searchCriteriaStorage.group && hasCriteriaSets()"></li>
-
-      <li class="stored-criteria-set"
-          ng-if="hasCriteriaSets()"
-          ng-repeat="(key, value) in searchCriteriaStorage.available">
-        <div>
-          <a class="glyphicon glyphicon-remove-sign"
-             ng-click="dropCriteriaSet($event, key)"
-             href></a>
-
-          <a href
-             ng-click="loadCriteriaSet($event, key)">{{ key }}</a>
-        </div>
-      </li>
-    </ul>
-  </span>
 </div>

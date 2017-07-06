@@ -128,10 +128,6 @@
     position: relative;
   }
   .stored-criteria {
-    position: absolute;
-    top: 0;
-    right: 0;
-
     .dropdown-toggle {
       border: 1px solid transparent;
       background: none;
@@ -166,21 +162,33 @@
     }
   }
 
+  .match-type {
+    color: #333;
+    vertical-align: text-top;
+    padding-left: 12px;
+  }
+
   [cam-share-link] {
-    position: absolute;
-    top: 5px;
-    right: 55px;
+    padding-left: 7px;
 
     .glyphicon {
       color: #333;
     }
+
+    [cam-widget-clipboard] {
+      vertical-align: text-bottom;
+      margin-bottom: -2px;
+    }
   }
 
   .total-results {
-    position: absolute;;
-    top: 5px;
-    right: 85px;
     text-align: right;
     color: #333;
+  }
+
+  .controls {
+    position: absolute;
+    bottom: -2px;
+    right: 0;
   }
 }
