@@ -5,6 +5,16 @@
     <div class="form-container search-container"
          ng-style="{'padding-right': getRightPadding()}"
          ng-class="{'has-icon': !!mode}">
+      <div ng-if="isMatchTypeActive() && searches.length > 0"
+           class="match-type">
+        <button ng-click="switchMatchType()"
+                type="button"
+                class="btn btn-default btn-xs"
+                ng-disabled="searches.length < 2">
+          {{ (matchType === 'all' ? 'MATCH_TYPE_ALL' : 'MATCH_TYPE_ANY') | translate }}
+        </button>
+        <span ng-disabled="searches.length < 2">{{ 'MATCH_TYPE' | translate }}</span>
+      </div>
       <span ng-if="mode"
             class="search-type glyphicon"
             ng-class="'glyphicon-' + mode"></span>
@@ -39,12 +49,6 @@
           tooltip="Total number of results">
       {{total}}
     </span>
-
-    <span ng-if="isMatchTypeActive()"
-          ng-click="switchMatchType()"
-          class="match-type glyphicon"
-          ng-class="{'glyphicon-record': matchType === 'any', 'glyphicon-asterisk': matchType === 'all'}"
-          tooltip="{{matchType === 'any' ? 'any of the conditions are met' : 'all of the conditions are met'}}"></span>
 
     <span cam-share-link></span>
 
