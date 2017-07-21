@@ -5,13 +5,13 @@
     <div class="form-container search-container"
          ng-style="{'padding-right': getRightPadding()}"
          ng-class="{'has-icon': !!mode}">
-      <div ng-if="isMatchTypeActive() && searches.length > 0"
+      <div ng-if="isMatchTypeActive && searches.length > 0"
            class="match-type">
         <button ng-click="switchMatchType()"
                 type="button"
                 class="btn btn-default btn-xs"
                 ng-disabled="searches.length < 2">
-          {{ (matchType === 'all' ? 'MATCH_TYPE_ALL' : 'MATCH_TYPE_ANY') | translate }}
+          {{ (matchType ? 'MATCH_TYPE_ANY' : 'MATCH_TYPE_ALL') | translate }}
         </button>
         <span ng-disabled="searches.length < 2">{{ 'MATCH_TYPE' | translate }}</span>
       </div>
@@ -45,7 +45,8 @@
     </div>
   </form>
   <div class="controls">
-    <span class="total-results"
+    <span ng-if="total"
+          class="total-results"
           tooltip="Total number of results">
       {{total}}
     </span>
