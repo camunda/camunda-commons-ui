@@ -7,7 +7,7 @@
          ng-class="{'has-icon': !!mode}">
       <div ng-if="isMatchAnyActive && searches.length > 0"
            class="match-any">
-        <button ng-click="newMatchType()"
+        <button ng-click="switchMatchType()"
                 type="button"
                 class="btn btn-default btn-xs"
                 ng-disabled="searches.length < 2">
