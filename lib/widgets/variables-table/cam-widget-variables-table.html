@@ -79,9 +79,11 @@
         <div ng-switch-when="value"
              ng-if="!isEditable('value', info) && variable.type !== 'Object' && variable.type !== 'String'"
              class="read-only value-wrapper">
-          <span ng-if="variable.type !== 'Bytes'"
+          <span ng-if="variable.type !== 'Bytes' && variable.type !== 'Date'"
                 cam-widget-clipboard="variable.value">{{ variable.value }}</span>
           <span ng-if="variable.type === 'Bytes'">{{ variable.value }}</span>
+          <span ng-if="variable.type === 'Date'"
+                cam-widget-clipboard="variable.value">{{ variable.value | camDate }}</span>
         </div>
 
         <div class="value-wrapper"
