@@ -97,7 +97,7 @@
             <span class="glyphicon glyphicon-remove"></span>
           </a>
 
-          <input ng-if="isPrimitive(variable.type) && !useCheckbox(variable.type) && !isNull(v)"
+          <input ng-if="isEditableType(variable.type) && !useCheckbox(variable.type) && !isNull(v)"
                  type="text"
                  class="form-control"
                  ng-model="variable.value"
