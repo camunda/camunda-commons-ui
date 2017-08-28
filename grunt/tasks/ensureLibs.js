@@ -13,6 +13,7 @@ var excluded = [
 
 var included = [
   'angular',
+  'moment',
   'dmn-js/lib/Modeler',
   'q',
   'superagent',
