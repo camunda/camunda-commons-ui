@@ -12,3 +12,4 @@ gh-pages
 cache
 /test-styles.css.map
 .idea
+.DS_Store
