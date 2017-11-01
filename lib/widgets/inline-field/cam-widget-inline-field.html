@@ -10,14 +10,25 @@
 </span>
 
 <span ng-if="editing"
+      ng-form
+      name="inlineForm"
       class="edit">
 
-  <input ng-if="simpleField"
+  <input ng-if="simpleField && !isNumber"
          class="form-control"
          type="{{ varType }}"
          ng-model="editValue"
          ng-keydown="handleKeydown($event)"
          placeholder="{{ placeholder }}" />
+
+   <input ng-if="isNumber"
+          name="numberField"
+          class="form-control"
+          ng-pattern="/^[0-9]{1,7}$/"
+          ng-model="editValue"
+          ng-keydown="handleKeydown($event)"
+          placeholder="{{ placeholder }}" />
+
 
   <span ng-show="varType === 'datetime' || varType === 'date' || varType === 'time'"
         class="cam-widget-inline-field field-control">
@@ -71,6 +82,7 @@
 
     <button type="button"
             class="btn btn-xs btn-default"
+            ng-style="{visibility: inlineForm.numberField.$valid ? 'visible' : 'hidden'}"
             ng-click="applyChange($event);"
             ng-keydown="cancelOnEsc($event);">
       <span class="glyphicon glyphicon-ok"></span>
