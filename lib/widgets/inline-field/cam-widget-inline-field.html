@@ -82,7 +82,7 @@
 
     <button type="button"
             class="btn btn-xs btn-default"
-            ng-style="{visibility: inlineForm.numberField.$valid ? 'visible' : 'hidden'}"
+            ng-style="{visibility: !isNumber || inlineForm.numberField.$valid ? 'visible' : 'hidden'}"
             ng-click="applyChange($event);"
             ng-keydown="cancelOnEsc($event);">
       <span class="glyphicon glyphicon-ok"></span>
