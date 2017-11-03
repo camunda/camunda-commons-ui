@@ -11,9 +11,9 @@
                 type="button"
                 class="btn btn-default btn-xs"
                 ng-disabled="searches.length < 2">
-          {{ (matchAny ? 'MATCH_TYPE_ANY' : 'MATCH_TYPE_ALL') | translate }}
+          {{ (matchAny ? 'CAM_WIDGET_SEARCH_MATCH_TYPE_ANY' : 'CAM_WIDGET_SEARCH_MATCH_TYPE_ALL') | translate }}
         </button>
-        <span ng-disabled="searches.length < 2">{{ 'MATCH_TYPE' | translate }}</span>
+        <span ng-disabled="searches.length < 2">{{ 'CAM_WIDGET_SEARCH_MATCH_TYPE' | translate }}</span>
       </div>
       <span ng-if="mode"
             class="search-type glyphicon"
@@ -47,7 +47,7 @@
   <div class="controls">
     <span ng-if="total"
           class="total-results"
-          tooltip="Total number of results">
+          tooltip="{{ 'CAM_WIDGET_SEARCH_TOTAL_NUMBER_RESULTS' | translate }}">
       {{total}}
     </span>
 

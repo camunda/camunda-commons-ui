@@ -1,6 +1,6 @@
 <div class="alert alert-danger"
      ng-if="error">
-  <strong>Could not render table:</strong><br/>
+  <strong>{{ 'CAM_WIDGET_DMN_VIEWER_ERROR' | translate }}</strong><br/>
   {{ error.message }}
 </div>
 
@@ -8,7 +8,7 @@
      ng-if="!loaded && !disableLoader"
      class="placeholder-container">
   <div class="placeholder-content">
-    Loading table<br />
+    {{ 'CAM_WIDGET_DMN_VIEWER_LOADING' | translate }}<br />
     <span class="glyphicon glyphicon-refresh animate-spin"></span>
   </div>
 </div>

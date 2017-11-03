@@ -93,7 +93,7 @@
              ng-if="!isNull(v)"
              class="set-null"
              tooltip-append-to-body="true"
-             tooltip="Set value to &quot;null&quot;">
+             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_SET_NULL' | translate }}">
             <span class="glyphicon glyphicon-remove"></span>
           </a>
 
@@ -101,12 +101,12 @@
                  type="text"
                  class="form-control"
                  ng-model="variable.value"
-                 placeholder="Value of the variable" />
+                 placeholder="{{ 'CAM_WIDGET_VARIABLES_TABLE_PLACEHOLDER_VALUE' | translate }}" />
 
           <input ng-if="useCheckbox(variable.type)"
                  type="checkbox"
                  ng-model="variable.value"
-                 placeholder="Value of the variable" />
+                 placeholder="{{ 'CAM_WIDGET_VARIABLES_TABLE_PLACEHOLDER_VALUE' | translate }}" />
 
           <a ng-if="variable.type === 'Object' && !isNull(v)"
              ng-click="editVariableValue(v)">
@@ -117,20 +117,20 @@
              ng-click="setNonNull(v)"
              class="null-value"
              tooltip-append-to-body="true"
-             tooltip="Re-set to previous or default value">
+             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_DEFAULT_VALUE' | translate }}">
             <span class="null-symbol">&lt;null&gt;</span>
           </a>
 
           <a ng-if="isBinary(variable.type)"
              ng-click="uploadVariable(v)"
              tooltip-append-to-body="true"
-             tooltip="Upload a new file">
+             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_UPLOAD' | translate }}">
             Upload
           </a>
 
           <span ng-if="variable.type === 'Null'"
                 class="null-value">
-            <span class="null-symbol">&lt;null&gt;</span>
+            <span class="null-symbol">{{ 'CAM_WIDGET_VARIABLES_TABLE_NULL' | translate }}</span>
           </span>
         </div><!-- / value-wrapper -->
         <!-- ................................................................................... -->
@@ -151,14 +151,14 @@
                   ng-disabled="!canEditVariable(info, v)"
                   ng-click="info.editMode = true"
                   tooltip-append-to-body="true"
-                  tooltip="Edit the variable">
+                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_EDIT_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
           <button class="btn btn-xs btn-default"
                   ng-disabled="!canEditVariable(info, v)"
                   ng-click="deleteVariable(v)"
                   tooltip-append-to-body="true"
-                  tooltip="Delete the variable">
+                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_DELETE_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon glyphicon-trash"></span>
           </button>
         </div>
@@ -169,13 +169,13 @@
                   ng-disabled="!info.valid || !info.changed"
                   ng-click="saveVariable(v)"
                   tooltip-append-to-body="true"
-                  tooltip="Save the variable">
+                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_SAVE_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
           <button class="btn btn-xs btn-default"
                   ng-click="info.editMode = false"
                   tooltip-append-to-body="true"
-                  tooltip="Revert the variable">
+                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_REVERT_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>

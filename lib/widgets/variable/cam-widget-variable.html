@@ -6,7 +6,7 @@
      ng-class="{null: isNull()}"
      class="value">
   <span ng-if="isNull()"
-        class="null-symbol">&lt;null&gt;</span>
+        class="null-symbol">{{ 'CAM_WIDGET_VARIABLE_NULL' | translate }}</span>
   {{ (variable.value === null ? '' : variable.value.toString()) }}
 </div>
 <div ng-if="display && isShown('value') && variable.type === 'Object'"
@@ -46,7 +46,7 @@
       <a ng-click="setNull()"
          class="btn btn-default set-null"
          ng-disabled="isDisabled('value')"
-         tooltip="Set value to &quot;null&quot;">
+         tooltip="{{ 'CAM_WIDGET_VARIABLE_SET_VALUE_NULL' | translate }}">
         <span class="glyphicon glyphicon-remove"></span>
       </a>
     </div>
@@ -56,7 +56,7 @@
            class="form-control value"
            ng-model="variable.value"
            ng-disabled="isDisabled('value')"
-           placeholder="Value of the variable"
+           placeholder="{{ 'CAM_WIDGET_VARIABLE_VALUE' | translate }}"
            cam-variable-validator="{{variable.type}}" />
 
     <input ng-if="useCheckbox()"
@@ -64,13 +64,13 @@
            class="value"
            ng-model="variable.value"
            ng-disabled="isDisabled('value')"
-           placeholder="Value of the variable"
+           placeholder="{{ 'CAM_WIDGET_VARIABLE_VALUE' | translate }}"
            cam-variable-validator="{{variable.type}}" />
 
     <div ng-if="variable.type === 'Object'"
          class="value form-control-static">
       <a ng-click="editVariableValue()" ng-disabled="isDisabled('value')">
-        {{ variable.valueInfo.objectTypeName || '&lt;undefined&gt;' }}
+        {{ (variable.valueInfo.objectTypeName || 'CAM_WIDGET_VARIABLE_UNDEFINED') | translate }}
       </a>
     </div>
   </div>
@@ -79,13 +79,13 @@
        ng-click="setNonNull()"
        class="value-wrapper value null-value btn btn-default"
        ng-disabled="isDisabled('value')"
-       tooltip="Re-set to previous or default value">
-    <span class="null-symbol">&lt;null&gt;</span>
+       tooltip="{{ 'CAM_WIDGET_VARIABLE_RESET' | translate }}">
+    <span class="null-symbol">{{ 'CAM_WIDGET_VARIABLE_NULL' | translate }}</span>
   </div>
 
   <div ng-if="variable.type === 'Null'"
        ng-disabled="isDisabled('value')"
        class="value-wrapper value btn no-click null-value">
-    <span class="null-symbol">&lt;null&gt;</span>
+    <span class="null-symbol">{{ 'CAM_WIDGET_VARIABLE_NULL' | translate }}</span>
   </div>
 </div>

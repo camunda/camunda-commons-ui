@@ -1,19 +1,19 @@
 <!-- # CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->
 <div class="modal-header">
-  <h3>Inspect "{{ variable.name }}" variable</h3>
+  <h3>{{ 'CAM_WIDGET_VARIABLE_DIALOG_INSPECT' | translate:'{ name: variable.name }' }}</h3>
 </div>
 
 <div class="modal-body">
   <div ng-if="readonly"
        class="form-group">
-    <label>Object type name:</label>
+    <label>{{ 'CAM_WIDGET_VARIABLE_DIALOG_LABEL_OBJECT_TYPE' | translate }}</label>
     <code class="form-control-static"
           cam-widget-clipboard="variable.valueInfo.objectTypeName">{{ variable.valueInfo.objectTypeName }}</code>
   </div>
 
   <div ng-if="readonly"
        class="form-group">
-    <label>Serialization Data Format:</label>
+    <label>{{ 'CAM_WIDGET_VARIABLE_DIALOG_LABEL_SERIALIZATION' | translate }}</label>
     <code class="form-control-static"
           cam-widget-clipboard="variable.valueInfo.serializationDataFormat">{{ variable.valueInfo.serializationDataFormat }}</code>
   </div>
@@ -21,7 +21,7 @@
   <div ng-if="!readonly"
        class="form-group">
     <label for="object-type-name"
-           cam-widget-clipboard="variable.valueInfo.objectTypeName">Object type name</label>
+           cam-widget-clipboard="variable.valueInfo.objectTypeName">{{ 'CAM_WIDGET_VARIABLE_DIALOG_LABEL_OBJECT_TYPE' | translate }}</label>
     <input type="text"
            id="object-type-name"
            class="form-control"
@@ -31,7 +31,7 @@
   <div ng-if="!readonly"
        class="form-group">
     <label for="serialization-data-format"
-           cam-widget-clipboard="variable.valueInfo.serializationDataFormat">Serialization data format</label>
+           cam-widget-clipboard="variable.valueInfo.serializationDataFormat">{{ 'CAM_WIDGET_VARIABLE_DIALOG_LABEL_SERIALIZATION' | translate }}</label>
     <input type="text"
            id="serialization-data-format"
            class="form-control"
@@ -42,7 +42,7 @@
     <label for="serialized-value"
            cam-widget-clipboard="variable.value"
            no-tooltip
-           ng-class="{hovered: hovered === 'var-value'}">Serialized value</label>
+           ng-class="{hovered: hovered === 'var-value'}">{{ 'CAM_WIDGET_VARIABLE_DIALOG_LABEL_SERIALIZED_VALUE' | translate }}</label>
     <textarea ng-model="variable.value"
               id="serialized-value"
               rows="10"
@@ -56,14 +56,14 @@
 <div class="modal-footer">
   <button class="btn btn-default"
           ng-click="$dismiss('close')">
-    Close
+    {{ 'CAM_WIDGET_VARIABLE_DIALOG_BTN_CLOSE' | translate }}
   </button>
 
   <button class="btn btn-primary"
           ng-if="!readonly"
           ng-readonly="!hasChanged('serialized')"
           ng-click="$close(variable)">
-    Change
+    {{ 'CAM_WIDGET_VARIABLE_DIALOG_BTN_CHANGE' | translate }}
   </button>
 </div>
 <!-- / CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->

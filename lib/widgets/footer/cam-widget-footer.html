@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-6" style="text-align: left;">
-      Date and Time displayed in local timezone: <i>{{timezoneName}}</i>
+      {{ 'CAM_WIDGET_FOOTER_TIMEZONE' | translate }} <i>{{timezoneName}}</i>
     </div>
     <div class="col-xs-6">
-      Powered by <a href="http://camunda.org">camunda BPM</a> /
+      {{ 'CAM_WIDGET_FOOTER_POWERED_BY' | translate }} <a href="http://camunda.org">camunda BPM</a> /
       <span class="version">{{version}}</span>
     </div>
   </div>

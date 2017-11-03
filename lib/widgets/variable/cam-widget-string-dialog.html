@@ -1,6 +1,6 @@
 <!-- # CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->
 <div class="modal-header">
-  <h3>Inspect "{{ variable.name }}" variable</h3>
+  <h3>{{ 'CAM_WIDGET_STRING_DIALOG_TITLE' | translate:'{name: variable.name}' }}</h3>
 </div>
 
 <div class="modal-body">
@@ -9,7 +9,7 @@
            cam-widget-clipboard="variable.value"
            no-tooltip
            ng-class="{hovered: hovered === 'var-value'}">
-      Value
+      {{ 'CAM_WIDGET_STRING_DIALOG_LABEL_VALUE' | translate }}
     </label>
     <textarea ng-model="variable.value"
               id="value"
@@ -24,7 +24,7 @@
 <div class="modal-footer">
   <button class="btn btn-default"
           ng-click="$dismiss('close')">
-    Close
+    {{ 'CAM_WIDGET_STRING_DIALOG_LABEL_CLOSE' | translate }}
   </button>
 </div>
 <!-- / CE - camunda-commons-ui/lib/widgets/variable/cam-widget-variable-dialog.html -->

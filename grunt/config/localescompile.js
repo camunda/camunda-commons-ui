@@ -8,9 +8,7 @@ module.exports = function(config, localesConfig, pathConfig) {
         anOption: 'for production'
       },
       src: [
-        pathConfig.sourceDir + '/../../camunda-commons-ui/resources/locales/*.json',
-        pathConfig.sourceDir + '/../../camunda-commons-ui/lib/*/locales/*.json',
-        pathConfig.sourceDir + '/scripts/**/locales/*.json'
+        pathConfig.sourceDir + '/../../camunda-commons-ui/lib/locales/*.json'
       ]
   };
 };
