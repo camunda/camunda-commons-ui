@@ -33,7 +33,7 @@
     "bootstrap": "3.3.1",
     "bpmn-font": "0.2.0",
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.4",
-    "bpmn-js": "0.9.2",
+    "bpmn-js": "0.9.3",
     "dmn-js": "0.3.1",
     "jquery": "2.1.1",
     "lodash": "2.4.1",
