@@ -41,7 +41,7 @@
         <li class="profile"
             ng-if="currentApp !== 'welcome'">
           <a ng-href="{{ '../../welcome/:engine/' | uri }}">
-            {{ myProfile }}
+            {{ myProfile | translate }}
           </a>
         </li>
 
@@ -51,7 +51,7 @@
         <li class="logout">
           <a href
              ng-click="logout()">
-            {{ signOut }}
+            {{ signOut | translate }}
           </a>
         </li>
       </ul>
