@@ -67,6 +67,14 @@
              ng-click="editVariableValue(v)"
              href>&lt;undefined&gt;</a>
         </div>
+        <div ng-switch-when="value"
+             ng-if="!isEditable('value', info) && (variable.type === 'Json' || variable.type === 'Xml')"
+             class="read-only value-wrapper">
+          <span cam-widget-clipboard="variable.value">
+            <a ng-click="editVariableValue(v)"
+               href>{{ variable.value }}</a>
+          </span>
+        </div>
 
         <div ng-switch-when="value"
              ng-if="!isEditable('value', info) && variable.type === 'String'"
@@ -77,7 +85,7 @@
         </div>
 
         <div ng-switch-when="value"
-             ng-if="!isEditable('value', info) && variable.type !== 'Object' && variable.type !== 'String'"
+             ng-if="!isEditable('value', info) && !hasEditDialog(variable.type)"
              class="read-only value-wrapper">
           <span ng-if="variable.type !== 'Bytes' && variable.type !== 'Date'"
                 cam-widget-clipboard="variable.value">{{ variable.value }}</span>
