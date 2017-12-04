@@ -105,7 +105,7 @@
             <span class="glyphicon glyphicon-remove"></span>
           </a>
 
-          <input ng-if="isEditableType(variable.type) && !useCheckbox(variable.type) && !isNull(v)"
+          <input ng-if="isPrimitive(variable.type) && !useCheckbox(variable.type) && !isNull(v)"
                  type="text"
                  class="form-control"
                  ng-model="variable.value"
@@ -119,6 +119,11 @@
           <a ng-if="variable.type === 'Object' && !isNull(v)"
              ng-click="editVariableValue(v)">
             {{ variable.valueInfo.objectTypeName || '&lt;undefined&gt;' }}
+          </a>
+
+          <a ng-if="(variable.type === 'Json' || variable.type === 'Xml') && !isNull(v)"
+             ng-click="editVariableValue(v)">
+            {{ variable.value || '&lt;undefined&gt;' }}
           </a>
 
           <a ng-if="variable.type !== 'Null' && !isBinary(variable.type) && isNull(v)"
