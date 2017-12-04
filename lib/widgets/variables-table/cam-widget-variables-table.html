@@ -1,15 +1,18 @@
 <table class="cam-table">
   <thead>
-    <tr>
-      <td ng-repeat="headerName in headerNames" ng-class="'col-' + headerName">
-        {{ headers[headerName] }}
-      </td>
-
-      <td class="actions"
-          ng-if="editable.length">
-        Actions
-      </td>
-    </tr>
+  <tr>
+    <td ng-repeat="column in headColumns" ng-class="col-{{column.class}}">
+      <span class="{{column.class}}">{{column.content}}</span>
+      <a ng-if="column.sortable === true"
+         ng-click="changeOrder(column.request)">
+        <span class="glyphicon" ng-class="orderClass(column.request)"></span>
+      </a>
+    </td>
+    <td class="actions"
+        ng-if="editable.length">
+      Actions
+    </td>
+  </tr>
   </thead>
 
   <tbody>
