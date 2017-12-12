@@ -154,18 +154,33 @@
      cam-variables="vars"
      on-edit="editFunction"
      on-save="saveFunction"
+     cam-headers="[
+    { class: 'name',      request: 'variableName', sortable: true,  content: 'Name'},
+    { class: 'value',     request: '',             sortable: false, content: 'Value'},
+    { class: 'type',      request: '',             sortable: false, content: 'Type'},
+    ]"
+         default-sort= "{ sortBy: 'variableName', sortOrder: 'asc' }"
      is-variable-editable="isVariableEditable"&gt;&lt;/div&gt;
 
 &lt;ol&gt;
-  &lt;li ng-repeate="change in changes"&gt;{{ change.name }} | {{ change.type }} | {{ change.value }} | {{ change.saved }}&lt;/li&gt;
+  &lt;li ng-repeat="change in changes"&gt;{{ change.name }} | {{ change.type }} | {{ change.value }} | {{ change.saved }}&lt;/li&gt;
 &lt;/ol&gt;</pre>
+
         <div class="test-container">
           <div cam-widget-variables-table
                cam-variables="vars"
                on-edit="editFunction"
                on-save="saveFunction"
+               cam-editable="['name','type', 'value']"
+               cam-headers="[
+          { class: 'name',      request: 'variableName', sortable: true,  content: 'Name'},
+          { class: 'value',     request: '',             sortable: false, content: 'Value'},
+          { class: 'type',      request: '',             sortable: false, content: 'Type'},
+          ]"
+               default-sort= "{ sortBy: 'variableName', sortOrder: 'asc' }"
                is-variable-editable="isVariableEditable"></div>
 
+          <div>{{changes}}</div>
           <ol>
             <li ng-repeat="change in changes">{{ change.name }} | {{ change.type }} | {{ change.value }} | {{ change.saved }}</li>
           </ol>
@@ -182,18 +197,28 @@
      class="first"
      on-download="formatDownloadLink"
      cam-editable="['value']"
-     cam-headers="headers"
+     cam-headers="[
+          { class: 'plain',     request: '',             sortable: false, content: 'Plain'},
+          { class: 'name',      request: 'variableName', sortable: true,  content: 'Name'},
+          { class: 'value',     request: '',             sortable: false, content: 'Value'},
+          { class: 'type',      request: '',             sortable: false, content: 'Type'},
+          { class: 'formatted', request: '',             sortable: false, content: 'Formatted'}
+        ]"
+     default-sort= "{ sortBy: 'variableName', sortOrder: 'asc' }"
+
      cam-variables="vars"&gt;&lt;/div&gt;
 
 &lt;h4&gt;Read only&lt;/h4&gt;
 &lt;div cam-widget-variables-table
      class="second"
+     default-sort= "{ sortBy: 'variableName', sortOrder: 'asc' }"
      cam-editable="[]"
      cam-headers="[
           { class: 'name',      request: 'variableName', sortable: true, content: 'Variable name'},
           { class: 'plain',     request: '',             sortable: false, content: 'Plain text'},
           { class: 'value',     request: '',             sortable: false, content: 'Value'}
           ]"
+
      cam-variables="vars"&gt;&lt;/div&gt;</pre>
         <div class="test-container">
           <h4>Editable and additions</h4>
@@ -201,18 +226,28 @@
                class="first"
                on-download="formatDownloadLink"
                cam-editable="['value']"
-               cam-headers="headers"
+               cam-headers="[
+          { class: 'plain',     request: '',             sortable: false, content: 'Plain'},
+          { class: 'name',      request: 'variableName', sortable: true,  content: 'Name'},
+          { class: 'value',     request: '',             sortable: false, content: 'Value'},
+          { class: 'type',      request: '',             sortable: false, content: 'Type'},
+          { class: 'formatted', request: '',             sortable: false, content: 'Formatted'}
+        ]"
+               default-sort = "{ sortBy: 'variableName', sortOrder: 'asc' }"
                cam-variables="vars"></div>
 
           <h4>Read only</h4>
           <div cam-widget-variables-table
                class="second"
                cam-editable="[]"
+               default-sort= "{ sortBy: 'variableName', sortOrder: 'asc' }"
                cam-headers="[
-          { class: 'name',      request: 'variableName', sortable: true, content: 'Variable name'},
           { class: 'plain',     request: '',             sortable: false, content: 'Plain text'},
-          { class: 'value',     request: '',             sortable: false, content: 'Value'}
+          { class: 'value',     request: '',             sortable: false, content: 'Value'},
+          { class: 'name',      request: 'variableName', sortable: true, content: 'Variable name'}
           ]"
+
+
 
 
 
