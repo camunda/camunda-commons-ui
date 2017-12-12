@@ -189,7 +189,11 @@
 &lt;div cam-widget-variables-table
      class="second"
      cam-editable="[]"
-     cam-headers="{plain: 'Plain text', name: 'Name', value: 'Value'}"
+     cam-headers="[
+          { class: 'name',      request: 'variableName', sortable: true, content: 'Variable name'},
+          { class: 'plain',     request: '',             sortable: false, content: 'Plain text'},
+          { class: 'value',     request: '',             sortable: false, content: 'Value'}
+          ]"
      cam-variables="vars"&gt;&lt;/div&gt;</pre>
         <div class="test-container">
           <h4>Editable and additions</h4>
@@ -204,7 +208,17 @@
           <div cam-widget-variables-table
                class="second"
                cam-editable="[]"
-               cam-headers="{plain: 'Plain text', name: 'Variable name', value: 'Value'}"
+               cam-headers="[
+          { class: 'name',      request: 'variableName', sortable: true, content: 'Variable name'},
+          { class: 'plain',     request: '',             sortable: false, content: 'Plain text'},
+          { class: 'value',     request: '',             sortable: false, content: 'Value'}
+          ]"
+
+
+
+
+
+
                cam-variables="vars"></div>
         </div><!-- /.test-container -->
       </div><!-- /.widget-example -->
