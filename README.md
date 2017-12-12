@@ -78,7 +78,10 @@ TESTED=variable nodemon -w lib/widgets/ --exec "protractor ./test/protractor.con
 ```
 This will only run the `cam-widget-variable` tests.
 
-
+## grunt connect keep alive web server
+```
+grunt connect:widgetTests:keepalive
+```
 
 ## Test
 
