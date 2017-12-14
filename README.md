@@ -97,8 +97,8 @@ directConnect: true,
 ```
 Run in commons-ui folder: 
 ``` 
-Rm -RF node_modules
-Npm install —legacy-bundling
+rm -rf node_modules
+npm install —-legacy-bundling
 ```
 Open webdriver-manager and change mac32.zip to mac64.zip if you run a newer macOS version.
 ``` 
