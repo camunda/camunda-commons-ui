@@ -18,7 +18,7 @@
   <tbody>
     <tr ng-repeat="(v, info) in variables"
         ng-class="rowClasses(info, v)">
-      <td ng-repeat="headerClass in headerClasses"
+      <td ng-repeat="headerClass in headerClasses track by $index"
           ng-init="variable=info.variable"
           ng-class="colClasses(info, headerClass, v)"
           ng-switch on="headerClass">
