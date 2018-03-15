@@ -9,7 +9,8 @@
     "livereloadPort": 8071
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dependencies": "license-checker --production --json --relativeLicensePath"
   },
   "repository": {
     "type": "git",
@@ -75,6 +76,7 @@
     "karma-junit-reporter": "0.2.2",
     "karma-mocha": "0.1.6",
     "karma-phantomjs-launcher": "0.1.4",
+    "license-checker": "14.0.0",
     "load-grunt-tasks": "2.0.0",
     "mocha": "2.1.0",
     "xunit-file": "0.0.6"
