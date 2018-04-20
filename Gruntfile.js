@@ -120,8 +120,7 @@ module.exports = function(grunt) {
       styles: {
         files: [
           'lib/**/*.less',
-          'resources/less/**/*.less',
-          'node_modules/dmn-js/styles/**/*.less'
+          'resources/less/**/*.less'
         ],
         tasks: ['less']
       },
@@ -217,8 +216,9 @@ module.exports = function(grunt) {
   });
 
   require('./grunt/tasks/gh-pages')(grunt);
+  require('./grunt/tasks/dmncompile')(grunt);
 
-  grunt.registerTask('build', ['newer:eslint', 'less:widgets', 'browserify:watch']);
+  grunt.registerTask('build', ['dmncompile', 'newer:eslint', 'less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 

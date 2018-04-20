@@ -14,7 +14,6 @@ var excluded = [
 var included = [
   'angular',
   'moment',
-  'dmn-js/lib/Modeler',
   'q',
   'superagent',
   'bpmn-js/lib/NavigatedViewer'
