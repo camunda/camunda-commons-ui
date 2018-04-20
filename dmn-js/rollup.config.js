@@ -29,7 +29,7 @@ export default {
         ['env', {
           modules: false,
           targets: {
-            browsers: ['ie = 9']
+            browsers: ['ie >= 9']
           }
         }]
       ]
