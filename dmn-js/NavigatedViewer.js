@@ -13,14 +13,18 @@ import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
  */
 export default class Viewer extends Manager {
 
-  _getViewProviders() {
+  constructor(options = {}) {
+    super(options);
+    this.options = options;
+  }
 
-    return [
+  _getViewProviders() {
+    let providers = [
       {
-        id: 'drd',
-        constructor: DrdViewer,
+        id: 'literalExpression',
+        constructor: LiteralExpressionViewer,
         opens(element) {
-          return is(element, 'dmn:Definitions') && containsDi(element);
+          return is(element, 'dmn:Decision') && element.literalExpression;
         }
       },
       {
@@ -29,15 +33,21 @@ export default class Viewer extends Manager {
         opens(element) {
           return is(element, 'dmn:Decision') && element.decisionTable;
         }
-      },
-      {
-        id: 'literalExpression',
-        constructor: LiteralExpressionViewer,
-        opens(element) {
-          return is(element, 'dmn:Decision') && element.literalExpression;
-        }
       }
     ];
+
+    const { tableViewOnly } = this.options;
+    if(!tableViewOnly) {
+      providers.push({
+        id: 'drd',
+        constructor: DrdViewer,
+        opens(element) {
+          return is(element, 'dmn:Definitions') && containsDi(element);
+        }
+      });
+    }
+
+    return providers;
 
   }
 
