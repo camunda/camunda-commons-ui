@@ -22,6 +22,6 @@
     "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
-    "dmn-js": "^4.2.0"
+    "dmn-js": "^4.3.0"
   }
 }
