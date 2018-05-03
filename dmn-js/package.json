@@ -3,6 +3,9 @@
   "version": "7.9.0-SNAPSHOT",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "if [ ! -f index.js ]; then npm i --silent && node_modules/.bin/rollup -c --silent; fi"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
@@ -15,7 +18,8 @@
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-commonjs": "^9.1.0",
     "rollup-plugin-json": "^2.3.0",
-    "rollup-plugin-node-resolve": "^3.3.0"
+    "rollup-plugin-node-resolve": "^3.3.0",
+    "rollup-plugin-uglify": "^3.0.0"
   },
   "dependencies": {
     "dmn-js": "^4.2.0"

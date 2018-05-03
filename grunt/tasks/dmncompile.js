@@ -6,7 +6,7 @@ module.exports = function(grunt) {
     var done = this.async();
     var dmnPath = path.join(__dirname, '../../dmn-js/');
 
-    var cmd = 'npm i --silent && node_modules/.bin/rollup -c --silent';
+    var cmd = 'npm run build';
     if (process.platform === 'win32') {
       cmd = cmd.replace(/\//g, '\\');
     }
