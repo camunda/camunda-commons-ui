@@ -7,8 +7,7 @@ var excluded = [
   'bpmn-font',
   'camunda-bpm-sdk-js',
   'persistify',
-  'mkdirp',
-  'dmn-js'
+  'mkdirp'
 ];
 
 var included = [
@@ -35,7 +34,7 @@ module.exports = function(grunt) {
         'node_modules/camunda-commons-ui/node_modules',
         'node_modules/camunda-commons-ui/node_modules/camunda-bpm-sdk-js/node_modules',
         'node_modules/camunda-bpm-sdk-js/node_modules',
-        'node_modules/camunda-bpm-webapp/node_modules/camunda-commons-ui/node_modules/camunda-bpm-sdk-js/node_modules',
+        'node_modules/camunda-bpm-webapp/node_modules/camunda-commons-ui/node_modules/camunda-bpm-sdk-js/node_modules'
       ]
     };
     var persistifyOptions = {
