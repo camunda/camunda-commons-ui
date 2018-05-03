@@ -7,7 +7,10 @@ var excluded = [
   'bpmn-font',
   'camunda-bpm-sdk-js',
   'persistify',
-  'mkdirp'
+  'mkdirp',
+  'bpmn-js',
+  'cmmn-js',
+  'diagram-js'
 ];
 
 var included = [
