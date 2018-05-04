@@ -216,9 +216,9 @@ module.exports = function(grunt) {
   });
 
   require('./grunt/tasks/gh-pages')(grunt);
-  require('./grunt/tasks/dmncompile')(grunt);
+  require('./grunt/tasks/compileLibs')(grunt);
 
-  grunt.registerTask('build', ['dmncompile', 'newer:eslint', 'less:widgets', 'browserify:watch']);
+  grunt.registerTask('build', ['compileLibs', 'newer:eslint', 'less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 
