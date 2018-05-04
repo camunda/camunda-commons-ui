@@ -8,8 +8,7 @@ var excluded = [
   'camunda-bpm-sdk-js',
   'persistify',
   'mkdirp',
-  'bpmn-js',
-  'cmmn-js',
+  'dmn-js',
   'diagram-js'
 ];
 
