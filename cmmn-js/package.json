@@ -1,0 +1,19 @@
+{
+  "name": "cmmn-js",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "if [ ! -f index.js ]; then npm i --silent && node build; fi"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browser-pack-flat": "^3.0.9",
+    "browserify-derequire": "^0.9.6"
+  },
+  "dependencies": {
+    "cmmn-js": "0.14.4"
+  }
+}
