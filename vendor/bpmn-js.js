@@ -1,3 +1,3 @@
 'use strict';
 
-module.exports = require('bpmn-js/dist/bpmn-navigated-viewer.production.min');
+module.exports = require('bpmn-js/lib/NavigatedViewer');

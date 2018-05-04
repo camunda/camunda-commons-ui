@@ -17,7 +17,8 @@ var included = [
   'angular',
   'moment',
   'q',
-  'superagent'
+  'superagent',
+  'bpmn-js/lib/NavigatedViewer'
 ];
 
 

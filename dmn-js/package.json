@@ -3,9 +3,6 @@
   "version": "7.9.0-SNAPSHOT",
   "main": "index.js",
   "license": "MIT",
-  "scripts": {
-    "build": "if [ ! -f index.js ]; then npm i --silent && node_modules/.bin/rollup -c --silent; fi"
-  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
