@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "if [ ! -f index.js ]; then npm i --silent && node build; fi"
+    "build": "node init"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
