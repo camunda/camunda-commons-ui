@@ -104,7 +104,7 @@
              ng-if="!isNull(v)"
              class="set-null"
              tooltip-append-to-body="true"
-             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_SET_NULL' | translate }}">
+             uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_SET_NULL' | translate }}">
             <span class="glyphicon glyphicon-remove"></span>
           </a>
 
@@ -133,14 +133,14 @@
              ng-click="setNonNull(v)"
              class="null-value"
              tooltip-append-to-body="true"
-             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_DEFAULT_VALUE' | translate }}">
+             uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_DEFAULT_VALUE' | translate }}">
             <span class="null-symbol">&lt;null&gt;</span>
           </a>
 
           <a ng-if="isBinary(variable.type)"
              ng-click="uploadVariable(v)"
              tooltip-append-to-body="true"
-             tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_UPLOAD' | translate }}">
+             uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_TOOLTIP_UPLOAD' | translate }}">
             Upload
           </a>
 
@@ -167,14 +167,14 @@
                   ng-disabled="!canEditVariable(info, v)"
                   ng-click="info.editMode = true"
                   tooltip-append-to-body="true"
-                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_EDIT_VARIABLE' | translate }}">
+                  uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_EDIT_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-pencil"></span>
           </button>
           <button class="btn btn-xs btn-default"
                   ng-disabled="!canEditVariable(info, v)"
                   ng-click="deleteVariable(v)"
                   tooltip-append-to-body="true"
-                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_DELETE_VARIABLE' | translate }}">
+                  uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_DELETE_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon glyphicon-trash"></span>
           </button>
         </div>
@@ -185,13 +185,13 @@
                   ng-disabled="!info.valid || !info.changed"
                   ng-click="saveVariable(v)"
                   tooltip-append-to-body="true"
-                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_SAVE_VARIABLE' | translate }}">
+                  uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_SAVE_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-ok"></span>
           </button>
           <button class="btn btn-xs btn-default"
                   ng-click="info.editMode = false"
                   tooltip-append-to-body="true"
-                  tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_REVERT_VARIABLE' | translate }}">
+                  uib-tooltip="{{ 'CAM_WIDGET_VARIABLES_TABLE_REVERT_VARIABLE' | translate }}">
             <span class="glyphicon glyphicon-remove"></span>
           </button>
         </div>

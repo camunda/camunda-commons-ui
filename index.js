@@ -58,7 +58,7 @@ function requirejsConf(options) {
       'angular-touch':              'node_modules/angular-touch/angular-touch',
 
       // #### vendor dependencies
-      'angular-bootstrap':          'vendor/ui-bootstrap-tpls-0.11.2-camunda',
+      'angular-bootstrap':          'vendor/ui-bootstrap-tpls-2.5.0-camunda',
       'jquery-ui-core':             'vendor/jquery.ui.core',
       'jquery-ui-mouse':            'vendor/jquery.ui.mouse',
       'jquery-ui-widget':           'vendor/jquery.ui.widget',

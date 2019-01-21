@@ -33,7 +33,8 @@
   <span ng-show="varType === 'datetime' || varType === 'date' || varType === 'time'"
         class="cam-widget-inline-field field-control">
 
-    <datepicker class="datepicker"
+    <div class="datepicker"
+                uib-datepicker
                 ng-if="varType === 'datetime' || varType === 'date'"
                 type="text"
                 ng-required="true"
@@ -42,15 +43,16 @@
                 ng-keydown="trapKeyboard($event, true); cancelOnEsc($event);"
 
                 ng-model="dateValue"
-                ng-change="changeDate(this)"></datepicker>
+                ng-change="changeDate(this)"></div>
 
-    <timepicker class="timepicker"
+    <div class="timepicker"
+                uib-timepicker
                 ng-if="varType === 'datetime' || varType === 'time'"
                 show-meridian="false"
 
                 ng-model="dateValue"
                 ng-keydown="cancelOnEsc($event);"
-                ng-change="changeDate(this)"></timepicker>
+                ng-change="changeDate(this)"></div>
   </span>
 
   <input ng-if="varType === 'option' && options[0].value"
@@ -58,7 +60,7 @@
          type="text"
          ng-model="editValue"
          ng-keydown="handleKeydown($event)"
-         typeahead="option as option.value for option in options | filter:$viewValue:instantTypeahead"
+         uib-typeahead="option as option.value for option in options | filter:$viewValue:instantTypeahead"
          typeahead-on-select="saveSelection($item)"
          instant-typeahead />
   <input ng-if="varType === 'option' && !options[0].value"
@@ -66,7 +68,7 @@
          type="text"
          ng-model="editValue"
          ng-keydown="handleKeydown($event)"
-         typeahead="option for option in options | filter:$viewValue:instantTypeahead"
+         uib-typeahead="option for option in options | filter:$viewValue:instantTypeahead"
          typeahead-on-select="saveSelection($item)"
          instant-typeahead />
 

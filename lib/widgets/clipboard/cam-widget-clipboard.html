@@ -1,6 +1,6 @@
 <span ng-transclude></span>
 <a ng-if="!noTooltip"
-   tooltip="{{ tooltipText }}"
+   uib-tooltip="{{ tooltipText }}"
    tooltip-append-to-body="true"
    ng-class="{'copy-ok': copyStatus === true, 'copy-error': copyStatus === false}"
    class="glyphicon {{icon}}"></a>

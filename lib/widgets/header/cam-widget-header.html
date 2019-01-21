@@ -18,7 +18,7 @@
 
   <div class="small-screen-warning">
     <span class="glyphicon glyphicon-exclamation-sign"
-          tooltip="{{ smallScreenWarning }}"
+          uib-tooltip="{{ smallScreenWarning }}"
           tooltip-placement="bottom"></span>
   </div>
 </div>
@@ -30,14 +30,16 @@
 
     <li class="account dropdown"
         ng-if="authentication.name"
-        ng-cloak>
+        ng-cloak
+        uib-dropdown>
       <a href
-         class="dropdown-toggle">
+         class="dropdown-toggle"
+         uib-dropdown-toggle>
         <span class="glyphicon glyphicon-user "></span>
         {{ (userName || authentication.name) }}
       </a>
 
-      <ul class="dropdown-menu dropdown-menu-right">
+      <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
         <li class="profile"
             ng-if="currentApp !== 'welcome'">
           <a ng-href="{{ '../../welcome/:engine/' | uri }}">
@@ -62,14 +64,16 @@
         ng-cloak></li>
 
     <li class="app-switch dropdown"
-        ng-if="showAppDropDown">
+        ng-if="showAppDropDown"
+        uib-dropdown>
       <a href
-         class="dropdown-toggle">
+         class="dropdown-toggle"
+         uib-dropdown-toggle>
         <span class="glyphicon glyphicon-home"></span>
         <span class="caret"></span>
       </a>
 
-      <ul class="dropdown-menu dropdown-menu-right">
+      <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu>
         <li ng-repeat="(appName, app) in apps"
             ng-class="appName">
           <a ng-href="{{ ('../../' + appName + '/:engine/' | uri) + getTargetRoute() }}">

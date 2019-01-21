@@ -4,7 +4,7 @@
   <a href
      ng-click="onDelete()"
      tooltip-placement="top"
-     tooltip="{{ deleteText | translate }}"
+     uib-tooltip="{{ deleteText | translate }}"
      class="remove-search glyphicon glyphicon-remove">
   </a>
 
@@ -19,7 +19,7 @@
         value="type.value">
     <span ng-if="type.tooltip"
           tooltip-placement="top"
-          tooltip="{{ type.tooltip | translate }}">
+          uib-tooltip="{{ type.tooltip | translate }}">
       {{ type.value.value | camQueryComponent }}
     </span>
     <span ng-if="!type.tooltip">
@@ -40,7 +40,7 @@
         value="name.value.value">
     <span ng-if="name.tooltip"
           tooltip-placement="top"
-          tooltip="{{name.tooltip | translate }}">
+          uib-tooltip="{{name.tooltip | translate }}">
         {{ name.value.value | camQueryComponent }}
     </span>
     <span ng-if="!name.tooltip">
@@ -59,7 +59,7 @@
         value="name.value">
     <span ng-if="name.tooltip"
           tooltip-placement="top"
-          tooltip="{{name.tooltip | translate }}">
+          uib-tooltip="{{name.tooltip | translate }}">
         {{ name.value | camQueryComponent }}
     </span>
     <span ng-if="!name.tooltip">
@@ -104,7 +104,7 @@
         value="operator.value">
     <span ng-if="operator.tooltip"
           tooltip-placement="top"
-          tooltip="{{operator.tooltip | translate }}">
+          uib-tooltip="{{operator.tooltip | translate }}">
       {{ operator.value.value | camQueryComponent }}
     </span>
     <span ng-if="!operator.tooltip">
@@ -114,7 +114,7 @@
 
   <span ng-if="operator.values.length < 2 && operator.tooltip"
         tooltip-placement="top"
-        tooltip="{{operator.tooltip | translate }}"
+        uib-tooltip="{{operator.tooltip | translate }}"
         class="operator-field">
     {{ operator.value.value | camQueryComponent }}
   </span>
@@ -137,7 +137,7 @@
     <span class="visible-whitespace"
           ng-if="value.tooltip"
           tooltip-placement="top"
-          tooltip="{{value.tooltip | translate }}">{{ value.value | camQueryComponent }}</span>
+          uib-tooltip="{{value.tooltip | translate }}">{{ value.value | camQueryComponent }}</span>
     <span class="visible-whitespace"
           ng-if="!value.tooltip">{{ value.value | camQueryComponent }}</span>
   </span>

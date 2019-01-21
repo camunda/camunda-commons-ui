@@ -46,7 +46,7 @@
       <a ng-click="setNull()"
          class="btn btn-default set-null"
          ng-disabled="isDisabled('value')"
-         tooltip="{{ 'CAM_WIDGET_VARIABLE_SET_VALUE_NULL' | translate }}">
+         uib-tooltip="{{ 'CAM_WIDGET_VARIABLE_SET_VALUE_NULL' | translate }}">
         <span class="glyphicon glyphicon-remove"></span>
       </a>
     </div>
@@ -79,7 +79,7 @@
        ng-click="setNonNull()"
        class="value-wrapper value null-value btn btn-default"
        ng-disabled="isDisabled('value')"
-       tooltip="{{ 'CAM_WIDGET_VARIABLE_RESET' | translate }}">
+       uib-tooltip="{{ 'CAM_WIDGET_VARIABLE_RESET' | translate }}">
     <span class="null-symbol">{{ 'CAM_WIDGET_VARIABLE_NULL' | translate }}</span>
   </div>
 

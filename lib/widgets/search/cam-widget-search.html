@@ -39,7 +39,7 @@
              type="text"
              ng-model="inputQuery"
              ng-keydown="onKeydown($event)"
-             typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
+             uib-typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
              typeahead-on-select="createSearch($item)"
              instant-typeahead />
     </div>
@@ -47,21 +47,21 @@
   <div class="controls">
     <span ng-if="total"
           class="total-results"
-          tooltip="{{ 'CAM_WIDGET_SEARCH_TOTAL_NUMBER_RESULTS' | translate }}">
+          uib-tooltip="{{ 'CAM_WIDGET_SEARCH_TOTAL_NUMBER_RESULTS' | translate }}">
       {{total}}
     </span>
 
     <span cam-share-link></span>
 
-    <span class="dropdown stored-criteria">
+    <span class="dropdown stored-criteria" uib-dropdown>
       <button ng-disabled="!searches.length && !hasCriteriaSets()"
-              class="dropdown-toggle btn btn-default">
+              class="dropdown-toggle btn btn-default" uib-dropdown-toggle>
         <span class="glyphicon glyphicon-floppy-disk"></span>
         <span class="caret"></span>
       </button>
 
       <ul class="dropdown-menu dropdown-menu-right"
-          ng-if="searchCriteriaStorage.group || hasCriteriaSets()">
+          ng-if="searchCriteriaStorage.group || hasCriteriaSets()" uib-dropdown-menu>
         <li ng-if="searchCriteriaStorage.group">
           <div class="input-group input-group-sm">
             <input type="text"
