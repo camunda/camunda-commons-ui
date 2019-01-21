@@ -40,6 +40,7 @@
                 ng-required="true"
                 is-open="datePickerOptions.isOpen"
                 show-button-bar="false"
+                ng-click="$event.stopPropagation()"
                 ng-keydown="trapKeyboard($event, true); cancelOnEsc($event);"
 
                 ng-model="dateValue"
