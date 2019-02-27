@@ -16,17 +16,17 @@ module.exports = function(grunt) {
       languages[lang] = languages[lang] || {labels:{}};
 
       loaded = grunt.file.readJSON(file);
-      for (key in loaded) {
-        if(typeof loaded[key] === "string") {
+      for (key in loaded.labels) {
+        if(typeof loaded.labels[key] === "string") {
           if(languages[lang].labels[key]) {
             throw grunt.util.error("Duplicate entry " + key + " for translation file " + lang + ".");
           }
-          languages[lang].labels[key] = loaded[key];
+          languages[lang].labels[key] = loaded.labels[key];
         } else {
-          if(languages[lang][key]) {
+          if(languages[lang].labels[key]) {
             throw grunt.util.error("Duplicate entry " + key + " for translation file " + lang + ".");
           }
-          languages[lang][key] = loaded[key];
+          languages[lang].labels[key] = loaded.labels[key];
         }
 
       }
