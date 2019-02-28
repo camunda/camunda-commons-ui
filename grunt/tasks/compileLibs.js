@@ -1,7 +1,7 @@
 let { promisify } = require('util');
 let exec = promisify(require('child_process').exec);
 let path = require('path');
-let libs = ['bpmn-js', 'dmn-js', 'cmmn-js'];
+let libs = ['node_modules/camunda-bpm-sdk-js/vendor/superagent', 'bpmn-js', 'dmn-js', 'cmmn-js'];
 
 module.exports = function(grunt) {
   grunt.registerTask('compileLibs', function() {
