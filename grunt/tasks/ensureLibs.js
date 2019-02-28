@@ -15,7 +15,8 @@ var excluded = [
 var included = [
   'angular',
   'moment',
-  'q'
+  'q',
+  'superagent'
 ];
 
 
