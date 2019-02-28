@@ -1,6 +1,6 @@
 {
   "name": "dmn-js",
-  "version": "7.11.0-alpha2",
+  "version": "7.11.0-SNAPSHOT",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
