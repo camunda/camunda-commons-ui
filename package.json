@@ -54,7 +54,7 @@
   },
   "devDependencies": {
     "brfs": "1.4.2",
-    "chai": "2.0.0",
+    "chai": "2.3.0",
     "chai-as-promised": "4.2.0",
     "chai-spies": "0.5.1",
     "grunt": "0.4.5",
