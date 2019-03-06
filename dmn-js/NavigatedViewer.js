@@ -1,11 +1,11 @@
-import Manager from 'dmn-js-shared/lib/base/Manager';
+import Manager from 'dmn-js/node_modules/dmn-js-shared/lib/base/Manager';
 
-import DrdViewer from 'dmn-js-drd/lib/NavigatedViewer';
-import DecisionTableViewer from 'dmn-js-decision-table/lib/Viewer';
-import LiteralExpressionViewer from 'dmn-js-literal-expression/lib/Viewer';
+import DrdViewer from 'dmn-js/node_modules/dmn-js-drd/lib/NavigatedViewer';
+import DecisionTableViewer from 'dmn-js/node_modules/dmn-js-decision-table/lib/Viewer';
+import LiteralExpressionViewer from 'dmn-js/node_modules/dmn-js-literal-expression/lib/Viewer';
 
-import { is } from 'dmn-js-shared/lib/util/ModelUtil';
-import { containsDi } from 'dmn-js-shared/lib/util/DiUtil';
+import { is } from 'dmn-js/node_modules/dmn-js-shared/lib/util/ModelUtil';
+import { containsDi } from 'dmn-js/node_modules/dmn-js-shared/lib/util/DiUtil';
 
 
 /**
