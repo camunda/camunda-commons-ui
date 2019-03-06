@@ -73,7 +73,7 @@
     "license-checker": "16.0.0",
     "load-grunt-tasks": "2.0.0",
     "mocha": "2.1.0",
-    "xunit-file": "0.0.6"
+    "xunit-file": "1.0.0"
   },
   "optionalDependencies": {
     "grunt-contrib-watch": "0.6.1",
