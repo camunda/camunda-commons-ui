@@ -12,7 +12,7 @@
     "babelify": "^8.0.0",
     "browser-pack-flat": "^3.0.9",
     "browserify": "^16.2.0",
-    "browserify-derequire": "^0.9.6"
+    "browserify-derequire": "^1.0.0"
   },
   "dependencies": {
     "cmmn-js": "0.17.1"
