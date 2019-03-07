@@ -7,12 +7,12 @@
     "build": "node init"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babelify": "^8.0.0",
-    "browser-pack-flat": "^3.0.9",
-    "browserify": "^16.2.0",
-    "browserify-derequire": "^0.9.6"
+    "@babel/core": "7.3.4",
+    "@babel/preset-env": "7.3.4",
+    "babelify": "10.0.0",
+    "browser-pack-flat": "3.0.9",
+    "browserify": "16.2.0",
+    "browserify-derequire": "1.0.0"
   },
   "dependencies": {
     "cmmn-js": "0.17.1"

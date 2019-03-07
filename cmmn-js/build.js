@@ -24,7 +24,7 @@ browserify({
       babelrc: false,
       global: true,
       presets: [
-        ['env', {
+        ['@babel/preset-env', {
           targets: {
             browsers: ['ie >= 9']
           }
