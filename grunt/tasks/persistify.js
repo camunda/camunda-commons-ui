@@ -25,6 +25,9 @@ module.exports = function(grunt) {
       this.data.options.browserifyOptions.transform = this.data.options.transform;
     }
 
+    delete this.data.options.watch;
+    this.data.options.ignoreWatch = false;
+
     var b = persistify( this.data.options.browserifyOptions, this.data.options );
 
     for(var key in externalModules) {
