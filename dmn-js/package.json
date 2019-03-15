@@ -22,7 +22,7 @@
     "dmn-js": "6.2.3",
     "dmn-js-shared": "6.2.3",
     "dmn-js-drd": "6.2.3",
-    "dmn-js-decision-table": "6.2.3",
+    "dmn-js-decision-table": "6.3.2",
     "dmn-js-literal-expression": "6.2.3",
     "diagram-js": "3.1.3"
   }
