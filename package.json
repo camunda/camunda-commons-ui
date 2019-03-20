@@ -49,7 +49,8 @@
     "clipboard": "2.0.4",
     "jquery": "3.3.1",
     "lodash": "4.17.11",
-    "persistify": "2.0.1"
+    "persistify": "2.0.1",
+    "watchify": "3.11.1"
   },
   "devDependencies": {
     "eslint": "5.15.1",
