@@ -48,8 +48,7 @@
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#master",
     "clipboard": "2.0.4",
     "jquery": "3.3.1",
-    "lodash": "4.17.11",
-    "persistify": "2.0.1"
+    "lodash": "4.17.11"
   },
   "devDependencies": {
     "eslint": "5.15.1",
@@ -79,8 +78,7 @@
     "load-grunt-tasks": "4.0.0",
     "mocha": "6.0.2",
     "xunit-file": "1.0.0",
-    "acorn": "6.1.1",
-    "watchify": "3.11.1"
+    "acorn": "6.1.1"
   },
   "optionalDependencies": {
     "grunt-contrib-watch": "1.1.0",
