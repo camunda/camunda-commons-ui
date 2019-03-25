@@ -14,10 +14,17 @@
           {{ (matchAny ? 'CAM_WIDGET_SEARCH_MATCH_TYPE_ANY' : 'CAM_WIDGET_SEARCH_MATCH_TYPE_ALL') | translate }}
         </button>
         <span ng-disabled="searches.length < 2">{{ 'CAM_WIDGET_SEARCH_MATCH_TYPE' | translate }}</span>
-      </div>
-      <span ng-if="mode"
-            class="search-type glyphicon"
-            ng-class="'glyphicon-' + mode"></span>
+        </div>
+        <div ng-if="isVariableCaseHandlingActive && searches.length > 0" class="match-any">
+          <button ng-click="switchVariableCases()" class="btn btn-default btn-xs" type="button">
+            <span ng-if="variableCaseHandling === 'none'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_NONE' | translate }}</span>
+            <span ng-if="variableCaseHandling === 'all'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_ALL' | translate }}</span>
+            <span ng-if="variableCaseHandling === 'values'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_VALUES' | translate }}</span>
+            <span ng-if="variableCaseHandling === 'names'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_NAMES' | translate }}</span>
+          </button>
+          <span>{{'CAM_WIDGET_SEARCH_VARIABLE_CASE_ATTRIBUTE' | translate}}</span>
+        </div>
+        <span ng-if="mode" class="search-type glyphicon" ng-class="'glyphicon-' + mode"></span>
       <span cam-widget-search-pill
             ng-repeat="search in searches"
             extended="search.extended"
