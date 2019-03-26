@@ -35,7 +35,7 @@
             on-delete="deleteSearch($index)"></span>
 
 
-      <div ng-if="searchHasVariableQuery && isVariableCaseHandlingActive">
+      <div class="ignore-case" ng-if="searchHasVariableQuery && isVariableCaseHandlingActive">
         {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_ATTRIBUTE' | translate }}
           <label>
             <input type="checkbox" ng-model="caseHandeling.ignoreNames" >
