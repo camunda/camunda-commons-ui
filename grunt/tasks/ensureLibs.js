@@ -16,7 +16,6 @@
  */
 
 var fs = require('fs');
-var persistify = require('persistify');
 
 var commonPackage = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
 
@@ -36,7 +35,7 @@ var included = [
 ];
 
 
-module.exports = function(grunt) {
+module.exports = function(grunt, dirname) {
   'use strict';
   grunt.registerMultiTask('ensureLibs', function() {
 
@@ -62,7 +61,7 @@ module.exports = function(grunt) {
     var dest = __dirname + '/../../cache/deps.js';
     var cacheDest = __dirname + '/../../cache/deps.json';
 
-    var b = persistify( browserifyOptions, persistifyOptions );
+    var b = require(dirname + '/node_modules/persistify')( browserifyOptions, persistifyOptions );
 
     var cacheData = {};
 

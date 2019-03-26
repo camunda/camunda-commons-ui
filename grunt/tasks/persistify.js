@@ -16,9 +16,8 @@
  */
 
 var fs = require('fs');
-var persistify = require('persistify');
 
-module.exports = function(grunt) {
+module.exports = function(grunt, dirname) {
   'use strict';
   grunt.registerMultiTask('persistify', function() {
 
@@ -42,7 +41,7 @@ module.exports = function(grunt) {
       this.data.options.browserifyOptions.transform = this.data.options.transform;
     }
 
-    var b = persistify( this.data.options.browserifyOptions, this.data.options, { "ignore-watch": false } );
+    var b = require(dirname + '/node_modules/persistify')( this.data.options.browserifyOptions, this.data.options, { "ignore-watch": false } );
 
     for(var key in externalModules) {
       b.external(key);
