@@ -96,7 +96,7 @@ module.exports = function(grunt, dirname) {
           if ( err ) {
             throw err;
           }
-          require( 'mkdirp' )(dest.substr(0, dest.lastIndexOf('/')), function(err) {
+          require(dirname + '/node_modules/mkdirp')(dest.substr(0, dest.lastIndexOf('/')), function(err) {
             if(err) {
               throw err;
             }
