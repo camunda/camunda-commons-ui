@@ -15,15 +15,6 @@
         </button>
         <span ng-disabled="searches.length < 2">{{ 'CAM_WIDGET_SEARCH_MATCH_TYPE' | translate }}</span>
         </div>
-        <div ng-if="isVariableCaseHandlingActive && searches.length > 0" class="match-any">
-          <button ng-click="switchVariableCases()" class="btn btn-default btn-xs" type="button">
-            <span ng-if="variableCaseHandling === 'none'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_NONE' | translate }}</span>
-            <span ng-if="variableCaseHandling === 'all'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_ALL' | translate }}</span>
-            <span ng-if="variableCaseHandling === 'values'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_VALUES' | translate }}</span>
-            <span ng-if="variableCaseHandling === 'names'">{{ 'CAM_WIDGET_SEARCH_VARIABLE_CASE_NAMES' | translate }}</span>
-          </button>
-          <span>{{'CAM_WIDGET_SEARCH_VARIABLE_CASE_ATTRIBUTE' | translate}}</span>
-        </div>
         <span ng-if="mode" class="search-type glyphicon" ng-class="'glyphicon-' + mode"></span>
       <span cam-widget-search-pill
             ng-repeat="search in searches"
@@ -42,6 +33,20 @@
             delete-text="{{ translations.deleteSearch }}"
             on-change="handleChange($index, field, before, value, $event)"
             on-delete="deleteSearch($index)"></span>
+
+
+      <div ng-if="searchHasVariableQuery && isVariableCaseHandlingActive">
+        {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_ATTRIBUTE' | translate }}
+          <label>
+            <input type="checkbox" ng-model="caseHandeling.ignoreNames" >
+            {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_NAME' | translate}}
+          </label>
+          <label>
+            <input type="checkbox" ng-model="caseHandeling.ignoreValues">
+            {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_VALUE' | translate}}
+          </label>.
+      </div>
+
       <input class="form-control main-field"
              type="text"
              ng-model="inputQuery"
@@ -49,6 +54,8 @@
              uib-typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
              typeahead-on-select="createSearch($item)"
              instant-typeahead />
+
+
     </div>
   </form>
   <div class="controls">
