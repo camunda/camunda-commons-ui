@@ -180,7 +180,8 @@ module.exports = function(grunt) {
           extDot: 'first'   // Extensions in filenames begin after the first dot
         }],
         options: {
-          watch: true
+          watch: true,
+          transform: ['brfs']
         }
       }
     },
