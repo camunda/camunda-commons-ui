@@ -24,11 +24,6 @@
   "bugs": {
     "url": "https://github.com/camunda/camunda-commons-ui/issues"
   },
-  "browserify": {
-    "transform": [
-      "brfs"
-    ]
-  },
   "homepage": "https://github.com/camunda/camunda-commons-ui",
   "dependencies": {
     "angular-animate": "1.7.8",
