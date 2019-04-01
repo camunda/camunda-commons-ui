@@ -46,7 +46,7 @@
     "lodash": "4.17.11"
   },
   "devDependencies": {
-    "eslint": "5.15.1",
+    "eslint": "5.16.0",
     "eslint-plugin-camunda-licensed": "0.4.2",
     "brfs": "2.0.2",
     "chai": "4.2.0",
