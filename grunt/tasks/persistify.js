@@ -43,6 +43,8 @@ module.exports = function(grunt, dirname) {
 
     var b = require(dirname + '/node_modules/persistify')( this.data.options.browserifyOptions, this.data.options, { "ignore-watch": false } );
 
+    b.transform('brfs', { global: true });
+
     for(var key in externalModules) {
       b.external(key);
     }
