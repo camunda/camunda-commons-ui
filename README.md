@@ -113,7 +113,7 @@ camunda-commons-ui/node_modules/protractor/bin/webdriver-manager --chrome update
 
 ## License
 
-Unless otherwise specified this project is licensed under [Apache License Version 2.0](./LICENSE).
+The source files in this repository are made available under the [Apache License Version 2.0](./LICENSE).
 
 
 ## Authors
