@@ -32,7 +32,8 @@
             invalid-text="{{ translations.invalid }}"
             delete-text="{{ translations.deleteSearch }}"
             on-change="handleChange($index, field, before, value, $event)"
-            on-delete="deleteSearch($index)"></span>
+            on-delete="deleteSearch($index)"
+            disable-typeahead-autoselect="disableTypeaheadAutoselect"></span>
 
 
       <div class="ignore-case" ng-if="searchHasVariableQuery && isVariableCaseHandlingActive">

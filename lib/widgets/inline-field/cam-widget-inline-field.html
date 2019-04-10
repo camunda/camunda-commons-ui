@@ -63,6 +63,7 @@
          ng-keydown="handleKeydown($event)"
          uib-typeahead="option as option.value for option in options | filter:$viewValue:instantTypeahead"
          typeahead-on-select="saveSelection($item)"
+         typeahead-focus-first="!disableAutoselect"
          instant-typeahead />
   <input ng-if="varType === 'option' && !options[0].value"
          class="form-control"
@@ -71,6 +72,7 @@
          ng-keydown="handleKeydown($event)"
          uib-typeahead="option for option in options | filter:$viewValue:instantTypeahead"
          typeahead-on-select="saveSelection($item)"
+         typeahead-focus-first="!disableAutoselect"
          instant-typeahead />
 
   <span ng-show="varType !== 'option'"
