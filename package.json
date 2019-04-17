@@ -53,7 +53,7 @@
     "chai-as-promised": "7.1.1",
     "chai-spies": "1.0.0",
     "chai-truthy": "1.0.0",
-    "grunt": "1.0.3",
+    "grunt": "1.0.4",
     "grunt-browserify": "5.3.0",
     "grunt-contrib-connect": "2.0.0",
     "grunt-contrib-less": "2.0.0",
@@ -77,6 +77,6 @@
   },
   "optionalDependencies": {
     "grunt-contrib-watch": "1.1.0",
-    "marked": "0.6.1"
+    "marked": "0.6.2"
   }
 }
