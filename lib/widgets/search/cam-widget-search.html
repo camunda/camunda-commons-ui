@@ -101,7 +101,7 @@
             ng-if="searchCriteriaStorage.group && hasCriteriaSets()"></li>
 
         <li class="stored-criteria-set"
-            ng-if="hasCriteriaSets()"
+            ng-if="hasCriteriaSets() && !isSearchCriteriaStorageGrouped"
             ng-repeat="(key, value) in searchCriteriaStorage.available">
           <div>
             <a class="glyphicon glyphicon-remove-sign"
@@ -110,6 +110,19 @@
 
             <a href
                ng-click="loadCriteriaSet($event, key)">{{ key }}</a>
+          </div>
+        </li>
+
+        <li class="stored-criteria-set"
+            ng-if="hasCriteriaSets() && isSearchCriteriaStorageGrouped"
+            ng-repeat="(group, values) in searchCriteriaStorage.available">
+          <div ng-repeat="(name, value) in values">
+            <a class="glyphicon glyphicon-remove-sign"
+              ng-click="dropCriteriaSet($event, name, group)"
+              href></a>
+
+            <a href
+              ng-click="loadCriteriaSet($event, name, group)">{{ group }} : {{ name }}</a>
           </div>
         </li>
       </ul>
