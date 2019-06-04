@@ -149,6 +149,10 @@
       padding: 2px 9px 2px 4px;
       margin-left: 2px;
       border-left: 3px solid transparent;
+      word-wrap: break-word; // IE
+      word-break: break-all; // IE
+      word-break: break-word;
+      white-space: normal;
       &:hover {
         border-left-color: @link-hover-color;
       }
