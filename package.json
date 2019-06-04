@@ -46,7 +46,10 @@
     "lodash": "4.17.11"
   },
   "devDependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
     "acorn": "6.1.1",
+    "babelify": "10.0.0",
     "brfs": "2.0.2",
     "chai": "4.2.0",
     "chai-as-promised": "7.1.1",
