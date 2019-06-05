@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome 74.0.3729 (Linux 0.0.0)" package="" timestamp="2019-06-05T14:07:02" id="0" hostname="stamm-ThinkPad-T480s" tests="33" errors="0" failures="0" time="0.11">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36"/>
+  </properties>
+  <testcase name="camunda-commons-ui environmement loads" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-in> should show on logged in" time="0.007" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-in> should hide on logged out" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-in> should update on &lt;authentication.changed>" time="0.002" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-out> should hide on logged in" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-out> should show on logged out" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth/directives &lt;cam-if-logged-out> should update on &lt;authentication.changed>" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth/directives"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #login should POST to auth backend with username/password" time="0.007" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #login should successfully login" time="0.008" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #login should fail login" time="0.004" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #logout should POST auth backend" time="0.002" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #logout should successfully logout" time="0.003" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #logout should fail logout" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #getAuthentication should successfully retrieve" time="0.005" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #getAuthentication should fail retrieve" time="0.004" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth AuthenticationService #getAuthentication should preload" time="0.003" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication query authenticated user should query authenticated user (required)" time="0.005" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication query authenticated user should query authenticated user (optional)" time="0.004" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication query authenticated user should cache authenticated user" time="0.006" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication access restriction should redirect to /login" time="0.002" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication access restriction should silence redirect to /login" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication post-login should redirect after successful login" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth route authentication post-logout should require re-authentication after logout" time="0.003" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth ng-view integration should render injected authentication" time="0.007" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/auth ng-view integration should render injected authentication (optional)" time="0.002" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/auth"/>
+  <testcase name="camunda-commons-ui/directives/autoFill bootstrap should bootstrap with module" time="0.014" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/directives/autoFill"/>
+  <testcase name="camunda-commons-ui/directives bootstrap should bootstrap with module" time="0" classname="Chrome_74_0_3729_(Linux_0_0_0).camunda-commons-ui/directives"/>
+  <testcase name="can be loaded using requirejs loads" time="0.011" classname="Chrome_74_0_3729_(Linux_0_0_0).can be loaded using requirejs"/>
+  <testcase name="can be loaded using requirejs can be used as dependency for other modules" time="0" classname="Chrome_74_0_3729_(Linux_0_0_0).can be loaded using requirejs"/>
+  <testcase name="unescape should reverse escape" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).unescape"/>
+  <testcase name="changeDmnNamespace should change dmn namespace in xml file" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).changeDmnNamespace"/>
+  <testcase name="changeDmnNamespace should not change random occurrence of old namespace in text" time="0" classname="Chrome_74_0_3729_(Linux_0_0_0).changeDmnNamespace"/>
+  <testcase name="changeDmnNamespace should not change current dmn file" time="0.001" classname="Chrome_74_0_3729_(Linux_0_0_0).changeDmnNamespace"/>
+  <system-out>
+    <![CDATA[
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

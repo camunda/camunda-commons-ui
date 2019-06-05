@@ -240,7 +240,7 @@ module.exports = function(grunt) {
 
 
     grunt.file.expand([
-      'dmn-js/node_modules/dmn-js/dist/assets/dmn-font/font/*.{eot,svg,ttf,woff,woff2}',
+      'node_modules/dmn-js/dist/assets/dmn-font/font/*.{eot,svg,ttf,woff,woff2}',
       'node_modules/bpmn-font/dist/font/*.{eot,svg,ttf,woff,woff2}',
       'node_modules/bootstrap/fonts/*.{eot,svg,ttf,woff,woff2}',
       'vendor/fonts/*.{eot,svg,ttf,woff,woff2}'

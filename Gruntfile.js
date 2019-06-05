@@ -181,7 +181,25 @@ module.exports = function(grunt) {
         }],
         options: {
           watch: true,
-          transform: ['brfs']
+          transform: [
+            [
+              'babelify',
+              {
+                global: true,
+                compact: false,
+                presets: [
+                  [
+                    '@babel/preset-env',
+                    {
+                      targets:
+                        'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
+                      forceAllTransforms: true
+                    }
+                  ]
+                ]
+              }
+            ],
+            'brfs']
         }
       }
     },
@@ -234,9 +252,8 @@ module.exports = function(grunt) {
   });
 
   require('./grunt/tasks/gh-pages')(grunt);
-  require('./grunt/tasks/compileLibs')(grunt);
 
-  grunt.registerTask('build', ['compileLibs', 'newer:eslint', 'less:widgets', 'browserify:watch']);
+  grunt.registerTask('build', ['newer:eslint', 'less:widgets', 'browserify:watch']);
 
   grunt.registerTask('build-gh-pages', ['build', 'gh-pages']);
 
