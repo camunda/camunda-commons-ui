@@ -44,6 +44,23 @@ module.exports = function(grunt, dirname) {
     var packageJson = JSON.parse(commonPackage);
 
     var browserifyOptions = {
+      transform: [
+        [
+          'babelify',
+          {
+            global: true,
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets:
+                    'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
+                  forceAllTransforms: true
+                }
+              ]
+            ]
+          }
+        ]],
       paths: [
         'node_modules',
         'node_modules/camunda-bpm-webapp/node_modules',
