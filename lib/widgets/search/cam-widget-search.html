@@ -99,33 +99,33 @@
         <li role="separator"
             class="divider"
             ng-if="searchCriteriaStorage.group && hasCriteriaSets()"></li>
-        <div class="stored-criteria-container">
-          <li class="stored-criteria-set"
-              ng-if="hasCriteriaSets() && !isSearchCriteriaStorageGrouped"
-              ng-repeat="(key, value) in searchCriteriaStorage.available">
-            <div>
-              <a class="glyphicon glyphicon-remove-sign"
-                ng-click="dropCriteriaSet($event, key)"
-                href></a>
 
-              <a href
-                ng-click="loadCriteriaSet($event, key)">{{ key }}</a>
-            </div>
-          </li>
+        <li class="stored-criteria-set"
+            ng-if="hasCriteriaSets() && !isSearchCriteriaStorageGrouped"
+            ng-repeat="(key, value) in searchCriteriaStorage.available">
+          <div>
+            <a class="glyphicon glyphicon-remove-sign"
+              ng-click="dropCriteriaSet($event, key)"
+              href></a>
 
-          <li class="stored-criteria-set"
-              ng-if="hasCriteriaSets() && isSearchCriteriaStorageGrouped"
-              ng-repeat="(group, values) in searchCriteriaStorage.available">
-            <div ng-repeat="(name, value) in values">
-              <a class="glyphicon glyphicon-remove-sign"
-                ng-click="dropCriteriaSet($event, name, group)"
-                href></a>
+            <a href
+              ng-click="loadCriteriaSet($event, key)">{{ key }}</a>
+          </div>
+        </li>
 
-              <a href
-                ng-click="loadCriteriaSet($event, name, group)">{{ group }} : {{ name }}</a>
-            </div>
-          </li>
-        </div>
+        <li class="stored-criteria-set"
+            ng-if="hasCriteriaSets() && isSearchCriteriaStorageGrouped"
+            ng-repeat="(group, values) in searchCriteriaStorage.available">
+          <div ng-repeat="(name, value) in values">
+            <a class="glyphicon glyphicon-remove-sign"
+              ng-click="dropCriteriaSet($event, name, group)"
+              href></a>
+
+            <a href
+              ng-click="loadCriteriaSet($event, name, group)">{{ group }} : {{ name }}</a>
+          </div>
+        </li>
+
       </ul>
     </span>
   </div>
