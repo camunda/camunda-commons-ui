@@ -21,11 +21,8 @@ var commonPackage = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
 
 var excluded = [
   'bpmn-font',
-  'camunda-bpm-sdk-js',
   'persistify',
   'mkdirp',
-  'dmn-js',
-  'diagram-js'
 ];
 
 var included = [
