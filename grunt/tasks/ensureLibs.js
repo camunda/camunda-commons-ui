@@ -22,14 +22,13 @@ var commonPackage = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
 var excluded = [
   'bpmn-font',
   'persistify',
-  'mkdirp',
+  'mkdirp'
 ];
 
 var included = [
   'angular',
   'moment',
-  'q',
-  'camunda-bpm-sdk-js/lib/angularjs'
+  'q'
 ];
 
 
