@@ -43,7 +43,7 @@
     "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.11",
     "clipboard": "2.0.4",
     "jquery": "3.4.1",
-    "lodash": "4.17.11"
+    "lodash": "4.17.14"
   },
   "devDependencies": {
     "eslint": "5.16.0",
