@@ -36,6 +36,13 @@
             on-delete="deleteSearch($index)"
             disable-typeahead-autoselect="disableTypeaheadAutoselect"></span>
 
+      <input class="form-control main-field"
+             type="text"
+             ng-model="inputQuery"
+             ng-keydown="onKeydown($event)"
+             uib-typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
+             typeahead-on-select="createSearch($item)"
+             instant-typeahead />
 
       <div class="ignore-case" ng-if="searchHasVariableQuery">
         {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_ATTRIBUTE' | translate }}
@@ -45,17 +52,10 @@
           </label>
           <label>
             <input type="checkbox" ng-model="caseHandeling.ignoreValues">
-            {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_VALUE' | translate}}
-          </label>.
+            {{'CAM_WIDGET_SEARCH_VARIABLE_CASE_VALUE' | translate}}.
+          </label>
       </div>
 
-      <input class="form-control main-field"
-             type="text"
-             ng-model="inputQuery"
-             ng-keydown="onKeydown($event)"
-             uib-typeahead="type as type.value for type in dropdownTypes | filter:$viewValue:instantTypeahead"
-             typeahead-on-select="createSearch($item)"
-             instant-typeahead />
 
 
     </div>
