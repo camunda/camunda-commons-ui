@@ -1,6 +1,6 @@
 {
   "name": "cmmn-js",
-  "version": "7.10.8-SNAPSHOT",
+  "version": "7.10.9-SNAPSHOT",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
