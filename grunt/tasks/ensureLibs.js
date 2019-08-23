@@ -28,6 +28,7 @@ var excluded = [
 var included = [
   'angular',
   'moment',
+  'camunda-bpm-sdk-js/lib/angularjs/index',
   'q'
 ];
 
