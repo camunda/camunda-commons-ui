@@ -29,7 +29,9 @@
            ng-model="password"></input>
     <button tabindex="3"
             class="btn btn-lg btn-primary"
-            type="submit">{{ 'PAGE_LOGIN_SIGN_IN_ACTION' | translate }}</button>
+            type="submit"
+            ng-disabled="status === 'LOADING'">{{ 'PAGE_LOGIN_SIGN_IN_ACTION' | translate }}</button>
+
   </form>
 </div>
 <!-- / CE - camunda-commons-ui/lib/auth/page/login.html -->
