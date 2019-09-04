@@ -56,7 +56,7 @@ module.exports = function(grunt, dirname) {
                   targets:
                   'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
                   forceAllTransforms: true,
-                  useBuiltIns: 'usage',
+                  useBuiltIns: 'entry',
                   corejs: 3
                 }
               ]
