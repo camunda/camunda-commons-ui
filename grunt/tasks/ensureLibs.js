@@ -48,14 +48,16 @@ module.exports = function(grunt, dirname) {
           {
             global: true,
             compact: false,
-            ignore: [/\/node_modules\/core-js/],
+            ignore: [/node_modules(?:\/|\\{1,2})core-js/],
             presets: [
               [
                 '@babel/preset-env',
                 {
                   targets:
                   'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
-                  forceAllTransforms: true
+                  forceAllTransforms: true,
+                  useBuiltIns: 'usage',
+                  corejs: 3
                 }
               ]
             ]
