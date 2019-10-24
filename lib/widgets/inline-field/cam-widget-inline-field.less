@@ -83,15 +83,16 @@
   &.btn-group,
   &.field-control {
     display: none;
+    position: absolute;
+    z-index: 99999;
   }
 }
 
 
-body > .cam-widget-inline-field {
+.cam-widget-inline-field.datepicker, .datepicker-control {
   &.btn-group,
   &.field-control {
     position: absolute;
-    z-index: 99999;
     display: block;
     background-color: @body-bg;
   }
