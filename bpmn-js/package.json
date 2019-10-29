@@ -1,6 +1,6 @@
 {
   "name": "bpmn-js",
-  "version": "7.9.17-SNAPSHOT",
+  "version": "7.9.17",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
