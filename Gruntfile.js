@@ -192,7 +192,7 @@ module.exports = function(grunt) {
                     '@babel/preset-env',
                     {
                       targets:
-                        'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
+                        'last 1 chrome version, last 1 firefox version, last 1 edge version',
                       forceAllTransforms: true
                     }
                   ]
