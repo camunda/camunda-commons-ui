@@ -43,6 +43,11 @@ module.exports = function(grunt, dirname) {
 
     var browserifyOptions = {
       transform: [
+        ['envify',
+          {
+            NODE_ENV: 'development'
+          }
+        ],
         [
           'babelify',
           {
