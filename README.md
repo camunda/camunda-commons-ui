@@ -1,3 +1,6 @@
+# Deprecated
+This Repository moved here: https://github.com/camunda/camunda-bpm-webapp/tree/master/camunda-commons-ui
+
 # camunda-commons-ui
 
 Common frontend / UI resources, widgets and libraries for the [Camunda web application][webapp]:
