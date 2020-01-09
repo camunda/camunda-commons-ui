@@ -52,6 +52,25 @@ module.exports = function(grunt, dirname) {
         'node_modules/camunda-commons-ui/node_modules/camunda-bpm-sdk-js/node_modules',
         'node_modules/camunda-bpm-sdk-js/node_modules',
         'node_modules/camunda-bpm-webapp/node_modules/camunda-commons-ui/node_modules/camunda-bpm-sdk-js/node_modules'
+      ],
+      transform: [
+        [
+          'babelify',
+          {
+            presets: [
+              [
+                '@babel/preset-env',
+                {
+                  targets:
+                    'last 1 chrome version, last 1 firefox version, last 1 edge version',
+                  forceAllTransforms: true,
+                  useBuiltIns: 'usage',
+                  corejs: 3
+                }
+              ]
+            ]
+          }
+        ],
       ]
     };
     var persistifyOptions = {
