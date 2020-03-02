@@ -19,11 +19,11 @@
     "rollup-plugin-node-resolve": "4.0.1"
   },
   "dependencies": {
-    "dmn-js": "6.3.3",
-    "dmn-js-shared": "6.3.3",
-    "dmn-js-drd": "6.3.3",
-    "dmn-js-decision-table": "6.3.3",
-    "dmn-js-literal-expression": "6.3.3",
-    "diagram-js": "3.3.1"
+    "dmn-js": "8.0.1",
+    "dmn-js-shared": "8.0.1",
+    "dmn-js-drd": "8.0.1",
+    "dmn-js-decision-table": "8.0.1",
+    "dmn-js-literal-expression": "8.0.1",
+    "diagram-js": "6.4.0"
   }
 }
