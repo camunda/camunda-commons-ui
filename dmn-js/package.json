@@ -19,6 +19,7 @@
     "rollup-plugin-node-resolve": "4.0.1"
   },
   "dependencies": {
+    "@bpmn-io/dmn-migrate": "0.4.2",
     "dmn-js": "8.0.1",
     "dmn-js-shared": "8.0.1",
     "dmn-js-drd": "8.0.1",
