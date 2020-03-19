@@ -36,6 +36,7 @@ export default {
     commonjs(),
     babel({
       babelrc: false,
+      ignore: [/node_modules(?:\/|\\{1,2})core-js/],
       plugins: [
         'inferno',
         '@babel/plugin-proposal-object-rest-spread',
@@ -46,7 +47,9 @@ export default {
           modules: false,
           targets: {
             browsers: ['ie >= 9']
-          }
+          },
+          useBuiltIns: 'usage',
+          corejs: 3
         }]
       ]
     })
