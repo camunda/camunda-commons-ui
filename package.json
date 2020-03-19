@@ -31,7 +31,6 @@
   },
   "homepage": "https://github.com/camunda/camunda-commons-ui",
   "dependencies": {
-    "@bpmn-io/dmn-migrate": "0.4.2",
     "angular-animate": "1.2.29",
     "angular-cookies": "1.2.29",
     "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",

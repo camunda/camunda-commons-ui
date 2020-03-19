@@ -28,7 +28,8 @@ export default {
           modules: false,
           targets: {
             browsers: ['ie >= 9']
-          }
+          },
+          useBuiltIns: true
         }]
       ]
     }),
