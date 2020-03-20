@@ -22,7 +22,11 @@ var commonPackage = fs.readFileSync(__dirname + '/../../package.json', 'utf8');
 var excluded = [
   'bpmn-font',
   'persistify',
-  'mkdirp'
+  'mkdirp',
+  'dmn-js-decision-table',
+  'dmn-js-drd',
+  'dmn-js-literal-expression',
+  'dmn-js-shared'
 ];
 
 var included = [
@@ -32,11 +36,9 @@ var included = [
   'q'
 ];
 
-
 module.exports = function(grunt, dirname) {
   'use strict';
   grunt.registerMultiTask('ensureLibs', function() {
-
     var done = this.async();
 
     var packageJson = JSON.parse(commonPackage);
@@ -54,7 +56,7 @@ module.exports = function(grunt, dirname) {
                 '@babel/preset-env',
                 {
                   targets:
-                  'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
+                    'ie 11, last 1 chrome version, last 1 firefox version, last 1 edge version',
                   forceAllTransforms: true,
                   useBuiltIns: 'usage',
                   corejs: 3
@@ -62,7 +64,8 @@ module.exports = function(grunt, dirname) {
               ]
             ]
           }
-        ]],
+        ]
+      ],
       paths: [
         'node_modules',
         'node_modules/camunda-bpm-webapp/node_modules',
@@ -80,47 +83,51 @@ module.exports = function(grunt, dirname) {
     var dest = __dirname + '/../../cache/deps.js';
     var cacheDest = __dirname + '/../../cache/deps.json';
 
-    var b = require(dirname + '/node_modules/persistify')( browserifyOptions, persistifyOptions );
+    var b = require(dirname + '/node_modules/persistify')(
+      browserifyOptions,
+      persistifyOptions
+    );
 
     var cacheData = {};
 
-    for(var key in packageJson.dependencies) {
-      if(excluded.indexOf(key) === -1) {
+    for (var key in packageJson.dependencies) {
+      if (excluded.indexOf(key) === -1) {
         b.require(key);
         cacheData[key] = packageJson.dependencies[key];
       }
     }
-    for(var i = 0; i < included.length; i++) {
+    for (var i = 0; i < included.length; i++) {
       b.require(included[i]);
       cacheData[included[i]] = 'no idea ¯\\_(ツ)_/¯';
     }
 
     fs.readFile(cacheDest, 'utf8', function(err, previousCache) {
-      if(!err && JSON.stringify(cacheData, null, '  ') === previousCache) {
+      if (!err && JSON.stringify(cacheData, null, '  ') === previousCache) {
         console.log('everything up to date');
         done();
         return;
       }
 
-      b.on( 'bundle:done', function( time ) {
+      b.on('bundle:done', function(time) {
         console.log(dest + ' written in ' + time + 'ms');
-      } );
+      });
 
-      b.on( 'error', function( err ) {
-        console.log( 'error', err );
-      } );
+      b.on('error', function(err) {
+        console.log('error', err);
+      });
 
       function doBundle(cb) {
-        b.bundle( function( err, buff ) {
-          if ( err ) {
+        b.bundle(function(err, buff) {
+          if (err) {
             throw err;
           }
-          require(dirname + '/node_modules/mkdirp')(dest.substr(0, dest.lastIndexOf('/')), function(err) {
-            if(err) {
+          require(dirname +
+            '/node_modules/mkdirp')(dest.substr(0, dest.lastIndexOf('/')), function(err) {
+            if (err) {
               throw err;
             }
-            fs.writeFileSync( dest, buff.toString() );
-            fs.writeFileSync( cacheDest, JSON.stringify(cacheData, null, '  '));
+            fs.writeFileSync(dest, buff.toString());
+            fs.writeFileSync(cacheDest, JSON.stringify(cacheData, null, '  '));
             done();
           });
         });
