@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "camunda-commons-ui",
-  "version": "7.11.12",
+  "version": "7.11.13-SNAPSHOT",
   "description": "Common files for camunda BPM platform UIs",
   "main": "index.js",
   "gruntConfig": {
@@ -40,7 +40,7 @@
     "angular-translate": "2.18.1",
     "bootstrap": "3.4.1",
     "bpmn-font": "0.8.0",
-    "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.11.12",
+    "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.11",
     "clipboard": "2.0.4",
     "jquery": "3.4.1",
     "lodash": "4.17.14"
