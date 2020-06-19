@@ -11,7 +11,7 @@
     "@babel/preset-env": "7.4.3",
     "babelify": "10.0.0",
     "browser-pack-flat": "3.3.0",
-    "browserify": "16.2.3",
+    "browserify": "16.5.1",
     "browserify-derequire": "1.0.0"
   },
   "dependencies": {
