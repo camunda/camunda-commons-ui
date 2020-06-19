@@ -23,7 +23,7 @@
     "@bpmn-io/dmn-migrate": "0.4.3",
     "diagram-js": "6.4.0",
     "dmn-js": "8.0.2",
-    "dmn-js-decision-table": "8.0.2",
+    "dmn-js-decision-table": "8.3.1",
     "dmn-js-drd": "8.0.2",
     "dmn-js-literal-expression": "8.0.2",
     "dmn-js-shared": "8.0.2"
