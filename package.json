@@ -81,7 +81,6 @@
     "xunit-file": "1.0.0"
   },
   "optionalDependencies": {
-    "grunt-contrib-watch": "1.1.0",
-    "marked": "0.6.2"
+    "grunt-contrib-watch": "1.1.0"
   }
 }
