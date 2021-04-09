@@ -2,7 +2,7 @@
 
 [cam-widget-dmn-viewer] {
   &[edit-mode="true"] {
-    @import (less) "dmn-js/node_modules/diagram-js/assets/diagram-js.css";
+    @import (less) "diagram-js/assets/diagram-js.css";
   }
 
   .grab-cursor {
@@ -31,7 +31,8 @@
     display: none;
   }
 
-  .dmn-js-powered-by, .bjs-powered-by {
+  .dmn-js-powered-by,
+  .bjs-powered-by {
     display: none !important;
   }
 
@@ -41,7 +42,7 @@
     fill: fade(@bpmn-highlight-bg, 40%) !important;
   }
 
-  .highlight .djs-visual>:nth-child(1) {
+  .highlight .djs-visual > :nth-child(1) {
     fill: @bpmn-highlight-bg !important;
   }
 
