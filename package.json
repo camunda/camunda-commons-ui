@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/camunda/camunda-commons-ui.git"
+    "url": "https://github.com/camunda/camunda-commons-ui.git"
   },
   "keywords": [
     "camunda"
@@ -33,7 +33,7 @@
   "dependencies": {
     "angular-animate": "1.2.29",
     "angular-cookies": "1.2.29",
-    "angular-data-depend": "git://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",
+    "angular-data-depend": "https://github.com/camunda-third-party/angular-data-depend#1.0.0-camunda",
     "angular-loader": "1.2.29",
     "angular-mocks": "1.2.29",
     "angular-moment": "0.9.0",
@@ -46,7 +46,7 @@
     "bootstrap": "3.3.6",
     "bpmn-font": "0.2.0",
     "bpmn-js": "0.18.4",
-    "camunda-bpm-sdk-js": "git://github.com/camunda/camunda-bpm-sdk-js#7.8",
+    "camunda-bpm-sdk-js": "https://github.com/camunda/camunda-bpm-sdk-js#7.8",
     "clipboard": "1.5.10",
     "cmmn-js": "0.7.4",
     "diagram-js": "0.18.2",
